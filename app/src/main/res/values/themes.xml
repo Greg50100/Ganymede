@@ -1,0 +1,8 @@
+<!-- res/values/themes.xml -->
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.App" parent="android:Theme.Material.Light.NoActionBar">
+        <!-- Pas de couleurs ici, tout est géré par Compose -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+</resources>

@@ -1,0 +1,78 @@
+# Android/Gradle project .gitignore
+
+# Gradle
+.gradle/
+**/.gradle/
+
+# Build outputs
+/build/
+**/build/
+/out/
+**/out/
+
+# Android Studio / IntelliJ
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Local configuration
+local.properties
+
+# NDK / CMake / External native builds
+.cxx/
+.externalNativeBuild/
+**/.cxx/
+**/.externalNativeBuild/
+
+# Android Studio captures
+captures/
+**/captures/
+
+# Artifacts
+*.apk
+*.ap_
+*.aab
+*.aar
+*.dex
+*.class
+*.so
+*.jar
+*.war
+*.ear
+
+# Keystores (ne pas commiter les clés de signature)
+*.jks
+*.keystore
+
+# Logs
+*.log
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+
+# Fastlane (rapports et captures)
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/
+**/fastlane/report.xml
+**/fastlane/Preview.html
+**/fastlane/screenshots/
+
+# Kotlin/Compose caches (couvert par build/ en général)
+.kotlinc/
+**/.kotlinc/
+
+# External modules (ignore outputs and local config)
+/external/
+/external/**/build/
+/external/**/.gradle/
+/external/**/local.properties
+
+# Misc
+*.orig
+*.rej

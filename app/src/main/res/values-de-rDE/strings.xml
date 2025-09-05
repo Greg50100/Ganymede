@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_title">Einstellungen</string>
+    <string name="theme_label">Thema</string>
+    <string name="color_label">Primärfarbe</string>
+    <string name="language_label">Sprache</string>
+    <string name="auto_label">Auto (System)</string>
+    <string name="light_label">Hell</string>
+    <string name="dark_label">Dunkel</string>
+    <string name="result_format">Ergebnis: %1$s</string>
+    <string name="welcome_home">Willkommen auf Ganymed</string>
+    <string name="calculator_title">Kalkulator</string>
+    <string name="calculator_description">Schnelle und wissenschaftliche Berechnungen</string>
+    <string name="converter_title">Einheitenumrechner</string>
+    <string name="converter_description">Länge, Gewicht, Volumen und mehr</string>
+    <string name="open_button">Offen</string>
+    <string name="welcome">Willkommen</string>
+    <string name="welcome_body">Ganymede app — Begrüßungsbildschirm.</string>
+    <string name="continue_button">Weitermachen</string>
+    <string name="converter_input_label">Wert in %1$s</string>
+    <string name="converter_result_format">Ergebnis: %1$s %2$s</string>
+    <string name="home_label">Willkommen</string>
+    <string name="calc_swipe_hint">Für Funktionen horizontal wischen</string>
+    <string name="calc_error_generic">Fehler</string>
+    <string name="calc_div_zero">Division durch Null</string>
+</resources>
+

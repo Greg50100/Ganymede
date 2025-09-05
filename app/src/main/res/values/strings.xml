@@ -1,0 +1,56 @@
+<resources>
+    <string name="app_name" translatable="false">Ganymede</string>
+    <string name="settings_title">Settings</string>
+    <string name="theme_label">Theme</string>
+    <string name="color_label">Primary color</string>
+    <string name="language_label">Language</string>
+    <string name="auto_label">Auto (system)</string>
+    <string name="light_label">Light</string>
+    <string name="dark_label">Dark</string>
+    <string name="result_format">Result: %1$s</string>
+
+    <!-- Home screen -->
+    <string name="welcome_home">Welcome to Ganymede</string>
+    <string name="calculator_title">Calculator</string>
+    <string name="calculator_description">Quick and scientific calculations</string>
+    <string name="converter_title">Unit converter</string>
+    <string name="converter_description">Length, weight, volume, and more</string>
+    <string name="open_button">Open</string>
+
+    <!-- Welcome screen -->
+    <string name="welcome">Welcome</string>
+    <string name="welcome_body">Ganymede app — welcome screen.</string>
+    <string name="continue_button">Continue</string>
+
+    <!-- Calculator -->
+    <string name="digit_1" translatable="false">1</string>
+    <string name="digit_2" translatable="false">2</string>
+    <string name="equals" translatable="false">=</string>
+    <string name="clear" translatable="false">C</string>
+
+    <!-- Converter -->
+    <string name="converter_input_label">Value in %1$s</string>
+    <string name="converter_result_format">Result: %1$s %2$s</string>
+
+    <!-- Navigation -->
+    <string name="home_label">Home</string>
+
+    <!-- Advanced Calculator -->
+    <string name="calc_memory_indicator" translatable="false">M</string>
+    <string name="calc_sin" translatable="false">sin</string>
+    <string name="calc_cos" translatable="false">cos</string>
+    <string name="calc_sqrt" translatable="false">√</string>
+    <string name="calc_left_paren" translatable="false">(</string>
+    <string name="calc_right_paren" translatable="false">)</string>
+    <string name="calc_m_plus" translatable="false">M+</string>
+    <string name="calc_m_minus" translatable="false">M-</string>
+    <string name="calc_m_recall" translatable="false">MR</string>
+    <string name="calc_m_clear" translatable="false">MC</string>
+    <string name="calc_error_generic">Error</string>
+    <string name="calc_tan" translatable="false">tan</string>
+    <string name="calc_log" translatable="false">log</string>
+    <string name="calc_ln" translatable="false">ln</string>
+    <string name="calc_pow" translatable="false">^</string>
+    <string name="calc_swipe_hint">Swipe horizontally for functions</string>
+    <string name="calc_div_zero">Division by zero</string>
+</resources>
