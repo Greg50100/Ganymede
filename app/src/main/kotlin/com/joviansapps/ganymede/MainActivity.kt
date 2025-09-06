@@ -17,13 +17,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             val settingsVm: SettingsViewModel = viewModel()
             val state by settingsVm.uiState.collectAsState()
-            val (themeMode, primaryColorLong, language) = state
 
-            LanguageProvider(code = language) {
-                AppTheme(
-                    themeMode        = themeMode,
-                    primaryColorLong = primaryColorLong
-                ) {
+            LanguageProvider(code = state.language) {
+                AppTheme(themeMode = state.themeMode) {
                     AppRoot(settingsVm)
                 }
             }

@@ -1,12 +1,9 @@
 package com.joviansapps.ganymede.ui.screens.settings
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -17,9 +14,9 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.joviansapps.ganymede.R
-import com.joviansapps.ganymede.ui.theme.seedColorScheme
 import com.joviansapps.ganymede.viewmodel.SettingsViewModel
 import com.joviansapps.ganymede.viewmodel.ThemeMode
+import com.joviansapps.ganymede.viewmodel.CalculatorViewModel
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.tooling.preview.Preview
@@ -27,14 +24,11 @@ import androidx.compose.ui.tooling.preview.Preview
 @Composable
 fun SettingsScreen(vm: SettingsViewModel = viewModel()) {
     val state by vm.uiState.collectAsState()
-    var customHex by remember { mutableStateOf("") }
-    var hexError by remember { mutableStateOf<String?>(null) }
     val useDark = when (state.themeMode) {
         ThemeMode.DARK -> true
         ThemeMode.LIGHT -> false
         ThemeMode.AUTO -> isSystemInDarkTheme()
     }
-    val previewScheme = seedColorScheme(Color(state.primaryColor), useDark)
     val listState = rememberLazyListState()
     var showCrashDialog by remember { mutableStateOf(false) }
 
@@ -57,58 +51,17 @@ fun SettingsScreen(vm: SettingsViewModel = viewModel()) {
                 height = 40.dp
             )
         }
-        // Couleur hex
+        // Aperçu palette supprimé -> remplacé par un simple aperçu des couleurs du thème actif
         item {
-            OutlinedTextField(
-                value = customHex,
-                onValueChange = {
-                    customHex = it.uppercase(); hexError = null
-                },
-                label = { Text("Seed HEX (ex: FF6750A4 ou 6750A4)") },
-                isError = hexError != null,
-                singleLine = true,
-                supportingText = { hexError?.let { e -> Text(e, color = MaterialTheme.colorScheme.error) } },
-                trailingIcon = {
-                    TextButton(onClick = {
-                        val raw = customHex.removePrefix("#")
-                        val full = if (raw.length == 6) "FF$raw" else raw
-                        val valid = full.length == 8 && full.all { c -> c in '0'..'9' || c in 'A'..'F' }
-                        if (!valid) hexError = "HEX invalide" else try {
-                            vm.setPrimaryColor(full.toLong(16)); hexError = null
-                        } catch (_: Exception) { hexError = "Erreur parsing" }
-                    }) { Text("Appliquer") }
-                },
-                modifier = Modifier.fillMaxWidth()
-            )
-        }
-        // Pastilles couleur
-        item {
-            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                listOf(0xFF6750A4, 0xFF006E1C, 0xFFB3261E, 0xFF1F6FEB, 0xFFFB8C00).forEach { colorLong ->
-                    val c = Color(colorLong)
-                    Box(
-                        Modifier
-                            .size(36.dp)
-                            .background(c, CircleShape)
-                            .border(
-                                width = if (state.primaryColor == colorLong) 3.dp else 1.dp,
-                                color = if (state.primaryColor == colorLong) MaterialTheme.colorScheme.primary else Color.Gray,
-                                shape = CircleShape
-                            )
-                            .clickable { vm.setPrimaryColor(colorLong) }
-                    )
-                }
-            }
-        }
-        // Aperçu palette
-        item {
+            Text("Couleurs du thème", style = MaterialTheme.typography.titleMedium)
+            Spacer(Modifier.height(8.dp))
+            val scheme = MaterialTheme.colorScheme
             Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                Text("Aperçu (Material 3)", style = MaterialTheme.typography.bodyMedium)
-                PaletteRowSample("Primary", previewScheme.primary, previewScheme.onPrimary, previewScheme.primaryContainer, previewScheme.onPrimaryContainer)
-                PaletteRowSample("Secondary", previewScheme.secondary, previewScheme.onSecondary, previewScheme.secondaryContainer, previewScheme.onSecondaryContainer)
-                PaletteRowSample("Tertiary", previewScheme.tertiary, previewScheme.onTertiary, previewScheme.tertiaryContainer, previewScheme.onTertiaryContainer)
-                PaletteRowSample("Error", previewScheme.error, previewScheme.onError, previewScheme.errorContainer, previewScheme.onErrorContainer)
-                PaletteRowSample("Surface", previewScheme.surface, previewScheme.onSurface, previewScheme.surfaceVariant, previewScheme.onSurfaceVariant)
+                PaletteRowSample("Primary", scheme.primary, scheme.onPrimary, scheme.primaryContainer, scheme.onPrimaryContainer)
+                PaletteRowSample("Secondary", scheme.secondary, scheme.onSecondary, scheme.secondaryContainer, scheme.onSecondaryContainer)
+                PaletteRowSample("Tertiary", scheme.tertiary, scheme.onTertiary, scheme.tertiaryContainer, scheme.onTertiaryContainer)
+                PaletteRowSample("Error", scheme.error, scheme.onError, scheme.errorContainer, scheme.onErrorContainer)
+                PaletteRowSample("Surface", scheme.surface, scheme.onSurface, scheme.surfaceVariant, scheme.onSurfaceVariant)
             }
         }
         // Langue
@@ -127,7 +80,7 @@ fun SettingsScreen(vm: SettingsViewModel = viewModel()) {
                 }
             }
         }
-        // Diagnostic (rapports de plantage) — désormais toujours visible
+        // Diagnostic
         item {
             Text("Diagnostic", style = MaterialTheme.typography.titleMedium)
             Spacer(Modifier.height(8.dp))
@@ -141,6 +94,24 @@ fun SettingsScreen(vm: SettingsViewModel = viewModel()) {
                     TextButton(onClick = { vm.testCrashReport() }) { Text("Tester envoi") }
                     TextButton(onClick = { showCrashDialog = true }) { Text("Forcer crash réel") }
                     if (state.crashReportsEnabled) Text("(Actif)", color = MaterialTheme.colorScheme.primary) else Text("(Inactif)")
+                }
+            }
+        }
+        // Formatage des nombres (PLAIN / THOUSANDS / SCIENTIFIC) pour la calculatrice
+        item {
+            val calcVm: CalculatorViewModel = viewModel()
+            val currentFormat by calcVm.formatMode.collectAsState()
+            Text("Format des nombres", style = MaterialTheme.typography.titleMedium)
+            Spacer(Modifier.height(8.dp))
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                val modes = listOf(CalculatorViewModel.FormatMode.PLAIN, CalculatorViewModel.FormatMode.THOUSANDS, CalculatorViewModel.FormatMode.SCIENTIFIC)
+                modes.forEach { mode ->
+                    val selected = mode == currentFormat
+                    if (selected) {
+                        FilledTonalButton(onClick = { /* already selected */ }, modifier = Modifier.weight(1f)) { Text(mode.name) }
+                    } else {
+                        OutlinedButton(onClick = { calcVm.setFormatMode(mode) }, modifier = Modifier.weight(1f)) { Text(mode.name) }
+                    }
                 }
             }
         }

@@ -7,7 +7,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
-import androidx.datastore.preferences.core.longPreferencesKey
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,7 +16,6 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import java.util.Locale
-import androidx.datastore.preferences.core.booleanPreferencesKey
 import com.joviansapps.ganymede.crash.CrashReporter
 
 // Delegate DataStore (extension sur Context)
@@ -34,7 +33,6 @@ enum class ThemeMode { LIGHT, DARK, AUTO }
 
 data class SettingsUiState(
     val themeMode: ThemeMode = ThemeMode.AUTO,
-    val primaryColor: Long = 0xFFFB8C00,
     val language: String = defaultLanguage(),
     val crashReportsEnabled: Boolean = true
 )
@@ -43,7 +41,6 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
     private val dataStore = application.dataStore
 
     private val KEY_THEME = stringPreferencesKey("theme_mode")
-    private val KEY_PRIMARY = longPreferencesKey("primary_color")
     private val KEY_LANG = stringPreferencesKey("language")
     private val KEY_CRASH = booleanPreferencesKey("crash_reports_enabled")
 
@@ -56,15 +53,11 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
             dataStore.data
                 .catch { emit(emptyPreferences()) }
                 .map { prefs ->
-                    val theme = prefs[KEY_THEME]?.let {
-                        try { ThemeMode.valueOf(it) } catch (_: Exception) { ThemeMode.AUTO }
-                    } ?: ThemeMode.AUTO
-                    val color = prefs[KEY_PRIMARY] ?: 0xFFFB8C00
+                    val theme = prefs[KEY_THEME]?.let { runCatching { ThemeMode.valueOf(it) }.getOrNull() } ?: ThemeMode.AUTO
                     val lang = prefs[KEY_LANG] ?: defaultLanguage()
                     val crash = prefs[KEY_CRASH] ?: true
                     SettingsUiState(
                         themeMode = theme,
-                        primaryColor = color,
                         language = lang,
                         crashReportsEnabled = crash
                     )
@@ -78,26 +71,14 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
 
     fun setTheme(mode: ThemeMode) {
         _uiState.value = _uiState.value.copy(themeMode = mode)
-        viewModelScope.launch {
-            dataStore.edit { prefs -> prefs[KEY_THEME] = mode.name }
-        }
-    }
-
-    fun setPrimaryColor(colorLong: Long) {
-        _uiState.value = _uiState.value.copy(primaryColor = colorLong)
-        viewModelScope.launch {
-            dataStore.edit { prefs -> prefs[KEY_PRIMARY] = colorLong }
-        }
+        viewModelScope.launch { dataStore.edit { it[KEY_THEME] = mode.name } }
     }
 
     fun setLanguage(lang: String) {
         val l = if (lang in SupportedLanguages) lang else "en"
         _uiState.value = _uiState.value.copy(language = l)
-        viewModelScope.launch {
-            dataStore.edit { prefs -> prefs[KEY_LANG] = l }
-        }
+        viewModelScope.launch { dataStore.edit { it[KEY_LANG] = l } }
     }
-
 
     fun setCrashReportsEnabled(enabled: Boolean) {
         _uiState.value = _uiState.value.copy(crashReportsEnabled = enabled)
@@ -113,7 +94,5 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
     }
 
     // Force un crash réel (utilisé uniquement pour tests). L'appel doit être intentionnel.
-    fun forceCrash(): Nothing {
-        throw RuntimeException("Crash forcé pour test Crashlytics")
-    }
+    fun forceCrash(): Nothing = throw RuntimeException("Crash forcé pour test Crashlytics")
 }

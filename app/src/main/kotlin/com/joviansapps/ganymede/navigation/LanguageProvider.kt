@@ -1,6 +1,5 @@
 package com.joviansapps.ganymede.navigation
 
-import android.content.Context
 import android.content.res.Configuration
 import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalContext

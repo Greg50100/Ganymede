@@ -8,6 +8,9 @@ import net.objecthunter.exp4j.ExpressionBuilder
 import net.objecthunter.exp4j.function.Function
 import java.math.BigDecimal
 import kotlin.math.*
+import java.text.DecimalFormat
+import java.text.NumberFormat
+import java.util.Locale
 
 /** ViewModel calculatrice (scientifique légère). */
 class CalculatorViewModel : ViewModel() {
@@ -20,6 +23,17 @@ class CalculatorViewModel : ViewModel() {
     private val _isDegrees   = MutableStateFlow(false) // false = radians, true = degrees
     private var justEvaluated = false
 
+    // Undo/redo stacks
+    private val undoStack = ArrayDeque<String>()
+    private val redoStack = ArrayDeque<String>()
+
+    // Format options
+    enum class FormatMode { PLAIN, THOUSANDS, SCIENTIFIC }
+    private val _formatMode = MutableStateFlow(FormatMode.PLAIN)
+
+    // expose format mode
+    val formatMode: StateFlow<FormatMode> = _formatMode
+
     // Exposition
     val expr: StateFlow<String>        = _expr
     val result: StateFlow<String>      = _result
@@ -31,7 +45,27 @@ class CalculatorViewModel : ViewModel() {
 
     // Utilitaires
     private fun refreshDisplayFromExpr() { _displayText.value = _expr.value }
-    private fun append(s: String) { _expr.value += s; refreshDisplayFromExpr() }
+    private fun pushState() { undoStack.addLast(_expr.value); if (undoStack.size > 100) undoStack.removeFirst() ; redoStack.clear() }
+    private fun append(s: String) { pushState(); _expr.value += s; refreshDisplayFromExpr() }
+
+    // allow external setExpression (e.g. from history)
+    fun setExpression(s: String) { pushState(); _expr.value = s; justEvaluated = false; refreshDisplayFromExpr() }
+
+    fun setFormatMode(mode: FormatMode) { _formatMode.value = mode }
+
+    fun undo() {
+        if (undoStack.isEmpty()) return
+        redoStack.addLast(_expr.value)
+        _expr.value = undoStack.removeLast()
+        refreshDisplayFromExpr()
+    }
+
+    fun redo() {
+        if (redoStack.isEmpty()) return
+        undoStack.addLast(_expr.value)
+        _expr.value = redoStack.removeLast()
+        refreshDisplayFromExpr()
+    }
 
     // Toggle Degrés/Radians
     fun toggleDegrees() { _isDegrees.value = !_isDegrees.value }
@@ -76,6 +110,12 @@ class CalculatorViewModel : ViewModel() {
 
     // Fonctions scientifiques et tokens variés
     fun onFunction(func: String) {
+        // Si on sort d'une évaluation, recommencer une nouvelle expression (comme onNumber)
+        if (justEvaluated) {
+            _expr.value = ""
+            _result.value = "0"
+            justEvaluated = false
+        }
         // Si la chaîne fournie contient déjà une parenthèse ou un opérateur, l'ajouter telle quelle
         if (func.endsWith("(") || func.contains("^") || func.contains("(") || func.contains(")")) {
             append(func)
@@ -85,18 +125,13 @@ class CalculatorViewModel : ViewModel() {
         val trig = setOf("sin","cos","tan","asin","acos","atan")
         if (func in trig) {
             if (_isDegrees.value) {
-                // utiliser nom personnalisé qui sera enregistré dans l'évaluateur
                 append("${func}_deg(")
             } else append("$func(")
             return
         }
         // Fonctions classiques : ajouter '(' pour l'appel
         val classic = setOf("sinh","cosh","tanh","asinh","acosh","atanh","sqrt","log","ln","abs")
-        if (func in classic) append("$func(")
-        else {
-            // Constantes comme pi, e ou tokens spécifiques (e.g. "pi" ou "e")
-            append(func)
-        }
+        if (func in classic) append("$func(") else append(func)
     }
 
     // Mémoire
@@ -107,8 +142,8 @@ class CalculatorViewModel : ViewModel() {
     fun hasMemory(): Boolean = memoryValue != 0.0
 
     // Edition
-    fun onClear() { _expr.value = ""; _result.value = "0"; justEvaluated = false; refreshDisplayFromExpr() }
-    fun onDelete() { if (_expr.value.isNotEmpty()) { _expr.value = _expr.value.dropLast(1); justEvaluated = false; refreshDisplayFromExpr() } }
+    fun onClear() { pushState(); _expr.value = ""; _result.value = "0"; justEvaluated = false; refreshDisplayFromExpr() }
+    fun onDelete() { if (_expr.value.isNotEmpty()) { pushState(); _expr.value = _expr.value.dropLast(1); justEvaluated = false; refreshDisplayFromExpr() } }
 
     // Evaluation
     fun onEvaluate() {
@@ -127,6 +162,7 @@ class CalculatorViewModel : ViewModel() {
     }
 
     fun clearHistory() { _history.value = emptyList() }
+    fun removeHistoryItem(index: Int) { _history.update { it.filterIndexed { i, _ -> i != index } } }
 
     // Event externe (ex: purge total depuis UI historique)
     fun onEvent(event: Any) { if (event is com.joviansapps.ganymede.data.CalculatorEvent.DeleteAll) { onClear(); clearHistory() } }
@@ -172,15 +208,32 @@ class CalculatorViewModel : ViewModel() {
         // considérer 'log(' comme log base 10 pour correspondre à l'UI
         expression = expression.replace("log(", "log10(")
 
+        // Sécuriser : si mode degrés actif, convertir toute occurrence brute de sin(, cos(, tan(, asin(, acos(, atan(
+        if (_isDegrees.value) {
+            expression = expression
+                .replace("sin(", "sin_deg(")
+                .replace("cos(", "cos_deg(")
+                .replace("tan(", "tan_deg(")
+                .replace("asin(", "asin_deg(")
+                .replace("acos(", "acos_deg(")
+                .replace("atan(", "atan_deg(")
+                // éviter double remplacement si déjà _deg(
+                .replace("_deg_deg(", "_deg(")
+        }
+
         // Convertit les usages 'a % b' en 'mod(a,b)' pour exp4j
         if (expression.contains('%')) {
             var tmp = expression.replace("%", " % ")
-            val modRegex = Regex("""([0-9.)]+)\s*%\s*([0-9.(]+)""")
+            // élargir la capture du premier opérande pour inclure une chaîne de puissances (ex: 2^5%3)
+            val modRegex = Regex("""([0-9.^)]+)\s*%\s*([0-9.(]+)""")
             while (modRegex.containsMatchIn(tmp)) {
                 tmp = tmp.replace(modRegex) { m -> "mod(${m.groupValues[1]},${m.groupValues[2]})" }
             }
             expression = tmp
         }
+
+        // Debug: afficher l'expression finale et le mode degrés pour aider les tests
+        // println("EVAL_EXPR: '$expression' degrees=${_isDegrees.value}")
 
         return try {
             // Déclarer fonctions personnalisées
@@ -204,11 +257,27 @@ class CalculatorViewModel : ViewModel() {
             val ln = object: Function("ln", 1) { override fun apply(vararg args: Double) = ln(args[0]) }
             val modFunc = object: Function("mod", 2) { override fun apply(vararg args: Double) = args[0] % args[1] }
 
+            // Fonctions hyperboliques et inverses
+            val sinhF = object: Function("sinh", 1) { override fun apply(vararg a: Double) = kotlin.math.sinh(a[0]) }
+            val coshF = object: Function("cosh", 1) { override fun apply(vararg a: Double) = kotlin.math.cosh(a[0]) }
+            val tanhF = object: Function("tanh", 1) { override fun apply(vararg a: Double) = kotlin.math.tanh(a[0]) }
+            val asinhF = object: Function("asinh", 1) { override fun apply(vararg a: Double) = kotlin.math.asinh(a[0]) }
+            val acoshF = object: Function("acosh", 1) { override fun apply(vararg a: Double) = kotlin.math.acosh(a[0]) }
+            val atanhF = object: Function("atanh", 1) { override fun apply(vararg a: Double) = kotlin.math.atanh(a[0]) }
+            val absF = object: Function("abs", 1) { override fun apply(vararg a: Double) = kotlin.math.abs(a[0]) }
+
             val builder = ExpressionBuilder(expression)
                 .function(fact)
                 .function(log10)
                 .function(ln)
                 .function(modFunc)
+                .function(sinhF)
+                .function(coshF)
+                .function(tanhF)
+                .function(asinhF)
+                .function(acoshF)
+                .function(atanhF)
+                .function(absF)
                 .variables("pi","e")
                 .functions(listOf(sinDeg, cosDeg, tanDeg, asinDeg, acosDeg, atanDeg))
 
@@ -231,6 +300,32 @@ class CalculatorViewModel : ViewModel() {
     // Format numérique sans séparateurs, sans zéros superflus
     private fun formatNumber(v: Double): String {
         if (v.isNaN() || v.isInfinite()) return "Erreur"
-        return if (v % 1.0 == 0.0) v.toLong().toString() else BigDecimal(v).stripTrailingZeros().toPlainString()
+        // considérer comme entier si proche d'un entier (corrige erreurs d'approximation comme 120.0000000000002)
+        val rounded = kotlin.math.round(v)
+        val eps = 1e-6
+        val isNearInt = kotlin.math.abs(v - rounded) < eps
+
+        return when (_formatMode.value) {
+            FormatMode.PLAIN -> {
+                if (isNearInt) rounded.toLong().toString() else BigDecimal(v).stripTrailingZeros().toPlainString()
+            }
+            FormatMode.THOUSANDS -> {
+                // Pour les entiers proches, formater explicitement avec grouping via String.format
+                if (isNearInt) {
+                    String.format(Locale.US, "%,d", rounded.toLong())
+                } else {
+                    val df = (NumberFormat.getInstance(Locale.US) as DecimalFormat)
+                    df.isGroupingUsed = true
+                    df.maximumFractionDigits = 10
+                    df.minimumFractionDigits = 0
+                    df.format(v)
+                }
+            }
+            FormatMode.SCIENTIFIC -> {
+                // Toujours formatter en notation scientifique (même pour nombres entiers)
+                val df = DecimalFormat("0.######E0")
+                df.format(v)
+            }
+        }
     }
 }
