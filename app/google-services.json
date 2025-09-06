@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "943451087308",
+    "project_id": "ganymede-24428",
+    "storage_bucket": "ganymede-24428.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:943451087308:android:bec2c47f5fb5d06bcdfd69",
+        "android_client_info": {
+          "package_name": "com.joviansapps.ganymede"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnVVkWS6VRDbGxr4hZeoMotNVFPAIVDOA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

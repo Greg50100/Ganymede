@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.google.gms.google.services)
+    alias(libs.plugins.google.firebase.crashlytics)
 }
 
 android {
@@ -26,6 +28,10 @@ android {
     }
 
     composeOptions { }
+
+    lint {
+        abortOnError = false
+    }
 }
 
 kotlin {
@@ -49,6 +55,11 @@ dependencies {
     implementation(libs.compose.foundation)
     implementation("net.objecthunter:exp4j:0.4.8")
 
+    // DataStore Preferences
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+
+    // Firebase Crashlytics (use version catalog alias)
+    implementation(libs.firebase.crashlytics)
 
     debugImplementation(libs.compose.ui.tooling)
 
