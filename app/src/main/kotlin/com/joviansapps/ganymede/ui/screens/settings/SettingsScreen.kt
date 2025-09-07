@@ -24,7 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 @Composable
 fun SettingsScreen(vm: SettingsViewModel = viewModel()) {
     val state by vm.uiState.collectAsState()
-    val useDark = when (state.themeMode) {
+    when (state.themeMode) {
         ThemeMode.DARK -> true
         ThemeMode.LIGHT -> false
         ThemeMode.AUTO -> isSystemInDarkTheme()

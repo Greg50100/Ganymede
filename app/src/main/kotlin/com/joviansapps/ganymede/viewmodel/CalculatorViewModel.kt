@@ -258,13 +258,27 @@ class CalculatorViewModel : ViewModel() {
             val modFunc = object: Function("mod", 2) { override fun apply(vararg args: Double) = args[0] % args[1] }
 
             // Fonctions hyperboliques et inverses
-            val sinhF = object: Function("sinh", 1) { override fun apply(vararg a: Double) = kotlin.math.sinh(a[0]) }
-            val coshF = object: Function("cosh", 1) { override fun apply(vararg a: Double) = kotlin.math.cosh(a[0]) }
-            val tanhF = object: Function("tanh", 1) { override fun apply(vararg a: Double) = kotlin.math.tanh(a[0]) }
-            val asinhF = object: Function("asinh", 1) { override fun apply(vararg a: Double) = kotlin.math.asinh(a[0]) }
-            val acoshF = object: Function("acosh", 1) { override fun apply(vararg a: Double) = kotlin.math.acosh(a[0]) }
-            val atanhF = object: Function("atanh", 1) { override fun apply(vararg a: Double) = kotlin.math.atanh(a[0]) }
-            val absF = object: Function("abs", 1) { override fun apply(vararg a: Double) = kotlin.math.abs(a[0]) }
+            val sinhF = object: Function("sinh", 1) { override fun apply(vararg a: Double) =
+                sinh(a[0])
+            }
+            val coshF = object: Function("cosh", 1) { override fun apply(vararg a: Double) =
+                cosh(a[0])
+            }
+            val tanhF = object: Function("tanh", 1) { override fun apply(vararg a: Double) =
+                tanh(a[0])
+            }
+            val asinhF = object: Function("asinh", 1) { override fun apply(vararg a: Double) =
+                asinh(a[0])
+            }
+            val acoshF = object: Function("acosh", 1) { override fun apply(vararg a: Double) =
+                acosh(a[0])
+            }
+            val atanhF = object: Function("atanh", 1) { override fun apply(vararg a: Double) =
+                atanh(a[0])
+            }
+            val absF = object: Function("abs", 1) { override fun apply(vararg a: Double) =
+                abs(a[0])
+            }
 
             val builder = ExpressionBuilder(expression)
                 .function(fact)
@@ -301,9 +315,9 @@ class CalculatorViewModel : ViewModel() {
     private fun formatNumber(v: Double): String {
         if (v.isNaN() || v.isInfinite()) return "Erreur"
         // considérer comme entier si proche d'un entier (corrige erreurs d'approximation comme 120.0000000000002)
-        val rounded = kotlin.math.round(v)
+        val rounded = round(v)
         val eps = 1e-6
-        val isNearInt = kotlin.math.abs(v - rounded) < eps
+        val isNearInt = abs(v - rounded) < eps
 
         return when (_formatMode.value) {
             FormatMode.PLAIN -> {

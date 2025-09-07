@@ -1,33 +1,50 @@
 package com.joviansapps.ganymede.navigation
 
+import android.content.ComponentCallbacks
 import android.content.res.Configuration
 import androidx.compose.runtime.*
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import java.util.*
 
 /**
- * Fournit à la composition un nouveau LocalContext configuré avec la locale `code`.
+ * Provides a Composition with a LocalContext configured for the specified locale code.
  */
 @Composable
 fun LanguageProvider(code: String, content: @Composable () -> Unit) {
     val ctx = LocalContext.current
 
-    // 1) crée l'objet Locale
+    // 1) Create the Locale object from the provided code
     val locale = remember(code) { Locale(code) }
 
-    // 2) crée une Configuration basée sur l'existante + nouvelle locale
-    val config = remember(locale) {
-        Configuration(ctx.resources.configuration).apply {
+    // 2) Read the current base configuration using LocalConfiguration and create a new Configuration with the new locale
+    val baseConfig = LocalConfiguration.current
+    val config = remember(locale, baseConfig) {
+        Configuration(baseConfig).apply {
             setLocale(locale)
         }
     }
 
-    // 3) crée un contexte dérivé de celui-ci avec la nouvelle config
+    // 3) Create a localized context from the modified configuration
     val localizedCtx = remember(config) {
         ctx.createConfigurationContext(config)
     }
 
-    // 4) injecte ce contexte dans la composition
+    // 4) Listen for configuration changes to allow recomposition if the system configuration changes
+    DisposableEffect(ctx) {
+        val callback = object : ComponentCallbacks {
+            override fun onConfigurationChanged(newConfig: Configuration) {
+                // No-op here; keeping the callback ensures system changes are observable.
+                // If you need to force a recomposition, you can update a state observed by the composable.
+            }
+
+            override fun onLowMemory() {}
+        }
+        ctx.registerComponentCallbacks(callback)
+        onDispose { ctx.unregisterComponentCallbacks(callback) }
+    }
+
+    // 5) Provide the localized context to the composition
     CompositionLocalProvider(
         LocalContext provides localizedCtx
     ) {

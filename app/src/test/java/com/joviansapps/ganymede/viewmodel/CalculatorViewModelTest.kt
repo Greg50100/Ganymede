@@ -298,7 +298,7 @@ class CalculatorViewModelUnitTest {
     fun degrees_mode_cos_60_and_asin_1() {
         val vm = CalculatorViewModel()
         vm.toggleDegrees() // activate degrees
-        vm.onFunction("cos"); vm.onNumber("60"); vm.onEvaluate(); // cos(60°)=0.5
+        vm.onFunction("cos"); vm.onNumber("60"); vm.onEvaluate() // cos(60°)=0.5
         val cosVal = vm.result.value.replace(",", "").toDouble()
         assertTrue(kotlin.math.abs(cosVal - 0.5) < 1e-6)
         // asin(1)=90°

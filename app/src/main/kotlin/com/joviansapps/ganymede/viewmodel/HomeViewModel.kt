@@ -25,8 +25,7 @@ class HomeViewModel : ViewModel() {
             _uiState.value = HomeUiState(isLoading = true)
             delay(1000) // simulation chargement
             _uiState.value = HomeUiState(
-                items = List(20) { "Item ${it + 1}" },
-                isLoading = false
+                items = List(20) { "Item ${it + 1}" }
             )
         }
     }

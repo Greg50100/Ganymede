@@ -1,13 +1,12 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name" translatable="false">Ganymede</string>
     <string name="settings_title">Settings</string>
     <string name="theme_label">Theme</string>
-    <string name="color_label">Primary color</string>
+    <string name="color_label" tools:ignore="UnusedResources">Primary color</string>
     <string name="language_label">Language</string>
     <string name="auto_label">Auto (system)</string>
     <string name="light_label">Light</string>
     <string name="dark_label">Dark</string>
-    <string name="result_format">Result: %1$s</string>
 
     <!-- Home screen -->
     <string name="welcome_home">Welcome to Ganymede</string>
@@ -23,34 +22,149 @@
     <string name="continue_button">Continue</string>
 
     <!-- Calculator -->
-    <string name="digit_1" translatable="false">1</string>
-    <string name="digit_2" translatable="false">2</string>
-    <string name="equals" translatable="false">=</string>
-    <string name="clear" translatable="false">C</string>
 
     <!-- Converter -->
     <string name="converter_input_label">Value in %1$s</string>
     <string name="converter_result_format">Result: %1$s %2$s</string>
+    <string name="converter_category_label">Category</string>
+    <string name="converter_from_unit_label">From unit</string>
+    <string name="converter_to_unit_label">To unit</string>
+    <string name="unit_length">Length</string>
+    <string name="unit_mass">Mass</string>
+    <string name="unit_temperature">Temperature</string>
+    <string name="unit_area">Area</string>
+    <string name="unit_storage">Storage</string>
+    <string name="unit_frequency">Frequency</string>
+    <string name="unit_speed">Speed</string>
+    <string name="unit_volume">Volume</string>
+    <string name="unit_angle">Angle</string>
+    <string name="unit_power">Power</string>
+    <string name="unit_pressure">Pressure</string>
+    <string name="unit_density">Density</string>
+    <string name="unit_energy">Energy</string>
+    <string name="unit_force">Force</string>
+    <string name="unit_fuel">Fuel economy</string>
+    <string name="unit_light">Light</string>
+    <string name="unit_time">Time</string>
+    <string name="unit_torque">Torque</string>
+    <string name="unit_viscosity">Viscosity</string>
+    <string name="unit_currency">Currency</string>
+    <string name="unit_numeric_base">Numeric base</string>
+
+    <!-- Full unit names (English) -->
+    <string name="unit_m_full">meter</string>
+    <string name="unit_km_full">kilometer</string>
+    <string name="unit_cm_full">centimeter</string>
+    <string name="unit_mm_full">millimeter</string>
+    <string name="unit_in_full">inch</string>
+    <string name="unit_ft_full">foot</string>
+    <string name="unit_yd_full">yard</string>
+    <string name="unit_mi_full">mile</string>
+    <string name="unit_nmi_full">nautical mile</string>
+
+    <string name="unit_g_full">gram</string>
+    <string name="unit_kg_full">kilogram</string>
+    <string name="unit_mg_full">milligram</string>
+    <string name="unit_lb_full">pound</string>
+    <string name="unit_oz_full">ounce</string>
+
+    <string name="unit_c_full">degree Celsius</string>
+    <string name="unit_f_full">degree Fahrenheit</string>
+    <string name="unit_k_full">kelvin</string>
+
+    <string name="value">Value</string>
+    <string name="unit">Unit</string>
+    <string name="copy_text">Copy text</string>
 
     <!-- Navigation -->
     <string name="home_label">Home</string>
 
     <!-- Advanced Calculator -->
     <string name="calc_memory_indicator" translatable="false">M</string>
-    <string name="calc_sin" translatable="false">sin</string>
-    <string name="calc_cos" translatable="false">cos</string>
-    <string name="calc_sqrt" translatable="false">√</string>
-    <string name="calc_left_paren" translatable="false">(</string>
-    <string name="calc_right_paren" translatable="false">)</string>
     <string name="calc_m_plus" translatable="false">M+</string>
     <string name="calc_m_minus" translatable="false">M-</string>
     <string name="calc_m_recall" translatable="false">MR</string>
     <string name="calc_m_clear" translatable="false">MC</string>
-    <string name="calc_error_generic">Error</string>
-    <string name="calc_tan" translatable="false">tan</string>
-    <string name="calc_log" translatable="false">log</string>
-    <string name="calc_ln" translatable="false">ln</string>
-    <string name="calc_pow" translatable="false">^</string>
     <string name="calc_swipe_hint">Swipe horizontally for functions</string>
+    <string name="result_format">Result: %1$s</string>
+    <string name="calc_error_generic">Error</string>
     <string name="calc_div_zero">Division by zero</string>
+
+    <!-- Additional full unit names -->
+    <string name="unit_m2_full">square meter</string>
+    <string name="unit_km2_full">square kilometer</string>
+    <string name="unit_ha_full">hectare</string>
+    <string name="unit_acre_full">acre</string>
+
+    <string name="unit_bit_full">bit</string>
+    <string name="unit_b_full">byte</string>
+    <string name="unit_kb_full">kilobyte</string>
+    <string name="unit_mb_full">megabyte</string>
+    <string name="unit_gb_full">gigabyte</string>
+
+    <string name="unit_hz_full">hertz</string>
+    <string name="unit_khz_full">kilohertz</string>
+    <string name="unit_mhz_full">megahertz</string>
+
+    <string name="unit_ms_full">meter per second</string>
+    <string name="unit_kmh_full">kilometer per hour</string>
+    <string name="unit_mph_full">mile per hour</string>
+    <string name="unit_knot_full">knot</string>
+
+    <string name="unit_l_full">liter</string>
+    <string name="unit_m3_full">cubic meter</string>
+    <string name="unit_ml_full">milliliter</string>
+
+    <string name="unit_rad_full">radian</string>
+    <string name="unit_deg_full">degree</string>
+    <string name="unit_grad_full">gradian</string>
+
+    <string name="unit_w_full">watt</string>
+    <string name="unit_kw_full">kilowatt</string>
+    <string name="unit_hp_full">horsepower</string>
+
+    <string name="unit_pa_full">pascal</string>
+    <string name="unit_kpa_full">kilopascal</string>
+    <string name="unit_bar_full">bar</string>
+    <string name="unit_atm_full">atmosphere</string>
+    <string name="unit_psi_full">pound per square inch</string>
+
+    <string name="unit_kg_m3_full">kilogram per cubic meter</string>
+    <string name="unit_g_cm3_full">gram per cubic centimeter</string>
+
+    <string name="unit_j_full">joule</string>
+    <string name="unit_kj_full">kilojoule</string>
+    <string name="unit_cal_full">calorie</string>
+    <string name="unit_kcal_full">kilocalorie</string>
+    <string name="unit_wh_full">watt hour</string>
+    <string name="unit_kwh_full">kilowatt hour</string>
+
+    <string name="unit_n_full">newton</string>
+    <string name="unit_kn_full">kilonewton</string>
+    <string name="unit_lbf_full">pound-force</string>
+
+    <string name="unit_l_100km_full">liters / 100 km</string>
+    <string name="unit_km_l_full">kilometers per liter</string>
+
+    <string name="unit_cd_full">candela</string>
+    <string name="unit_mcd_full">millicandela</string>
+
+    <string name="unit_s_full">second</string>
+    <string name="unit_min_full">minute</string>
+    <string name="unit_h_full">hour</string>
+    <string name="unit_day_full">day</string>
+
+    <string name="unit_n_m_full">newton meter</string>
+    <string name="unit_kn_m_full">kilonewton meter</string>
+
+    <string name="unit_pa_s_full">pascal second</string>
+    <string name="unit_cp_full">centipoise</string>
+
+    <string name="unit_eur_full">euro</string>
+    <string name="unit_usd_full">US dollar</string>
+    <string name="unit_gbp_full">pound sterling</string>
+
+    <string name="unit_base2_full">base 2 (binary)</string>
+    <string name="unit_base8_full">base 8 (octal)</string>
+    <string name="unit_base10_full">base 10 (decimal)</string>
 </resources>

@@ -7,7 +7,6 @@
     <string name="auto_label">Auto (sistema)</string>
     <string name="light_label">Claro</string>
     <string name="dark_label">Oscuro</string>
-    <string name="result_format">Resultado: %1$s</string>
     <string name="welcome_home">Bienvenidos a Ganimedes</string>
     <string name="calculator_title">Calculadora</string>
     <string name="calculator_description">Cálculos rápidos y científicos</string>
@@ -19,8 +18,38 @@
     <string name="continue_button">Continuar</string>
     <string name="converter_input_label">Valor en %1$s</string>
     <string name="converter_result_format">Resultado: %1$s %2$s</string>
+    <string name="converter_category_label">Categoría</string>
+    <string name="converter_from_unit_label">Unidad origen</string>
+    <string name="converter_to_unit_label">Unidad destino</string>
+    <string name="unit_length">Longitud</string>
+    <string name="unit_mass">Masa</string>
+    <string name="unit_temperature">Temperatura</string>
+    <string name="copy_text">Copiar</string>
     <string name="home_label">Inicio</string>
     <string name="calc_swipe_hint">Deslice horizontalmente para ver las funciones</string>
+    <!-- Full unit names (español) -->
+    <string name="unit_m_full">metro</string>
+    <string name="unit_km_full">kilómetro</string>
+    <string name="unit_cm_full">centímetro</string>
+    <string name="unit_mm_full">milímetro</string>
+    <string name="unit_in_full">pulgada</string>
+    <string name="unit_ft_full">pie</string>
+    <string name="unit_yd_full">yarda</string>
+    <string name="unit_mi_full">milla</string>
+    <string name="unit_nmi_full">milla náutica</string>
+
+    <string name="unit_g_full">gramo</string>
+    <string name="unit_kg_full">kilogramo</string>
+    <string name="unit_mg_full">miligramo</string>
+    <string name="unit_lb_full">libra</string>
+    <string name="unit_oz_full">onza</string>
+
+    <string name="unit_c_full">grado Celsius</string>
+    <string name="unit_f_full">grado Fahrenheit</string>
+    <string name="unit_k_full">kelvin</string>
+    <string name="value">Valor</string>
+    <string name="unit">Unidad</string>
+    <string name="result_format">Resultado: %1$s</string>
     <string name="calc_error_generic">Error</string>
     <string name="calc_div_zero">División por cero</string>
 </resources>

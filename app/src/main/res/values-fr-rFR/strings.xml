@@ -19,9 +19,132 @@
     <string name="continue_button">Continuer</string>
     <string name="converter_input_label">Valeur en %1$s</string>
     <string name="converter_result_format">Résultat : %1$s %2$s</string>
+    <string name="converter_category_label">Catégorie</string>
+    <string name="converter_from_unit_label">Unité source</string>
+    <string name="converter_to_unit_label">Unité cible</string>
+    <string name="unit_temperature">Température</string>
+    <string name="unit_area">Aire</string>
+    <string name="unit_storage">Stockage</string>
+    <string name="unit_frequency">Fréquence</string>
+    <string name="unit_length">Longueur</string>
+    <string name="unit_mass">Masse</string>
+    <string name="unit_speed">Vitesse</string>
+    <string name="unit_volume">Volume</string>
+    <string name="unit_angle">Angle</string>
+    <string name="unit_power">Puissance</string>
+    <string name="unit_pressure">Pression</string>
+    <string name="unit_density">Densité</string>
+    <string name="unit_energy">Énergie</string>
+    <string name="unit_force">Force</string>
+    <string name="unit_fuel">Carburant</string>
+    <string name="unit_light">Lumière</string>
+    <string name="unit_time">Temps</string>
+    <string name="unit_torque">Couple</string>
+    <string name="unit_viscosity">Viscosité</string>
+    <string name="unit_currency">Devise</string>
+    <string name="unit_numeric_base">Base numérique</string>
+    <string name="copy_text">Copier</string>
     <string name="home_label">Accueil</string>
     <string name="calc_swipe_hint">Glisser horizontalement pour les fonctions</string>
     <string name="calc_error_generic">Erreur</string>
     <string name="calc_div_zero">Division par zéro</string>
-    <!-- … -->
+    <!-- Full unit names (français) -->
+    <string name="unit_m_full">mètre</string>
+    <string name="unit_km_full">kilomètre</string>
+    <string name="unit_cm_full">centimètre</string>
+    <string name="unit_mm_full">millimètre</string>
+    <string name="unit_in_full">pouce</string>
+    <string name="unit_ft_full">pied</string>
+    <string name="unit_yd_full">yard</string>
+    <string name="unit_mi_full">mille terrestre</string>
+    <string name="unit_nmi_full">mille marin</string>
+
+    <string name="unit_g_full">gramme</string>
+    <string name="unit_kg_full">kilogramme</string>
+    <string name="unit_mg_full">milligramme</string>
+    <string name="unit_lb_full">livre</string>
+    <string name="unit_oz_full">once</string>
+
+    <string name="unit_c_full">degré Celsius</string>
+    <string name="unit_f_full">degré Fahrenheit</string>
+    <string name="unit_k_full">kelvin</string>
+    <string name="value">Valeur</string>
+    <string name="unit">Unité</string>
+    <!-- Nouvelles unités -->
+    <string name="unit_m2_full">mètre carré</string>
+    <string name="unit_km2_full">kilomètre carré</string>
+    <string name="unit_ha_full">hectare</string>
+    <string name="unit_acre_full">acre</string>
+
+    <string name="unit_bit_full">bit</string>
+    <string name="unit_b_full">octet</string>
+    <string name="unit_kb_full">kilooctet</string>
+    <string name="unit_mb_full">mégaoctet</string>
+    <string name="unit_gb_full">gigaoctet</string>
+
+    <string name="unit_hz_full">hertz</string>
+    <string name="unit_khz_full">kilohertz</string>
+    <string name="unit_mhz_full">mégahertz</string>
+
+    <string name="unit_ms_full">mètre par seconde</string>
+    <string name="unit_kmh_full">kilomètre par heure</string>
+    <string name="unit_mph_full">mile par heure</string>
+    <string name="unit_knot_full">nœud</string>
+
+    <string name="unit_l_full">litre</string>
+    <string name="unit_m3_full">mètre cube</string>
+    <string name="unit_ml_full">millilitre</string>
+
+    <string name="unit_rad_full">radian</string>
+    <string name="unit_deg_full">degré</string>
+    <string name="unit_grad_full">grade</string>
+
+    <string name="unit_w_full">watt</string>
+    <string name="unit_kw_full">kilowatt</string>
+    <string name="unit_hp_full">cheval vapeur</string>
+
+    <string name="unit_pa_full">pascal</string>
+    <string name="unit_kpa_full">kilopascal</string>
+    <string name="unit_bar_full">bar</string>
+    <string name="unit_atm_full">atmosphère</string>
+    <string name="unit_psi_full">livre par pouce carré</string>
+
+    <string name="unit_kg_m3_full">kilogramme par mètre cube</string>
+    <string name="unit_g_cm3_full">gramme par centimètre cube</string>
+
+    <string name="unit_j_full">joule</string>
+    <string name="unit_kj_full">kilojoule</string>
+    <string name="unit_cal_full">calorie</string>
+    <string name="unit_kcal_full">kilocalorie</string>
+    <string name="unit_wh_full">watt-heure</string>
+    <string name="unit_kwh_full">kilowatt-heure</string>
+
+    <string name="unit_n_full">newton</string>
+    <string name="unit_kn_full">kilonewton</string>
+    <string name="unit_lbf_full">livre-force</string>
+
+    <string name="unit_l_100km_full">litres / 100 km</string>
+    <string name="unit_km_l_full">kilomètres par litre</string>
+
+    <string name="unit_cd_full">candela</string>
+    <string name="unit_mcd_full">millicandela</string>
+
+    <string name="unit_s_full">seconde</string>
+    <string name="unit_min_full">minute</string>
+    <string name="unit_h_full">heure</string>
+    <string name="unit_day_full">jour</string>
+
+    <string name="unit_n_m_full">newton mètre</string>
+    <string name="unit_kn_m_full">kilonewton mètre</string>
+
+    <string name="unit_pa_s_full">pascal seconde</string>
+    <string name="unit_cp_full">centipoise</string>
+
+    <string name="unit_eur_full">euro</string>
+    <string name="unit_usd_full">dollar US</string>
+    <string name="unit_gbp_full">livre sterling</string>
+
+    <string name="unit_base2_full">base 2 (binaire)</string>
+    <string name="unit_base8_full">base 8 (octal)</string>
+    <string name="unit_base10_full">base 10 (décimal)</string>
 </resources>

@@ -7,7 +7,6 @@
     <string name="auto_label">Auto (System)</string>
     <string name="light_label">Hell</string>
     <string name="dark_label">Dunkel</string>
-    <string name="result_format">Ergebnis: %1$s</string>
     <string name="welcome_home">Willkommen auf Ganymed</string>
     <string name="calculator_title">Kalkulator</string>
     <string name="calculator_description">Schnelle und wissenschaftliche Berechnungen</string>
@@ -19,9 +18,38 @@
     <string name="continue_button">Weitermachen</string>
     <string name="converter_input_label">Wert in %1$s</string>
     <string name="converter_result_format">Ergebnis: %1$s %2$s</string>
+    <string name="converter_category_label">Kategorie</string>
+    <string name="converter_from_unit_label">Ausgangseinheit</string>
+    <string name="converter_to_unit_label">Zieleinheit</string>
+    <string name="unit_length">Länge</string>
+    <string name="unit_mass">Masse</string>
+    <string name="unit_temperature">Temperatur</string>
+    <string name="copy_text">Kopie</string>
     <string name="home_label">Willkommen</string>
     <string name="calc_swipe_hint">Für Funktionen horizontal wischen</string>
+    <!-- Full unit names (Deutsch) -->
+    <string name="unit_m_full">Meter</string>
+    <string name="unit_km_full">Kilometer</string>
+    <string name="unit_cm_full">Zentimeter</string>
+    <string name="unit_mm_full">Millimeter</string>
+    <string name="unit_in_full">Zoll</string>
+    <string name="unit_ft_full">Fuß</string>
+    <string name="unit_yd_full">Yard</string>
+    <string name="unit_mi_full">Meile</string>
+    <string name="unit_nmi_full">Seemeile</string>
+
+    <string name="unit_g_full">Gramm</string>
+    <string name="unit_kg_full">Kilogramm</string>
+    <string name="unit_mg_full">Milligramm</string>
+    <string name="unit_lb_full">Pfund</string>
+    <string name="unit_oz_full">Unze</string>
+
+    <string name="unit_c_full">Grad Celsius</string>
+    <string name="unit_f_full">Grad Fahrenheit</string>
+    <string name="unit_k_full">Kelvin</string>
+    <string name="value">Wert</string>
+    <string name="unit">Einheit</string>
+    <string name="result_format">Ergebnis: %1$s</string>
     <string name="calc_error_generic">Fehler</string>
     <string name="calc_div_zero">Division durch Null</string>
 </resources>
-
