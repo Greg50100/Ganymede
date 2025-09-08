@@ -147,4 +147,6 @@
     <string name="unit_base2_full">base 2 (binaire)</string>
     <string name="unit_base8_full">base 8 (octal)</string>
     <string name="unit_base10_full">base 10 (décimal)</string>
+    <string name="graph_title">Graphe</string>
+    <string name="graph_description">Créer des graphiques à partir de points</string>
 </resources>

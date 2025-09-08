@@ -52,4 +52,6 @@
     <string name="result_format">Ergebnis: %1$s</string>
     <string name="calc_error_generic">Fehler</string>
     <string name="calc_div_zero">Division durch Null</string>
+    <string name="graph_title">Diagramm</string>
+    <string name="graph_description">Einfache Liniendiagramme aus Punkten erstellen</string>
 </resources>

@@ -22,6 +22,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
+@Preview
 fun SettingsScreen(vm: SettingsViewModel = viewModel()) {
     val state by vm.uiState.collectAsState()
     when (state.themeMode) {

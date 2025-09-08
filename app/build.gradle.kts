@@ -54,6 +54,8 @@ dependencies {
     implementation(libs.navigation.compose)
     implementation(libs.compose.foundation)
     implementation("net.objecthunter:exp4j:0.4.8")
+    // Icônes Material (ArrowBack etc.)
+    implementation("androidx.compose.material:material-icons-extended:1.6.0")
 
     // DataStore Preferences
     implementation("androidx.datastore:datastore-preferences:1.0.0")

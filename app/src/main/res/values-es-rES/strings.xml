@@ -52,4 +52,6 @@
     <string name="result_format">Resultado: %1$s</string>
     <string name="calc_error_generic">Error</string>
     <string name="calc_div_zero">División por cero</string>
+    <string name="graph_title">Gráfico</string>
+    <string name="graph_description">Crear gráficos de líneas con puntos</string>
 </resources>

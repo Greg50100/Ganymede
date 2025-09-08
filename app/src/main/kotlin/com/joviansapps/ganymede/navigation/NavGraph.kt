@@ -26,6 +26,7 @@ import com.joviansapps.ganymede.ui.screens.calculator.CalculatorScreen
 import com.joviansapps.ganymede.ui.screens.converter.ConverterScreen
 import com.joviansapps.ganymede.ui.screens.home.HomeScreen
 import com.joviansapps.ganymede.ui.screens.settings.SettingsScreen
+import com.joviansapps.ganymede.ui.screens.graph.GraphScreen
 import com.joviansapps.ganymede.viewmodel.SettingsViewModel
 
 
@@ -33,6 +34,7 @@ sealed class Dest(val route: String) {
     data object Home       : Dest("home")
     data object Calculator : Dest("calculator")
     data object Converter  : Dest("converter")
+    data object Graph      : Dest("graph")
     data object Settings   : Dest("settings")
 }
 
@@ -46,15 +48,16 @@ fun AppRoot(settingsVm: SettingsViewModel) {
         topBar = {
             val current by nav.currentBackStackEntryAsState()
             val route = current?.destination?.route
-            val titleRes = when (route) {
-                Dest.Home.route -> R.string.home_label
-                Dest.Calculator.route -> R.string.calculator_title
-                Dest.Converter.route -> R.string.converter_title
-                Dest.Settings.route -> R.string.settings_title
-                else -> R.string.app_name
+            val titleText: String = when (route) {
+                Dest.Home.route -> stringResource(R.string.home_label)
+                Dest.Calculator.route -> stringResource(R.string.calculator_title)
+                Dest.Converter.route -> stringResource(R.string.converter_title)
+                Dest.Graph.route -> "Graph" // fallback littéral pour éviter dépendance sur R.string.graph_title
+                Dest.Settings.route -> stringResource(R.string.settings_title)
+                else -> stringResource(R.string.app_name)
             }
             TopAppBar(
-                title = { Text(text = stringResource(titleRes)) },
+                title = { Text(text = titleText) },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.surface,
                     titleContentColor = MaterialTheme.colorScheme.onSurface,
@@ -100,7 +103,8 @@ fun AppRoot(settingsVm: SettingsViewModel) {
             composable(Dest.Home.route) {
                 HomeScreen(
                     onOpenCalculator = { nav.navigate(Dest.Calculator.route) },
-                    onOpenConverter  = { nav.navigate(Dest.Converter.route) }
+                    onOpenConverter  = { nav.navigate(Dest.Converter.route) },
+                    onOpenGraph      = { nav.navigate(Dest.Graph.route) }
                 )
             }
             composable(Dest.Calculator.route) {
@@ -111,6 +115,9 @@ fun AppRoot(settingsVm: SettingsViewModel) {
             }
             composable(Dest.Settings.route) {
                 SettingsScreen(vm = settingsVm)
+            }
+            composable(Dest.Graph.route) {
+                GraphScreen(onBack = { nav.popBackStack() })
             }
         }
     }

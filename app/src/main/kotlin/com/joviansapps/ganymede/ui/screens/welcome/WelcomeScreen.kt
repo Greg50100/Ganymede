@@ -10,6 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.joviansapps.ganymede.R
 
 @Composable
+@Preview
 fun WelcomeScreen(onContinue: () -> Unit) {
     Surface(modifier = Modifier.fillMaxSize()) {
         Column(
