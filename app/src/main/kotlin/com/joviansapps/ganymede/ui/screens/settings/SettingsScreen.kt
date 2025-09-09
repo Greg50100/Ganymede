@@ -9,6 +9,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -20,12 +21,16 @@ import com.joviansapps.ganymede.viewmodel.CalculatorViewModel
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.sp
+import androidx.compose.ui.draw.scale
+import androidx.compose.ui.platform.LocalContext
+
 
 @Composable
 @Preview
 fun SettingsScreen(vm: SettingsViewModel = viewModel()) {
     val state by vm.uiState.collectAsState()
-    when (state.themeMode) {
+    val isDark = when (state.themeMode) {
         ThemeMode.DARK -> true
         ThemeMode.LIGHT -> false
         ThemeMode.AUTO -> isSystemInDarkTheme()
@@ -141,7 +146,8 @@ private fun SegmentedToggleGroup(
     modifier: Modifier = Modifier,
     height: Dp = 40.dp
 ) {
-    Row(modifier = modifier, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+    val context = LocalContext.current
+    Row(modifier = modifier, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
         modes.forEach { mode ->
             val isSelected = mode == selected
             val label = when (mode) {
@@ -149,11 +155,16 @@ private fun SegmentedToggleGroup(
                 ThemeMode.DARK -> stringResource(R.string.dark_label).uppercase()
                 ThemeMode.AUTO -> stringResource(R.string.auto_label).uppercase()
             }
-            val emoji = when (mode) {
-                ThemeMode.LIGHT -> "☀️"
-                ThemeMode.DARK -> "🌙"
-                ThemeMode.AUTO -> "🔁"
+
+            // Resolve drawable resource name and id without wrapping painterResource in try/catch
+            val resName = when (mode) {
+                ThemeMode.LIGHT -> "light_mode"
+                ThemeMode.DARK -> "dark_mode"
+                ThemeMode.AUTO -> "autorenew"
             }
+            val resId = context.resources.getIdentifier(resName, "drawable", context.packageName)
+            val finalResId = if (resId != 0) resId else R.drawable.ic_launcher_foreground
+            val iconPainter = painterResource(id = finalResId)
 
             val buttonModifier = Modifier
                 .height(height)
@@ -166,7 +177,7 @@ private fun SegmentedToggleGroup(
                     shape = RoundedCornerShape(12.dp)
                 ) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(emoji)
+                        Icon(painter = iconPainter, contentDescription = label, modifier = Modifier.size(20.dp))
                         Spacer(Modifier.width(8.dp))
                         Text(label, style = MaterialTheme.typography.labelLarge)
                     }
@@ -178,7 +189,7 @@ private fun SegmentedToggleGroup(
                     shape = RoundedCornerShape(12.dp)
                 ) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(emoji)
+                        Icon(painter = iconPainter, contentDescription = label, modifier = Modifier.size(20.dp))
                         Spacer(Modifier.width(8.dp))
                         Text(label, style = MaterialTheme.typography.labelLarge)
                     }

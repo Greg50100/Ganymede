@@ -63,6 +63,9 @@ dependencies {
     // Firebase Crashlytics (use version catalog alias)
     implementation(libs.firebase.crashlytics)
 
+    // Coil for image loading (Compose)
+    implementation("io.coil-kt:coil-compose:2.4.0")
+
     debugImplementation(libs.compose.ui.tooling)
 
     testImplementation(libs.junit)

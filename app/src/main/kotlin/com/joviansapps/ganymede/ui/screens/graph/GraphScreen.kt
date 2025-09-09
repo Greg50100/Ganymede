@@ -32,6 +32,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.gestures.rememberTransformableState
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.stringResource
+import com.joviansapps.ganymede.R
+
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun GraphScreen(
@@ -57,7 +60,7 @@ fun GraphScreen(
 
     val pagerState = rememberPagerState(pageCount = { 2 })
     val scope = rememberCoroutineScope()
-    val tabTitles = listOf("Fonctions", "Graphe")
+    val tabTitles = listOf(stringResource(R.string.tab_functions), stringResource(R.string.tab_graph))
 
     Column(modifier.fillMaxSize()) {
         // Tab navigation sans TopAppBar
@@ -111,24 +114,24 @@ private fun FunctionInputPage(
         OutlinedTextField(
             value = expr,
             onValueChange = onExprChange,
-            label = { Text("f(x)") },
+            label = { Text(stringResource(R.string.f_x)) },
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(Modifier.height(8.dp))
         OutlinedTextField(
             value = name,
             onValueChange = onNameChange,
-            label = { Text("Nom (optionnel)") },
+            label = { Text(stringResource(R.string.name_optionnal)) },
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(Modifier.height(12.dp))
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            Button(onClick = onAdd, enabled = expr.isNotBlank()) { Text("Ajouter") }
-            OutlinedButton(onClick = onClearAll, enabled = functions.isNotEmpty()) { Text("Effacer tout") }
+            Button(onClick = onAdd, enabled = expr.isNotBlank()) { Text(stringResource(R.string.add)) }
+            OutlinedButton(onClick = onClearAll, enabled = functions.isNotEmpty()) { Text(stringResource(R.string.clear_all)) }
         }
         if (functions.isNotEmpty()) {
             Spacer(Modifier.height(12.dp))
-            Text("Fonctions: ${functions.size}", style = MaterialTheme.typography.labelMedium)
+            Text(stringResource(R.string.functions_count, functions.size), style = MaterialTheme.typography.labelMedium)
             Spacer(Modifier.height(8.dp))
             LazyColumn(Modifier.weight(1f)) {
                 itemsIndexed(functions, key = { index, f -> f.name + index }) { index, f ->
@@ -137,7 +140,7 @@ private fun FunctionInputPage(
             }
         } else {
             Spacer(Modifier.height(16.dp))
-            Text("Aucune fonction", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text(stringResource(R.string.no_functions), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
     }
 }
@@ -159,10 +162,10 @@ private fun FunctionRow(index: Int, f: com.joviansapps.ganymede.graphing.GraphFu
         Spacer(Modifier.width(12.dp))
         Column(Modifier.weight(1f)) {
             Text(f.name, style = MaterialTheme.typography.bodyMedium, color = f.color)
-            Text("= ${f.expression}", style = MaterialTheme.typography.bodySmall)
+            Text("= ${'$'}{f.expression}", style = MaterialTheme.typography.bodySmall)
         }
         IconButton(onClick = { onDelete(index) }) {
-            Icon(Icons.Filled.Delete, contentDescription = "Supprimer")
+            Icon(Icons.Filled.Delete, contentDescription = stringResource(R.string.delete))
         }
     }
     // remplace Divider déprécié
@@ -194,7 +197,7 @@ private fun GraphPage(vm: com.joviansapps.ganymede.graphing.GraphViewModel) {
                     w.yMin = cy + (w.yMin - cy) / zoom
                     w.yMax = cy + (w.yMax - cy) / zoom
                     vm.window.value = vm.window.value
-                }) { Icon(Icons.Filled.ZoomIn, contentDescription = "Zoom in") }
+                }) { Icon(Icons.Filled.ZoomIn, contentDescription = stringResource(R.string.zoom_in)) }
 
                 SmallFloatingActionButton(onClick = {
                     val w = vm.window.value
@@ -206,11 +209,11 @@ private fun GraphPage(vm: com.joviansapps.ganymede.graphing.GraphViewModel) {
                     w.yMin = cy + (w.yMin - cy) * zoom
                     w.yMax = cy + (w.yMax - cy) * zoom
                     vm.window.value = vm.window.value
-                }) { Icon(Icons.Filled.ZoomOut, contentDescription = "Zoom out") }
+                }) { Icon(Icons.Filled.ZoomOut, contentDescription = stringResource(R.string.zoom_out)) }
 
                 SmallFloatingActionButton(onClick = {
                     vm.window.value = com.joviansapps.ganymede.graphing.Window()
-                }) { Icon(Icons.Filled.Refresh, contentDescription = "Reset") }
+                }) { Icon(Icons.Filled.Refresh, contentDescription = stringResource(R.string.reset)) }
             }
         }
     }
