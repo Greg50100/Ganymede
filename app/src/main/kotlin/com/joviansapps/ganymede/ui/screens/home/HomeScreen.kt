@@ -167,7 +167,8 @@ private fun BuyMeACoffeeButton(
             painter = painterResource(id = R.drawable.yellow_img),
             contentDescription = stringResource(R.string.buy_me_a_coffee),
             // taille fixe pour conserver les proportions et rester alignée en bas
-            modifier = Modifier.size(200.dp)
+            modifier = Modifier.size(200
+                .dp)
 
 
         )
