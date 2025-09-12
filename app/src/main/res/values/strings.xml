@@ -14,6 +14,8 @@
     <string name="calculator_description">Quick and scientific calculations</string>
     <string name="converter_title">Unit converter</string>
     <string name="converter_description">Length, weight, volume, and more</string>
+    <string name="utilities_title">Utilities</string>
+    <string name="utilities_description">A collection of small tools</string>
     <string name="open_button">Open</string>
 
     <!-- Welcome screen -->
@@ -27,6 +29,7 @@
     <string name="converter_input_label">Value in %1$s</string>
     <string name="converter_result_format">Result: %1$s %2$s</string>
     <string name="converter_category_label">Category</string>
+    <string name="format_label">Format</string>
     <string name="converter_from_unit_label">From unit</string>
     <string name="converter_to_unit_label">To unit</string>
     <string name="unit_length">Length</string>
@@ -187,7 +190,125 @@
 
     <string name="buy_me_a_coffee" translatable="false">Buy me a coffee</string>
     <string name="loading">Loading…</string>
-    
+
     <string name="more_coming_soon">More features coming soon!</string>
     <string name="more_coming_soon_description">Stay tuned for updates.</string>
+
+    <string name="resistor_calculator_title">Resistor Calculator</string>
+    <string name="resistor_calculator_description">Calculate resistor values based on color codes</string>
+    <string name="black">Black</string>
+    <string name="brown">Brown</string>
+    <string name="red">Red</string>
+    <string name="orange">Orange</string>
+    <string name="yellow">Yellow</string>
+    <string name="green">Green</string>
+    <string name="blue">Blue</string>
+    <string name="violet">Violet</string>
+    <string name="gray">Gray</string>
+    <string name="white">White</string>
+    <string name="gold">Gold</string>
+    <string name="silver">Silver</string>
+    <string name="none">None</string>
+    <string name="black_1">Black (×1)</string>
+    <string name="brown_10">Brown (×10)</string>
+    <string name="red_100">Red (×100)</string>
+    <string name="orange_1k">Orange (×1k)</string>
+    <string name="yellow_10k">Yellow (×10k)</string>
+    <string name="green_100k">Green (×100k)</string>
+    <string name="blue_1M">Blue (×1M)</string>
+    <string name="violet_10M">Violet (×10M)</string>
+    <string name="gray_100M">Gray (×100M)</string>
+    <string name="white_1G">White (×1G)</string>
+    <string name="gold_0_1">Gold (×0.1)</string>
+    <string name="silver_0_01">Silver (×0.01)</string>
+    <string name="resistor_band_1">Band 1</string>
+    <string name="resistor_band_2">Band 2</string>
+    <string name="resistor_band_3">Band 3</string>
+    <string name="resistor_band_4">Band 4 (tolerance)</string>
+    <string name="resistor_value_format">Resistor value: %1$s Ω ± %2$s%%</string>
+    <string name="resistor_invalid_selection">Please select colors for all bands</string>
+    <string name="gold_5">Gold (±5%)</string>
+    <string name="silver_10">Silver (±10%)</string>
+    <string name="brown_1">Brown (±1%)</string>
+    <string name="red_2">Red (±2%)</string>
+    <string name="brown_100ppm">Brown (100ppm)</string>
+    <string name="red_50ppm">Red (50ppm)</string>
+    <string name="orange_15ppm">Orange (15ppm)</string>
+    <string name="yellow_25ppm">Yellow (25ppm)</string>
+    <string name="blue_10ppm">Blue (10ppm)</string>
+    <string name="violet_5ppm">Violet (5ppm)</string>
+    <string name="inductance_calculator_title">Inductance Calculator</string>
+    <string name="inductance_calculator_description">Calculate inductor values and color codes</string>
+    <string name="time_constant_calculator_title">Time Constant Calculator</string>
+
+    <!-- Electronics Category -->
+    <string name="electronics_category_title">Electronics</string>
+    <string name="electronics_category_description">Tools and calculators for electronics</string>
+
+    <!-- Inductance Calculator -->
+    <string name="tab_color_code">Color Code</string>
+    <string name="tab_value_to_color">Value → Color</string>
+    <string name="tab_winding">Winding</string>
+    <string name="inductance_value_label">Inductance Value</string>
+    <string name="tolerance_label">Tolerance</string>
+    <string name="coil_winding_calculator_title">Coil Winding Calculator</string>
+    <string name="turns_label">Number of turns</string>
+    <string name="coil_diameter_label">Coil diameter</string>
+    <string name="coil_length_label">Coil length</string>
+    <string name="band_1_label">Band 1</string>
+    <string name="band_2_label">Band 2</string>
+    <string name="band_3_label">Band 3</string>
+    <string name="multiplier_label">Multiplier</string>
+    <string name="calculated_inductance_format">Calculated inductance: %.2f µH</string>
+    <string name="inductance_result_format">Inductance: %s</string>
+    <string name="tolerance_result_format">Tolerance: %s</string>
+    <string name="arrow_up" translatable="false">▲</string>
+    <string name="arrow_down" translatable="false">▼</string>
+
+    <!-- Resistor Calculator -->
+    <string name="ppm_label">PPM</string>
+    <string name="resistance_result_format">Resistance: %s Ω</string>
+    <string name="tolerance_percentage_format">Tolerance: ±%s%%</string>
+    <string name="default_suffix"> (default)</string>
+    <string name="temp_coefficient_format">Temperature coefficient: %sppm</string>
+
+    <!-- Settings Screen -->
+    <string name="settings_theme_colors_title">Theme colors</string>
+    <string name="settings_diagnostics_title">Diagnostics</string>
+    <string name="settings_crash_reports_label">Crash reports</string>
+    <string name="settings_crash_reports_description">Enables simulated report logging in Logcat (tag CrashReporter).</string>
+    <string name="settings_crash_reports_test_button">Test send</string>
+    <string name="settings_crash_reports_force_button">Force real crash</string>
+    <string name="settings_crash_reports_active_label">(Active)</string>
+    <string name="settings_crash_reports_inactive_label">(Inactive)</string>
+    <string name="settings_number_format_title">Number format</string>
+    <string name="settings_number_format_plain">PLAIN</string>
+    <string name="settings_number_format_thousands">THOUSANDS</string>
+    <string name="settings_number_format_scientific">SCIENTIFIC</string>
+    <string name="dialog_crash_title">Confirm crash</string>
+    <string name="dialog_crash_message">This action will intentionally crash the application to test Crashlytics.</string>
+    <string name="dialog_crash_confirm_button">Crash</string>
+    <string name="dialog_crash_cancel_button">Cancel</string>
+
+    <!-- History Dialog -->
+    <string name="history_title">History</string>
+    <string name="history_empty">No history</string>
+    <string name="history_close_button">Close</string>
+    <string name="history_clear_all_button">Clear all</string>
+
+    <string name="back_button_description">Back</string>
+
+    <!-- Capacitor / Time constant strings -->
+    <string name="mode_charge">Charge</string>
+    <string name="mode_discharge">Discharge</string>
+    <string name="resistor_label">Resistance (Ω)</string>
+    <string name="capacitor_label">Capacitance (µF)</string>
+    <string name="capacitor_label_description">Enter capacitor value in microfarads (µF)</string>
+    <string name="voltage_label">Initial voltage (V)</string>
+    <string name="time_label">Time (s)</string>
+    <string name="time_label_seconds">Seconds</string>
+    <string name="calculate_button">Calculate</string>
+    <string name="result_voltage_format">Voltage: %.4f V</string>
+    <string name="result_charge_format">Charge: %.6f C</string>
+
 </resources>

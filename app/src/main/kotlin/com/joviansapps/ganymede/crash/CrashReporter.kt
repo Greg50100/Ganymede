@@ -7,8 +7,11 @@ import com.google.firebase.crashlytics.FirebaseCrashlytics
 // Façade Crashlytics directe (sans KTX). Fallback local en cas d'échec des appels.
 object CrashReporter {
     @Volatile private var enabled: Boolean = true
+    // TODO: Purger/limiter le buffer si nécessaire (taille max) et envisager une persistance si offline.
     private val buffer = Collections.synchronizedList(mutableListOf<String>())
 
+    // TODO: S'assurer que updateEnabled() est appelée tôt (Application.onCreate) pour refléter le choix utilisateur.
+    // TODO: Ajouter éventuellement des setUserId/setCustomKey pour enrichir les rapports (si besoin produit).
     private val crashlytics: FirebaseCrashlytics? by lazy {
         runCatching { FirebaseCrashlytics.getInstance() }.getOrNull()
     }

@@ -59,7 +59,7 @@ fun SettingsScreen(vm: SettingsViewModel = viewModel()) {
         }
         // Aperçu palette supprimé -> remplacé par un simple aperçu des couleurs du thème actif
         item {
-            Text("Couleurs du thème", style = MaterialTheme.typography.titleMedium)
+            Text(stringResource(R.string.settings_theme_colors_title), style = MaterialTheme.typography.titleMedium)
             Spacer(Modifier.height(8.dp))
             val scheme = MaterialTheme.colorScheme
             Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
@@ -88,18 +88,18 @@ fun SettingsScreen(vm: SettingsViewModel = viewModel()) {
         }
         // Diagnostic
         item {
-            Text("Diagnostic", style = MaterialTheme.typography.titleMedium)
+            Text(stringResource(R.string.settings_diagnostics_title), style = MaterialTheme.typography.titleMedium)
             Spacer(Modifier.height(8.dp))
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                ToggleRow("Rapports de plantage", state.crashReportsEnabled) { vm.setCrashReportsEnabled(it) }
+                ToggleRow(stringResource(R.string.settings_crash_reports_label), state.crashReportsEnabled) { vm.setCrashReportsEnabled(it) }
                 Text(
-                    "Active l'enregistrement simulé de rapports dans Logcat (tag CrashReporter).",
+                    stringResource(R.string.settings_crash_reports_description),
                     style = MaterialTheme.typography.bodySmall
                 )
                 Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                    TextButton(onClick = { vm.testCrashReport() }) { Text("Tester envoi") }
-                    TextButton(onClick = { showCrashDialog = true }) { Text("Forcer crash réel") }
-                    if (state.crashReportsEnabled) Text("(Actif)", color = MaterialTheme.colorScheme.primary) else Text("(Inactif)")
+                    TextButton(onClick = { vm.testCrashReport() }) { Text(stringResource(R.string.settings_crash_reports_test_button)) }
+                    TextButton(onClick = { showCrashDialog = true }) { Text(stringResource(R.string.settings_crash_reports_force_button)) }
+                    if (state.crashReportsEnabled) Text(stringResource(R.string.settings_crash_reports_active_label), color = MaterialTheme.colorScheme.primary) else Text(stringResource(R.string.settings_crash_reports_inactive_label))
                 }
             }
         }
@@ -107,16 +107,20 @@ fun SettingsScreen(vm: SettingsViewModel = viewModel()) {
         item {
             val calcVm: CalculatorViewModel = viewModel()
             val currentFormat by calcVm.formatMode.collectAsState()
-            Text("Format des nombres", style = MaterialTheme.typography.titleMedium)
+            Text(stringResource(R.string.settings_number_format_title), style = MaterialTheme.typography.titleMedium)
             Spacer(Modifier.height(8.dp))
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                val modes = listOf(CalculatorViewModel.FormatMode.PLAIN, CalculatorViewModel.FormatMode.THOUSANDS, CalculatorViewModel.FormatMode.SCIENTIFIC)
-                modes.forEach { mode ->
+                val modes = listOf(
+                    CalculatorViewModel.FormatMode.PLAIN to R.string.settings_number_format_plain,
+                    CalculatorViewModel.FormatMode.THOUSANDS to R.string.settings_number_format_thousands,
+                    CalculatorViewModel.FormatMode.SCIENTIFIC to R.string.settings_number_format_scientific
+                )
+                modes.forEach { (mode, labelRes) ->
                     val selected = mode == currentFormat
                     if (selected) {
-                        FilledTonalButton(onClick = { /* already selected */ }, modifier = Modifier.weight(1f)) { Text(mode.name) }
+                        FilledTonalButton(onClick = { /* already selected */ }, modifier = Modifier.weight(1f)) { Text(stringResource(labelRes)) }
                     } else {
-                        OutlinedButton(onClick = { calcVm.setFormatMode(mode) }, modifier = Modifier.weight(1f)) { Text(mode.name) }
+                        OutlinedButton(onClick = { calcVm.setFormatMode(mode) }, modifier = Modifier.weight(1f)) { Text(stringResource(labelRes)) }
                     }
                 }
             }
@@ -127,13 +131,13 @@ fun SettingsScreen(vm: SettingsViewModel = viewModel()) {
         AlertDialog(
             onDismissRequest = { showCrashDialog = false },
             confirmButton = {
-                TextButton(onClick = { showCrashDialog = false; vm.forceCrash() }) { Text("Crash") }
+                TextButton(onClick = { showCrashDialog = false; vm.forceCrash() }) { Text(stringResource(R.string.dialog_crash_confirm_button)) }
             },
             dismissButton = {
-                TextButton(onClick = { showCrashDialog = false }) { Text("Annuler") }
+                TextButton(onClick = { showCrashDialog = false }) { Text(stringResource(R.string.dialog_crash_cancel_button)) }
             },
-            title = { Text("Confirmer crash") },
-            text = { Text("Cette action va volontairement faire planter l'application pour tester Crashlytics.") }
+            title = { Text(stringResource(R.string.dialog_crash_title)) },
+            text = { Text(stringResource(R.string.dialog_crash_message)) }
         )
     }
 }
@@ -146,7 +150,6 @@ private fun SegmentedToggleGroup(
     modifier: Modifier = Modifier,
     height: Dp = 40.dp
 ) {
-    val context = LocalContext.current
     Row(modifier = modifier, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
         modes.forEach { mode ->
             val isSelected = mode == selected
@@ -156,15 +159,12 @@ private fun SegmentedToggleGroup(
                 ThemeMode.AUTO -> stringResource(R.string.auto_label).uppercase()
             }
 
-            // Resolve drawable resource name and id without wrapping painterResource in try/catch
-            val resName = when (mode) {
-                ThemeMode.LIGHT -> "light_mode"
-                ThemeMode.DARK -> "dark_mode"
-                ThemeMode.AUTO -> "autorenew"
+            val iconRes = when (mode) {
+                ThemeMode.LIGHT -> R.drawable.light_mode
+                ThemeMode.DARK -> R.drawable.dark_mode
+                ThemeMode.AUTO -> R.drawable.autorenew
             }
-            val resId = context.resources.getIdentifier(resName, "drawable", context.packageName)
-            val finalResId = if (resId != 0) resId else R.drawable.ic_launcher_foreground
-            val iconPainter = painterResource(id = finalResId)
+            val iconPainter = painterResource(id = iconRes)
 
             val buttonModifier = Modifier
                 .height(height)

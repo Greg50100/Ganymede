@@ -41,6 +41,7 @@ fun GraphScreen(
     onBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    // TODO: Valider l'expression (parser/erreurs) et afficher un message i18n en cas d'échec.
     val vm = viewModel<com.joviansapps.ganymede.graphing.GraphViewModel>()
 
     var expr by rememberSaveable { mutableStateOf("") }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="settings_title">Paramètres</string>
     <string name="theme_label">Thème</string>
     <string name="color_label">Couleur principale</string>
@@ -148,6 +149,9 @@
     <string name="unit_base8_full">base 8 (octal)</string>
     <string name="unit_base10_full">base 10 (décimal)</string>
     <string name="graph_title">Graphe</string>
+    <string name="electronics_category_title">Électronique</string>
+    <string name="resistor_calculator_title">Calculateur de résistance</string>
+    <string name="inductance_calculator_title">Calculateur d\'inductance</string>
     <string name="graph_description">Créer des graphiques à partir de points</string>
     <string name="name_optionnal">Nom (optionnel)</string>
     <string name="tab_functions">Fonctions</string>
@@ -160,4 +164,106 @@
     <string name="zoom_in">Agrandir</string>
     <string name="zoom_out">Rétrécir</string>
     <string name="reset">Réinitialiser</string>
+
+    <!-- Settings Screen -->
+    <string name="settings_theme_colors_title">Couleurs du thème</string>
+    <string name="settings_diagnostics_title">Diagnostic</string>
+    <string name="settings_crash_reports_label">Rapports de plantage</string>
+    <string name="settings_crash_reports_description">Active l\'enregistrement simulé de rapports dans Logcat (tag CrashReporter).</string>
+    <string name="settings_crash_reports_test_button">Tester l\'envoi</string>
+    <string name="settings_crash_reports_force_button">Forcer un crash réel</string>
+    <string name="settings_crash_reports_active_label">(Actif)</string>
+    <string name="settings_crash_reports_inactive_label">(Inactif)</string>
+    <string name="settings_number_format_title">Format des nombres</string>
+    <string name="settings_number_format_plain">NORMAL</string>
+    <string name="settings_number_format_thousands">MILLIERS</string>
+    <string name="settings_number_format_scientific">SCIENTIFIQUE</string>
+    <string name="dialog_crash_title">Confirmer le crash</string>
+    <string name="dialog_crash_message">Cette action va volontairement faire planter l\'application pour tester Crashlytics.</string>
+    <string name="dialog_crash_confirm_button">Crasher</string>
+    <string name="dialog_crash_cancel_button">Annuler</string>
+
+    <string name="back_button_description">Retour</string>
+
+    <!-- Utilities -->
+    <string name="utilities_title">Utilitaires</string>
+    <string name="utilities_description">Une collection de petits outils</string>
+    <string name="more_coming_soon">Plus de fonctionnalités bientôt !</string>
+    <string name="more_coming_soon_description">Restez à l\'écoute des mises à jour.</string>
+
+    <!-- Resistor Calculator -->
+    <string name="resistor_calculator_description">Calculez les valeurs des résistances en fonction des codes couleur</string>
+    <string name="black">Noir</string>
+    <string name="brown">Marron</string>
+    <string name="red">Rouge</string>
+    <string name="orange">Orange</string>
+    <string name="yellow">Jaune</string>
+    <string name="green">Vert</string>
+    <string name="blue">Bleu</string>
+    <string name="violet">Violet</string>
+    <string name="gray">Gris</string>
+    <string name="white">Blanc</string>
+    <string name="gold">Or</string>
+    <string name="silver">Argent</string>
+    <string name="none">Aucun</string>
+    <string name="black_1">Noir (×1)</string>
+    <string name="brown_10">Marron (×10)</string>
+    <string name="red_100">Rouge (×100)</string>
+    <string name="orange_1k">Orange (×1k)</string>
+    <string name="yellow_10k">Jaune (×10k)</string>
+    <string name="green_100k">Vert (×100k)</string>
+    <string name="blue_1M">Bleu (×1M)</string>
+    <string name="violet_10M">Violet (×10M)</string>
+    <string name="gray_100M">Gris (×100M)</string>
+    <string name="white_1G">Blanc (×1G)</string>
+    <string name="gold_0_1">Or (×0.1)</string>
+    <string name="silver_0_01">Argent (×0.01)</string>
+    <string name="resistor_band_1">Bande 1</string>
+    <string name="resistor_band_2">Bande 2</string>
+    <string name="resistor_band_3">Bande 3</string>
+    <string name="resistor_band_4">Bande 4 (tolérance)</string>
+    <string name="resistor_value_format">Valeur de la résistance : %1$s Ω ± %2$s%%</string>
+    <string name="resistor_invalid_selection">Veuillez sélectionner les couleurs pour toutes les bandes</string>
+    <string name="gold_5">Or (±5%)</string>
+    <string name="silver_10">Argent (±10%)</string>
+    <string name="brown_1">Marron (±1%)</string>
+    <string name="red_2">Rouge (±2%)</string>
+    <string name="brown_100ppm">Marron (100ppm)</string>
+    <string name="red_50ppm">Rouge (50ppm)</string>
+    <string name="orange_15ppm">Orange (15ppm)</string>
+    <string name="yellow_25ppm">Jaune (25ppm)</string>
+    <string name="blue_10ppm">Bleu (10ppm)</string>
+    <string name="violet_5ppm">Violet (5ppm)</string>
+    <string name="ppm_label">PPM</string>
+    <string name="resistance_result_format">Résistance : %s Ω</string>
+    <string name="tolerance_percentage_format">Tolérance : ±%s%%</string>
+    <string name="default_suffix"> (par défaut)</string>
+    <string name="temp_coefficient_format">Coefficient de température : %sppm</string>
+
+    <!-- Inductance Calculator -->
+    <string name="inductance_calculator_description">Calculez les valeurs des inductances et les codes couleur</string>
+    <string name="electronics_category_description">Outils et calculateurs pour l\'électronique</string>
+    <string name="tab_color_code">Code couleur</string>
+    <string name="tab_value_to_color">Valeur → Couleur</string>
+    <string name="tab_winding">Bobinage</string>
+    <string name="inductance_value_label">Valeur de l\'inductance</string>
+    <string name="tolerance_label">Tolérance</string>
+    <string name="coil_winding_calculator_title">Calculateur de bobinage</string>
+    <string name="turns_label">Nombre de tours</string>
+    <string name="coil_diameter_label">Diamètre de la bobine</string>
+    <string name="coil_length_label">Longueur de la bobine</string>
+    <string name="band_1_label">Bande 1</string>
+    <string name="band_2_label">Bande 2</string>
+    <string name="band_3_label">Bande 3</string>
+    <string name="multiplier_label">Multiplicateur</string>
+    <string name="calculated_inductance_format">Inductance calculée : %.2f µH</string>
+    <string name="inductance_result_format">Inductance : %s</string>
+    <string name="tolerance_result_format">Tolérance : %s</string>
+
+    <!-- History Dialog -->
+    <string name="history_title">Historique</string>
+    <string name="history_empty">Aucun historique</string>
+    <string name="history_close_button">Fermer</string>
+    <string name="history_clear_all_button">Tout effacer</string>
+
 </resources>

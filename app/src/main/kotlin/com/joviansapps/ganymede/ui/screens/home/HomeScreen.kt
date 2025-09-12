@@ -53,8 +53,12 @@ fun HomeScreen(
     onOpenCalculator: () -> Unit = {},
     onOpenConverter: () -> Unit = {},
     onOpenGraph: () -> Unit = {},
+    onOpenUtilities: () -> Unit = {},
 ) {
     val context = LocalContext.current
+
+    // TODO: Extraire l'URL BuyMeACoffee vers strings.xml (ou BuildConfig) pour éviter la valeur en dur.
+    // TODO: Vérifier le contraste/tailles pour accessibilité; éviter les magic numbers (200.dp) via dimension resources.
 
     // Use a Box to position top content and a bottom-aligned button without Modifier.weight
     Box(
@@ -92,7 +96,14 @@ fun HomeScreen(
 
             Spacer(Modifier.height(16.dp))
 
-            // fonctionalités à venir
+            OutlinedLabelButton(
+                title = stringResource(R.string.utilities_title),
+                description = stringResource(R.string.utilities_description),
+                onClick = onOpenUtilities,
+            )
+
+            Spacer(Modifier.height(16.dp))
+
             OutlinedLabelButton(
                 title = stringResource(R.string.more_coming_soon),
                 description = stringResource(R.string.more_coming_soon_description),

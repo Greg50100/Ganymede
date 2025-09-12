@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.App">
+        <!-- TODO: Vérifier la cohérence du thème système/Compose pour la status bar (clair/sombre). -->
 
         <activity
             android:name=".MainActivity"

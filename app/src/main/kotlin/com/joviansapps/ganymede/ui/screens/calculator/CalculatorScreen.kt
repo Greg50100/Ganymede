@@ -40,6 +40,8 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -155,11 +157,12 @@ fun CalculatorScreen() {
     }
 
     if (showHistory) {
+        // Historique (boîte de dialogue) — icônes Material déjà utilisées
         AlertDialog(
             onDismissRequest = { showHistory = false },
-            title = { Text("Historique") },
+            title = { Text(stringResource(R.string.history_title)) },
             text = {
-                if (history.isEmpty()) Text("Aucun historique") else {
+                if (history.isEmpty()) Text(stringResource(R.string.history_empty)) else {
                     LazyColumn { itemsIndexed(history) { i, item ->
                         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                             Text(item, modifier = Modifier.weight(1f).clickable {
@@ -168,14 +171,19 @@ fun CalculatorScreen() {
                                 vm.setExpression(left)
                                 showHistory = false
                             })
-                            IconButton(onClick = { vm.removeHistoryItem(i) }) { Text("🗑") }
+                            IconButton(onClick = { vm.removeHistoryItem(i) }) {
+                                Icon(
+                                    imageVector = Icons.Default.Delete,
+                                    contentDescription = stringResource(R.string.delete)
+                                )
+                            }
                         }
                         Spacer(Modifier.height(6.dp))
                     } }
                 }
             },
-            confirmButton = { TextButton(onClick = { showHistory = false }) { Text("Fermer") } },
-            dismissButton = { TextButton(onClick = { vm.clearHistory() }) { Text("Effacer tout") } }
+            confirmButton = { TextButton(onClick = { showHistory = false }) { Text(stringResource(R.string.history_close_button)) } },
+            dismissButton = { TextButton(onClick = { vm.clearHistory() }) { Text(stringResource(R.string.history_clear_all_button)) } }
         )
     }
 }

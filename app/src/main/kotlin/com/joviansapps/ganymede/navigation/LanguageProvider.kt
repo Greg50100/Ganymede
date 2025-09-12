@@ -44,6 +44,10 @@ fun LanguageProvider(code: String, content: @Composable () -> Unit) {
         onDispose { ctx.unregisterComponentCallbacks(callback) }
     }
 
+    // TODO: Gérer la direction RTL si une langue RTL est ajoutée (CompositionLocalProvider(LocalLayoutDirection, ...)).
+    // TODO: Envisager un mécanisme de recomposition forcée si la config système change (orientation, locales système),
+    //       par exemple via un state clé plutôt qu'un ComponentCallbacks no-op.
+
     // 5) Provide the localized context to the composition
     CompositionLocalProvider(
         LocalContext provides localizedCtx

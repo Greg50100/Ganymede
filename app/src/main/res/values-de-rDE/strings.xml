@@ -162,4 +162,108 @@
     <string name="unit_base2_full">Basis 2 (binär)</string>
     <string name="unit_base8_full">Basis 8 (oktal)</string>
     <string name="unit_base10_full">Basis 10 (dezimal)</string>
+
+    <!-- Utilities -->
+    <string name="utilities_title">Dienstprogramme</string>
+    <string name="utilities_description">Eine Sammlung kleiner Werkzeuge</string>
+    <string name="more_coming_soon">Weitere Funktionen folgen in Kürze!</string>
+    <string name="more_coming_soon_description">Bleiben Sie dran für Updates.</string>
+
+    <!-- Resistor Calculator -->
+    <string name="resistor_calculator_title">Widerstandsrechner</string>
+    <string name="resistor_calculator_description">Widerstandswerte anhand von Farbcodes berechnen</string>
+    <string name="black">Schwarz</string>
+    <string name="brown">Braun</string>
+    <string name="red">Rot</string>
+    <string name="orange">Orange</string>
+    <string name="yellow">Gelb</string>
+    <string name="green">Grün</string>
+    <string name="blue">Blau</string>
+    <string name="violet">Violett</string>
+    <string name="gray">Grau</string>
+    <string name="white">Weiß</string>
+    <string name="gold">Gold</string>
+    <string name="silver">Silber</string>
+    <string name="none">Keine</string>
+    <string name="black_1">Schwarz (×1)</string>
+    <string name="brown_10">Braun (×10)</string>
+    <string name="red_100">Rot (×100)</string>
+    <string name="orange_1k">Orange (×1k)</string>
+    <string name="yellow_10k">Gelb (×10k)</string>
+    <string name="green_100k">Grün (×100k)</string>
+    <string name="blue_1M">Blau (×1M)</string>
+    <string name="violet_10M">Violett (×10M)</string>
+    <string name="gray_100M">Grau (×100M)</string>
+    <string name="white_1G">Weiß (×1G)</string>
+    <string name="gold_0_1">Gold (×0.1)</string>
+    <string name="silver_0_01">Silber (×0.01)</string>
+    <string name="resistor_band_1">Band 1</string>
+    <string name="resistor_band_2">Band 2</string>
+    <string name="resistor_band_3">Band 3</string>
+    <string name="resistor_band_4">Band 4 (Toleranz)</string>
+    <string name="resistor_value_format">Widerstandswert: %1$s Ω ± %2$s%%</string>
+    <string name="resistor_invalid_selection">Bitte Farben für alle Bänder auswählen</string>
+    <string name="gold_5">Gold (±5%)</string>
+    <string name="silver_10">Silber (±10%)</string>
+    <string name="brown_1">Braun (±1%)</string>
+    <string name="red_2">Rot (±2%)</string>
+    <string name="brown_100ppm">Braun (100ppm)</string>
+    <string name="red_50ppm">Rot (50ppm)</string>
+    <string name="orange_15ppm">Orange (15ppm)</string>
+    <string name="yellow_25ppm">Gelb (25ppm)</string>
+    <string name="blue_10ppm">Blau (10ppm)</string>
+    <string name="violet_5ppm">Violett (5ppm)</string>
+    <string name="ppm_label">PPM</string>
+    <string name="resistance_result_format">Widerstand: %s Ω</string>
+    <string name="tolerance_percentage_format">Toleranz: ±%s%%</string>
+    <string name="default_suffix"> (Standard)</string>
+    <string name="temp_coefficient_format">Temperaturkoeffizient: %sppm</string>
+
+    <!-- Inductance Calculator -->
+    <string name="inductance_calculator_title">Induktivitätsrechner</string>
+    <string name="inductance_calculator_description">Induktivitätswerte und Farbcodes berechnen</string>
+    <string name="electronics_category_title">Elektronik</string>
+    <string name="electronics_category_description">Werkzeuge und Rechner für die Elektronik</string>
+    <string name="tab_color_code">Farbcode</string>
+    <string name="tab_value_to_color">Wert → Farbe</string>
+    <string name="tab_winding">Wicklung</string>
+    <string name="inductance_value_label">Induktivitätswert</string>
+    <string name="tolerance_label">Toleranz</string>
+    <string name="coil_winding_calculator_title">Spulenwicklungsrechner</string>
+    <string name="turns_label">Anzahl der Windungen</string>
+    <string name="coil_diameter_label">Spulendurchmesser</string>
+    <string name="coil_length_label">Spulenlänge</string>
+    <string name="band_1_label">Band 1</string>
+    <string name="band_2_label">Band 2</string>
+    <string name="band_3_label">Band 3</string>
+    <string name="multiplier_label">Multiplikator</string>
+    <string name="calculated_inductance_format">Berechnete Induktivität: %.2f µH</string>
+    <string name="inductance_result_format">Induktivität: %s</string>
+    <string name="tolerance_result_format">Toleranz: %s</string>
+
+    <!-- Settings Screen -->
+    <string name="settings_theme_colors_title">Themenfarben</string>
+    <string name="settings_diagnostics_title">Diagnose</string>
+    <string name="settings_crash_reports_label">Absturzberichte</string>
+    <string name="settings_crash_reports_description">Aktiviert die simulierte Protokollierung von Berichten in Logcat (Tag CrashReporter).</string>
+    <string name="settings_crash_reports_test_button">Senden testen</string>
+    <string name="settings_crash_reports_force_button">Echten Absturz erzwingen</string>
+    <string name="settings_crash_reports_active_label">(Aktiv)</string>
+    <string name="settings_crash_reports_inactive_label">(Inaktiv)</string>
+    <string name="settings_number_format_title">Zahlenformat</string>
+    <string name="settings_number_format_plain">EINFACH</string>
+    <string name="settings_number_format_thousands">TAUSENDER</string>
+    <string name="settings_number_format_scientific">WISSENSCHAFTLICH</string>
+    <string name="dialog_crash_title">Absturz bestätigen</string>
+    <string name="dialog_crash_message">Diese Aktion wird die Anwendung absichtlich zum Absturz bringen, um Crashlytics zu testen.</string>
+    <string name="dialog_crash_confirm_button">Absturz</string>
+    <string name="dialog_crash_cancel_button">Abbrechen</string>
+
+    <!-- History Dialog -->
+    <string name="history_title">Verlauf</string>
+    <string name="history_empty">Kein Verlauf</string>
+    <string name="history_close_button">Schließen</string>
+    <string name="history_clear_all_button">Alles löschen</string>
+
+    <string name="back_button_description">Zurück</string>
 </resources>

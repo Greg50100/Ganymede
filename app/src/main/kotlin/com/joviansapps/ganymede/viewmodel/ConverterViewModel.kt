@@ -1,5 +1,6 @@
 package com.joviansapps.ganymede.viewmodel
 
+import android.content.Context
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,17 +14,50 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
+import java.text.ParseException
+import java.text.NumberFormat
 import java.util.*
+
+// Ajout: mode de formatage
+enum class FormatMode { AUTO, SCIENTIFIC, LOCALE }
+
+private const val PREFS_NAME = "ganymede_prefs"
+private const val PREF_FORMAT_MODE = "pref_format_mode"
 
 data class ConverterUiState(
     val category: UnitCategory = UnitCategory.LENGTH,
     val unitFrom: String = ConversionRepository.units(UnitCategory.LENGTH).first().id,
-    val unitTo: String = ConversionRepository.units(UnitCategory.LENGTH).getOrElse(1) { ConversionRepository.units(UnitCategory.LENGTH).first() }.id
+    val unitTo: String = ConversionRepository.units(UnitCategory.LENGTH).getOrElse(1) { ConversionRepository.units(UnitCategory.LENGTH).first() }.id,
+    val formatMode: FormatMode = FormatMode.AUTO
 )
 
 class ConverterViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(ConverterUiState())
     val uiState: StateFlow<ConverterUiState> = _uiState.asStateFlow()
+
+    fun onFormatModeChange(mode: FormatMode) {
+        _uiState.value = _uiState.value.copy(formatMode = mode)
+        // re-run last conversion to update displayed values with new format
+        _lastEdited.value?.let { id ->
+            val text = _values.value[id]?.text ?: ""
+            performConversionFrom(id, text)
+        }
+    }
+
+    // Persistance: charger/enregistrer le mode de format via SharedPreferences
+    fun loadPersistedFormat(context: Context) {
+        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val name = prefs.getString(PREF_FORMAT_MODE, null) ?: return
+        val mode = try { FormatMode.valueOf(name) } catch (e: Exception) { null }
+        mode?.let { onFormatModeChange(it) }
+    }
+
+    fun savePersistedFormat(context: Context, mode: FormatMode) {
+        try {
+            val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+            prefs.edit().putString(PREF_FORMAT_MODE, mode.name).apply()
+        } catch (_: Exception) { }
+    }
 
     // Map unitId -> TextFieldValue maintained in ViewModel to preserve cursor when UI recomposes
     private val _values = MutableStateFlow<Map<String, TextFieldValue>>(emptyMap())
@@ -86,7 +120,7 @@ class ConverterViewModel : ViewModel() {
             val num = asNum
             val newMap = units.associate { target ->
                 val conv = try { source.convert(target, num) } catch (e: Exception) { Double.NaN }
-                val shown = if (target.id == unitId) text else formatNumber(conv)
+                val shown = if (target.id == unitId) text else formatNumber(conv, _uiState.value.formatMode)
                 target.id to TextFieldValue(shown)
             }
             _values.value = newMap
@@ -95,7 +129,7 @@ class ConverterViewModel : ViewModel() {
 
         // For currency use currencyRates to adjust base conversion if FactorUnit used
         // We'll attempt to parse as double
-        val parsed = text.toDoubleOrNull()
+        val parsed = parseInputToDouble(text)
         if (parsed == null) {
             // partial input (e.g. "1.") - do not convert other fields, only update this one
             return
@@ -118,11 +152,33 @@ class ConverterViewModel : ViewModel() {
             } catch (e: Exception) {
                 Double.NaN
             }
-            val shown = if (target.id == unitId) text else formatNumber(conv)
+            val shown = if (target.id == unitId) text else formatNumber(conv, _uiState.value.formatMode)
             target.id to TextFieldValue(shown)
         }
 
         _values.value = updated
+    }
+
+    // Parse input respecting locale decimal separator; accept both ',' and '.' and also try NumberFormat parsing.
+    private fun parseInputToDouble(text: String): Double? {
+        if (text.isBlank()) return null
+        // Try direct parse first (fast path)
+        text.toDoubleOrNull()?.let { return it }
+
+        // Replace comma by dot to accept European-style input like "1,23"
+        val normalized = text.replace(',', '.')
+        normalized.toDoubleOrNull()?.let { return it }
+
+        // Last resort: use NumberFormat with locale which handles grouping and decimals
+        return try {
+            val nf = NumberFormat.getNumberInstance(Locale.getDefault())
+            val parsed = nf.parse(text)
+            parsed?.toDouble()
+        } catch (e: ParseException) {
+            null
+        } catch (e: Exception) {
+            null
+        }
     }
 
     fun refreshCurrencyRates() {
@@ -140,10 +196,25 @@ class ConverterViewModel : ViewModel() {
         }
     }
 
-    private fun formatNumber(v: Double): String {
+    private fun formatNumber(v: Double, mode: FormatMode): String {
         if (v.isNaN() || v.isInfinite()) return ""
-        val symbols = DecimalFormatSymbols.getInstance(Locale.getDefault())
-        val df = DecimalFormat("#,##0.######", symbols)
-        return df.format(v)
+        val a = kotlin.math.abs(v)
+        return when (mode) {
+            FormatMode.AUTO -> {
+                if ((a != 0.0 && (a < 1e-3 || a >= 1e7))) String.format(Locale.getDefault(), "%.6e", v) else {
+                    if (v == v.toLong().toDouble()) v.toLong().toString() else {
+                        val symbols = DecimalFormatSymbols.getInstance(Locale.getDefault())
+                        val df = DecimalFormat("#,##0.######", symbols)
+                        df.format(v)
+                    }
+                }
+            }
+            FormatMode.SCIENTIFIC -> String.format(Locale.getDefault(), "%.6e", v)
+            FormatMode.LOCALE -> {
+                val symbols = DecimalFormatSymbols.getInstance(Locale.getDefault())
+                val df = DecimalFormat("#,##0.######", symbols)
+                df.format(v)
+            }
+        }
     }
 }

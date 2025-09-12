@@ -72,6 +72,9 @@ fun AppTheme(
         ThemeMode.DARK -> true
         ThemeMode.LIGHT -> false
     }
+    // TODO: Ajouter support Dynamic Color (Android 12+) via dynamicLightColorScheme/dynamicDarkColorScheme avec fallback sur LightOrangeScheme/DarkOrangeScheme
     val scheme = if (useDark) DarkOrangeScheme else LightOrangeScheme
+    // TODO: Centraliser Typography/Shapes si nécessaire (MaterialTheme(typography = ..., shapes = ...))
+    // TODO: Harmoniser la barre de statut (WindowInsetsControllerCompat) avec le thème courant (clair/sombre)
     MaterialTheme(colorScheme = scheme, typography = Typography(), content = content)
 }

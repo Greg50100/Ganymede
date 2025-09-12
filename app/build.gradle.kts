@@ -47,6 +47,7 @@ dependencies {
     implementation(libs.material)
 
     // Compose de base
+    implementation(platform(libs.androidx.compose.bom))
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.activity.compose)
@@ -55,7 +56,7 @@ dependencies {
     implementation(libs.compose.foundation)
     implementation("net.objecthunter:exp4j:0.4.8")
     // Icônes Material (ArrowBack etc.)
-    implementation("androidx.compose.material:material-icons-extended:1.6.0")
+    implementation(libs.androidx.compose.material.icons.extended)
 
     // DataStore Preferences
     implementation("androidx.datastore:datastore-preferences:1.0.0")
@@ -73,4 +74,17 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    // TODO: Envisager l'usage du BOM Compose pour ui/foundation/material3/navigation/activity afin d'éviter le drift de versions.
+
+    // TODO: Mettre à jour DataStore preferences vers 1.1.x
+    // implementation("androidx.datastore:datastore-preferences:1.1.1")
+
+    // TODO: Mettre à jour Coil Compose vers 2.7.x
+    // implementation("io.coil-kt:coil-compose:2.7.0")
+
+    // TODO: Mettre à jour coroutines-test vers 1.9.x
+    // testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0")
+
+    // TODO: Optionnel — utiliser le BOM Firebase pour aligner Crashlytics et dépendances associées
+    // implementation(platform("com.google.firebase:firebase-bom:<version>"))
 }
