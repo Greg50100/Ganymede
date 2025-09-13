@@ -17,7 +17,9 @@ import com.joviansapps.ganymede.R
 fun ElectronicCategoryScreen(
     onOpenResistorCalculator: () -> Unit,
     onOpenInductanceCalculator: () -> Unit,
-    onOpenCondensatorChargeCalculator: () -> Unit
+    onOpenCondensatorChargeCalculator: () -> Unit,
+    onOpenParallelSeriesResistorCalculator: () -> Unit,
+    onOpenParallelSeriesCapacitorCalculator: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -34,6 +36,12 @@ fun ElectronicCategoryScreen(
         }
         Button(onClick = onOpenCondensatorChargeCalculator) {
             Text(stringResource(id = R.string.time_constant_calculator_title))
+        }
+        Button(onClick = onOpenParallelSeriesResistorCalculator) {
+            Text(stringResource(id = R.string.parallel_series_resistor_calculator_title))
+        }
+        Button(onClick = onOpenParallelSeriesCapacitorCalculator) {
+            Text(stringResource(id = R.string.parallel_series_capacitor_calculator_title))
         }
     }
 }

@@ -33,9 +33,12 @@ import com.joviansapps.ganymede.ui.screens.graph.GraphScreen
 import com.joviansapps.ganymede.ui.screens.utilities.UtilitiesScreen
 import com.joviansapps.ganymede.ui.screens.utilities.electronics.ElectronicCategoryScreen
 import com.joviansapps.ganymede.ui.screens.utilities.electronics.CapacitorChargeScreen
+import com.joviansapps.ganymede.ui.screens.utilities.electronics.ParallelSeriesResistorCalculatorScreen
 import com.joviansapps.ganymede.ui.screens.utilities.electronics.inductancecalculator.InductanceCalculatorScreen
 import com.joviansapps.ganymede.ui.screens.utilities.electronics.resistorcalculator.ResistorCalculatorScreen
+import com.joviansapps.ganymede.ui.screens.utilities.electronics.ParallelSeriesCapacitorCalculatorScreen
 import com.joviansapps.ganymede.viewmodel.SettingsViewModel
+import kotlin.io.encoding.Base64
 
 
 sealed class Dest(val route: String) {
@@ -49,6 +52,8 @@ sealed class Dest(val route: String) {
     data object ResistorCalculator : Dest("resistor_calculator")
     data object InductanceCalculator : Dest("inductance_calculator")
     data object TimeConstantCalculator : Dest("time_constant_calculator")
+    data object ParallelSeriesResistorCalculator : Dest("parallel_series_resistor_calculator")
+    data object ParallelSeriesCapacitorCalculator : Dest("parallel_series_capacitor_calculator")
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -75,6 +80,8 @@ fun AppRoot(settingsVm: SettingsViewModel) {
                 Dest.ResistorCalculator.route -> stringResource(R.string.resistor_calculator_title)
                 Dest.InductanceCalculator.route -> stringResource(R.string.inductance_calculator_title)
                 Dest.TimeConstantCalculator.route -> stringResource(R.string.time_constant_calculator_title)
+                Dest.ParallelSeriesResistorCalculator.route -> stringResource(R.string.parallel_series_resistor_calculator_title)
+                Dest.ParallelSeriesCapacitorCalculator.route -> stringResource(R.string.parallel_series_capacitor_calculator_title)
                 else -> stringResource(R.string.app_name)
             }
             TopAppBar(
@@ -172,13 +179,16 @@ fun AppRoot(settingsVm: SettingsViewModel) {
                 ElectronicCategoryScreen(
                     onOpenResistorCalculator = { nav.navigate(Dest.ResistorCalculator.route) },
                     onOpenInductanceCalculator = { nav.navigate(Dest.InductanceCalculator.route) },
-                    onOpenCondensatorChargeCalculator = { nav.navigate(Dest.TimeConstantCalculator.route) }
+                    onOpenCondensatorChargeCalculator = { nav.navigate(Dest.TimeConstantCalculator.route) },
+                    onOpenParallelSeriesResistorCalculator = { nav.navigate(Dest.ParallelSeriesResistorCalculator.route) },
+                    onOpenParallelSeriesCapacitorCalculator = { nav.navigate(Dest.ParallelSeriesCapacitorCalculator.route) }
                 )
             }
             composable(Dest.ResistorCalculator.route) { ResistorCalculatorScreen() }
             composable(Dest.InductanceCalculator.route) { InductanceCalculatorScreen() }
-            composable(Dest.TimeConstantCalculator.route) { CapacitorChargeScreen( )
-            }
+            composable(Dest.TimeConstantCalculator.route) { CapacitorChargeScreen( ) }
+            composable(Dest.ParallelSeriesResistorCalculator.route) { ParallelSeriesResistorCalculatorScreen() }
+            composable(Dest.ParallelSeriesCapacitorCalculator.route) { ParallelSeriesCapacitorCalculatorScreen() }
         }
     }
 }

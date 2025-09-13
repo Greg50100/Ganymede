@@ -268,13 +268,12 @@
 
     <string name="rc_charge_calculator_title">Calculateur de Charge RC</string>
     <string name="input_parameters_title">Paramètres d\'entrée</string>
-    <string name="voltage_label">Tension (V)</string>
-    <string name="capacitance_label">Capacité (F)</string>
-    <string name="resistance_label">Résistance (Ω)</string>
-    <string name="reset_button">Réinitialiser</string>
+    <string name="voltage_label">Tension [U]</string>
+    <string name="capacitance_label">Capacité [C]</string>
+    <string name="resistance_label">Résistance [Ω]</string>
     <string name="results_title">Résultats :</string>
-    <string name="time_constant_result">Constante de temps (τ) : %.4f s</string>
-    <string name="stored_energy_result">Énergie stockée (E) : %.4f J</string>
+    <string name="time_constant_result">Constante de temps [τ] : %.4f s</string>
+    <string name="stored_energy_result">Énergie stockée [E] : %.4f J</string>
     <string name="voltage_legend">Tension (Vc)</string>
-    <string name="current_legend">Courant (I)</string>
+    <string name="current_legend">Courant [I]</string>
 </resources>

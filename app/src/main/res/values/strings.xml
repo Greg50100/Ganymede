@@ -318,15 +318,17 @@
 
     <string name="rc_charge_calculator_title">RC Charge Calculator</string>
     <string name="input_parameters_title">Input parameters</string>
-    <string name="voltage_label">Voltage (V)</string>
-    <string name="capacitance_label">Capacitance (F)</string>
-    <string name="resistance_label">Resistance (Ω)</string>
-    <string name="reset_button">Reset</string>
+    <string name="voltage_label">Voltage [U]</string>
+    <string name="capacitance_label">Capacitance [C]</string>
+    <string name="resistance_label">Resistance [Ω]</string>
+    <string name="reset_button" translatable="false">Reset</string>
     <string name="results_title">Results:</string>
-    <string name="time_constant_result">Time constant (τ): %.4f s</string>
-    <string name="stored_energy_result">Stored energy (E): %.4f J</string>
+    <string name="time_constant_result">Time constant [τ]: %.4f s</string>
+    <string name="stored_energy_result">Stored energy [E]: %.4f J</string>
     <string name="voltage_legend">Voltage (Vc)</string>
-    <string name="current_legend">Current (I)</string>
+    <string name="current_legend">Current [I]</string>
 
     <string name="time_constant_formula_description">Formula for time constant</string>
+    <string name="parallel_series_resistor_calculator_title">Parallel and Series Resistor Calculator</string>
+    <string name="parallel_series_capacitor_calculator_title">Parallel and Series Capacitor Calculator</string>
 </resources>

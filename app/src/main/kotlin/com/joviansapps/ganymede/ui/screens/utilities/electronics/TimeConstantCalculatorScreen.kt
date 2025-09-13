@@ -1,5 +1,6 @@
 package com.joviansapps.ganymede.ui.screens.utilities.electronics
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -183,6 +184,7 @@ class CapacitorChargeViewModel : ViewModel() {
 // ---------------------------------------------------
 
 @Composable
+
 fun CapacitorChargeScreen(viewModel: CapacitorChargeViewModel = viewModel()) {
     // ... (Le reste du fichier est identique à la version précédente)
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -253,7 +255,7 @@ private fun CalculatorTabContent(
             OutlinedTextField(
                 value = formatNumber(uiState.timeConstant, "s"),
                 onValueChange = {},
-                label = { Text("Constante de temps (τ)") },
+                label = { Text("Cste de temps (τ)") },
                 readOnly = true,
                 modifier = Modifier.weight(1f)
             )
@@ -264,31 +266,36 @@ private fun CalculatorTabContent(
                 readOnly = true,
                 modifier = Modifier.weight(1f)
             )
-        }
-        Row (
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
-        ){
-            Image(
-                painter = painterResource(id = R.drawable.time_constant_formula_1),
-                contentDescription = "Formule de la constante de temps : Tau = R x C",
+            OutlinedButton(
+                onClick = { onEvent(CalculatorEvent.Reset) },
+                border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline),
                 modifier = Modifier
-                    .weight(1f),
-                colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface)
-            )
-            Image(
-                painter = painterResource(id = R.drawable.time_constant_formula_2),
-                contentDescription = "Formule de l'énergie stockée : E = 1/2 x C x V²",
-                modifier = Modifier.weight(1f),
-                colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface)
-            )
+                    .weight(1f)
+                    .height(56.dp), // Hauteur similaire à OutlinedTextField
+                shape = MaterialTheme.shapes.extraSmall, // Bordures similaires
+                colors = ButtonDefaults.outlinedButtonColors(contentColor = MaterialTheme.colorScheme.error)
+            ) {
+                Text(stringResource(id = R.string.reset_button))
+            }
         }
-        OutlinedButton(
-            onClick = { onEvent(CalculatorEvent.Reset) },
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text(stringResource(id = R.string.reset_button))
-        }
+
+        Image(
+            painter = painterResource(id = R.drawable.time_constant_equation),
+            contentDescription = "Illustration d'un condensateur en charge",
+            contentScale = ContentScale.FillWidth,
+            modifier = Modifier
+                .fillMaxWidth(),
+            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.primary)
+        )
+
+        Image(
+            painter = painterResource(id = R.drawable.time_constant_circuit),
+            contentDescription = "Illustration d'un circuit RC",
+            contentScale = ContentScale.FillWidth,
+            modifier = Modifier
+                .fillMaxWidth(),
+            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.primary)
+        )
     }
 }
 
