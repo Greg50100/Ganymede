@@ -276,6 +276,7 @@ private fun CalculatorTabContent(
 // --- Composables spécifiques et utilitaires ---
 
 @OptIn(ExperimentalMaterial3Api::class)
+@Suppress("DEPRECATION")
 @Composable
 private fun ResistorUnitInputField(
     label: String,
