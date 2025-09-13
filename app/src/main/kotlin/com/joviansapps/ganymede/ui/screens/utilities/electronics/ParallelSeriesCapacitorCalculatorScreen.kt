@@ -253,6 +253,7 @@ private fun CalculatorTabContent(
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
+@Suppress("DEPRECATION")
 @Composable
 private fun CapacitorUnitInputField(
     label: String,
