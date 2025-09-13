@@ -304,11 +304,29 @@
     <string name="resistor_label">Resistance (Ω)</string>
     <string name="capacitor_label">Capacitance (µF)</string>
     <string name="capacitor_label_description">Enter capacitor value in microfarads (µF)</string>
-    <string name="voltage_label">Initial voltage (V)</string>
     <string name="time_label">Time (s)</string>
     <string name="time_label_seconds">Seconds</string>
     <string name="calculate_button">Calculate</string>
     <string name="result_voltage_format">Voltage: %.4f V</string>
     <string name="result_charge_format">Charge: %.6f C</string>
 
+
+    <string name="plot_duration_label">Plot duration (s)</string>
+    <string name="max_y_label">Max Y (V) — optional</string>
+    <string name="max_y_description">Leave empty for auto scale</string>
+    <string name="press_calculate_to_generate_graph">Press \'Calculate\' to generate the graph.</string>
+
+    <string name="rc_charge_calculator_title">RC Charge Calculator</string>
+    <string name="input_parameters_title">Input parameters</string>
+    <string name="voltage_label">Voltage (V)</string>
+    <string name="capacitance_label">Capacitance (F)</string>
+    <string name="resistance_label">Resistance (Ω)</string>
+    <string name="reset_button">Reset</string>
+    <string name="results_title">Results:</string>
+    <string name="time_constant_result">Time constant (τ): %.4f s</string>
+    <string name="stored_energy_result">Stored energy (E): %.4f J</string>
+    <string name="voltage_legend">Voltage (Vc)</string>
+    <string name="current_legend">Current (I)</string>
+
+    <string name="time_constant_formula_description">Formula for time constant</string>
 </resources>

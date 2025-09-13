@@ -1,40 +1,57 @@
 package com.joviansapps.ganymede.ui.screens.utilities
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.joviansapps.ganymede.R
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 
+// 1. Modèle de données pour la scalabilité
+private data class Utility(
+    val titleRes: Int,
+    val descriptionRes: Int,
+    val onClick: () -> Unit
+)
 
 @Composable
 @Preview
 fun UtilitiesScreen(
     onOpenElectronics: () -> Unit = {}
 ) {
+    val utilities = listOf(
+        Utility(
+            titleRes = R.string.electronics_category_title,
+            descriptionRes = R.string.electronics_category_description,
+            onClick = onOpenElectronics
+        )
+        // Vous pourrez en ajouter d'autres ici
+    )
+
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(24.dp),
-        verticalArrangement = Arrangement.Top
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
+        utilities.forEach { utility ->
+            UtilityButton(
+                title = stringResource(id = utility.titleRes),
+                onClick = utility.onClick
+            ) {
+                Text(
+                    text = stringResource(id = utility.descriptionRes),
+                    style = MaterialTheme.typography.bodyMedium.copy(color = MaterialTheme.colorScheme.onSurfaceVariant)
+                )
+            }
+        }
 
-        UtilityButton(
-            title = stringResource(id = R.string.electronics_category_title),
-            description = stringResource(id = R.string.electronics_category_description),
-            onClick = onOpenElectronics
-        )
-
-        Spacer(Modifier.height(32.dp))
+        Spacer(Modifier.height(16.dp))
 
         Text(
             text = stringResource(id = R.string.more_coming_soon),
@@ -46,34 +63,36 @@ fun UtilitiesScreen(
 @Composable
 private fun UtilityButton(
     title: String,
-    description: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    titleStyle: TextStyle = MaterialTheme.typography.titleLarge.copy(color = MaterialTheme.colorScheme.primary)
+    titleStyle: TextStyle = MaterialTheme.typography.titleLarge.copy(color = MaterialTheme.colorScheme.primary),
+    content: @Composable ColumnScope.() -> Unit // 3. Utilisation du Slot API
 ) {
-    val corner = RoundedCornerShape(8.dp)
-    Box(modifier = modifier.fillMaxWidth()) {
+    val titleHeightEstimate = 26.dp // Hauteur approximative du conteneur de titre
+
+    Box(modifier = modifier) {
         OutlinedButton(
             onClick = onClick,
-            shape = corner,
+            shape = RoundedCornerShape(8.dp),
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 4.dp)
+                // 2. Éviter les nombres magiques en liant le padding à une estimation
+                .padding(top = titleHeightEstimate / 2)
         ) {
-            Column(Modifier.padding(vertical = 8.dp, horizontal = 8.dp)) {
-                Text(
-                    text = description,
-                    style = MaterialTheme.typography.bodyMedium.copy(color = MaterialTheme.colorScheme.onSurfaceVariant)
-                )
-            }
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp)
+                    .padding(top = titleHeightEstimate / 2),
+                horizontalAlignment = Alignment.Start,
+                content = content
+            )
         }
+
         Surface(
             color = MaterialTheme.colorScheme.background,
-            shape = corner,
             modifier = Modifier
-                .align(Alignment.TopStart)
                 .padding(start = 20.dp)
-                .offset(y = (-13).dp)
         ) {
             Text(
                 text = title,

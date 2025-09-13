@@ -32,7 +32,7 @@ import com.joviansapps.ganymede.ui.screens.settings.SettingsScreen
 import com.joviansapps.ganymede.ui.screens.graph.GraphScreen
 import com.joviansapps.ganymede.ui.screens.utilities.UtilitiesScreen
 import com.joviansapps.ganymede.ui.screens.utilities.electronics.ElectronicCategoryScreen
-import com.joviansapps.ganymede.ui.screens.utilities.electronics.TimeConstantCalculatorScreen
+import com.joviansapps.ganymede.ui.screens.utilities.electronics.CapacitorChargeScreen
 import com.joviansapps.ganymede.ui.screens.utilities.electronics.inductancecalculator.InductanceCalculatorScreen
 import com.joviansapps.ganymede.ui.screens.utilities.electronics.resistorcalculator.ResistorCalculatorScreen
 import com.joviansapps.ganymede.viewmodel.SettingsViewModel
@@ -177,7 +177,7 @@ fun AppRoot(settingsVm: SettingsViewModel) {
             }
             composable(Dest.ResistorCalculator.route) { ResistorCalculatorScreen() }
             composable(Dest.InductanceCalculator.route) { InductanceCalculatorScreen() }
-            composable(Dest.TimeConstantCalculator.route) { TimeConstantCalculatorScreen(onBack = { nav.popBackStack() })
+            composable(Dest.TimeConstantCalculator.route) { CapacitorChargeScreen( )
             }
         }
     }
