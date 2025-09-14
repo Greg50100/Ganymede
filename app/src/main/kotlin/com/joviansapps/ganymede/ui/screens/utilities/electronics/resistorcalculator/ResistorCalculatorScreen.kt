@@ -144,7 +144,8 @@ private fun ResistorColorCodeCalculator() {
         modifier = Modifier
             .fillMaxWidth()
             .height(100.dp)
-    ) {
+    )
+    {
         Image(
             painter = painterResource(id = R.drawable.bg_resistor_body_2),
             contentDescription = null,

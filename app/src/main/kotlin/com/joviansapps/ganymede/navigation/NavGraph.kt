@@ -37,9 +37,11 @@ import com.joviansapps.ganymede.ui.screens.utilities.electronics.ParallelSeriesR
 import com.joviansapps.ganymede.ui.screens.utilities.electronics.inductancecalculator.InductanceCalculatorScreen
 import com.joviansapps.ganymede.ui.screens.utilities.electronics.resistorcalculator.ResistorCalculatorScreen
 import com.joviansapps.ganymede.ui.screens.utilities.electronics.ParallelSeriesCapacitorCalculatorScreen
+import com.joviansapps.ganymede.ui.screens.utilities.electronics.OhmsLawCalculatorScreen
+import com.joviansapps.ganymede.ui.screens.utilities.electronics.VoltageDividerCalculatorScreen
+import com.joviansapps.ganymede.ui.screens.utilities.health.BmiCalculatorScreen
+import com.joviansapps.ganymede.ui.screens.utilities.health.HealthCategoryScreen
 import com.joviansapps.ganymede.viewmodel.SettingsViewModel
-import kotlin.io.encoding.Base64
-
 
 sealed class Dest(val route: String) {
     data object Home             : Dest("home")
@@ -54,6 +56,11 @@ sealed class Dest(val route: String) {
     data object TimeConstantCalculator : Dest("time_constant_calculator")
     data object ParallelSeriesResistorCalculator : Dest("parallel_series_resistor_calculator")
     data object ParallelSeriesCapacitorCalculator : Dest("parallel_series_capacitor_calculator")
+    data object OhmsLawCalculator : Dest("ohms_law_calculator")
+    data object VoltageDividerCalculator : Dest("voltage_divider_calculator")
+    // New destinations for Health utilities
+    data object HealthCategory   : Dest("health_category")
+    data object BmiCalculator    : Dest("bmi_calculator")
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -82,6 +89,10 @@ fun AppRoot(settingsVm: SettingsViewModel) {
                 Dest.TimeConstantCalculator.route -> stringResource(R.string.time_constant_calculator_title)
                 Dest.ParallelSeriesResistorCalculator.route -> stringResource(R.string.parallel_series_resistor_calculator_title)
                 Dest.ParallelSeriesCapacitorCalculator.route -> stringResource(R.string.parallel_series_capacitor_calculator_title)
+                Dest.OhmsLawCalculator.route -> stringResource(R.string.ohms_law_calculator_title)
+                Dest.VoltageDividerCalculator.route -> stringResource(R.string.voltage_divider_calculator_title)
+                Dest.HealthCategory.route -> stringResource(R.string.health_category_title)
+                Dest.BmiCalculator.route -> stringResource(R.string.bmi_calculator_title)
                 else -> stringResource(R.string.app_name)
             }
             TopAppBar(
@@ -96,8 +107,6 @@ fun AppRoot(settingsVm: SettingsViewModel) {
                         }
                     }
                 },
-                // Pour ajuster la hauteur, décommentez et modifiez la ligne suivante :
-                // modifier = Modifier.height(80.dp),
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.surface,
                     titleContentColor = MaterialTheme.colorScheme.onSurface,
@@ -108,8 +117,6 @@ fun AppRoot(settingsVm: SettingsViewModel) {
         },
         bottomBar = {
             NavigationBar(
-                // Pour ajuster la hauteur, décommentez et modifiez la ligne suivante :
-                // modifier = Modifier.height(100.dp),
                 containerColor = MaterialTheme.colorScheme.surface,
                 contentColor = MaterialTheme.colorScheme.onSurface
             ) {
@@ -172,16 +179,19 @@ fun AppRoot(settingsVm: SettingsViewModel) {
             }
             composable(Dest.Utilities.route) {
                 UtilitiesScreen(
-                    onOpenElectronics = { nav.navigate(Dest.ElectronicsCategory.route) }
+                    onOpenElectronics = { nav.navigate(Dest.ElectronicsCategory.route) },
+                    onOpenHealth = { nav.navigate(Dest.HealthCategory.route) }
                 )
             }
             composable(Dest.ElectronicsCategory.route) {
                 ElectronicCategoryScreen(
                     onOpenResistorCalculator = { nav.navigate(Dest.ResistorCalculator.route) },
                     onOpenInductanceCalculator = { nav.navigate(Dest.InductanceCalculator.route) },
-                    onOpenCondensatorChargeCalculator = { nav.navigate(Dest.TimeConstantCalculator.route) },
+                    onOpenTimeConstantCalculator = { nav.navigate(Dest.TimeConstantCalculator.route) },
                     onOpenParallelSeriesResistorCalculator = { nav.navigate(Dest.ParallelSeriesResistorCalculator.route) },
-                    onOpenParallelSeriesCapacitorCalculator = { nav.navigate(Dest.ParallelSeriesCapacitorCalculator.route) }
+                    onOpenParallelSeriesCapacitorCalculator = { nav.navigate(Dest.ParallelSeriesCapacitorCalculator.route) },
+                    onOpenOhmsLawCalculator = { nav.navigate(Dest.OhmsLawCalculator.route) },
+                    onOpenVoltageDividerCalculator = { nav.navigate(Dest.VoltageDividerCalculator.route) }
                 )
             }
             composable(Dest.ResistorCalculator.route) { ResistorCalculatorScreen() }
@@ -189,6 +199,18 @@ fun AppRoot(settingsVm: SettingsViewModel) {
             composable(Dest.TimeConstantCalculator.route) { CapacitorChargeScreen( ) }
             composable(Dest.ParallelSeriesResistorCalculator.route) { ParallelSeriesResistorCalculatorScreen() }
             composable(Dest.ParallelSeriesCapacitorCalculator.route) { ParallelSeriesCapacitorCalculatorScreen() }
+            composable(Dest.OhmsLawCalculator.route) { OhmsLawCalculatorScreen() }
+            composable(Dest.VoltageDividerCalculator.route) { VoltageDividerCalculatorScreen() }
+
+            // New routes for Health Utilities
+            composable(Dest.HealthCategory.route) {
+                HealthCategoryScreen(
+                    onOpenBmiCalculator = { nav.navigate(Dest.BmiCalculator.route) }
+                )
+            }
+            composable(Dest.BmiCalculator.route) {
+                BmiCalculatorScreen()
+            }
         }
     }
 }

@@ -191,6 +191,23 @@
     <string name="more_coming_soon">Plus de fonctionnalités bientôt !</string>
     <string name="more_coming_soon_description">Restez à l\'écoute des mises à jour.</string>
 
+    <!-- Health Category -->
+    <string name="health_category_title">Santé</string>
+    <string name="health_category_description">Outils pour la santé et le bien-être</string>
+    <string name="bmi_calculator_title">Calculateur d\'IMC</string>
+    <string name="bmi_calculator_description">Calculez votre Indice de Masse Corporelle</string>
+    <string name="metric">Métrique</string>
+    <string name="imperial">Impérial</string>
+    <string name="height_cm">Taille (cm)</string>
+    <string name="height_in">Taille (po)</string>
+    <string name="weight_kg">Poids (kg)</string>
+    <string name="weight_lbs">Poids (lb)</string>
+    <string name="enter_values">Saisir les valeurs</string>
+    <string name="underweight">Insuffisance pondérale</string>
+    <string name="normal_weight">Poids normal</string>
+    <string name="overweight">Surpoids</string>
+    <string name="obesity">Obésité</string>
+
     <!-- Resistor Calculator -->
     <string name="resistor_calculator_description">Calculez les valeurs des résistances en fonction des codes couleur</string>
     <string name="black">Noir</string>
@@ -266,6 +283,21 @@
     <string name="history_close_button">Fermer</string>
     <string name="history_clear_all_button">Tout effacer</string>
 
+    <!-- Capacitor / Time constant strings -->
+    <string name="mode_charge">Charge</string>
+    <string name="mode_discharge">Décharge</string>
+    <string name="resistor_label">Résistance (Ω)</string>
+    <string name="capacitor_label">Capacité (µF)</string>
+    <string name="capacitor_label_description">Saisir la valeur du condensateur en microfarads (µF)</string>
+    <string name="time_label">Temps (s)</string>
+    <string name="time_label_seconds">Secondes</string>
+    <string name="calculate_button">Calculer</string>
+    <string name="result_voltage_format">Tension : %.4f V</string>
+    <string name="result_charge_format">Charge : %.6f C</string>
+    <string name="plot_duration_label">Durée du tracé (s)</string>
+    <string name="max_y_label">Y max (V) — optionnel</string>
+    <string name="max_y_description">Laisser vide pour une mise à l\'échelle automatique</string>
+    <string name="press_calculate_to_generate_graph">Appuyer sur \'Calculer\' pour générer le graphique.</string>
     <string name="rc_charge_calculator_title">Calculateur de Charge RC</string>
     <string name="input_parameters_title">Paramètres d\'entrée</string>
     <string name="voltage_label">Tension [U]</string>
@@ -276,4 +308,9 @@
     <string name="stored_energy_result">Énergie stockée [E] : %.4f J</string>
     <string name="voltage_legend">Tension (Vc)</string>
     <string name="current_legend">Courant [I]</string>
+    <string name="time_constant_formula_description">Formule de la constante de temps</string>
+    <string name="parallel_series_resistor_calculator_title">Calculateur de résistances en parallèle et en série</string>
+    <string name="parallel_series_capacitor_calculator_title">Calculateur de condensateurs en parallèle et en série</string>
+    <string name="time_constant_calculator_title">Calculateur de constante de temps</string>
 </resources>
+

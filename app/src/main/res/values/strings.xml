@@ -23,8 +23,6 @@
     <string name="welcome_body">Ganymede app — welcome screen.</string>
     <string name="continue_button">Continue</string>
 
-    <!-- Calculator -->
-
     <!-- Converter -->
     <string name="converter_input_label">Value in %1$s</string>
     <string name="converter_result_format">Result: %1$s %2$s</string>
@@ -176,7 +174,7 @@
     <string name="name_optionnal">Name (optional)</string>
     <string name="f_x" translatable="false">f(x)</string>
 
-    <!-- GraphScreen strings translated to French -->
+    <!-- GraphScreen strings -->
     <string name="tab_functions">Functions</string>
     <string name="tab_graph">Graph</string>
     <string name="add">Add</string>
@@ -194,6 +192,7 @@
     <string name="more_coming_soon">More features coming soon!</string>
     <string name="more_coming_soon_description">Stay tuned for updates.</string>
 
+    <!-- Resistor Calculator -->
     <string name="resistor_calculator_title">Resistor Calculator</string>
     <string name="resistor_calculator_description">Calculate resistor values based on color codes</string>
     <string name="black">Black</string>
@@ -240,10 +239,29 @@
     <string name="inductance_calculator_title">Inductance Calculator</string>
     <string name="inductance_calculator_description">Calculate inductor values and color codes</string>
     <string name="time_constant_calculator_title">Time Constant Calculator</string>
+    <string name="time_constant_calculator_description">Calculate RC circuit charge time</string>
 
     <!-- Electronics Category -->
     <string name="electronics_category_title">Electronics</string>
     <string name="electronics_category_description">Tools and calculators for electronics</string>
+
+    <!-- Health Category -->
+    <string name="health_category_title">Health</string>
+    <string name="health_category_description">Utilities for health and fitness</string>
+    <string name="bmi_calculator_title">BMI Calculator</string>
+    <string name="bmi_calculator_description">Calculate your Body Mass Index</string>
+    <string name="metric">Metric</string>
+    <string name="imperial">Imperial</string>
+    <string name="height_cm">Height (cm)</string>
+    <string name="height_in">Height (in)</string>
+    <string name="weight_kg">Weight (kg)</string>
+    <string name="weight_lbs">Weight (lbs)</string>
+    <string name="enter_values">Enter values</string>
+    <string name="underweight">Underweight</string>
+    <string name="normal_weight">Normal</string>
+    <string name="overweight">Overweight</string>
+    <string name="obesity">Obesity</string>
+
 
     <!-- Inductance Calculator -->
     <string name="tab_color_code">Color Code</string>
@@ -329,6 +347,34 @@
     <string name="current_legend">Current [I]</string>
 
     <string name="time_constant_formula_description">Formula for time constant</string>
-    <string name="parallel_series_resistor_calculator_title">Parallel and Series Resistor Calculator</string>
-    <string name="parallel_series_capacitor_calculator_title">Parallel and Series Capacitor Calculator</string>
+    <!-- Parallel/Series Calculators -->
+    <string name="parallel_series_resistor_calculator_title">Parallel &amp; Series Resistor Calculator</string>
+    <string name="parallel_series_resistor_calculator_description">Calculate total resistance for components</string>
+    <string name="parallel_series_capacitor_calculator_title">Parallel &amp; Series Capacitor Calculator</string>
+    <string name="parallel_series_capacitor_calculator_description">Calculate total capacitance for components</string>
+    <string name="series_result">Series: %1$s %2$s</string>
+    <string name="parallel_result">Parallel: %1$s %2$s</string>
+    <string name="add_component">Add %1$s</string>
+    <string name="remove_component">Remove %1$s</string>
+    <string name="component_value">%1$s %2$d value (%3$s)</string>
+
+    <!-- Ohm's Law Calculator -->
+    <string name="ohms_law_calculator_title">Ohm\'s Law Calculator</string>
+    <string name="ohms_law_calculator_description">Calculate V, I, R based on Ohm\'s Law</string>
+    <string name="ohms_law_triangle_description">Ohm\'s Law Triangle showing V = I * R</string>
+    <string name="ohms_law_description">Enter any two values to calculate the third.</string>
+    <string name="voltage_v">Voltage (V)</string>
+    <string name="current_a">Current (A)</string>
+    <string name="resistance_ohm">Resistance (Ω)</string>
+
+    <!-- Voltage Divider Calculator -->
+    <string name="voltage_divider_calculator_title">Voltage Divider Calculator</string>
+    <string name="voltage_divider_calculator_description">Calculate output voltage from a voltage divider circuit</string>
+    <string name="voltage_divider_circuit_description">Voltage divider circuit diagram</string>
+    <string name="input_voltage_vin">Input Voltage (Vin)</string>
+    <string name="resistance_r1_ohm">Resistance R1 (Ω)</string>
+    <string name="resistance_r2_ohm">Resistance R2 (Ω)</string>
+    <string name="output_voltage_vout">Output Voltage (Vout): %s V</string>
+
 </resources>
+
