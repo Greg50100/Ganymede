@@ -2,9 +2,15 @@ package com.joviansapps.ganymede.graphing
 
 import androidx.compose.ui.graphics.Color
 import kotlin.math.*
+import java.util.UUID
 
 // Expression-based graph function evaluated via local RPN parser
-class GraphFunction(val expression: String, val color: Color, val name: String) {
+class GraphFunction(
+    val expression: String,
+    val color: Color,
+    val name: String,
+    val id: String = UUID.randomUUID().toString()
+) {
     private val rpn: List<String>
     init {
         val tokens = tokenize(expression)

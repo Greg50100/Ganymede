@@ -179,7 +179,11 @@
     <string name="tab_graph">Graph</string>
     <string name="add">Add</string>
     <string name="clear_all">Clear all</string>
-    <string name="functions_count">Functions: %1$d</string>
+    <!-- Plurals for function count -->
+    <plurals name="functions_count">
+        <item quantity="one">%1$d Function</item>
+        <item quantity="other">%1$d Functions</item>
+    </plurals>
     <string name="no_functions">No functions</string>
     <string name="delete">Delete</string>
     <string name="zoom_in">Zoom in</string>
@@ -208,6 +212,55 @@
     <string name="gold">Gold</string>
     <string name="silver">Silver</string>
     <string name="none">None</string>
+
+    <string-array name="resistor_band_colors">
+        <item>@string/black</item>
+        <item>@string/brown</item>
+        <item>@string/red</item>
+        <item>@string/orange</item>
+        <item>@string/yellow</item>
+        <item>@string/green</item>
+        <item>@string/blue</item>
+        <item>@string/violet</item>
+        <item>@string/gray</item>
+        <item>@string/white</item>
+    </string-array>
+
+    <string-array name="resistor_multiplier_colors">
+        <item>@string/black</item>
+        <item>@string/brown</item>
+        <item>@string/red</item>
+        <item>@string/orange</item>
+        <item>@string/yellow</item>
+        <item>@string/green</item>
+        <item>@string/blue</item>
+        <item>@string/violet</item>
+        <item>@string/gray</item>
+        <item>@string/white</item>
+        <item>@string/gold</item>
+        <item>@string/silver</item>
+    </string-array>
+
+    <string-array name="resistor_tolerance_colors">
+        <item>@string/brown</item>
+        <item>@string/red</item>
+        <item>@string/green</item>
+        <item>@string/blue</item>
+        <item>@string/violet</item>
+        <item>@string/gray</item>
+        <item>@string/gold</item>
+        <item>@string/silver</item>
+    </string-array>
+
+    <string-array name="resistor_ppm_colors">
+        <item>@string/brown</item>
+        <item>@string/red</item>
+        <item>@string/orange</item>
+        <item>@string/yellow</item>
+        <item>@string/blue</item>
+        <item>@string/violet</item>
+    </string-array>
+
     <string name="black_1">Black (×1)</string>
     <string name="brown_10">Brown (×10)</string>
     <string name="red_100">Red (×100)</string>
@@ -397,4 +450,5 @@
     <string name="time_high_result">Time High: %s s</string>
     <string name="time_low_result">Time Low: %s s</string>
 </resources>
+
 

@@ -44,6 +44,8 @@ import com.joviansapps.ganymede.ui.screens.utilities.electronics.Timer555Calcula
 import com.joviansapps.ganymede.ui.screens.utilities.health.BmiCalculatorScreen
 import com.joviansapps.ganymede.ui.screens.utilities.health.HealthCategoryScreen
 import com.joviansapps.ganymede.viewmodel.SettingsViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.joviansapps.ganymede.graphing.GraphViewModel
 
 sealed class Dest(val route: String) {
     data object Home             : Dest("home")
@@ -181,7 +183,8 @@ fun AppRoot(settingsVm: SettingsViewModel) {
                 SettingsScreen(vm = settingsVm)
             }
             composable(Dest.Graph.route) {
-                GraphScreen(onBack = { nav.popBackStack() })
+                val graphVm: GraphViewModel = viewModel()
+                GraphScreen(graphViewModel = graphVm)
             }
             composable(Dest.Utilities.route) {
                 UtilitiesScreen(
