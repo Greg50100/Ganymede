@@ -34,7 +34,9 @@ fun ElectronicCategoryScreen(
     onOpenParallelSeriesResistorCalculator: () -> Unit = {},
     onOpenParallelSeriesCapacitorCalculator: () -> Unit = {},
     onOpenOhmsLawCalculator: () -> Unit = {},
-    onOpenVoltageDividerCalculator: () -> Unit = {}
+    onOpenVoltageDividerCalculator: () -> Unit = {},
+    onOpenLedResistorCalculator: () -> Unit = {},
+    onOpenTimer555Calculator: () -> Unit = {}
 ) {
     val utilities = listOf(
         ElectronicUtility(
@@ -78,6 +80,18 @@ fun ElectronicCategoryScreen(
             R.string.voltage_divider_calculator_description,
             Icons.Default.VerticalSplit,
             onOpenVoltageDividerCalculator
+        ),
+        ElectronicUtility(
+            R.string.led_resistor_calculator_title,
+            R.string.led_resistor_calculator_description,
+            Icons.Default.Lightbulb,
+            onOpenLedResistorCalculator
+        ),
+        ElectronicUtility(
+            R.string.timer_555_astable_title,
+            R.string.timer_555_astable_description,
+            Icons.Default.Timer,
+            onOpenTimer555Calculator
         )
     )
 

@@ -376,5 +376,25 @@
     <string name="resistance_r2_ohm">Resistance R2 (Ω)</string>
     <string name="output_voltage_vout">Output Voltage (Vout): %s V</string>
 
+    <!-- LED Resistor Calculator -->
+    <string name="led_resistor_calculator_title">LED Resistor Calculator</string>
+    <string name="led_resistor_calculator_description">Find the right current-limiting resistor for your LED</string>
+    <string name="source_voltage_v">Source Voltage (V)</string>
+    <string name="led_forward_voltage_v">LED Forward Voltage (V)</string>
+    <string name="led_forward_current_ma">LED Forward Current (mA)</string>
+    <string name="required_resistor_value">Required Resistor: %s Ω</string>
+
+    <!-- 555 Timer Calculator -->
+    <string name="timer_555_astable_title">555 Timer Astable Calculator</string>
+    <string name="timer_555_astable_description">Calculate frequency and duty cycle for a 555 timer in astable mode</string>
+    <string name="timer_555_astable_circuit_desc">Circuit diagram for a 555 timer in astable mode</string>
+    <string name="resistance_r1_kohm">Resistance R1 (kΩ)</string>
+    <string name="resistance_r2_kohm">Resistance R2 (kΩ)</string>
+    <string name="capacitance_c1_uf">Capacitance C1 (µF)</string>
+    <string name="frequency_result">Frequency: %s Hz</string>
+    <string name="period_result">Period: %s s</string>
+    <string name="duty_cycle_result">Duty Cycle: %s %%</string>
+    <string name="time_high_result">Time High: %s s</string>
+    <string name="time_low_result">Time Low: %s s</string>
 </resources>
 

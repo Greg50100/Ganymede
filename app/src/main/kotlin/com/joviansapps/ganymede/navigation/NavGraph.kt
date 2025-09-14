@@ -39,6 +39,8 @@ import com.joviansapps.ganymede.ui.screens.utilities.electronics.resistorcalcula
 import com.joviansapps.ganymede.ui.screens.utilities.electronics.ParallelSeriesCapacitorCalculatorScreen
 import com.joviansapps.ganymede.ui.screens.utilities.electronics.OhmsLawCalculatorScreen
 import com.joviansapps.ganymede.ui.screens.utilities.electronics.VoltageDividerCalculatorScreen
+import com.joviansapps.ganymede.ui.screens.utilities.electronics.LedResistorCalculatorScreen
+import com.joviansapps.ganymede.ui.screens.utilities.electronics.Timer555CalculatorScreen
 import com.joviansapps.ganymede.ui.screens.utilities.health.BmiCalculatorScreen
 import com.joviansapps.ganymede.ui.screens.utilities.health.HealthCategoryScreen
 import com.joviansapps.ganymede.viewmodel.SettingsViewModel
@@ -58,6 +60,8 @@ sealed class Dest(val route: String) {
     data object ParallelSeriesCapacitorCalculator : Dest("parallel_series_capacitor_calculator")
     data object OhmsLawCalculator : Dest("ohms_law_calculator")
     data object VoltageDividerCalculator : Dest("voltage_divider_calculator")
+    data object LedResistorCalculator : Dest("led_resistor_calculator")
+    data object Timer555Calculator : Dest("timer_555_calculator")
     // New destinations for Health utilities
     data object HealthCategory   : Dest("health_category")
     data object BmiCalculator    : Dest("bmi_calculator")
@@ -91,6 +95,8 @@ fun AppRoot(settingsVm: SettingsViewModel) {
                 Dest.ParallelSeriesCapacitorCalculator.route -> stringResource(R.string.parallel_series_capacitor_calculator_title)
                 Dest.OhmsLawCalculator.route -> stringResource(R.string.ohms_law_calculator_title)
                 Dest.VoltageDividerCalculator.route -> stringResource(R.string.voltage_divider_calculator_title)
+                Dest.LedResistorCalculator.route -> stringResource(R.string.led_resistor_calculator_title)
+                Dest.Timer555Calculator.route -> stringResource(R.string.timer_555_astable_title)
                 Dest.HealthCategory.route -> stringResource(R.string.health_category_title)
                 Dest.BmiCalculator.route -> stringResource(R.string.bmi_calculator_title)
                 else -> stringResource(R.string.app_name)
@@ -191,7 +197,9 @@ fun AppRoot(settingsVm: SettingsViewModel) {
                     onOpenParallelSeriesResistorCalculator = { nav.navigate(Dest.ParallelSeriesResistorCalculator.route) },
                     onOpenParallelSeriesCapacitorCalculator = { nav.navigate(Dest.ParallelSeriesCapacitorCalculator.route) },
                     onOpenOhmsLawCalculator = { nav.navigate(Dest.OhmsLawCalculator.route) },
-                    onOpenVoltageDividerCalculator = { nav.navigate(Dest.VoltageDividerCalculator.route) }
+                    onOpenVoltageDividerCalculator = { nav.navigate(Dest.VoltageDividerCalculator.route) },
+                    onOpenLedResistorCalculator = { nav.navigate(Dest.LedResistorCalculator.route) },
+                    onOpenTimer555Calculator = { nav.navigate(Dest.Timer555Calculator.route) }
                 )
             }
             composable(Dest.ResistorCalculator.route) { ResistorCalculatorScreen() }
@@ -201,6 +209,8 @@ fun AppRoot(settingsVm: SettingsViewModel) {
             composable(Dest.ParallelSeriesCapacitorCalculator.route) { ParallelSeriesCapacitorCalculatorScreen() }
             composable(Dest.OhmsLawCalculator.route) { OhmsLawCalculatorScreen() }
             composable(Dest.VoltageDividerCalculator.route) { VoltageDividerCalculatorScreen() }
+            composable(Dest.LedResistorCalculator.route) { LedResistorCalculatorScreen() }
+            composable(Dest.Timer555Calculator.route) { Timer555CalculatorScreen() }
 
             // New routes for Health Utilities
             composable(Dest.HealthCategory.route) {

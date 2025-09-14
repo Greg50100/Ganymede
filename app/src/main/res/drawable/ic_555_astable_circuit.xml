@@ -1,0 +1,69 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="150dp"
+    android:viewportWidth="200"
+    android:viewportHeight="150">
+
+    <!-- VCC -->
+    <path android:pathData="M100,10 L100,20" android:strokeWidth="1" android:strokeColor="#000000"/>
+    <path android:pathData="M90,10 L110,10" android:strokeWidth="1" android:strokeColor="#000000"/>
+    <!-- VCC Text -->
+    <!-- <text x="105" y="15" font-size="8">VCC</text> -->
+
+    <!-- R1 -->
+    <path android:pathData="M100,20 L100,30" android:strokeWidth="1" android:strokeColor="#000000"/>
+    <path android:pathData="M95,30 L105,30 L105,40 L95,40 Z" android:strokeWidth="1" android:strokeColor="#000000" android:fillColor="#FFFFFF"/>
+    <!-- <text x="110" y="38" font-size="8">R1</text> -->
+    <path android:pathData="M100,40 L100,50" android:strokeWidth="1" android:strokeColor="#000000"/>
+
+    <!-- R2 -->
+    <path android:pathData="M100,50 L100,60" android:strokeWidth="1" android:strokeColor="#000000"/>
+    <path android:pathData="M95,60 L105,60 L105,70 L95,70 Z" android:strokeWidth="1" android:strokeColor="#000000" android:fillColor="#FFFFFF"/>
+    <!-- <text x="110" y="68" font-size="8">R2</text> -->
+    <path android:pathData="M100,70 L100,80" android:strokeWidth="1" android:strokeColor="#000000"/>
+
+    <!-- Capacitor C1 -->
+    <path android:pathData="M100,80 L100,90" android:strokeWidth="1" android:strokeColor="#000000"/>
+    <path android:pathData="M90,90 L110,90" android:strokeWidth="1" android:strokeColor="#000000"/>
+    <path android:pathData="M90,94 L110,94" android:strokeWidth="1" android:strokeColor="#000000"/>
+    <!-- <text x="115" y="95" font-size="8">C1</text> -->
+    <path android:pathData="M100,94 L100,104" android:strokeWidth="1" android:strokeColor="#000000"/>
+
+    <!-- Ground -->
+    <path android:pathData="M100,104 L100,114" android:strokeWidth="1" android:strokeColor="#000000"/>
+    <path android:pathData="M90,114 L110,114" android:strokeWidth="1" android:strokeColor="#000000"/>
+    <path android:pathData="M95,119 L105,119" android:strokeWidth="1" android:strokeColor="#000000"/>
+    <path android:pathData="M98,124 L102,124" android:strokeWidth="1" android:strokeColor="#000000"/>
+
+    <!-- 555 Timer IC Box -->
+    <path android:pathData="M40,40 L80,40 L80,110 L40,110 Z" android:strokeWidth="1" android:strokeColor="#000000" android:fillColor="#FFFFFF"/>
+    <!-- <text x="55" y="75" font-size="10">555</text> -->
+
+    <!-- Connections to 555 -->
+    <!-- Pin 7 (Discharge) -->
+    <path android:pathData="M80,50 L100,50" android:strokeWidth="1" android:strokeColor="#000000"/>
+    <!-- <text x="70" y="48" font-size="8">7</text> -->
+    <!-- Pin 6 (Threshold) -->
+    <path android:pathData="M80,60 L100,70" android:strokeWidth="1" android:strokeColor="#000000"/>
+    <!-- <text x="70" y="58" font-size="8">6</text> -->
+    <!-- Pin 2 (Trigger) -->
+    <path android:pathData="M80,70 L100,70" android:strokeWidth="1" android:strokeColor="#000000"/>
+    <path android:pathData="M100,70 L100,80" android:strokeWidth="1" android:strokeColor="#000000"/>
+    <!-- <text x="70" y="78" font-size="8">2</text> -->
+    <!-- Pin 3 (Output) -->
+    <path android:pathData="M80,85 L90,85" android:strokeWidth="1" android:strokeColor="#000000"/>
+    <!-- <text x="70" y="83" font-size="8">3</text> -->
+    <!-- <text x="95" y="83" font-size="8">Out</text> -->
+
+    <!-- Pin 4 (Reset) to VCC -->
+    <path android:pathData="M60,40 L60,20 L100,20" android:strokeWidth="1" android:strokeColor="#000000"/>
+    <!-- <text x="50" y="38" font-size="8">4</text> -->
+    <!-- Pin 8 (VCC) to VCC -->
+    <path android:pathData="M70,40 L70,15 L100,15" android:strokeWidth="1" android:strokeColor="#000000"/>
+    <!-- <text x="73" y="38" font-size="8">8</text> -->
+
+    <!-- Pin 1 (GND) to Ground -->
+    <path android:pathData="M50,110 L50,120 L100,120" android:strokeWidth="1" android:strokeColor="#000000"/>
+    <!-- <text x="45" y="115" font-size="8">1</text> -->
+
+</vector>
