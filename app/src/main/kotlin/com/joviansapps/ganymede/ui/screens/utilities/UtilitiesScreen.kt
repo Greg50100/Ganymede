@@ -6,6 +6,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Calculate
 import androidx.compose.material.icons.filled.Memory
 import androidx.compose.material.icons.filled.MonitorHeart
 import androidx.compose.material3.*
@@ -31,7 +32,8 @@ private data class Utility(
 @Preview
 fun UtilitiesScreen(
     onOpenElectronics: () -> Unit = {},
-    onOpenHealth: () -> Unit = {}
+    onOpenHealth: () -> Unit = {},
+    onOpenMath: () -> Unit = {}
 ) {
     // List of available utility categories
     val utilities = listOf(
@@ -46,6 +48,12 @@ fun UtilitiesScreen(
             descriptionRes = R.string.health_category_description,
             icon = Icons.Default.MonitorHeart,
             onClick = onOpenHealth
+        ),
+        Utility(
+            titleRes = R.string.math_category_title,
+            descriptionRes = R.string.math_category_description,
+            icon = Icons.Default.Calculate,
+            onClick = onOpenMath
         )
         // New utilities can be added here easily
     )
@@ -72,7 +80,7 @@ fun UtilitiesScreen(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun UtilityCard(
+fun UtilityCard(
     title: String,
     description: String,
     icon: ImageVector,

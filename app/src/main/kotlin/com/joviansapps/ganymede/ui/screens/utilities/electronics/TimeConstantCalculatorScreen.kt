@@ -185,7 +185,7 @@ class CapacitorChargeViewModel : ViewModel() {
 
 @Composable
 
-fun CapacitorChargeScreen(viewModel: CapacitorChargeViewModel = viewModel()) {
+fun TimeConstantCalculatorScreen(viewModel: CapacitorChargeViewModel = viewModel()) {
     // ... (Le reste du fichier est identique à la version précédente)
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     var selectedTabIndex by remember { mutableIntStateOf(0) }
@@ -462,8 +462,8 @@ fun ChargeDischargeGraph(points: List<GraphPoint>) {
 
 @Preview(showBackground = true)
 @Composable
-private fun CapacitorChargeScreenPreview() {
+private fun TimeConstantCalculatorScreenPreview() {
     MaterialTheme {
-        CapacitorChargeScreen()
+        TimeConstantCalculatorScreen()
     }
 }

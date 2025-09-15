@@ -449,6 +449,24 @@
     <string name="duty_cycle_result">Duty Cycle: %s %%</string>
     <string name="time_high_result">Time High: %s s</string>
     <string name="time_low_result">Time Low: %s s</string>
+    <string name="calculate">Calculer</string>
+
+
+    <!-- Math Utilities -->
+    <string name="quadratic_equation_solver_title">Quadratic Equation Solver</string>
+    <string name="quadratic_equation_solver_description">Solve equations of the form ax²+bx+c=0</string>
+    <string name="quadratic_equation_formula">Equation: ax² + bx + c = 0</string>
+    <string name="coefficient_a">Coefficient a</string>
+    <string name="coefficient_b">Coefficient b</string>
+    <string name="coefficient_c">Coefficient c</string>
+    <string name="error_a_cannot_be_zero">\'a\' cannot be zero.</string>
+    <string name="discriminant_value">Discriminant (Δ) = %1$.2f</string>
+    <string name="two_real_roots">Two real roots:\nx1 = %1$.2f\nx2 = %2$.2f</string>
+    <string name="one_real_root">One real root:\nx = %1$.2f</string>
+    <string name="two_complex_roots">Two complex roots:\nx1 = %1$.2f + %2$.2fi\nx2 = %1$.2f - %2$.2fi</string>
+    <string name="error_invalid_numbers">Please enter valid numbers for a, b, and c.</string>
+    <string name="math_category_title">Math</string>
+    <string name="math_category_description">Mathematical tools and calculators</string>
 </resources>
 
 

@@ -20,32 +20,34 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import com.joviansapps.ganymede.R
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.joviansapps.ganymede.R
+import com.joviansapps.ganymede.graphing.GraphViewModel
 import com.joviansapps.ganymede.ui.screens.calculator.CalculatorScreen
 import com.joviansapps.ganymede.ui.screens.converter.ConverterScreen
+import com.joviansapps.ganymede.ui.screens.graph.GraphScreen
 import com.joviansapps.ganymede.ui.screens.home.HomeScreen
 import com.joviansapps.ganymede.ui.screens.settings.SettingsScreen
-import com.joviansapps.ganymede.ui.screens.graph.GraphScreen
 import com.joviansapps.ganymede.ui.screens.utilities.UtilitiesScreen
 import com.joviansapps.ganymede.ui.screens.utilities.electronics.ElectronicCategoryScreen
-import com.joviansapps.ganymede.ui.screens.utilities.electronics.CapacitorChargeScreen
+import com.joviansapps.ganymede.ui.screens.utilities.electronics.LedResistorCalculatorScreen
+import com.joviansapps.ganymede.ui.screens.utilities.electronics.OhmsLawCalculatorScreen
+import com.joviansapps.ganymede.ui.screens.utilities.electronics.ParallelSeriesCapacitorCalculatorScreen
 import com.joviansapps.ganymede.ui.screens.utilities.electronics.ParallelSeriesResistorCalculatorScreen
+import com.joviansapps.ganymede.ui.screens.utilities.electronics.TimeConstantCalculatorScreen
+import com.joviansapps.ganymede.ui.screens.utilities.electronics.Timer555CalculatorScreen
+import com.joviansapps.ganymede.ui.screens.utilities.electronics.VoltageDividerCalculatorScreen
 import com.joviansapps.ganymede.ui.screens.utilities.electronics.inductancecalculator.InductanceCalculatorScreen
 import com.joviansapps.ganymede.ui.screens.utilities.electronics.resistorcalculator.ResistorCalculatorScreen
-import com.joviansapps.ganymede.ui.screens.utilities.electronics.ParallelSeriesCapacitorCalculatorScreen
-import com.joviansapps.ganymede.ui.screens.utilities.electronics.OhmsLawCalculatorScreen
-import com.joviansapps.ganymede.ui.screens.utilities.electronics.VoltageDividerCalculatorScreen
-import com.joviansapps.ganymede.ui.screens.utilities.electronics.LedResistorCalculatorScreen
-import com.joviansapps.ganymede.ui.screens.utilities.electronics.Timer555CalculatorScreen
 import com.joviansapps.ganymede.ui.screens.utilities.health.BmiCalculatorScreen
 import com.joviansapps.ganymede.ui.screens.utilities.health.HealthCategoryScreen
+import com.joviansapps.ganymede.ui.screens.utilities.math.MathCategoryScreen
+import com.joviansapps.ganymede.ui.screens.utilities.math.QuadraticEquationSolverScreen
 import com.joviansapps.ganymede.viewmodel.SettingsViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.joviansapps.ganymede.graphing.GraphViewModel
 
 sealed class Dest(val route: String) {
     data object Home             : Dest("home")
@@ -64,9 +66,10 @@ sealed class Dest(val route: String) {
     data object VoltageDividerCalculator : Dest("voltage_divider_calculator")
     data object LedResistorCalculator : Dest("led_resistor_calculator")
     data object Timer555Calculator : Dest("timer_555_calculator")
-    // New destinations for Health utilities
     data object HealthCategory   : Dest("health_category")
     data object BmiCalculator    : Dest("bmi_calculator")
+    data object MathCategory     : Dest("math_category")
+    data object QuadraticEquationSolver : Dest("quadratic_solver")
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -101,6 +104,8 @@ fun AppRoot(settingsVm: SettingsViewModel) {
                 Dest.Timer555Calculator.route -> stringResource(R.string.timer_555_astable_title)
                 Dest.HealthCategory.route -> stringResource(R.string.health_category_title)
                 Dest.BmiCalculator.route -> stringResource(R.string.bmi_calculator_title)
+                Dest.MathCategory.route -> stringResource(R.string.math_category_title)
+                Dest.QuadraticEquationSolver.route -> stringResource(R.string.quadratic_equation_solver_title)
                 else -> stringResource(R.string.app_name)
             }
             TopAppBar(
@@ -189,7 +194,8 @@ fun AppRoot(settingsVm: SettingsViewModel) {
             composable(Dest.Utilities.route) {
                 UtilitiesScreen(
                     onOpenElectronics = { nav.navigate(Dest.ElectronicsCategory.route) },
-                    onOpenHealth = { nav.navigate(Dest.HealthCategory.route) }
+                    onOpenHealth = { nav.navigate(Dest.HealthCategory.route) },
+                    onOpenMath = { nav.navigate(Dest.MathCategory.route) }
                 )
             }
             composable(Dest.ElectronicsCategory.route) {
@@ -207,7 +213,7 @@ fun AppRoot(settingsVm: SettingsViewModel) {
             }
             composable(Dest.ResistorCalculator.route) { ResistorCalculatorScreen() }
             composable(Dest.InductanceCalculator.route) { InductanceCalculatorScreen() }
-            composable(Dest.TimeConstantCalculator.route) { CapacitorChargeScreen( ) }
+            composable(Dest.TimeConstantCalculator.route) { TimeConstantCalculatorScreen( ) }
             composable(Dest.ParallelSeriesResistorCalculator.route) { ParallelSeriesResistorCalculatorScreen() }
             composable(Dest.ParallelSeriesCapacitorCalculator.route) { ParallelSeriesCapacitorCalculatorScreen() }
             composable(Dest.OhmsLawCalculator.route) { OhmsLawCalculatorScreen() }
@@ -215,7 +221,6 @@ fun AppRoot(settingsVm: SettingsViewModel) {
             composable(Dest.LedResistorCalculator.route) { LedResistorCalculatorScreen() }
             composable(Dest.Timer555Calculator.route) { Timer555CalculatorScreen() }
 
-            // New routes for Health Utilities
             composable(Dest.HealthCategory.route) {
                 HealthCategoryScreen(
                     onOpenBmiCalculator = { nav.navigate(Dest.BmiCalculator.route) }
@@ -224,6 +229,15 @@ fun AppRoot(settingsVm: SettingsViewModel) {
             composable(Dest.BmiCalculator.route) {
                 BmiCalculatorScreen()
             }
+            composable(Dest.MathCategory.route) {
+                MathCategoryScreen(
+                    onOpenQuadraticEquationSolver = { nav.navigate(Dest.QuadraticEquationSolver.route) }
+                )
+            }
+            composable(Dest.QuadraticEquationSolver.route) {
+                QuadraticEquationSolverScreen()
+            }
         }
     }
 }
+
