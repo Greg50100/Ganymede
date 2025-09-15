@@ -304,6 +304,7 @@
     <string name="capacitance_label">Capacité [C]</string>
     <string name="resistance_label">Résistance [Ω]</string>
     <string name="results_title">Résultats :</string>
+    <string name="result_title">Résultat :</string>
     <string name="time_constant_result">Constante de temps [τ] : %.4f s</string>
     <string name="stored_energy_result">Énergie stockée [E] : %.4f J</string>
     <string name="voltage_legend">Tension (Vc)</string>

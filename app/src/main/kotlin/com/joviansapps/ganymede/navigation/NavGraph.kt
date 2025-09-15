@@ -43,10 +43,16 @@ import com.joviansapps.ganymede.ui.screens.utilities.electronics.Timer555Calcula
 import com.joviansapps.ganymede.ui.screens.utilities.electronics.VoltageDividerCalculatorScreen
 import com.joviansapps.ganymede.ui.screens.utilities.electronics.inductancecalculator.InductanceCalculatorScreen
 import com.joviansapps.ganymede.ui.screens.utilities.electronics.resistorcalculator.ResistorCalculatorScreen
+import com.joviansapps.ganymede.ui.screens.utilities.electronics.FilterCalculatorScreen
+import com.joviansapps.ganymede.ui.screens.utilities.electronics.WireGaugeCalculatorScreen
+import com.joviansapps.ganymede.ui.screens.utilities.electronics.EnergyCostCalculatorScreen
+import com.joviansapps.ganymede.ui.screens.utilities.electronics.VoltageDropCalculatorScreen
 import com.joviansapps.ganymede.ui.screens.utilities.health.BmiCalculatorScreen
 import com.joviansapps.ganymede.ui.screens.utilities.health.HealthCategoryScreen
 import com.joviansapps.ganymede.ui.screens.utilities.math.MathCategoryScreen
 import com.joviansapps.ganymede.ui.screens.utilities.math.QuadraticEquationSolverScreen
+import com.joviansapps.ganymede.ui.screens.utilities.physics.PhysicsCategoryScreen
+import com.joviansapps.ganymede.ui.screens.utilities.physics.FreeFallCalculatorScreen
 import com.joviansapps.ganymede.viewmodel.SettingsViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -79,10 +85,17 @@ fun AppRoot(settingsVm: SettingsViewModel) {
                 Dest.VoltageDividerCalculator.route -> stringResource(R.string.voltage_divider_calculator_title)
                 Dest.LedResistorCalculator.route -> stringResource(R.string.led_resistor_calculator_title)
                 Dest.Timer555Calculator.route -> stringResource(R.string.timer_555_astable_title)
+                Dest.FilterCalculator.route -> stringResource(R.string.filter_calculator_title)
                 Dest.HealthCategory.route -> stringResource(R.string.health_category_title)
                 Dest.BmiCalculator.route -> stringResource(R.string.bmi_calculator_title)
                 Dest.MathCategory.route -> stringResource(R.string.math_category_title)
                 Dest.QuadraticEquationSolver.route -> stringResource(R.string.quadratic_equation_solver_title)
+                Dest.PhysicsCategory.route -> stringResource(R.string.physics_category_title)
+                Dest.FreeFallCalculator.route -> stringResource(R.string.free_fall_calculator_title)
+                Dest.WireGaugeCalculator.route -> stringResource(R.string.wire_gauge_calculator_title)
+                Dest.EnergyCostCalculator.route -> stringResource(R.string.energy_cost_calculator_title)
+                Dest.VoltageDropCalculator.route -> stringResource(R.string.voltage_drop_calculator_title)
+
                 else -> stringResource(R.string.app_name)
             }
             TopAppBar(
@@ -172,7 +185,8 @@ fun AppRoot(settingsVm: SettingsViewModel) {
                 UtilitiesScreen(
                     onOpenElectronics = { nav.navigate(Dest.ElectronicsCategory.route) },
                     onOpenHealth = { nav.navigate(Dest.HealthCategory.route) },
-                    onOpenMath = { nav.navigate(Dest.MathCategory.route) }
+                    onOpenMath = { nav.navigate(Dest.MathCategory.route) },
+                    onPhysics = { nav.navigate(Dest.PhysicsCategory.route) }
                 )
             }
             composable(Dest.ElectronicsCategory.route) {
@@ -185,7 +199,11 @@ fun AppRoot(settingsVm: SettingsViewModel) {
                     onOpenOhmsLawCalculator = { nav.navigate(Dest.OhmsLawCalculator.route) },
                     onOpenVoltageDividerCalculator = { nav.navigate(Dest.VoltageDividerCalculator.route) },
                     onOpenLedResistorCalculator = { nav.navigate(Dest.LedResistorCalculator.route) },
-                    onOpenTimer555Calculator = { nav.navigate(Dest.Timer555Calculator.route) }
+                    onOpenTimer555Calculator = { nav.navigate(Dest.Timer555Calculator.route) },
+                    onOpenFilterCalculator = { nav.navigate(Dest.FilterCalculator.route) },
+                    onOpenWireGaugeCalculator = { nav.navigate(Dest.WireGaugeCalculator.route) },
+                    onOpenVoltageDropCalculator = { nav.navigate(Dest.VoltageDropCalculator.route) },
+                    onOpenEnergyCostCalculator = { nav.navigate(Dest.EnergyCostCalculator.route) }
                 )
             }
             composable(Dest.ResistorCalculator.route) { ResistorCalculatorScreen() }
@@ -197,6 +215,10 @@ fun AppRoot(settingsVm: SettingsViewModel) {
             composable(Dest.VoltageDividerCalculator.route) { VoltageDividerCalculatorScreen() }
             composable(Dest.LedResistorCalculator.route) { LedResistorCalculatorScreen() }
             composable(Dest.Timer555Calculator.route) { Timer555CalculatorScreen() }
+            composable(Dest.FilterCalculator.route) { FilterCalculatorScreen() }
+            composable(Dest.WireGaugeCalculator.route) { WireGaugeCalculatorScreen() }
+            composable(Dest.VoltageDropCalculator.route) { VoltageDropCalculatorScreen() }
+            composable(Dest.EnergyCostCalculator.route) { EnergyCostCalculatorScreen() }
 
             composable(Dest.HealthCategory.route) {
                 HealthCategoryScreen(
@@ -213,6 +235,14 @@ fun AppRoot(settingsVm: SettingsViewModel) {
             }
             composable(Dest.QuadraticEquationSolver.route) {
                 QuadraticEquationSolverScreen()
+            }
+            composable(Dest.PhysicsCategory.route) {
+                PhysicsCategoryScreen(
+                    onOpenFreeFallCalculator = { nav.navigate(Dest.FreeFallCalculator.route) }
+                )
+            }
+            composable(Dest.FreeFallCalculator.route) {
+                FreeFallCalculatorScreen()
             }
         }
     }

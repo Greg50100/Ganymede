@@ -394,6 +394,7 @@
     <string name="resistance_label">Resistance [Ω]</string>
     <string name="reset_button" translatable="false">Reset</string>
     <string name="results_title">Results:</string>
+    <string name="result_title">Result:</string>
     <string name="time_constant_result">Time constant [τ]: %.4f s</string>
     <string name="stored_energy_result">Stored energy [E]: %.4f J</string>
     <string name="voltage_legend">Voltage (Vc)</string>
@@ -467,6 +468,49 @@
     <string name="error_invalid_numbers">Please enter valid numbers for a, b, and c.</string>
     <string name="math_category_title">Math</string>
     <string name="math_category_description">Mathematical tools and calculators</string>
+
+    <!-- Physics Category -->
+    <string name="physics_category_title">Physics</string>
+    <string name="physics_category_description">Tools for classical mechanics and more</string>
+    <string name="free_fall_calculator_title">Free Fall Calculator</string>
+    <string name="free_fall_calculator_description">Calculates velocity and time for a falling object</string>
+    <string name="height_m_label">Height (m)</string>
+    <string name="final_velocity_label">Final Velocity</string>
+    <string name="time_of_fall_label">Time of Fall</string>
+    <string name="error_invalid_height">Please enter a valid positive height.</string>
+
+    <!-- Filter Calculator -->
+    <string name="filter_calculator_title">Filter Calculator</string>
+    <string name="filter_calculator_description">Calculates RC/RL filter cutoff frequency</string>
+    <string name="inductance_label">Inductance (H)</string>
+    <string name="frequency_label">Frequency (Hz)</string>
+    <string name="cutoff_frequency">Cutoff Frequency</string>
+    <string name="rc_filter_tab">RC Filter</string>
+    <string name="rl_filter_tab">RL Filter</string>
+    <string name="error_two_values_needed">Please enter exactly two values.</string>
+    <string name="low_pass_filter_tab">Low-Pass</string>
+    <string name="high_pass_filter_tab">High-Pass</string>
+
+    <!-- Power & Wiring Calculators -->
+    <string name="voltage_drop_calculator_title">Voltage Drop Calculator</string>
+    <string name="voltage_drop_calculator_description">Calculate voltage loss over a wire</string>
+    <string name="wire_gauge_calculator_title">Wire Gauge Calculator</string>
+    <string name="wire_gauge_calculator_description">Find the appropriate wire size (AWG)</string>
+    <string name="energy_cost_calculator_title">Energy Cost Calculator</string>
+    <string name="energy_cost_calculator_description">Estimate electricity costs for a device</string>
+    <string name="wire_length_m">Wire Length (m)</string>
+    <string name="wire_diameter_mm">Wire Diameter (mm)</string>
+    <string name="copper">Copper</string>
+    <string name="aluminum">Aluminum</string>
+    <string name="error_all_fields_required">Please fill in all fields.</string>
+    <string name="voltage_drop_result">Drop: %.2f V (%.2f%%)</string>
+    <string name="max_voltage_drop_percent">Max Voltage Drop (%%)</string>
+    <string name="recommended_wire_gauge_result">Recommended: %d AWG (%.2f mm)</string>
+    <string name="power_consumption_w">Power Consumption (W)</string>
+    <string name="usage_hours_per_day">Usage (hours/day)</string>
+    <string name="cost_per_kwh">Cost per kWh</string>
+    <string name="estimated_cost">Estimated Cost</string>
+    <string name="cost_per_day">Day: %.2f</string>
+    <string name="cost_per_month">Month: %.2f</string>
+    <string name="cost_per_year">Year: %.2f</string>
 </resources>
-
-

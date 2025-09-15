@@ -36,7 +36,11 @@ fun ElectronicCategoryScreen(
     onOpenOhmsLawCalculator: () -> Unit = {},
     onOpenVoltageDividerCalculator: () -> Unit = {},
     onOpenLedResistorCalculator: () -> Unit = {},
-    onOpenTimer555Calculator: () -> Unit = {}
+    onOpenTimer555Calculator: () -> Unit = {},
+    onOpenFilterCalculator: () -> Unit = {},
+    onOpenWireGaugeCalculator: () -> Unit = {},
+    onOpenEnergyCostCalculator: () -> Unit = {},
+    onOpenVoltageDropCalculator: () -> Unit = {}
 ) {
     val utilities = listOf(
         ElectronicUtility(
@@ -92,6 +96,30 @@ fun ElectronicCategoryScreen(
             R.string.timer_555_astable_description,
             Icons.Default.Timer,
             onOpenTimer555Calculator
+        ),
+        ElectronicUtility(
+            R.string.filter_calculator_title,
+            R.string.filter_calculator_description,
+            Icons.Default.FilterAlt,
+            onOpenFilterCalculator
+        ),
+        ElectronicUtility(
+            R.string.wire_gauge_calculator_title,
+            R.string.wire_gauge_calculator_description,
+            Icons.Default.ElectricalServices,
+            onOpenWireGaugeCalculator
+        ),
+        ElectronicUtility(
+            R.string.voltage_drop_calculator_title,
+            R.string.voltage_drop_calculator_description,
+            Icons.Default.Power,
+            onOpenVoltageDropCalculator
+        ),
+        ElectronicUtility(
+            R.string.energy_cost_calculator_title,
+            R.string.energy_cost_calculator_description,
+            Icons.Default.Money,
+            onOpenEnergyCostCalculator
         )
     )
 

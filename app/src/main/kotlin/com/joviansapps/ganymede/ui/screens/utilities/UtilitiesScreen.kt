@@ -33,7 +33,8 @@ private data class Utility(
 fun UtilitiesScreen(
     onOpenElectronics: () -> Unit = {},
     onOpenHealth: () -> Unit = {},
-    onOpenMath: () -> Unit = {}
+    onOpenMath: () -> Unit = {},
+    onPhysics: () -> Unit = {}
 ) {
     // List of available utility categories
     val utilities = listOf(
@@ -54,6 +55,12 @@ fun UtilitiesScreen(
             descriptionRes = R.string.math_category_description,
             icon = Icons.Default.Calculate,
             onClick = onOpenMath
+        ),
+        Utility(
+            titleRes = R.string.physics_category_title,
+            descriptionRes = R.string.physics_category_description,
+            icon = Icons.Default.Calculate,
+            onClick = onPhysics
         )
         // New utilities can be added here easily
     )

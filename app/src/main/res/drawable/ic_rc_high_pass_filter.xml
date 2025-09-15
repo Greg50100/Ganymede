@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="100dp"
+    android:viewportWidth="200"
+    android:viewportHeight="100">
+
+    <!-- Vin and Input wire -->
+    <path
+        android:pathData="M 10,45 L 50,45"
+        android:strokeWidth="2"
+        android:strokeColor="#FF000000" />
+
+    <!-- Capacitor -->
+    <path
+        android:pathData="M 50,45 L 70,45"
+        android:strokeWidth="2"
+        android:strokeColor="#00000000" />
+    <path
+        android:pathData="M 70,35 L 70,55"
+        android:strokeWidth="2"
+        android:strokeColor="#FF000000" />
+    <path
+        android:pathData="M 80,35 L 80,55"
+        android:strokeWidth="2"
+        android:strokeColor="#FF000000" />
+    <path
+        android:pathData="M 80,45 L 100,45"
+        android:strokeWidth="2"
+        android:strokeColor="#FF000000" />
+
+
+    <!-- Wire to output and resistor -->
+    <path
+        android:pathData="M 100,45 L 130,45"
+        android:strokeWidth="2"
+        android:strokeColor="#FF000000" />
+
+    <!-- Vout and Output wire -->
+    <path
+        android:pathData="M 130,45 L 180,45"
+        android:strokeWidth="2"
+        android:strokeColor="#FF000000" />
+
+    <!-- Resistor -->
+    <path
+        android:pathData="M 130,45 L 130,65"
+        android:strokeWidth="2"
+        android:strokeColor="#FF000000" />
+    <path
+        android:pathData="M 115,65 L 145,65 L 145,75 L 115,75 L 115,65"
+        android:strokeWidth="2"
+        android:strokeColor="#FF000000"
+        android:fillColor="#00000000"/>
+    <path
+        android:pathData="M 130,75 L 130,90"
+        android:strokeWidth="2"
+        android:strokeColor="#FF000000" />
+
+    <!-- Ground -->
+    <path
+        android:pathData="M 115,90 L 145,90"
+        android:strokeWidth="2"
+        android:strokeColor="#FF000000" />
+    <path
+        android:pathData="M 120,95 L 140,95"
+        android:strokeWidth="2"
+        android:strokeColor="#FF000000" />
+    <path
+        android:pathData="M 125,100 L 135,100"
+        android:strokeWidth="2"
+        android:strokeColor="#FF000000" />
+
+</vector>

@@ -23,6 +23,10 @@ sealed class Dest(val route: String) {
     data object VoltageDividerCalculator : Dest("voltage_divider_calculator")
     data object LedResistorCalculator : Dest("led_resistor_calculator")
     data object Timer555Calculator : Dest("timer_555_calculator")
+    data object FilterCalculator : Dest("filter_calculator")
+    data object WireGaugeCalculator : Dest("wire_gauge_calculator")
+    data object VoltageDropCalculator : Dest("voltage_drop_calculator")
+    data object EnergyCostCalculator : Dest("energy_cost_calculator")
 
     // Health Utilities
     data object HealthCategory   : Dest("health_category")
@@ -31,4 +35,9 @@ sealed class Dest(val route: String) {
     // Math Utilities
     data object MathCategory     : Dest("math_category")
     data object QuadraticEquationSolver : Dest("quadratic_solver")
+
+    // Physics Utilities
+    data object PhysicsCategory  : Dest("physics_category")
+    data object FreeFallCalculator : Dest("free_fall_calculator")
+
 }
