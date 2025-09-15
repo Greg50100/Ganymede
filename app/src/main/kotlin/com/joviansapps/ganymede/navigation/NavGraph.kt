@@ -47,12 +47,18 @@ import com.joviansapps.ganymede.ui.screens.utilities.electronics.FilterCalculato
 import com.joviansapps.ganymede.ui.screens.utilities.electronics.WireGaugeCalculatorScreen
 import com.joviansapps.ganymede.ui.screens.utilities.electronics.EnergyCostCalculatorScreen
 import com.joviansapps.ganymede.ui.screens.utilities.electronics.VoltageDropCalculatorScreen
+import com.joviansapps.ganymede.ui.screens.utilities.electronics.BatteryLifeCalculatorScreen
+import com.joviansapps.ganymede.ui.screens.utilities.electronics.WavelengthFrequencyCalculatorScreen
 import com.joviansapps.ganymede.ui.screens.utilities.health.BmiCalculatorScreen
+import com.joviansapps.ganymede.ui.screens.utilities.health.BmrCalculatorScreen
+import com.joviansapps.ganymede.ui.screens.utilities.health.BodyFatCalculatorScreen
 import com.joviansapps.ganymede.ui.screens.utilities.health.HealthCategoryScreen
 import com.joviansapps.ganymede.ui.screens.utilities.math.MathCategoryScreen
 import com.joviansapps.ganymede.ui.screens.utilities.math.QuadraticEquationSolverScreen
 import com.joviansapps.ganymede.ui.screens.utilities.physics.PhysicsCategoryScreen
 import com.joviansapps.ganymede.ui.screens.utilities.physics.FreeFallCalculatorScreen
+import com.joviansapps.ganymede.ui.screens.utilities.physics.NewtonsSecondLawCalculatorScreen
+import com.joviansapps.ganymede.ui.screens.utilities.physics.ProjectileMotionCalculatorScreen
 import com.joviansapps.ganymede.viewmodel.SettingsViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -95,6 +101,15 @@ fun AppRoot(settingsVm: SettingsViewModel) {
                 Dest.WireGaugeCalculator.route -> stringResource(R.string.wire_gauge_calculator_title)
                 Dest.EnergyCostCalculator.route -> stringResource(R.string.energy_cost_calculator_title)
                 Dest.VoltageDropCalculator.route -> stringResource(R.string.voltage_drop_calculator_title)
+                Dest.BatteryLifeCalculator.route -> stringResource(R.string.battery_life_calculator_title)
+                Dest.WavelengthFrequencyCalculator.route -> stringResource(R.string.wavelength_calculator_title)
+                Dest.BmrCalculator.route -> stringResource(R.string.bmr_calculator_title)
+                Dest.BodyFatCalculator.route -> stringResource(R.string.body_fat_calculator_title)
+                Dest.GCDandLCMCalculator.route -> stringResource(R.string.gcd_lcm_calculator_title)
+                Dest.PercentageCalculator.route -> stringResource(R.string.percentage_calculator_title)
+                Dest.NewtonsSecondLawCalculator.route -> stringResource(R.string.newtons_second_law_title)
+                Dest.ProjectileMotionCalculator.route -> stringResource(R.string.projectile_motion_calculator_title)
+
 
                 else -> stringResource(R.string.app_name)
             }
@@ -163,9 +178,9 @@ fun AppRoot(settingsVm: SettingsViewModel) {
             composable(Dest.Home.route) {
                 HomeScreen(
                     onOpenCalculator = { nav.navigate(Dest.Calculator.route) },
-                    onOpenConverter  = { nav.navigate(Dest.Converter.route) },
-                    onOpenGraph      = { nav.navigate(Dest.Graph.route) },
-                    onOpenUtilities  = { nav.navigate(Dest.Utilities.route) }
+                    onOpenConverter = { nav.navigate(Dest.Converter.route) },
+                    onOpenGraph = { nav.navigate(Dest.Graph.route) },
+                    onOpenUtilities = { nav.navigate(Dest.Utilities.route) }
                 )
             }
             composable(Dest.Calculator.route) {
@@ -186,7 +201,7 @@ fun AppRoot(settingsVm: SettingsViewModel) {
                     onOpenElectronics = { nav.navigate(Dest.ElectronicsCategory.route) },
                     onOpenHealth = { nav.navigate(Dest.HealthCategory.route) },
                     onOpenMath = { nav.navigate(Dest.MathCategory.route) },
-                    onPhysics = { nav.navigate(Dest.PhysicsCategory.route) }
+                    onOpenPhysics = { nav.navigate(Dest.PhysicsCategory.route) }
                 )
             }
             composable(Dest.ElectronicsCategory.route) {
@@ -203,12 +218,14 @@ fun AppRoot(settingsVm: SettingsViewModel) {
                     onOpenFilterCalculator = { nav.navigate(Dest.FilterCalculator.route) },
                     onOpenWireGaugeCalculator = { nav.navigate(Dest.WireGaugeCalculator.route) },
                     onOpenVoltageDropCalculator = { nav.navigate(Dest.VoltageDropCalculator.route) },
-                    onOpenEnergyCostCalculator = { nav.navigate(Dest.EnergyCostCalculator.route) }
+                    onOpenEnergyCostCalculator = { nav.navigate(Dest.EnergyCostCalculator.route) },
+                    onOpenBatteryLifeCalculator = { nav.navigate(Dest.BatteryLifeCalculator.route) },
+                    onOpenWavelengthFrequencyCalculator = { nav.navigate(Dest.WavelengthFrequencyCalculator.route) }
                 )
             }
             composable(Dest.ResistorCalculator.route) { ResistorCalculatorScreen() }
             composable(Dest.InductanceCalculator.route) { InductanceCalculatorScreen() }
-            composable(Dest.TimeConstantCalculator.route) { TimeConstantCalculatorScreen( ) }
+            composable(Dest.TimeConstantCalculator.route) { TimeConstantCalculatorScreen() }
             composable(Dest.ParallelSeriesResistorCalculator.route) { ParallelSeriesResistorCalculatorScreen() }
             composable(Dest.ParallelSeriesCapacitorCalculator.route) { ParallelSeriesCapacitorCalculatorScreen() }
             composable(Dest.OhmsLawCalculator.route) { OhmsLawCalculatorScreen() }
@@ -219,31 +236,39 @@ fun AppRoot(settingsVm: SettingsViewModel) {
             composable(Dest.WireGaugeCalculator.route) { WireGaugeCalculatorScreen() }
             composable(Dest.VoltageDropCalculator.route) { VoltageDropCalculatorScreen() }
             composable(Dest.EnergyCostCalculator.route) { EnergyCostCalculatorScreen() }
+            composable(Dest.BatteryLifeCalculator.route) { BatteryLifeCalculatorScreen() }
+            composable(Dest.WavelengthFrequencyCalculator.route) { WavelengthFrequencyCalculatorScreen() }
 
             composable(Dest.HealthCategory.route) {
                 HealthCategoryScreen(
-                    onOpenBmiCalculator = { nav.navigate(Dest.BmiCalculator.route) }
+                    onOpenBmiCalculator = { nav.navigate(Dest.BmiCalculator.route) },
+                    onOpenBmrCalculator = { nav.navigate(Dest.BmrCalculator.route) },
+                    onOpenBodyFatCalculator = { nav.navigate(Dest.BodyFatCalculator.route) }
                 )
             }
-            composable(Dest.BmiCalculator.route) {
-                BmiCalculatorScreen()
-            }
+            composable(Dest.BmiCalculator.route) { BmiCalculatorScreen() }
+            composable(Dest.BmrCalculator.route) { BmrCalculatorScreen() }
+            composable(Dest.BodyFatCalculator.route) { BodyFatCalculatorScreen() }
+
             composable(Dest.MathCategory.route) {
                 MathCategoryScreen(
-                    onOpenQuadraticEquationSolver = { nav.navigate(Dest.QuadraticEquationSolver.route) }
+                    onOpenQuadraticEquationSolver = { nav.navigate(Dest.QuadraticEquationSolver.route) },
+                    onOpenGCDandLCMCalculator = { nav.navigate(Dest.GCDandLCMCalculator.route) },
+                    onOpenPercentageCalculator = { nav.navigate(Dest.PercentageCalculator.route) }
                 )
             }
-            composable(Dest.QuadraticEquationSolver.route) {
-                QuadraticEquationSolverScreen()
-            }
+            composable(Dest.QuadraticEquationSolver.route) { QuadraticEquationSolverScreen() }
             composable(Dest.PhysicsCategory.route) {
                 PhysicsCategoryScreen(
-                    onOpenFreeFallCalculator = { nav.navigate(Dest.FreeFallCalculator.route) }
+                    onOpenFreeFallCalculator = { nav.navigate(Dest.FreeFallCalculator.route) },
+                    onOpenNewtonsSecondLawCalculator = { nav.navigate(Dest.NewtonsSecondLawCalculator.route) },
+                    onOpenProjectileMotionCalculator = { nav.navigate(Dest.ProjectileMotionCalculator.route) }
                 )
             }
-            composable(Dest.FreeFallCalculator.route) {
-                FreeFallCalculatorScreen()
-            }
+            composable(Dest.FreeFallCalculator.route) { FreeFallCalculatorScreen() }
+            composable(Dest.NewtonsSecondLawCalculator.route) { NewtonsSecondLawCalculatorScreen() }
+            composable(Dest.ProjectileMotionCalculator.route) { ProjectileMotionCalculatorScreen() }
+
         }
     }
 }

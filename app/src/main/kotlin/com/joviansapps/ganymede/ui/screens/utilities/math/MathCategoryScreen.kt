@@ -1,32 +1,44 @@
 package com.joviansapps.ganymede.ui.screens.utilities.math
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Functions
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import com.joviansapps.ganymede.R
+import com.joviansapps.ganymede.ui.screens.utilities.common.CategoryGridScreen
+import com.joviansapps.ganymede.ui.screens.utilities.common.CategoryItem
 
 @Composable
 fun MathCategoryScreen(
     onOpenQuadraticEquationSolver: () -> Unit,
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            Button(onClick = onOpenQuadraticEquationSolver) {
-                Text(stringResource(id = R.string.quadratic_equation_solver_title))
-            }
-            // Other health-related calculators can be added here
-        }
-    }
+    modifier: Modifier = Modifier,
+    onOpenPercentageCalculator: () -> Unit,
+    onOpenGCDandLCMCalculator: () -> Unit
+) {
+    // Define the list of items for the math category
+    val mathItems = listOf(
+        CategoryItem(
+            title = stringResource(id = R.string.quadratic_equation_solver_title),
+            description = stringResource(id = R.string.quadratic_equation_solver_description),
+            icon = Icons.Default.Functions, // Using a more appropriate icon
+            onClick = onOpenQuadraticEquationSolver
+        ),
+        CategoryItem(
+            title = stringResource(id = R.string.percentage_calculator_title),
+            description = stringResource(id = R.string.percentage_calculator_description),
+            icon = Icons.Default.Functions,
+            onClick = onOpenPercentageCalculator
+        ),
+        CategoryItem(
+            title = stringResource(id = R.string.gcd_lcm_calculator_title),
+            description = stringResource(id = R.string.gcd_lcm_calculator_description),
+            icon = Icons.Default.Functions,
+            onClick = onOpenGCDandLCMCalculator
+        )
+        // Add other math calculators here in the future
+    )
+
+    // Use the generic CategoryGridScreen to display them
+    CategoryGridScreen(items = mathItems, modifier = modifier)
+}

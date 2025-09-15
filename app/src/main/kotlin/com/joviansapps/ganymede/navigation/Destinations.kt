@@ -27,17 +27,26 @@ sealed class Dest(val route: String) {
     data object WireGaugeCalculator : Dest("wire_gauge_calculator")
     data object VoltageDropCalculator : Dest("voltage_drop_calculator")
     data object EnergyCostCalculator : Dest("energy_cost_calculator")
+    data object BatteryLifeCalculator : Dest("battery_life_calculator")
+    data object WavelengthFrequencyCalculator : Dest("wavelength_frequency_calculator")
+
 
     // Health Utilities
     data object HealthCategory   : Dest("health_category")
     data object BmiCalculator    : Dest("bmi_calculator")
+    data object BmrCalculator    : Dest("bmr_calculator")
+    data object BodyFatCalculator : Dest("body_fat_calculator")
 
     // Math Utilities
     data object MathCategory     : Dest("math_category")
     data object QuadraticEquationSolver : Dest("quadratic_solver")
+    data object PercentageCalculator : Dest("percentage_calculator")
+    data object GCDandLCMCalculator : Dest("gcd_lcm_calculator")
 
     // Physics Utilities
     data object PhysicsCategory  : Dest("physics_category")
     data object FreeFallCalculator : Dest("free_fall_calculator")
+    data object NewtonsSecondLawCalculator : Dest("newtons_second_law_calculator")
+    data object ProjectileMotionCalculator : Dest("projectile_motion_calculator")
 
 }

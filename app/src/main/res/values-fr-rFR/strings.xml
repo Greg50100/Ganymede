@@ -16,7 +16,7 @@
     <string name="converter_description">Longueur, poids, volume et plus</string>
     <string name="open_button">Ouvrir</string>
     <string name="welcome">Bienvenue</string>
-    <string name="welcome_body">Ganymede app — écran de bienvenue.</string>
+    <string name="welcome_body">Application Ganymède — écran de bienvenue.</string>
     <string name="continue_button">Continuer</string>
     <string name="converter_input_label">Valeur en %1$s</string>
     <string name="converter_result_format">Résultat : %1$s %2$s</string>
@@ -37,19 +37,18 @@
     <string name="unit_density">Densité</string>
     <string name="unit_energy">Énergie</string>
     <string name="unit_force">Force</string>
-    <string name="unit_fuel">Carburant</string>
+    <string name="unit_fuel">Consommation de carburant</string>
     <string name="unit_light">Lumière</string>
     <string name="unit_time">Temps</string>
     <string name="unit_torque">Couple</string>
     <string name="unit_viscosity">Viscosité</string>
     <string name="unit_currency">Devise</string>
     <string name="unit_numeric_base">Base numérique</string>
-    <string name="copy_text">Copier</string>
+    <string name="copy_text">Copier le texte</string>
     <string name="home_label">Accueil</string>
     <string name="calc_swipe_hint">Glisser horizontalement pour les fonctions</string>
     <string name="calc_error_generic">Erreur</string>
     <string name="calc_div_zero">Division par zéro</string>
-    <!-- Full unit names (français) -->
     <string name="unit_m_full">mètre</string>
     <string name="unit_km_full">kilomètre</string>
     <string name="unit_cm_full">centimètre</string>
@@ -57,7 +56,7 @@
     <string name="unit_in_full">pouce</string>
     <string name="unit_ft_full">pied</string>
     <string name="unit_yd_full">yard</string>
-    <string name="unit_mi_full">mille terrestre</string>
+    <string name="unit_mi_full">mille</string>
     <string name="unit_nmi_full">mille marin</string>
 
     <string name="unit_g_full">gramme</string>
@@ -71,7 +70,6 @@
     <string name="unit_k_full">kelvin</string>
     <string name="value">Valeur</string>
     <string name="unit">Unité</string>
-    <!-- Nouvelles unités -->
     <string name="unit_m2_full">mètre carré</string>
     <string name="unit_km2_full">kilomètre carré</string>
     <string name="unit_ha_full">hectare</string>
@@ -102,7 +100,7 @@
 
     <string name="unit_w_full">watt</string>
     <string name="unit_kw_full">kilowatt</string>
-    <string name="unit_hp_full">cheval vapeur</string>
+    <string name="unit_hp_full">cheval-vapeur</string>
 
     <string name="unit_pa_full">pascal</string>
     <string name="unit_kpa_full">kilopascal</string>
@@ -142,56 +140,56 @@
     <string name="unit_cp_full">centipoise</string>
 
     <string name="unit_eur_full">euro</string>
-    <string name="unit_usd_full">dollar US</string>
+    <string name="unit_usd_full">dollar américain</string>
     <string name="unit_gbp_full">livre sterling</string>
 
     <string name="unit_base2_full">base 2 (binaire)</string>
     <string name="unit_base8_full">base 8 (octal)</string>
     <string name="unit_base10_full">base 10 (décimal)</string>
-    <string name="graph_title">Graphe</string>
+    <string name="graph_title">Outil graphique</string>
     <string name="electronics_category_title">Électronique</string>
     <string name="resistor_calculator_title">Calculateur de résistance</string>
     <string name="inductance_calculator_title">Calculateur d\'inductance</string>
-    <string name="graph_description">Créer des graphiques à partir de points</string>
-    <string name="name_optionnal">Nom (optionnel)</string>
+    <string name="graph_description">Créer des graphiques linéaires simples à partir de points</string>
+    <string name="name_optionnal">Nom (facultatif)</string>
     <string name="tab_functions">Fonctions</string>
-    <string name="tab_graph">Graphe</string>
+    <string name="tab_graph">Graphique</string>
     <string name="add">Ajouter</string>
-    <string name="clear_all">Effacer tout</string>
-    <string name="functions_count">Fonctions : %1$d</string>
+    <string name="clear_all">Tout effacer</string>
+    <plurals name="functions_count">
+        <item quantity="one">%1$d Fonction</item>
+        <item quantity="other">%1$d Fonctions</item>
+    </plurals>
     <string name="no_functions">Aucune fonction</string>
     <string name="delete">Supprimer</string>
-    <string name="zoom_in">Agrandir</string>
-    <string name="zoom_out">Rétrécir</string>
+    <string name="zoom_in">Zoomer</string>
+    <string name="zoom_out">Dézoomer</string>
     <string name="reset">Réinitialiser</string>
 
-    <!-- Settings Screen -->
     <string name="settings_theme_colors_title">Couleurs du thème</string>
-    <string name="settings_diagnostics_title">Diagnostic</string>
+    <string name="settings_diagnostics_title">Diagnostics</string>
     <string name="settings_crash_reports_label">Rapports de plantage</string>
-    <string name="settings_crash_reports_description">Active l\'enregistrement simulé de rapports dans Logcat (tag CrashReporter).</string>
+    <string name="settings_crash_reports_description">Active la journalisation simulée des rapports dans Logcat (étiquette CrashReporter).</string>
     <string name="settings_crash_reports_test_button">Tester l\'envoi</string>
-    <string name="settings_crash_reports_force_button">Forcer un crash réel</string>
+    <string name="settings_crash_reports_force_button">Forcer un vrai plantage</string>
     <string name="settings_crash_reports_active_label">(Actif)</string>
     <string name="settings_crash_reports_inactive_label">(Inactif)</string>
     <string name="settings_number_format_title">Format des nombres</string>
     <string name="settings_number_format_plain">NORMAL</string>
     <string name="settings_number_format_thousands">MILLIERS</string>
     <string name="settings_number_format_scientific">SCIENTIFIQUE</string>
-    <string name="dialog_crash_title">Confirmer le crash</string>
-    <string name="dialog_crash_message">Cette action va volontairement faire planter l\'application pour tester Crashlytics.</string>
-    <string name="dialog_crash_confirm_button">Crasher</string>
+    <string name="dialog_crash_title">Confirmer le plantage</string>
+    <string name="dialog_crash_message">Cette action fera planter intentionnellement l\'application pour tester Crashlytics.</string>
+    <string name="dialog_crash_confirm_button">Planter</string>
     <string name="dialog_crash_cancel_button">Annuler</string>
 
     <string name="back_button_description">Retour</string>
 
-    <!-- Utilities -->
     <string name="utilities_title">Utilitaires</string>
     <string name="utilities_description">Une collection de petits outils</string>
     <string name="more_coming_soon">Plus de fonctionnalités bientôt !</string>
-    <string name="more_coming_soon_description">Restez à l\'écoute des mises à jour.</string>
+    <string name="more_coming_soon_description">Restez à l\'écoute pour les mises à jour.</string>
 
-    <!-- Health Category -->
     <string name="health_category_title">Santé</string>
     <string name="health_category_description">Outils pour la santé et le bien-être</string>
     <string name="bmi_calculator_title">Calculateur d\'IMC</string>
@@ -208,7 +206,6 @@
     <string name="overweight">Surpoids</string>
     <string name="obesity">Obésité</string>
 
-    <!-- Resistor Calculator -->
     <string name="resistor_calculator_description">Calculez les valeurs des résistances en fonction des codes couleur</string>
     <string name="black">Noir</string>
     <string name="brown">Marron</string>
@@ -257,7 +254,6 @@
     <string name="default_suffix"> (par défaut)</string>
     <string name="temp_coefficient_format">Coefficient de température : %sppm</string>
 
-    <!-- Inductance Calculator -->
     <string name="inductance_calculator_description">Calculez les valeurs des inductances et les codes couleur</string>
     <string name="electronics_category_description">Outils et calculateurs pour l\'électronique</string>
     <string name="tab_color_code">Code couleur</string>
@@ -277,13 +273,11 @@
     <string name="inductance_result_format">Inductance : %s</string>
     <string name="tolerance_result_format">Tolérance : %s</string>
 
-    <!-- History Dialog -->
     <string name="history_title">Historique</string>
     <string name="history_empty">Aucun historique</string>
     <string name="history_close_button">Fermer</string>
     <string name="history_clear_all_button">Tout effacer</string>
 
-    <!-- Capacitor / Time constant strings -->
     <string name="mode_charge">Charge</string>
     <string name="mode_discharge">Décharge</string>
     <string name="resistor_label">Résistance (Ω)</string>
@@ -313,5 +307,154 @@
     <string name="parallel_series_resistor_calculator_title">Calculateur de résistances en parallèle et en série</string>
     <string name="parallel_series_capacitor_calculator_title">Calculateur de condensateurs en parallèle et en série</string>
     <string name="time_constant_calculator_title">Calculateur de constante de temps</string>
-</resources>
 
+    <string name="format_label">Format</string>
+    <string name="time_constant_calculator_description">Calculer le temps de charge du circuit RC</string>
+    <string name="parallel_series_resistor_calculator_description">Calculer la résistance totale des composants</string>
+    <string name="parallel_series_capacitor_calculator_description">Calculer la capacité totale des composants</string>
+    <string name="series_result">Série : %1$s %2$s</string>
+    <string name="parallel_result">Parallèle : %1$s %2$s</string>
+    <string name="add_component">Ajouter %1$s</string>
+    <string name="remove_component">Supprimer %1$s</string>
+    <string name="component_value">Valeur %1$s %2$d (%3$s)</string>
+    <string name="ohms_law_calculator_title">Calculateur de la loi d\'Ohm</string>
+    <string name="ohms_law_calculator_description">Calculez V, I, R en fonction de la loi d\'Ohm</string>
+    <string name="ohms_law_triangle_description">Triangle de la loi d\'Ohm montrant V = I * R</string>
+    <string name="ohms_law_description">Entrez deux valeurs quelconques pour calculer la troisième.</string>
+    <string name="voltage_v">Tension (V)</string>
+    <string name="current_a">Courant (A)</string>
+    <string name="resistance_ohm">Résistance (Ω)</string>
+    <string name="voltage_divider_calculator_title">Calculateur de diviseur de tension</string>
+    <string name="voltage_divider_calculator_description">Calculer la tension de sortie d\'un circuit diviseur de tension</string>
+    <string name="voltage_divider_circuit_description">Schéma du circuit diviseur de tension</string>
+    <string name="input_voltage_vin">Tension d\'entrée (Vin)</string>
+    <string name="resistance_r1_ohm">Résistance R1 (Ω)</string>
+    <string name="resistance_r2_ohm">Résistance R2 (Ω)</string>
+    <string name="output_voltage_vout">Tension de sortie (Vout) : %s V</string>
+    <string name="led_resistor_calculator_title">Calculateur de résistance pour LED</string>
+    <string name="led_resistor_calculator_description">Trouvez la bonne résistance de limitation de courant pour votre LED</string>
+    <string name="source_voltage_v">Tension source (V)</string>
+    <string name="led_forward_voltage_v">Tension directe de la LED (V)</string>
+    <string name="led_forward_current_ma">Courant direct de la LED (mA)</string>
+    <string name="required_resistor_value">Résistance requise : %s Ω</string>
+    <string name="timer_555_astable_title">Calculateur astable pour Timer 555</string>
+    <string name="timer_555_astable_description">Calculez la fréquence et le rapport cyclique pour un timer 555 en mode astable</string>
+    <string name="timer_555_astable_circuit_desc">Schéma de circuit pour un timer 555 en mode astable</string>
+    <string name="resistance_r1_kohm">Résistance R1 (kΩ)</string>
+    <string name="resistance_r2_kohm">Résistance R2 (kΩ)</string>
+    <string name="capacitance_c1_uf">Capacité C1 (µF)</string>
+    <string name="frequency_result">Fréquence : %s Hz</string>
+    <string name="period_result">Période : %s s</string>
+    <string name="duty_cycle_result">Rapport cyclique : %s %%</string>
+    <string name="time_high_result">Temps haut : %s s</string>
+    <string name="time_low_result">Temps bas : %s s</string>
+    <string name="calculate">Calculer</string>
+    <string name="quadratic_equation_solver_title">Solveur d\'équation quadratique</string>
+    <string name="quadratic_equation_solver_description">Résoudre les équations de la forme ax²+bx+c=0</string>
+    <string name="quadratic_equation_formula">Équation : ax² + bx + c = 0</string>
+    <string name="coefficient_a">Coefficient a</string>
+    <string name="coefficient_b">Coefficient b</string>
+    <string name="coefficient_c">Coefficient c</string>
+    <string name="error_a_cannot_be_zero">\'a\' ne peut pas être zéro.</string>
+    <string name="discriminant_value">Discriminant (Δ) = %1$.2f</string>
+    <string name="two_real_roots">Deux racines réelles :\nx1 = %1$.2f\nx2 = %2$.2f</string>
+    <string name="one_real_root">Une racine réelle :\nx = %1$.2f</string>
+    <string name="two_complex_roots">Deux racines complexes :\nx1 = %1$.2f + %2$.2fi\nx2 = %1$.2f - %2$.2fi</string>
+    <string name="error_invalid_numbers">Veuillez saisir des nombres valides pour a, b et c.</string>
+    <string name="math_category_title">Mathématiques</string>
+    <string name="math_category_description">Outils et calculateurs mathématiques</string>
+    <string name="physics_category_title">Physique</string>
+    <string name="physics_category_description">Outils pour la mécanique classique et plus</string>
+    <string name="free_fall_calculator_title">Calculateur de chute libre</string>
+    <string name="free_fall_calculator_description">Calcule la vitesse et le temps pour un objet en chute</string>
+    <string name="height_m_label">Hauteur (m)</string>
+    <string name="final_velocity_label">Vitesse finale</string>
+    <string name="time_of_fall_label">Temps de chute</string>
+    <string name="error_invalid_height">Veuillez saisir une hauteur positive valide.</string>
+    <string name="filter_calculator_title">Calculateur de filtre</string>
+    <string name="filter_calculator_description">Calcule la fréquence de coupure du filtre RC/RL</string>
+    <string name="inductance_label">Inductance (H)</string>
+    <string name="frequency_label">Fréquence (Hz)</string>
+    <string name="cutoff_frequency">Fréquence de coupure</string>
+    <string name="rc_filter_tab">Filtre RC</string>
+    <string name="rl_filter_tab">Filtre RL</string>
+    <string name="error_two_values_needed">Veuillez saisir exactement deux valeurs.</string>
+    <string name="low_pass_filter_tab">Passe-bas</string>
+    <string name="high_pass_filter_tab">Passe-haut</string>
+    <string name="voltage_drop_calculator_title">Calculateur de chute de tension</string>
+    <string name="voltage_drop_calculator_description">Calculez la perte de tension sur un fil</string>
+    <string name="wire_gauge_calculator_title">Calculateur de calibre de fil</string>
+    <string name="wire_gauge_calculator_description">Trouvez la bonne taille de fil (AWG)</string>
+    <string name="energy_cost_calculator_title">Calculateur de coût énergétique</string>
+    <string name="energy_cost_calculator_description">Estimez les coûts d\'électricité pour un appareil</string>
+    <string name="wire_length_m">Longueur du fil (m)</string>
+    <string name="wire_diameter_mm">Diamètre du fil (mm)</string>
+    <string name="copper">Cuivre</string>
+    <string name="aluminum">Aluminium</string>
+    <string name="error_all_fields_required">Veuillez remplir tous les champs.</string>
+    <string name="voltage_drop_result">Chute : %.2f V (%.2f%%)</string>
+    <string name="max_voltage_drop_percent">Chute de tension max (%)</string>
+    <string name="recommended_wire_gauge_result">Recommandé : %d AWG (%.2f mm)</string>
+    <string name="power_consumption_w">Consommation électrique (W)</string>
+    <string name="usage_hours_per_day">Utilisation (heures/jour)</string>
+    <string name="cost_per_kwh">Coût par kWh</string>
+    <string name="estimated_cost">Coût estimé</string>
+    <string name="cost_per_day">Jour : %.2f</string>
+    <string name="cost_per_month">Mois : %.2f</string>
+    <string name="cost_per_year">Année : %.2f</string>
+    <string name="bmr_calculator_title">Calculateur de BMR</string>
+    <string name="bmr_calculator_description">Estimer le taux métabolique de base</string>
+    <string name="gender_male">Homme</string>
+    <string name="gender_female">Femme</string>
+    <string name="age_years">Âge (ans)</string>
+    <string name="bmr_result_title">Taux métabolique de base (BMR)</string>
+    <string name="percentage_calculator_title">Calculateur de pourcentage</string>
+    <string name="percentage_calculator_description">Calculez facilement des pourcentages</string>
+    <string name="projectile_motion_calculator_title">Calculateur de mouvement de projectile</string>
+    <string name="projectile_motion_calculator_description">Analyser la trajectoire du projectile</string>
+    <string name="initial_velocity_label">Vitesse initiale (m/s)</string>
+    <string name="launch_angle_label">Angle de lancement (degrés)</string>
+    <string name="initial_height_label">Hauteur initiale (m)</string>
+    <string name="max_height_label">Hauteur maximale :</string>
+    <string name="time_of_flight_label">Temps de vol :</string>
+    <string name="range_label">Portée :</string>
+    <string name="battery_life_calculator_title">Calculateur d\'autonomie de la batterie</string>
+    <string name="battery_life_calculator_description">Estimer l\'autonomie de la batterie</string>
+    <string name="battery_capacity_mah">Capacité de la batterie (mAh)</string>
+    <string name="circuit_consumption_ma">Consommation du circuit (mA)</string>
+    <string name="estimated_battery_life">Autonomie estimée de la batterie</string>
+    <string name="circuit_type">Type de circuit</string>
+    <string name="filter_type">Type de filtre</string>
+    <string name="low_pass">Passe-bas</string>
+    <string name="high_pass">Passe-haut</string>
+    <string name="capacitance_uf">Capacité (µF)</string>
+    <string name="inductance_mh">Inductance (mH)</string>
+    <string name="cutoff_frequency_hz">Fréquence de coupure (Hz)</string>
+    <string name="voltage_drop">Chute de tension</string>
+    <string name="voltage_drop_percent">Pourcentage de chute</string>
+    <string name="end_voltage">Tension en bout de ligne</string>
+    <string name="recommended_wire_gauge">Calibre de fil recommandé</string>
+    <string name="wavelength_calculator_title">Longueur d\'onde</string>
+    <string name="wavelength_label">Longueur d\'onde</string>
+    <string name="frequency_hz">Fréquence (Hz)</string>
+    <string name="wavelength_m">Longueur d\'onde (m)</string>
+    <string name="wavelength_calculator_description">Calculez la longueur d\'onde à partir de la fréquence et vice versa</string>
+    <string name="body_fat_calculator_title">Pourcentage de graisse corporelle</string>
+    <string name="body_fat_calculator_description">Estimez le pourcentage de graisse corporelle à l\'aide de mesures de circonférence</string>
+    <string name="neck_circumference_cm">Cou (cm)</string>
+    <string name="waist_circumference_cm">Taille (cm)</string>
+    <string name="hip_circumference_cm">Hanche (cm)</string>
+    <string name="body_fat_percentage_result">Pourcentage de graisse corporelle</string>
+    <string name="gcd_lcm_calculator_title">PGCD / PPCM</string>
+    <string name="gcd_lcm_calculator_description">Calculez le plus grand commun diviseur et le plus petit commun multiple</string>
+    <string name="first_number">Premier nombre</string>
+    <string name="second_number">Deuxième nombre</string>
+    <string name="gcd_result">PGCD : %s</string>
+    <string name="lcm_result">PPCM : %s</string>
+    <string name="newtons_second_law_title">Deuxième loi de Newton</string>
+    <string name="newtons_second_law_description">Calculer la force à partir de la masse et de l\'accélération (F = m × a)</string>
+    <string name="newtons_second_law_formula">Force = Masse × Accélération</string>
+    <string name="force_newtons">Force (N)</string>
+    <string name="mass_kg">Masse (kg)</string>
+    <string name="acceleration_ms2">Accélération (m/s²)</string>
+</resources>

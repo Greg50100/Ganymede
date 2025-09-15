@@ -1,32 +1,44 @@
 package com.joviansapps.ganymede.ui.screens.utilities.physics
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Speed
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import com.joviansapps.ganymede.R
+import com.joviansapps.ganymede.ui.screens.utilities.common.CategoryGridScreen
+import com.joviansapps.ganymede.ui.screens.utilities.common.CategoryItem
 
 @Composable
 fun PhysicsCategoryScreen(
     onOpenFreeFallCalculator: () -> Unit,
+    onOpenNewtonsSecondLawCalculator: () -> Unit,
+    onOpenProjectileMotionCalculator: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-        Button(onClick = onOpenFreeFallCalculator) {
-            Text(stringResource(id = R.string.free_fall_calculator_title))
-        }
-        // Other health-related calculators can be added here
-    }
+    // Define the list of items for the physics category
+    val physicsItems = listOf(
+        CategoryItem(
+            title = stringResource(id = R.string.free_fall_calculator_title),
+            description = stringResource(id = R.string.free_fall_calculator_description),
+            icon = Icons.Default.Speed, // Using a more appropriate icon
+            onClick = onOpenFreeFallCalculator
+        ),
+        CategoryItem(
+            title = stringResource(id = R.string.newtons_second_law_title),
+            description = stringResource(id = R.string.newtons_second_law_description),
+            icon = Icons.Default.Speed,
+            onClick = onOpenNewtonsSecondLawCalculator
+        ),
+        CategoryItem(
+            title = stringResource(id = R.string.projectile_motion_calculator_title),
+            description = stringResource(id = R.string.projectile_motion_calculator_description),
+            icon = Icons.Default.Speed,
+            onClick = onOpenProjectileMotionCalculator
+        )
+        // Add other physics calculators here in the future
+    )
+
+    // Use the generic CategoryGridScreen to display them
+    CategoryGridScreen(items = physicsItems, modifier = modifier)
 }

@@ -513,4 +513,87 @@
     <string name="cost_per_day">Day: %.2f</string>
     <string name="cost_per_month">Month: %.2f</string>
     <string name="cost_per_year">Year: %.2f</string>
+
+    <!-- For BmrCalculatorScreen.kt -->
+
+    <string name="bmr_calculator_title">BMR Calculator</string>
+    <string name="bmr_calculator_description">Estimate basal metabolic rate</string>
+    <string name="gender_male">Male</string>
+    <string name="gender_female">Female</string>
+    <string name="age_years">Age (years)</string>
+    <string name="bmr_result_title">Basal Metabolic Rate (BMR)</string>
+
+    <!-- For PercentageCalculatorScreen.kt -->
+
+    <string name="percentage_calculator_title">Percentage Calculator</string>
+    <string name="percentage_calculator_description">Calculate percentages easily</string>
+
+    <!-- For ProjectileMotionCalculatorScreen.kt -->
+
+    <string name="projectile_motion_calculator_title">Projectile Motion Calculator</string>
+    <string name="projectile_motion_calculator_description">Analyze projectile trajectory</string>
+    <string name="initial_velocity_label">Initial Velocity (m/s)</string>
+    <string name="launch_angle_label">Launch Angle (degrees)</string>
+    <string name="initial_height_label">Initial Height (m)</string>
+    <string name="max_height_label">Max Height:</string>
+    <string name="time_of_flight_label">Time of Flight:</string>
+    <string name="range_label">Range:</string>
+
+    <!-- For BatteryLifeCalculatorScreen.kt -->
+
+    <string name="battery_life_calculator_title">Battery Life Calculator</string>
+    <string name="battery_life_calculator_description">Estimate battery autonomy</string>
+    <string name="battery_capacity_mah">Battery Capacity (mAh)</string>
+    <string name="circuit_consumption_ma">Circuit Consumption (mA)</string>
+    <string name="estimated_battery_life">Estimated Battery Life</string>
+
+    <!-- For FilterCalculatorScreen_Refactored.kt -->
+
+    <string name="circuit_type">Circuit Type</string>
+    <string name="filter_type">Filter Type</string>
+    <string name="low_pass">Low-Pass</string>
+    <string name="high_pass">High-Pass</string>
+    <string name="capacitance_uf">Capacitance (µF)</string>
+    <string name="inductance_mh">Inductance (mH)</string>
+    <string name="cutoff_frequency_hz">Cutoff Frequency (Hz)</string>
+
+    <!-- Voltage Drop Calculator -->
+    <string name="voltage_drop">Voltage Drop</string>
+    <string name="voltage_drop_percent">Drop Percentage</string>
+    <string name="end_voltage">Voltage at End</string>
+
+    <!-- Wire Gauge Calculator -->
+    <string name="recommended_wire_gauge">Recommended Gauge</string>
+    <string name="awg_result_format" translatable="false">AWG %d (%.2f mm)</string>
+
+    <!-- Wavelength Calculator -->
+    <string name="wavelength_calculator_title">Wavelength</string>
+    <string name="wavelength_label">Wavelength</string>
+    <string name="frequency_hz">Frequency (Hz)</string>
+    <string name="wavelength_m">Wavelength (m)</string>
+    <string name="wavelength_calculator_description">Calculate wavelength from frequency and vice versa</string>
+
+    <!-- Body Fat Calculator -->
+    <string name="body_fat_calculator_title">Body Fat Percentage</string>
+    <string name="body_fat_calculator_description">Estimate body fat percentage using circumference measurements</string>
+    <string name="neck_circumference_cm">Neck (cm)</string>
+    <string name="waist_circumference_cm">Waist (cm)</string>
+    <string name="hip_circumference_cm">Hip (cm)</string>
+    <string name="body_fat_percentage_result">Body Fat Percentage</string>
+
+    <!-- GCD/LCM Calculator -->
+    <string name="gcd_lcm_calculator_title">GCD / LCM</string>
+    <string name="gcd_lcm_calculator_description">Compute greatest common divisor and least common multiple</string>
+    <string name="first_number">First Number</string>
+    <string name="second_number">Second Number</string>
+    <string name="gcd_result">GCD: %s</string>
+    <string name="lcm_result">LCM: %s</string>
+
+    <!-- Newton's Second Law -->
+    <string name="newtons_second_law_title">Newton\'s Second Law</string>
+    <string name="newtons_second_law_description">Calculate force from mass and acceleration (F = m × a)</string>
+    <string name="newtons_second_law_formula">Force = Mass × Acceleration</string>
+    <string name="force_newtons">Force (N)</string>
+    <string name="mass_kg">Mass (kg)</string>
+    <string name="acceleration_ms2">Acceleration (m/s²)</string>
 </resources>

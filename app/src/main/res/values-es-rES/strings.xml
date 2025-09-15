@@ -7,27 +7,26 @@
     <string name="auto_label">Auto (sistema)</string>
     <string name="light_label">Claro</string>
     <string name="dark_label">Oscuro</string>
-    <string name="welcome_home">Bienvenidos a Ganimedes</string>
+    <string name="welcome_home">Bienvenido a Ganímedes</string>
     <string name="calculator_title">Calculadora</string>
     <string name="calculator_description">Cálculos rápidos y científicos</string>
     <string name="converter_title">Convertidor de unidades</string>
     <string name="converter_description">Longitud, peso, volumen y más</string>
-    <string name="open_button">Abierto</string>
+    <string name="open_button">Abrir</string>
     <string name="welcome">Bienvenido</string>
-    <string name="welcome_body">Ganymede app — pantalla de bienvenida.</string>
+    <string name="welcome_body">Aplicación Ganímedes - pantalla de bienvenida.</string>
     <string name="continue_button">Continuar</string>
     <string name="converter_input_label">Valor en %1$s</string>
     <string name="converter_result_format">Resultado: %1$s %2$s</string>
     <string name="converter_category_label">Categoría</string>
-    <string name="converter_from_unit_label">Unidad origen</string>
-    <string name="converter_to_unit_label">Unidad destino</string>
+    <string name="converter_from_unit_label">Unidad de origen</string>
+    <string name="converter_to_unit_label">Unidad de destino</string>
     <string name="unit_length">Longitud</string>
     <string name="unit_mass">Masa</string>
     <string name="unit_temperature">Temperatura</string>
-    <string name="copy_text">Copiar</string>
+    <string name="copy_text">Copiar texto</string>
     <string name="home_label">Inicio</string>
-    <string name="calc_swipe_hint">Deslice horizontalmente para ver las funciones</string>
-    <!-- Full unit names (español) -->
+    <string name="calc_swipe_hint">Desliza horizontalmente para funciones</string>
     <string name="unit_m_full">metro</string>
     <string name="unit_km_full">kilómetro</string>
     <string name="unit_cm_full">centímetro</string>
@@ -52,20 +51,22 @@
     <string name="result_format">Resultado: %1$s</string>
     <string name="calc_error_generic">Error</string>
     <string name="calc_div_zero">División por cero</string>
-    <string name="graph_title">Gráfico</string>
-    <string name="graph_description">Crear gráficos de líneas con puntos</string>
+    <string name="graph_title">Herramienta de gráficos</string>
+    <string name="graph_description">Crear gráficos de líneas simples a partir de puntos</string>
     <string name="name_optionnal">Nombre (opcional)</string>
     <string name="tab_functions">Funciones</string>
     <string name="tab_graph">Gráfico</string>
-    <string name="add">Agregar</string>
+    <string name="add">Añadir</string>
     <string name="clear_all">Borrar todo</string>
-    <string name="functions_count">Funciones: %1$d</string>
-    <string name="no_functions">Sin funciones</string>
+    <plurals name="functions_count">
+        <item quantity="one">%1$d Función</item>
+        <item quantity="other">%1$d Funciones</item>
+    </plurals>
+    <string name="no_functions">No hay funciones</string>
     <string name="delete">Eliminar</string>
     <string name="zoom_in">Acercar</string>
     <string name="zoom_out">Alejar</string>
     <string name="reset">Restablecer</string>
-    <!-- Unit category labels (missing before) -->
     <string name="unit_area">Área</string>
     <string name="unit_storage">Almacenamiento</string>
     <string name="unit_frequency">Frecuencia</string>
@@ -80,12 +81,11 @@
     <string name="unit_fuel">Consumo de combustible</string>
     <string name="unit_light">Luz</string>
     <string name="unit_time">Tiempo</string>
-    <string name="unit_torque">Par</string>
+    <string name="unit_torque">Par motor</string>
     <string name="unit_viscosity">Viscosidad</string>
     <string name="unit_currency">Moneda</string>
     <string name="unit_numeric_base">Base numérica</string>
 
-    <!-- Extended full unit names (missing before) -->
     <string name="unit_m2_full">metro cuadrado</string>
     <string name="unit_km2_full">kilómetro cuadrado</string>
     <string name="unit_ha_full">hectárea</string>
@@ -112,7 +112,7 @@
 
     <string name="unit_rad_full">radián</string>
     <string name="unit_deg_full">grado</string>
-    <string name="unit_grad_full">grado centesimal</string>
+    <string name="unit_grad_full">gradián</string>
 
     <string name="unit_w_full">vatio</string>
     <string name="unit_kw_full">kilovatio</string>
@@ -131,8 +131,8 @@
     <string name="unit_kj_full">kilojulio</string>
     <string name="unit_cal_full">caloría</string>
     <string name="unit_kcal_full">kilocaloría</string>
-    <string name="unit_wh_full">vatio hora</string>
-    <string name="unit_kwh_full">kilovatio hora</string>
+    <string name="unit_wh_full">vatio-hora</string>
+    <string name="unit_kwh_full">kilovatio-hora</string>
 
     <string name="unit_n_full">newton</string>
     <string name="unit_kn_full">kilonewton</string>
@@ -163,13 +163,11 @@
     <string name="unit_base8_full">base 8 (octal)</string>
     <string name="unit_base10_full">base 10 (decimal)</string>
 
-    <!-- Utilities -->
     <string name="utilities_title">Utilidades</string>
     <string name="utilities_description">Una colección de pequeñas herramientas</string>
     <string name="more_coming_soon">¡Más funciones próximamente!</string>
-    <string name="more_coming_soon_description">Esté atento a las actualizaciones.</string>
+    <string name="more_coming_soon_description">Mantente atento a las actualizaciones.</string>
 
-    <!-- Resistor Calculator -->
     <string name="resistor_calculator_title">Calculadora de resistencias</string>
     <string name="resistor_calculator_description">Calcular valores de resistencias a partir de códigos de colores</string>
     <string name="black">Negro</string>
@@ -219,7 +217,6 @@
     <string name="default_suffix"> (por defecto)</string>
     <string name="temp_coefficient_format">Coeficiente de temperatura: %sppm</string>
 
-    <!-- Inductance Calculator -->
     <string name="inductance_calculator_title">Calculadora de inductancia</string>
     <string name="inductance_calculator_description">Calcular valores de inductores y códigos de colores</string>
     <string name="electronics_category_title">Electrónica</string>
@@ -229,7 +226,7 @@
     <string name="tab_winding">Bobinado</string>
     <string name="inductance_value_label">Valor de inductancia</string>
     <string name="tolerance_label">Tolerancia</string>
-    <string name="coil_winding_calculator_title">Calculadora de bobinado</string>
+    <string name="coil_winding_calculator_title">Calculadora de bobinado de bobina</string>
     <string name="turns_label">Número de vueltas</string>
     <string name="coil_diameter_label">Diámetro de la bobina</string>
     <string name="coil_length_label">Longitud de la bobina</string>
@@ -241,7 +238,6 @@
     <string name="inductance_result_format">Inductancia: %s</string>
     <string name="tolerance_result_format">Tolerancia: %s</string>
 
-    <!-- Settings Screen -->
     <string name="settings_theme_colors_title">Colores del tema</string>
     <string name="settings_diagnostics_title">Diagnósticos</string>
     <string name="settings_crash_reports_label">Informes de fallos</string>
@@ -259,7 +255,6 @@
     <string name="dialog_crash_confirm_button">Bloquear</string>
     <string name="dialog_crash_cancel_button">Cancelar</string>
 
-    <!-- History Dialog -->
     <string name="history_title">Historial</string>
     <string name="history_empty">No hay historial</string>
     <string name="history_close_button">Cerrar</string>
