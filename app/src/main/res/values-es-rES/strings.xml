@@ -4,7 +4,7 @@
     <string name="theme_label">Tema</string>
     <string name="color_label">Color primario</string>
     <string name="language_label">Idioma</string>
-    <string name="auto_label">Auto (sistema)</string>
+    <string name="auto_label">Auto</string>
     <string name="light_label">Claro</string>
     <string name="dark_label">Oscuro</string>
     <string name="welcome_home">Bienvenido a Ganímedes</string>
@@ -261,4 +261,25 @@
     <string name="history_clear_all_button">Borrar todo</string>
 
     <string name="back_button_description">Atrás</string>
+
+    <!-- Error Messages -->
+    <string name="error_a_cannot_be_zero">\'a\' no puede ser cero.</string>
+    <string name="error_invalid_numbers">Por favor, ingrese números válidos para a, b y c.</string>
+    <string name="error_current_zero">La corriente no puede ser cero para calcular la resistencia.</string>
+    <string name="error_resistance_zero">La resistencia no puede ser cero para calcular la corriente.</string>
+
+    <!-- About Section -->
+    <string name="about_title">Acerca de</string>
+    <string name="about_app_version">Versión de la aplicación</string>
+    <string name="about_github">Código Fuente en GitHub</string>
+    <string name="about_report_issue">Informar de un problema</string>
+    <string name="about_licenses">Licencias de Código Abierto</string>
+
+    <!-- Behavior Section -->
+    <string name="behavior_title">Comportamiento</string>
+    <string name="haptic_feedback_label">Respuesta Háptica</string>
+    <string name="haptic_feedback_description">Vibrar al pulsar una tecla</string>
+    <string name="keep_screen_on_label">Mantener la pantalla encendida</string>
+    <string name="keep_screen_on_description">Evitar que la pantalla se apague</string>
 </resources>
+

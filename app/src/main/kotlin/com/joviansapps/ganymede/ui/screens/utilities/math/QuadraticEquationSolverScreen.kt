@@ -37,7 +37,8 @@ data class QuadraticEquationUiState(
     val a: String = "",
     val b: String = "",
     val c: String = "",
-    val result: String = ""
+    val result: String? = null, // Can be null
+    val error: String? = null    // New field for errors
 )
 
 // --- 2. ViewModel ---
@@ -65,33 +66,35 @@ class QuadraticEquationViewModel : ViewModel() {
             val valB = state.b.toDoubleOrNull()
             val valC = state.c.toDoubleOrNull()
 
-            val newResult = if (valA != null && valB != null && valC != null) {
-                if (valA == 0.0) {
-                    "Coefficient 'a' cannot be zero."
-                } else {
-                    val discriminant = valB.pow(2) - 4 * valA * valC
-                    val discriminantText = "Discriminant (Δ) = $discriminant\n"
-                    when {
-                        discriminant > 0 -> {
-                            val root1 = (-valB + sqrt(discriminant)) / (2 * valA)
-                            val root2 = (-valB - sqrt(discriminant)) / (2 * valA)
-                            discriminantText + "Two real roots:\nx1 = $root1\nx2 = $root2"
-                        }
-                        discriminant == 0.0 -> {
-                            val root = -valB / (2 * valA)
-                            discriminantText + "One real root:\nx = $root"
-                        }
-                        else -> {
-                            val realPart = -valB / (2 * valA)
-                            val imaginaryPart = sqrt(-discriminant) / (2 * valA)
-                            discriminantText + "Two complex roots:\nx1 = $realPart + ${imaginaryPart}i\nx2 = $realPart - ${imaginaryPart}i"
-                        }
-                    }
-                }
-            } else {
-                "Please enter valid numbers for a, b, and c."
+            if (valA == null || valB == null || valC == null) {
+                _uiState.update { it.copy(result = null, error = "error_invalid_numbers") }
+                return@launch
             }
-            _uiState.update { it.copy(result = newResult) }
+
+            if (valA == 0.0) {
+                _uiState.update { it.copy(result = null, error = "error_a_cannot_be_zero") }
+                return@launch
+            }
+
+            val discriminant = valB.pow(2) - 4 * valA * valC
+            val discriminantText = "Discriminant (Δ) = ${"%.2f".format(discriminant)}\n"
+            val newResult = when {
+                discriminant > 0 -> {
+                    val root1 = (-valB + sqrt(discriminant)) / (2 * valA)
+                    val root2 = (-valB - sqrt(discriminant)) / (2 * valA)
+                    discriminantText + "Two real roots:\nx1 = ${"%.2f".format(root1)}\nx2 = ${"%.2f".format(root2)}"
+                }
+                discriminant == 0.0 -> {
+                    val root = -valB / (2 * valA)
+                    discriminantText + "One real root:\nx = ${"%.2f".format(root)}"
+                }
+                else -> {
+                    val realPart = -valB / (2 * valA)
+                    val imaginaryPart = sqrt(-discriminant) / (2 * valA)
+                    discriminantText + "Two complex roots:\nx1 = ${"%.2f".format(realPart)} + ${"%.2f".format(imaginaryPart)}i\nx2 = ${"%.2f".format(realPart)} - ${"%.2f".format(imaginaryPart)}i"
+                }
+            }
+            _uiState.update { it.copy(result = newResult, error = null) } // Clear error on success
         }
     }
 }
@@ -146,10 +149,28 @@ fun QuadraticEquationSolverScreen(viewModel: QuadraticEquationViewModel = viewMo
             Text(stringResource(R.string.calculate))
         }
 
-        if (uiState.result.isNotEmpty()) {
+        if (uiState.error != null || uiState.result != null) {
             Spacer(modifier = Modifier.height(16.dp))
+        }
+
+        uiState.error?.let { errorKey ->
+            val errorStringRes = when (errorKey) {
+                "error_invalid_numbers" -> R.string.error_invalid_numbers
+                "error_a_cannot_be_zero" -> R.string.error_a_cannot_be_zero
+                else -> null
+            }
+            errorStringRes?.let {
+                Text(
+                    text = stringResource(it),
+                    color = MaterialTheme.colorScheme.error,
+                    style = MaterialTheme.typography.bodyLarge
+                )
+            }
+        }
+
+        uiState.result?.let {
             Text(
-                text = uiState.result,
+                text = it,
                 style = MaterialTheme.typography.bodyLarge
             )
         }

@@ -1,17 +1,17 @@
 package com.joviansapps.ganymede.crash
 
 import android.util.Log
-import java.util.Collections
 import com.google.firebase.crashlytics.FirebaseCrashlytics
+import java.util.Collections
 
 // Façade Crashlytics directe (sans KTX). Fallback local en cas d'échec des appels.
 object CrashReporter {
     @Volatile private var enabled: Boolean = true
-    // TODO: Purger/limiter le buffer si nécessaire (taille max) et envisager une persistance si offline.
+    private const val MAX_BUFFER_SIZE = 50 // Limite pour éviter une consommation mémoire excessive
+
+    // Buffer pour garder une trace des derniers logs en mémoire.
     private val buffer = Collections.synchronizedList(mutableListOf<String>())
 
-    // TODO: S'assurer que updateEnabled() est appelée tôt (Application.onCreate) pour refléter le choix utilisateur.
-    // TODO: Ajouter éventuellement des setUserId/setCustomKey pour enrichir les rapports (si besoin produit).
     private val crashlytics: FirebaseCrashlytics? by lazy {
         runCatching { FirebaseCrashlytics.getInstance() }.getOrNull()
     }
@@ -24,7 +24,22 @@ object CrashReporter {
         }
     }
 
-    fun clearBufferedReports() = buffer.clear()
+    /**
+     * Associe un identifiant utilisateur aux rapports de plantage.
+     */
+    fun setUserId(id: String) {
+        if (!enabled) return
+        crashlytics?.setUserId(id)
+    }
+
+    /**
+     * Ajoute une clé personnalisée pour enrichir les rapports.
+     */
+    fun setCustomKey(key: String, value: String) {
+        if (!enabled) return
+        crashlytics?.setCustomKey(key, value)
+    }
+
     fun getBufferedReports(): List<String> = buffer.toList()
 
     fun log(throwable: Throwable, message: String? = null, extra: Map<String, Any?> = emptyMap()) {
@@ -37,7 +52,7 @@ object CrashReporter {
                 append(extra.entries.joinToString { "${it.key}=${it.value}" })
             }
         }
-        buffer.add(line)
+        addToBuffer(line)
         val used = crashlytics?.let { c ->
             runCatching {
                 c.log(line)
@@ -57,8 +72,17 @@ object CrashReporter {
                 append(extra.entries.joinToString { "${it.key}=${it.value}" })
             }
         }
-        buffer.add(line)
+        addToBuffer(line)
         val used = crashlytics?.let { c -> runCatching { c.log(line) }.isSuccess } ?: false
         if (!used) Log.i("CrashReporter", line)
+    }
+
+    private fun addToBuffer(line: String) {
+        synchronized(buffer) {
+            buffer.add(line)
+            while (buffer.size > MAX_BUFFER_SIZE) {
+                buffer.removeAt(0)
+            }
+        }
     }
 }

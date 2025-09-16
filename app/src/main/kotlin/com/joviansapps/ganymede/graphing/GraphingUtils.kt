@@ -1,9 +1,14 @@
 package com.joviansapps.ganymede.graphing
 
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.PointMode
+import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.TextMeasurer
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.drawText
@@ -12,6 +17,7 @@ import androidx.compose.ui.text.style.TextAlign
 import kotlin.math.abs
 import kotlin.math.ceil
 import kotlin.math.floor
+import kotlin.math.sign
 
 fun DrawScope.drawGridLines(window: Window, lineWidth: Float, gridLinesColor: Color) {
     val xRange = IntRange(
@@ -220,22 +226,174 @@ fun DrawScope.drawGraph(window: Window, function: GraphFunction, lineWidth: Floa
     }
 }
 
+
+fun DrawScope.drawTrackingCrosshair(
+    window: Window,
+    vm: GraphViewModel,
+    textMeasurer: TextMeasurer,
+    axesColor: Color,
+    surfaceColor: Color
+) {
+    val cursorPosition = vm.cursorPosition.value ?: return
+    val functions = vm.functions
+
+    // Convert graph coordinates to pixel coordinates
+    val cursorPx = cursorPosition.unitToPxCoordinates(window, size.width, size.height)
+
+    // Clamp to canvas bounds
+    if (cursorPx.x < 0 || cursorPx.x > size.width || cursorPx.y < 0 || cursorPx.y > size.height) {
+        vm.setCursorPosition(null) // Hide cursor if it's dragged off-screen
+        return
+    }
+
+    // Draw crosshair lines (dashed)
+    val pathEffect = androidx.compose.ui.graphics.PathEffect.dashPathEffect(floatArrayOf(10f, 10f), 0f)
+    drawLine(axesColor, Offset(cursorPx.x, 0f), Offset(cursorPx.x, size.height), strokeWidth = 2f, pathEffect = pathEffect)
+    drawLine(axesColor, Offset(0f, cursorPx.y), Offset(size.width, cursorPx.y), strokeWidth = 2f, pathEffect = pathEffect)
+
+
+    // For each function, find the y-value at the cursor's x and draw info
+    functions.forEach { function ->
+        function.execute(cursorPosition.x)?.let { yValue ->
+            val pointOnCurve = Offset(cursorPosition.x, yValue)
+            val pointOnCurvePx = pointOnCurve.unitToPxCoordinates(window, size.width, size.height)
+
+            // Draw a circle on the curve
+            if(pointOnCurvePx.y > 0 && pointOnCurvePx.y < size.height) {
+                drawCircle(function.color, radius = 10f, center = pointOnCurvePx)
+
+                // Draw the text label with coordinates
+                val labelText = "(${String.format("%.2f", cursorPosition.x)}, ${String.format("%.2f", yValue)})"
+                val textResult = textMeasurer.measure(
+                    text = labelText,
+                    style = TextStyle(color = function.color, background = surfaceColor.copy(alpha = 0.8f))
+                )
+                drawText(
+                    textLayoutResult = textResult,
+                    topLeft = Offset(pointOnCurvePx.x + 20f, pointOnCurvePx.y - textResult.size.height - 20f)
+                )
+            }
+        }
+    }
+}
+
+/**
+ * Utility function to find and draw the roots (x-intercepts) of a function.
+ * It detects where the function's sign changes and marks the spot.
+ */
+fun DrawScope.drawRoots(
+    window: Window,
+    function: GraphFunction,
+    resolution: Int = 500
+) {
+    var prevY: Float? = null
+
+    for (i in 0..resolution) {
+        val x = window.xMin + (window.xMax - window.xMin) * (i.toFloat() / resolution)
+        val y = function.execute(x)
+
+        if (prevY != null && y != null && y.isFinite() && prevY.isFinite()) {
+            // A change of sign indicates that a root is between the previous and current point.
+            if (sign(y) != sign(prevY)) {
+                val rootPointPx = Offset(x, 0f).unitToPxCoordinates(window, size.width, size.height)
+                // Rendre le marqueur plus visible
+                drawCircle(
+                    color = function.color.copy(alpha = 0.5f),
+                    radius = 16f,
+                    center = rootPointPx,
+                )
+                drawCircle(
+                    color = Color.Black,
+                    radius = 16f,
+                    center = rootPointPx,
+                    style = Stroke(width = 2f)
+                )
+            }
+        }
+        prevY = y
+    }
+}
+
+/**
+ * Utility function to find and draw intersection points between two functions.
+ */
+fun DrawScope.drawIntersections(
+    window: Window,
+    func1: GraphFunction,
+    func2: GraphFunction,
+    resolution: Int = 500
+) {
+    var prevDiff: Float? = null
+
+    for (i in 0..resolution) {
+        val x = window.xMin + (window.xMax - window.xMin) * (i.toFloat() / resolution)
+        val y1 = func1.execute(x)
+        val y2 = func2.execute(x)
+
+        if (y1 != null && y2 != null && y1.isFinite() && y2.isFinite()) {
+            val diff = y1 - y2
+            if (prevDiff != null) {
+                // A change of sign in the difference between the two functions indicates an intersection.
+                if (sign(diff) != sign(prevDiff)) {
+                    val intersectPoint = Offset(x, y1) // Approximate y-value with y1
+                    val intersectPx = intersectPoint.unitToPxCoordinates(window, size.width, size.height)
+
+                    // Rendre le marqueur plus visible
+                     drawCircle(
+                        color = Color.White,
+                        radius = 18f,
+                        center = intersectPx
+                    )
+                    drawCircle(
+                        color = Color.Black,
+                        radius = 16f,
+                        center = intersectPx
+                    )
+                    drawCircle(
+                        color = Color.White,
+                        radius = 14f,
+                        center = intersectPx
+                    )
+                }
+            }
+            prevDiff = diff
+        } else {
+            prevDiff = null // Reset if one of the functions is undefined
+        }
+    }
+}
+
+
 fun DrawScope.renderCanvas(
     window: Window,
     vm: GraphViewModel,
     canvasScale: Float,
     textMeasurer: TextMeasurer,
     gridLinesColor: Color,
-    axesColor: Color
+    axesColor: Color,
+    surfaceColor: Color = Color.Gray // Provide a default color
 ) {
     val lineWidth = 5f / canvasScale
     window.findAutoScale()
     drawGridLines(window, lineWidth, gridLinesColor)
     drawAxes(window, lineWidth, canvasScale, textMeasurer, axesColor)
 
-    vm.functions.forEach {
+    vm.functions.forEach { function ->
         runCatching {
-            drawGraph(window, it, lineWidth)
+            drawGraph(window, function, lineWidth)
+            // NEW: Draw roots for the function
+            drawRoots(window, function)
         }
     }
+
+    // NEW: Draw intersections between the first two functions, if they exist
+    if (vm.functions.size >= 2) {
+        runCatching {
+            drawIntersections(window, vm.functions[0], vm.functions[1])
+        }
+    }
+
+
+    // Call the crosshair drawing function at the end (so it draws on top)
+    drawTrackingCrosshair(window, vm, textMeasurer, axesColor, surfaceColor)
 }

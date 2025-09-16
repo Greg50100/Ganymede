@@ -1,137 +1,167 @@
+// app/src/main/kotlin/com/joviansapps/ganymede/ui/screens/settings/SettingsScreen.kt
 package com.joviansapps.ganymede.ui.screens.settings
 
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.OpenInNew
+import androidx.compose.material.icons.filled.BugReport
+import androidx.compose.material.icons.filled.ColorLens
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Language
+import androidx.compose.material.icons.filled.Straighten
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.joviansapps.ganymede.R
+import com.joviansapps.ganymede.viewmodel.CalculatorViewModel
 import com.joviansapps.ganymede.viewmodel.SettingsViewModel
 import com.joviansapps.ganymede.viewmodel.ThemeMode
-import com.joviansapps.ganymede.viewmodel.CalculatorViewModel
-import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.sp
-import androidx.compose.ui.draw.scale
-import androidx.compose.ui.platform.LocalContext
+import java.util.Locale
 
-
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
-@Preview
 fun SettingsScreen(vm: SettingsViewModel = viewModel()) {
     val state by vm.uiState.collectAsState()
-    val isDark = when (state.themeMode) {
-        ThemeMode.DARK -> true
-        ThemeMode.LIGHT -> false
-        ThemeMode.AUTO -> isSystemInDarkTheme()
-    }
-    val listState = rememberLazyListState()
     var showCrashDialog by remember { mutableStateOf(false) }
+    val context = LocalContext.current
 
     LazyColumn(
-        state = listState,
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(24.dp)
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        // Thème
         item {
-            Text(stringResource(R.string.theme_label), style = MaterialTheme.typography.titleMedium)
-            Spacer(Modifier.height(8.dp))
-            SegmentedToggleGroup(
-                modes = listOf(ThemeMode.LIGHT, ThemeMode.DARK, ThemeMode.AUTO),
-                selected = state.themeMode,
-                onSelect = { vm.setTheme(it) },
-                modifier = Modifier.fillMaxWidth(),
-                height = 40.dp
-            )
-        }
-        // Aperçu palette supprimé -> remplacé par un simple aperçu des couleurs du thème actif
-        item {
-            Text(stringResource(R.string.settings_theme_colors_title), style = MaterialTheme.typography.titleMedium)
-            Spacer(Modifier.height(8.dp))
-            val scheme = MaterialTheme.colorScheme
-            Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                PaletteRowSample("Primary", scheme.primary, scheme.onPrimary, scheme.primaryContainer, scheme.onPrimaryContainer)
-                PaletteRowSample("Secondary", scheme.secondary, scheme.onSecondary, scheme.secondaryContainer, scheme.onSecondaryContainer)
-                PaletteRowSample("Tertiary", scheme.tertiary, scheme.onTertiary, scheme.tertiaryContainer, scheme.onTertiaryContainer)
-                PaletteRowSample("Error", scheme.error, scheme.onError, scheme.errorContainer, scheme.onErrorContainer)
-                PaletteRowSample("Surface", scheme.surface, scheme.onSurface, scheme.surfaceVariant, scheme.onSurfaceVariant)
-            }
-        }
-        // Langue
-        item {
-            Text(stringResource(R.string.language_label), style = MaterialTheme.typography.titleMedium)
-            var expanded by remember { mutableStateOf(false) }
-            Box {
-                OutlinedButton(onClick = { expanded = true }) { Text(state.language.uppercase()) }
-                DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
-                    listOf("fr", "en", "es", "de").forEach { lang ->
-                        DropdownMenuItem(
-                            text = { Text(lang.uppercase()) },
-                            onClick = { vm.setLanguage(lang); expanded = false }
-                        )
-                    }
-                }
-            }
-        }
-        // Diagnostic
-        item {
-            Text(stringResource(R.string.settings_diagnostics_title), style = MaterialTheme.typography.titleMedium)
-            Spacer(Modifier.height(8.dp))
-            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                ToggleRow(stringResource(R.string.settings_crash_reports_label), state.crashReportsEnabled) { vm.setCrashReportsEnabled(it) }
-                Text(
-                    stringResource(R.string.settings_crash_reports_description),
-                    style = MaterialTheme.typography.bodySmall
+            SettingsGroup(title = stringResource(R.string.theme_label), icon = Icons.Default.ColorLens) {
+                SegmentedToggleGroup(
+                    modes = listOf(ThemeMode.LIGHT, ThemeMode.DARK, ThemeMode.AUTO),
+                    selected = state.themeMode,
+                    onSelect = { vm.setTheme(it) }
                 )
-                Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                    TextButton(onClick = { vm.testCrashReport() }) { Text(stringResource(R.string.settings_crash_reports_test_button)) }
-                    TextButton(onClick = { showCrashDialog = true }) { Text(stringResource(R.string.settings_crash_reports_force_button)) }
-                    if (state.crashReportsEnabled) Text(stringResource(R.string.settings_crash_reports_active_label), color = MaterialTheme.colorScheme.primary) else Text(stringResource(R.string.settings_crash_reports_inactive_label))
-                }
+                Spacer(Modifier.height(12.dp))
+                Text(
+                    stringResource(R.string.settings_theme_colors_title),
+                    style = MaterialTheme.typography.titleSmall,
+                    modifier = Modifier.padding(start = 4.dp)
+                )
+                Spacer(Modifier.height(8.dp))
+                PaletteGrid()
             }
         }
-        // Formatage des nombres (PLAIN / THOUSANDS / SCIENTIFIC) pour la calculatrice
+
+        item {
+            SettingsGroup(title = stringResource(R.string.language_label), icon = Icons.Default.Language) {
+                LanguageSelector(
+                    currentLanguage = state.language,
+                    onLanguageSelected = { vm.setLanguage(it) }
+                )
+            }
+        }
+
         item {
             val calcVm: CalculatorViewModel = viewModel()
             val currentFormat by calcVm.formatMode.collectAsState()
-            Text(stringResource(R.string.settings_number_format_title), style = MaterialTheme.typography.titleMedium)
-            Spacer(Modifier.height(8.dp))
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+
+            SettingsGroup(title = stringResource(id = R.string.settings_number_format_title), icon = Icons.Default.Straighten) {
                 val modes = listOf(
                     CalculatorViewModel.FormatMode.PLAIN to R.string.settings_number_format_plain,
                     CalculatorViewModel.FormatMode.THOUSANDS to R.string.settings_number_format_thousands,
                     CalculatorViewModel.FormatMode.SCIENTIFIC to R.string.settings_number_format_scientific
                 )
-                modes.forEach { (mode, labelRes) ->
-                    val selected = mode == currentFormat
-                    if (selected) {
-                        FilledTonalButton(onClick = { /* already selected */ }, modifier = Modifier.weight(1f)) { Text(stringResource(labelRes)) }
-                    } else {
-                        OutlinedButton(onClick = { calcVm.setFormatMode(mode) }, modifier = Modifier.weight(1f)) { Text(stringResource(labelRes)) }
+                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+                    SingleChoiceSegmentedButtonRow {
+                        modes.forEach { (mode, labelRes) ->
+                            SegmentedButton(
+                                selected = mode == currentFormat,
+                                onClick = { calcVm.setFormatMode(mode) },
+                                shape = SegmentedButtonDefaults.itemShape(index = mode.ordinal, count = modes.size)
+                            ) {
+                                Text(stringResource(labelRes))
+                            }
+                        }
                     }
                 }
             }
         }
-        item { Spacer(Modifier.height(48.dp)) }
+
+
+        item {
+            SettingsGroup(title = stringResource(R.string.settings_diagnostics_title), icon = Icons.Default.BugReport) {
+                ToggleRow(
+                    label = stringResource(R.string.settings_crash_reports_label),
+                    isChecked = state.crashReportsEnabled,
+                    onCheckedChange = { vm.setCrashReportsEnabled(it) }
+                )
+                Text(
+                    stringResource(R.string.settings_crash_reports_description),
+                    style = MaterialTheme.typography.bodySmall,
+                    modifier = Modifier.padding(horizontal = 4.dp)
+                )
+                Spacer(Modifier.height(8.dp))
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    TextButton(onClick = { vm.testCrashReport() }) {
+                        Text(stringResource(R.string.settings_crash_reports_test_button))
+                    }
+                    OutlinedButton(onClick = { showCrashDialog = true }, colors = ButtonDefaults.outlinedButtonColors(contentColor = MaterialTheme.colorScheme.error)) {
+                        Text(stringResource(R.string.settings_crash_reports_force_button))
+                    }
+                }
+            }
+        }
+
+        item {
+            SettingsGroup(title = stringResource(R.string.about_title), icon = Icons.Default.Info) {
+                val appVersion = try {
+                    context.packageManager.getPackageInfo(context.packageName, 0).versionName
+                } catch (e: PackageManager.NameNotFoundException) {
+                    null
+                }
+
+                InfoRow(label = stringResource(R.string.about_app_version), value = appVersion ?: "N/A")
+                Divider(modifier = Modifier.padding(vertical = 8.dp))
+                ClickableInfoRow(
+                    label = stringResource(R.string.about_github),
+                    onClick = {
+                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Greg50100/Ganymede"))
+                        context.startActivity(intent)
+                    }
+                )
+                Divider(modifier = Modifier.padding(vertical = 8.dp))
+                ClickableInfoRow(
+                    label = stringResource(R.string.about_licenses),
+                    onClick = { /* TODO: Navigate to a licenses screen */ }
+                )
+            }
+        }
     }
+
     if (showCrashDialog) {
         AlertDialog(
             onDismissRequest = { showCrashDialog = false },
             confirmButton = {
-                TextButton(onClick = { showCrashDialog = false; vm.forceCrash() }) { Text(stringResource(R.string.dialog_crash_confirm_button)) }
+                TextButton(onClick = {
+                    showCrashDialog = false
+                    vm.forceCrash()
+                }) { Text(stringResource(R.string.dialog_crash_confirm_button)) }
             },
             dismissButton = {
                 TextButton(onClick = { showCrashDialog = false }) { Text(stringResource(R.string.dialog_crash_cancel_button)) }
@@ -143,104 +173,181 @@ fun SettingsScreen(vm: SettingsViewModel = viewModel()) {
 }
 
 @Composable
-private fun SegmentedToggleGroup(
-    modes: List<ThemeMode>,
-    selected: ThemeMode,
-    onSelect: (ThemeMode) -> Unit,
-    modifier: Modifier = Modifier,
-    height: Dp = 40.dp
+private fun SettingsGroup(
+    title: String,
+    icon: ImageVector,
+    content: @Composable ColumnScope.() -> Unit
 ) {
-    Row(modifier = modifier, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-        modes.forEach { mode ->
-            val isSelected = mode == selected
-            val label = when (mode) {
-                ThemeMode.LIGHT -> stringResource(R.string.light_label).uppercase()
-                ThemeMode.DARK -> stringResource(R.string.dark_label).uppercase()
-                ThemeMode.AUTO -> stringResource(R.string.auto_label).uppercase()
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+    ) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(
+                    imageVector = icon,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary
+                )
+                Spacer(Modifier.width(12.dp))
+                Text(title, style = MaterialTheme.typography.titleLarge)
             }
+            Spacer(Modifier.height(16.dp))
+            content()
+        }
+    }
+}
 
-            val iconRes = when (mode) {
-                ThemeMode.LIGHT -> R.drawable.light_mode
-                ThemeMode.DARK -> R.drawable.dark_mode
-                ThemeMode.AUTO -> R.drawable.autorenew
-            }
-            val iconPainter = painterResource(id = iconRes)
-
-            val buttonModifier = Modifier
-                .height(height)
-                .weight(1f)
-
-            if (isSelected) {
-                FilledTonalButton(
-                    onClick = { onSelect(mode) },
-                    modifier = buttonModifier,
-                    shape = RoundedCornerShape(12.dp)
-                ) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(painter = iconPainter, contentDescription = label, modifier = Modifier.size(20.dp))
-                        Spacer(Modifier.width(8.dp))
-                        Text(label, style = MaterialTheme.typography.labelLarge)
-                    }
-                }
-            } else {
-                OutlinedButton(
-                    onClick = { onSelect(mode) },
-                    modifier = buttonModifier,
-                    shape = RoundedCornerShape(12.dp)
-                ) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(painter = iconPainter, contentDescription = label, modifier = Modifier.size(20.dp))
-                        Spacer(Modifier.width(8.dp))
-                        Text(label, style = MaterialTheme.typography.labelLarge)
-                    }
-                }
-            }
-         }
-     }
- }
-
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun PaletteRowSample(label: String, main: Color, onMain: Color, container: Color, onContainer: Color) {
-    Column(Modifier.fillMaxWidth()) {
-        Text(label, style = MaterialTheme.typography.labelLarge)
-        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            Box(
-                Modifier
-                    .weight(1f)
-                    .height(40.dp)
-                    .background(main, RoundedCornerShape(6.dp)),
-            contentAlignment = Alignment.Center) { Text("Main", color = onMain, style = MaterialTheme.typography.labelMedium) }
-            Box(
-                Modifier
-                    .weight(1f)
-                    .height(40.dp)
-                    .background(container, RoundedCornerShape(6.dp)),
-            contentAlignment = Alignment.Center) { Text("Container", color = onContainer, style = MaterialTheme.typography.labelMedium) }
+private fun LanguageSelector(
+    currentLanguage: String,
+    onLanguageSelected: (String) -> Unit
+) {
+    var expanded by remember { mutableStateOf(false) }
+    val languages = remember { listOf("fr", "en", "es", "de") }
+
+    ExposedDropdownMenuBox(
+        expanded = expanded,
+        onExpandedChange = { expanded = !expanded }
+    ) {
+        OutlinedTextField(
+            value = Locale(currentLanguage).displayLanguage,
+            onValueChange = {},
+            readOnly = true,
+            label = { Text(stringResource(R.string.language_label)) },
+            trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
+            modifier = Modifier
+                .menuAnchor()
+                .fillMaxWidth()
+        )
+        ExposedDropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false },
+            ) {
+                languages.forEach { lang ->
+                    DropdownMenuItem(
+                        text = { Text(Locale(lang).displayLanguage) },
+                        onClick = {
+                            onLanguageSelected(lang)
+                            expanded = false
+                        }
+                    )
+                }
         }
     }
 }
 
 @Composable
-private fun ToggleRow(label: String, value: Boolean, onChange: (Boolean) -> Unit) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
+private fun SegmentedToggleGroup(
+    modes: List<ThemeMode>,
+    selected: ThemeMode,
+    onSelect: (ThemeMode) -> Unit,
+) {
+    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+        SingleChoiceSegmentedButtonRow {
+            modes.forEachIndexed { index, mode ->
+                SegmentedButton(
+                    selected = mode == selected,
+                    onClick = { onSelect(mode) },
+                    shape = SegmentedButtonDefaults.itemShape(index = index, count = modes.size),
+                    icon = {
+                        val iconRes = when (mode) {
+                            ThemeMode.LIGHT -> R.drawable.light_mode
+                            ThemeMode.DARK -> R.drawable.dark_mode
+                            ThemeMode.AUTO -> R.drawable.autorenew
+                        }
+                        Icon(painter = painterResource(id = iconRes), contentDescription = null, modifier = Modifier.size(20.dp))
+                    }
+                ) {
+                    val label = when (mode) {
+                        ThemeMode.LIGHT -> stringResource(R.string.light_label)
+                        ThemeMode.DARK -> stringResource(R.string.dark_label)
+                        ThemeMode.AUTO -> stringResource(R.string.auto_label)
+                    }
+                    Text(label)
+                }
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+private fun PaletteGrid() {
+    val scheme = MaterialTheme.colorScheme
+    val colors = listOf(
+        "Primary" to scheme.primary,
+        "Secondary" to scheme.secondary,
+        "Tertiary" to scheme.tertiary,
+        "Surface" to scheme.surface,
+        "Background" to scheme.background,
+        "Error" to scheme.error
+    )
+    FlowRow(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        Text(label, style = MaterialTheme.typography.bodyMedium)
-        Switch(checked = value, onCheckedChange = onChange)
+        colors.forEach { (name, color) ->
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Box(
+                    modifier = Modifier
+                        .size(24.dp)
+                        .background(color, RoundedCornerShape(4.dp))
+                )
+                Spacer(Modifier.width(6.dp))
+                Text(name, style = MaterialTheme.typography.labelSmall)
+            }
+        }
     }
 }
 
 @Composable
-@Preview(name = "SettingsPreview")
-fun SettingsPreview() {
-    SettingsScreen()
+private fun ToggleRow(
+    label: String,
+    isChecked: Boolean,
+    onCheckedChange: (Boolean) -> Unit
+) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(label, style = MaterialTheme.typography.bodyLarge)
+        Switch(checked = isChecked, onCheckedChange = onCheckedChange)
+    }
 }
 
 @Composable
-@Preview(name = "SettingsPreview_Narrow", widthDp = 360)
-fun SettingsPreviewNarrow() {
-    SettingsPreview()
+private fun InfoRow(label: String, value: String) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 4.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(text = label, style = MaterialTheme.typography.bodyLarge)
+        Text(text = value, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+    }
+}
+
+@Composable
+private fun ClickableInfoRow(label: String, onClick: () -> Unit) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable(onClick = onClick)
+            .padding(vertical = 12.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(text = label, style = MaterialTheme.typography.bodyLarge)
+        Icon(
+            imageVector = Icons.AutoMirrored.Filled.OpenInNew,
+            contentDescription = null,
+            tint = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+    }
 }

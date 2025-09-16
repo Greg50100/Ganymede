@@ -4,7 +4,7 @@
     <string name="theme_label">Theme</string>
     <string name="color_label" tools:ignore="UnusedResources">Primary color</string>
     <string name="language_label">Language</string>
-    <string name="auto_label">Auto (system)</string>
+    <string name="auto_label">Auto</string>
     <string name="light_label">Light</string>
     <string name="dark_label">Dark</string>
 
@@ -450,7 +450,7 @@
     <string name="duty_cycle_result">Duty Cycle: %s %%</string>
     <string name="time_high_result">Time High: %s s</string>
     <string name="time_low_result">Time Low: %s s</string>
-    <string name="calculate">Calculer</string>
+    <string name="calculate">Calculate</string>
 
 
     <!-- Math Utilities -->
@@ -596,4 +596,98 @@
     <string name="force_newtons">Force (N)</string>
     <string name="mass_kg">Mass (kg)</string>
     <string name="acceleration_ms2">Acceleration (m/s²)</string>
+
+    <!-- Zener Diode Calculator -->
+    <string name="zener_diode_calculator_title">Zener Diode Calculator</string>
+    <string name="zener_diode_calculator_description">Calculate the series resistor for a Zener regulator</string>
+    <string name="input_voltage_range">Input Voltage (V)</string>
+    <string name="zener_voltage_vz">Zener Voltage (Vz)</string>
+    <string name="load_current_il">Load Current (IL) in mA</string>
+    <string name="required_series_resistor">Required Series Resistor (Rs)</string>
+    <string name="power_dissipation_in_resistor">Power in Resistor (Ps)</string>
+    <string name="power_dissipation_in_zener">Power in Zener (Pz)</string>
+    <string name="min_value">Min</string>
+    <string name="max_value">Max</string>
+
+    <!-- Zener Diode Calculator (compat keys expected by code) -->
+    <string name="zener_voltage_v">Zener Voltage (V)</string>
+    <string name="load_resistance_ohm">Load Resistance (Ω)</string>
+    <string name="zener_power_rating_w">Zener Power Rating (W)</string>
+    <string name="series_resistor_rs">Series Resistor (Rs)</string>
+    <string name="resistor_power_pr">Resistor Power (Pr)</string>
+    <string name="zener_current_iz">Zener Current (Iz)</string>
+
+    <!-- Reactance Calculator -->
+    <string name="reactance_calculator_title">Reactance Calculator</string>
+    <string name="reactance_calculator_description">Calculate capacitive and inductive reactance</string>
+    <string name="capacitive_reactance_xc">Capacitive Reactance (Xc)</string>
+    <string name="inductive_reactance_xl">Inductive Reactance (XL)</string>
+    <string name="ohms_unit">Ω</string>
+
+    <!-- Power Calculator -->
+    <string name="power_calculator_title">Power Calculator</string>
+    <string name="power_calculator_description">Calculate DC/AC power and power factor</string>
+    <string name="dc_power">DC Power</string>
+    <string name="ac_power_single_phase">AC Power (Single Phase)</string>
+    <string name="power_factor">Power Factor</string>
+    <string name="apparent_power_va">Apparent Power (VA)</string>
+    <string name="real_power_w">Real Power (W)</string>
+    <string name="reactive_power_var">Reactive Power (VAR)</string>
+    <string name="phase_angle_deg">Phase Angle (°)</string>
+
+    <!-- Wheatstone Bridge Calculator -->
+    <string name="wheatstone_bridge_calculator_title">Wheatstone Bridge</string>
+    <string name="wheatstone_bridge_calculator_description">Calculate unknown resistance in a Wheatstone bridge</string>
+    <string name="unknown_resistance_rx">Unknown Resistance (Rx)</string>
+    <string name="resistance_r3_ohm">Resistance R3 (Ω)</string>
+    <string name="wheatstone_bridge_description">Wheatstone Bridge Circuit Diagram</string>
+    <string name="calculate_for">Calculate for:</string>
+
+    <!-- Op-Amp Calculator -->
+    <string name="op_amp_calculator_title">Op-Amp Calculator</string>
+    <string name="op_amp_calculator_description">Calculate gain and output voltage for Op-Amps</string>
+    <string name="op_amp_circuit_diagram">Operational Amplifier Circuit Diagram</string>
+    <string name="feedback_resistance_rf_kohm">Feedback Resistance (Rf) in kΩ</string>
+    <string name="voltage_gain">Voltage Gain (Av)</string>
+    <string name="output_voltage_vout_short">Output Voltage (Vout)</string>
+
+    <!-- Date & Time Category -->
+    <string name="date_category_title">Date &amp; Time</string>
+    <string name="date_category_description">Tools for date and time calculations</string>
+    <string name="date_calculator_title">Date Calculator</string>
+    <string name="date_calculator_description">Calculate the duration between two dates</string>
+    <string name="date_calculator_tab_difference">Difference</string>
+    <string name="date_calculator_tab_add_subtract">Add / Subtract</string>
+    <string name="date_calculator_start_date">Start Date</string>
+    <string name="date_calculator_end_date">End Date</string>
+    <string name="date_calculator_initial_date">Initial Date</string>
+    <string name="date_calculator_years">Years</string>
+    <string name="date_calculator_months">Months</string>
+    <string name="date_calculator_days">Days</string>
+    <string name="date_calculator_new_date">New Date:</string>
+
+    <!-- Easter Calculator -->
+    <string name="easter_calculator_title">Easter Calculator</string>
+    <string name="easter_calculator_description">Calculate the date of Easter for a given year.</string>
+    <string name="year_label">Year</string>
+    <string name="easter_date_result">Easter date: %1$s</string>
+
+    <!-- Error Messages -->
+    <string name="error_current_zero">Current cannot be zero to calculate resistance.</string>
+    <string name="error_resistance_zero">Resistance cannot be zero to calculate current.</string>
+
+    <!-- About Section -->
+    <string name="about_title">About</string>
+    <string name="about_app_version">App Version</string>
+    <string name="about_github">Source Code on GitHub</string>
+    <string name="about_report_issue">Report an Issue</string>
+    <string name="about_licenses">Open Source Licenses</string>
+
+    <!-- Behavior Section -->
+    <string name="behavior_title">Behavior</string>
+    <string name="haptic_feedback_label">Haptic Feedback</string>
+    <string name="haptic_feedback_description">Vibrate on key press</string>
+    <string name="keep_screen_on_label">Keep Screen On</string>
+    <string name="keep_screen_on_description">Prevent the screen from turning off</string>
 </resources>
+

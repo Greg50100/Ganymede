@@ -34,7 +34,8 @@ enum class ThemeMode { LIGHT, DARK, AUTO }
 data class SettingsUiState(
     val themeMode: ThemeMode = ThemeMode.AUTO,
     val language: String = defaultLanguage(),
-    val crashReportsEnabled: Boolean = true
+    val crashReportsEnabled: Boolean = true,
+    val keepScreenOnEnabled: Boolean = false
 )
 
 class SettingsViewModel(application: Application) : AndroidViewModel(application) {
@@ -43,6 +44,7 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
     private val KEY_THEME = stringPreferencesKey("theme_mode")
     private val KEY_LANG = stringPreferencesKey("language")
     private val KEY_CRASH = booleanPreferencesKey("crash_reports_enabled")
+    private val KEY_SCREEN_ON = booleanPreferencesKey("keep_screen_on_enabled")
 
     private val _uiState = MutableStateFlow(SettingsUiState())
     val uiState: StateFlow<SettingsUiState> = _uiState
@@ -56,10 +58,12 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
                     val theme = prefs[KEY_THEME]?.let { runCatching { ThemeMode.valueOf(it) }.getOrNull() } ?: ThemeMode.AUTO
                     val lang = prefs[KEY_LANG] ?: defaultLanguage()
                     val crash = prefs[KEY_CRASH] ?: true
+                    val screenOn = prefs[KEY_SCREEN_ON] ?: false
                     SettingsUiState(
                         themeMode = theme,
                         language = lang,
-                        crashReportsEnabled = crash
+                        crashReportsEnabled = crash,
+                        keepScreenOnEnabled = screenOn
                     )
                 }
                 .collect { ui ->
@@ -84,6 +88,11 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
         _uiState.value = _uiState.value.copy(crashReportsEnabled = enabled)
         CrashReporter.updateEnabled(enabled)
         viewModelScope.launch { dataStore.edit { it[KEY_CRASH] = enabled } }
+    }
+
+    fun setKeepScreenOnEnabled(enabled: Boolean) {
+        _uiState.value = _uiState.value.copy(keepScreenOnEnabled = enabled)
+        viewModelScope.launch { dataStore.edit { it[KEY_SCREEN_ON] = enabled } }
     }
 
     fun testCrashReport() {

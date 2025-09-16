@@ -1,16 +1,23 @@
 package com.joviansapps.ganymede.viewmodel
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import android.content.Context
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.joviansapps.ganymede.data.CalculatorEvent
 import com.joviansapps.ganymede.data.CalculatorAction
+import com.joviansapps.ganymede.data.CalculatorEvent
 import com.joviansapps.ganymede.data.CalculatorState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import net.objecthunter.exp4j.ExpressionBuilder
 import net.objecthunter.exp4j.function.Function
 import java.math.BigDecimal
@@ -19,15 +26,22 @@ import java.text.NumberFormat
 import java.util.Locale
 import kotlin.math.*
 
+// Extension DataStore sur le Context
+private val Context.dataStore by preferencesDataStore(name = "calculator_history")
+
 /**
- * ViewModel for the scientific calculator, refactored to use a single state object (MVI pattern).
+ * ViewModel for the scientific calculator, now with persistent history using DataStore.
  */
-class CalculatorViewModel : ViewModel() {
+class CalculatorViewModel(application: Application) : AndroidViewModel(application) {
+
+    private val dataStore = application.dataStore
+    private val HISTORY_KEY = stringPreferencesKey("calculation_history")
+    // Utiliser un séparateur peu commun pour stocker la liste dans une seule chaîne
+    private val HISTORY_SEPARATOR = "|||"
 
     private val _uiState = MutableStateFlow(CalculatorState())
     val uiState = _uiState.asStateFlow()
 
-    // Convenience observable flows used by UI components
     val history = uiState
         .map { it.history }
         .stateIn(viewModelScope, SharingStarted.Eagerly, _uiState.value.history)
@@ -35,6 +49,34 @@ class CalculatorViewModel : ViewModel() {
     val displayText = uiState
         .map { it.result }
         .stateIn(viewModelScope, SharingStarted.Eagerly, _uiState.value.result)
+
+    private var memoryValue = 0.0
+    private val operators = setOf('+', '-', '*', '/', '^')
+
+    enum class FormatMode { PLAIN, THOUSANDS, SCIENTIFIC }
+    private val _formatMode = MutableStateFlow(FormatMode.PLAIN)
+    val formatMode = _formatMode.asStateFlow()
+
+    init {
+        // Charger l'historique au démarrage
+        loadHistory()
+    }
+
+    private fun loadHistory() {
+        viewModelScope.launch {
+            val prefs = dataStore.data.first()
+            val savedHistory = prefs[HISTORY_KEY]?.split(HISTORY_SEPARATOR)?.filter { it.isNotEmpty() } ?: emptyList()
+            _uiState.update { it.copy(history = savedHistory) }
+        }
+    }
+
+    private fun saveHistory(history: List<String>) {
+        viewModelScope.launch {
+            dataStore.edit { prefs ->
+                prefs[HISTORY_KEY] = history.joinToString(HISTORY_SEPARATOR)
+            }
+        }
+    }
 
     /**
      * Backwards-compatible event handler used by older UI components.
@@ -52,19 +94,8 @@ class CalculatorViewModel : ViewModel() {
         }
     }
 
-    // Internal state not directly needed by the UI
-    private var memoryValue = 0.0
-    private val operators = setOf('+', '-', '*', '/', '^')
-
-    // Format options (can be moved to state if UI needs to control it)
-    enum class FormatMode { PLAIN, THOUSANDS, SCIENTIFIC }
-    // expose as StateFlow so UI can observe current mode
-    private val _formatMode = MutableStateFlow(FormatMode.PLAIN)
-    val formatMode = _formatMode.asStateFlow()
-
     fun setFormatMode(mode: FormatMode) {
         _formatMode.value = mode
-        // Re-evaluate to apply new format if a result is showing
         if (_uiState.value.justEvaluated) {
             val currentResult = uiState.value.result.toDoubleOrNull()
             if (currentResult != null) {
@@ -73,10 +104,6 @@ class CalculatorViewModel : ViewModel() {
         }
     }
 
-    /**
-     * Single entry point for all user actions.
-     * Updates the state based on the incoming action.
-     */
     fun onAction(action: CalculatorAction) {
         when (action) {
             is CalculatorAction.Number -> enterNumber(action.number)
@@ -186,7 +213,9 @@ class CalculatorViewModel : ViewModel() {
     }
 
     private fun clearAll() {
-        _uiState.update { CalculatorState(isDegrees = it.isDegrees, hasMemory = it.hasMemory) }
+        val newState = CalculatorState(isDegrees = _uiState.value.isDegrees, hasMemory = _uiState.value.hasMemory)
+        _uiState.update { newState }
+        saveHistory(newState.history)
     }
 
     private fun setExpression(expression: String) {
@@ -194,13 +223,14 @@ class CalculatorViewModel : ViewModel() {
     }
 
     private fun removeHistoryItem(index: Int) {
-        _uiState.update { state ->
-            state.copy(history = state.history.filterIndexed { i, _ -> i != index })
-        }
+        val newHistory = _uiState.value.history.filterIndexed { i, _ -> i != index }
+        _uiState.update { it.copy(history = newHistory) }
+        saveHistory(newHistory)
     }
 
     private fun clearHistory() {
         _uiState.update { it.copy(history = emptyList()) }
+        saveHistory(emptyList())
     }
 
     private fun toggleDegrees() {
@@ -235,13 +265,15 @@ class CalculatorViewModel : ViewModel() {
         try {
             val resultValue = evaluateExpression(expressionToEval, state.isDegrees)
             val formattedResult = formatNumber(resultValue)
+            val newHistory = state.history + "${state.expression} = $formattedResult"
             _uiState.update {
                 it.copy(
                     result = formattedResult,
-                    history = it.history + "${it.expression} = $formattedResult",
+                    history = newHistory,
                     justEvaluated = true
                 )
             }
+            saveHistory(newHistory)
         } catch (e: ArithmeticException) {
             _uiState.update { it.copy(result = "Division by zero", justEvaluated = true) }
         } catch (e: Exception) {
@@ -262,7 +294,7 @@ class CalculatorViewModel : ViewModel() {
 
     private fun preprocessExpression(expr: String, isDegrees: Boolean): String {
         var expression = expr
-        if (expression.last() in operators) expression = expression.dropLast(1)
+        if (expression.isNotEmpty() && expression.last() in operators) expression = expression.dropLast(1)
 
         val open = expression.count { it == '(' }
         val close = expression.count { it == ')' }

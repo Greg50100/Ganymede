@@ -45,9 +45,6 @@ import kotlin.math.pow
 // 1. ÉTAT DE L'UI & ÉVÉNEMENTS
 // ---------------------------------------------------
 
-interface EnumSymbolProvider {
-    val symbol: String
-}
 
 enum class VoltageUnit(override val symbol: String, val multiplier: Double) : EnumSymbolProvider {
     V("V", 1.0), mV("mV", 1e-3)

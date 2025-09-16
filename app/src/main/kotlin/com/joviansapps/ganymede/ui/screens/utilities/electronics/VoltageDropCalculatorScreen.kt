@@ -131,23 +131,13 @@ fun VoltageDropCalculatorScreen(viewModel: VoltageDropViewModel = viewModel()) {
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     Text(stringResource(R.string.results_title), style = MaterialTheme.typography.titleLarge)
-                    ResultRow(label = stringResource(R.string.voltage_drop), value = "%.2f V".format(uiState.voltageDrop))
-                    ResultRow(label = stringResource(R.string.voltage_drop_percent), value = "%.2f %%".format(uiState.voltageDropPercentage))
-                    ResultRow(label = stringResource(R.string.end_voltage), value = "%.2f V".format(uiState.endVoltage))
+                    ElectronicsResultRow(label = stringResource(R.string.voltage_drop), value = "%.2f V".format(uiState.voltageDrop))
+                    ElectronicsResultRow(label = stringResource(R.string.voltage_drop_percent), value = "%.2f %%".format(uiState.voltageDropPercentage))
+                    ElectronicsResultRow(label = stringResource(R.string.end_voltage), value = "%.2f V".format(uiState.endVoltage))
                 }
             }
         }
     }
 }
 
-@Composable
-private fun ResultRow(label: String, value: String) {
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Text(text = label, style = MaterialTheme.typography.bodyLarge)
-        Text(text = value, style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.primary)
-    }
-}
+// Use shared ResultRow defined in ResultRow.kt

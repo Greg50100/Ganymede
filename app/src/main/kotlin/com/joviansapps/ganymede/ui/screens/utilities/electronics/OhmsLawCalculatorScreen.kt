@@ -31,7 +31,8 @@ data class OhmsLawUiState(
     val voltage: String = "",
     val current: String = "",
     val resistance: String = "",
-    val lastEdited: OhmsLawField? = null
+    val lastEdited: OhmsLawField? = null,
+    val error: String? = null // New error field
 )
 
 enum class OhmsLawField { VOLTAGE, CURRENT, RESISTANCE }
@@ -54,21 +55,31 @@ class OhmsLawViewModel : ViewModel() {
     private fun calculate() {
         viewModelScope.launch {
             val state = _uiState.value
+            _uiState.update { it.copy(error = null) } // Reset error at the start of calculation
+
             val v = state.voltage.toDoubleOrNull()
             val i = state.current.toDoubleOrNull()
             val r = state.resistance.toDoubleOrNull()
 
             when (state.lastEdited) {
                 OhmsLawField.VOLTAGE, OhmsLawField.CURRENT -> {
-                    if (v != null && i != null && i != 0.0) {
-                        _uiState.update { it.copy(resistance = (v / i).toString()) }
+                    if (v != null && i != null) {
+                        if (i == 0.0) {
+                            _uiState.update { it.copy(resistance = "", error = "error_current_zero") }
+                        } else {
+                            _uiState.update { it.copy(resistance = (v / i).toString()) }
+                        }
                     }
                 }
                 OhmsLawField.RESISTANCE -> {
                     if (i != null && r != null) {
                         _uiState.update { it.copy(voltage = (i * r).toString()) }
-                    } else if (v != null && r != null && r != 0.0) {
-                        _uiState.update { it.copy(current = (v / r).toString()) }
+                    } else if (v != null && r != null) {
+                        if (r == 0.0) {
+                            _uiState.update { it.copy(current = "", error = "error_resistance_zero") }
+                        } else {
+                            _uiState.update { it.copy(current = (v / r).toString()) }
+                        }
                     }
                 }
                 null -> {}
@@ -124,6 +135,22 @@ fun OhmsLawCalculatorScreen(viewModel: OhmsLawViewModel = viewModel()) {
             onValueChange = { viewModel.onValueChange(OhmsLawField.RESISTANCE, it) },
             label = stringResource(R.string.resistance_ohm)
         )
+
+        uiState.error?.let { errorKey ->
+            val errorStringRes = when (errorKey) {
+                "error_current_zero" -> R.string.error_current_zero
+                "error_resistance_zero" -> R.string.error_resistance_zero
+                else -> null
+            }
+            errorStringRes?.let {
+                Text(
+                    text = stringResource(it),
+                    color = MaterialTheme.colorScheme.error,
+                    style = MaterialTheme.typography.bodyLarge,
+                    modifier = Modifier.padding(top = 8.dp)
+                )
+            }
+        }
     }
 }
 

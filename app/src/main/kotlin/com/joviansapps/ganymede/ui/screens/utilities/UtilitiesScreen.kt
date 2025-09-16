@@ -1,10 +1,7 @@
 package com.joviansapps.ganymede.ui.screens.utilities
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Calculate
-import androidx.compose.material.icons.filled.Memory
-import androidx.compose.material.icons.filled.MonitorHeart
-import androidx.compose.material.icons.filled.Speed
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -18,7 +15,8 @@ fun UtilitiesScreen(
     onOpenElectronics: () -> Unit = {},
     onOpenHealth: () -> Unit = {},
     onOpenMath: () -> Unit = {},
-    onOpenPhysics: () -> Unit = {}
+    onOpenPhysics: () -> Unit = {},
+    onOpenDate: () -> Unit = {} // Ajouté
 ) {
     // List of available utility categories
     val utilityItems = listOf(
@@ -45,6 +43,13 @@ fun UtilitiesScreen(
             description = stringResource(id = R.string.physics_category_description),
             icon = Icons.Default.Speed, // Changed icon for better distinction
             onClick = onOpenPhysics
+        ),
+        // Date utility category
+        CategoryItem(
+            title = stringResource(id = R.string.date_category_title),
+            description = stringResource(id = R.string.date_category_description),
+            icon = Icons.Default.DateRange,
+            onClick = onOpenDate
         )
         // New utility categories can be added here easily
     )

@@ -1,7 +1,9 @@
 package com.joviansapps.ganymede.graphing
 
+import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 
@@ -12,6 +14,15 @@ class GraphViewModel : ViewModel() {
     val functions = mutableStateListOf<GraphFunction>()
     val constants = mutableStateListOf<Pair<String, Double>>()
     var mode = TrigMode.RADIANS
+
+    // State for tracking cursor position in graph coordinates
+    private val _cursorPosition = mutableStateOf<Offset?>(null)
+    val cursorPosition: State<Offset?> = _cursorPosition
+
+    // Method to update cursor position from the view
+    fun setCursorPosition(position: Offset?) {
+        _cursorPosition.value = position
+    }
 
     // Add / remove / clear functions
     fun addFunction(name: String, expression: String) {

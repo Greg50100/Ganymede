@@ -1,17 +1,18 @@
 // app/src/main/kotlin/com/joviansapps/ganymede/ui/theme/Theme.kt
 package com.joviansapps.ganymede.ui.theme
 
+import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import com.joviansapps.ganymede.viewmodel.ThemeMode
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 
 private val LightOrangeScheme = lightColorScheme(
     primary = Color(0xFFFB8C00),
     onPrimary = Color.White,
     primaryContainer = Color(0xFFFFD6A3),
-    // éviter les marrons — utiliser des neutres bleu-ardoise/charbon pour le contraste
     onPrimaryContainer = Color(0xFF0D1B2A),
     secondary = Color(0xFF1565C0), // bleu complémentaire
     onSecondary = Color.White,
@@ -36,7 +37,6 @@ private val LightOrangeScheme = lightColorScheme(
 
 private val DarkOrangeScheme = darkColorScheme(
     primary = Color(0xFFFFB04C),
-    // version sombre sans marron — utiliser des gris/bleus chauds
     onPrimary = Color(0xFF0D1B2A),
     primaryContainer = Color(0xFF12324A),
     onPrimaryContainer = Color(0xFFFFDBBF),
@@ -60,7 +60,6 @@ private val DarkOrangeScheme = darkColorScheme(
     errorContainer = Color(0xFF93000A),
     onErrorContainer = Color(0xFFFFDAD6)
 )
-
 @Composable
 fun AppTheme(
     themeMode: ThemeMode,
@@ -78,3 +77,19 @@ fun AppTheme(
     // TODO: Harmoniser la barre de statut (WindowInsetsControllerCompat) avec le thème courant (clair/sombre)
     MaterialTheme(colorScheme = scheme, typography = Typography(), content = content)
 }
+
+
+//TODO: Ajouter ce code mais trouver les défaux de fonctionnement avant( appli en noir et blanc)
+// --- Amélioration 3 : Ajouter le support pour les couleurs dynamiques (Material You) ---
+//val dynamicColor = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
+//val context = LocalContext.current
+//
+//val scheme = when {
+//    dynamicColor && useDark -> dynamicDarkColorScheme(context)
+//    dynamicColor && !useDark -> dynamicLightColorScheme(context)
+//    useDark -> DarkOrangeScheme
+//    else -> LightOrangeScheme
+//}
+//
+//MaterialTheme(colorScheme = scheme, typography = Typography(), content = content)
+//}

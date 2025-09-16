@@ -22,6 +22,14 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.text.DecimalFormat
 
+// --- Amélioration 1 : Utiliser une classe scellée pour les champs ---
+// Remplace les chaînes de caractères ("source", "forward_v") pour plus de sécurité et de clarté.
+sealed class LedResistorField {
+    object SourceVoltage : LedResistorField()
+    object ForwardVoltage : LedResistorField()
+    object ForwardCurrent : LedResistorField()
+}
+
 data class LedResistorUiState(
     val sourceVoltage: String = "",
     val ledForwardVoltage: String = "",
@@ -33,13 +41,13 @@ class LedResistorViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(LedResistorUiState())
     val uiState = _uiState.asStateFlow()
 
-    fun onValueChange(field: String, value: String) {
+    // --- Amélioration 1 : Mettre à jour la gestion des événements ---
+    fun onValueChange(field: LedResistorField, value: String) {
         _uiState.update {
             when (field) {
-                "source" -> it.copy(sourceVoltage = value)
-                "forward_v" -> it.copy(ledForwardVoltage = value)
-                "forward_c" -> it.copy(ledForwardCurrent = value)
-                else -> it
+                is LedResistorField.SourceVoltage -> it.copy(sourceVoltage = value)
+                is LedResistorField.ForwardVoltage -> it.copy(ledForwardVoltage = value)
+                is LedResistorField.ForwardCurrent -> it.copy(ledForwardCurrent = value)
             }
         }
         calculate()
@@ -53,7 +61,7 @@ class LedResistorViewModel : ViewModel() {
             val forwardC_mA = state.ledForwardCurrent.toDoubleOrNull()
 
             if (sourceV != null && forwardV != null && forwardC_mA != null && forwardC_mA > 0 && sourceV > forwardV) {
-                val forwardC_A = forwardC_mA / 1000.0 // Convert mA to A
+                val forwardC_A = forwardC_mA / 1000.0 // Convertir mA en A
                 val resistance = (sourceV - forwardV) / forwardC_A
                 _uiState.update { it.copy(resistance = resistance) }
             } else {
@@ -78,9 +86,10 @@ fun LedResistorCalculatorScreen(viewModel: LedResistorViewModel = viewModel()) {
     ) {
         Text(stringResource(R.string.led_resistor_calculator_title), style = MaterialTheme.typography.headlineSmall)
 
+        // --- Amélioration 1 : Utiliser la classe scellée dans les appels UI ---
         OutlinedTextField(
             value = uiState.sourceVoltage,
-            onValueChange = { viewModel.onValueChange("source", it) },
+            onValueChange = { viewModel.onValueChange(LedResistorField.SourceVoltage, it) },
             label = { Text(stringResource(R.string.source_voltage_v)) },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             modifier = Modifier.fillMaxWidth()
@@ -88,7 +97,7 @@ fun LedResistorCalculatorScreen(viewModel: LedResistorViewModel = viewModel()) {
 
         OutlinedTextField(
             value = uiState.ledForwardVoltage,
-            onValueChange = { viewModel.onValueChange("forward_v", it) },
+            onValueChange = { viewModel.onValueChange(LedResistorField.ForwardVoltage, it) },
             label = { Text(stringResource(R.string.led_forward_voltage_v)) },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             modifier = Modifier.fillMaxWidth()
@@ -96,7 +105,7 @@ fun LedResistorCalculatorScreen(viewModel: LedResistorViewModel = viewModel()) {
 
         OutlinedTextField(
             value = uiState.ledForwardCurrent,
-            onValueChange = { viewModel.onValueChange("forward_c", it) },
+            onValueChange = { viewModel.onValueChange(LedResistorField.ForwardCurrent, it) },
             label = { Text(stringResource(R.string.led_forward_current_ma)) },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             modifier = Modifier.fillMaxWidth()

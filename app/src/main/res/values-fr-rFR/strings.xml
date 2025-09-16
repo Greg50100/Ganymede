@@ -5,7 +5,7 @@
     <string name="theme_label">Thème</string>
     <string name="color_label">Couleur principale</string>
     <string name="language_label">Langue</string>
-    <string name="auto_label">Auto (système)</string>
+    <string name="auto_label">Auto</string>
     <string name="light_label">Clair</string>
     <string name="dark_label">Sombre</string>
     <string name="result_format">Résultat: %1$s</string>
@@ -457,4 +457,39 @@
     <string name="force_newtons">Force (N)</string>
     <string name="mass_kg">Masse (kg)</string>
     <string name="acceleration_ms2">Accélération (m/s²)</string>
+    <!-- Catégorie Date & Heure -->
+    <string name="date_category_title">Date &amp; Heure</string>
+    <string name="date_category_description">Outils pour les calculs de date et d\'heure</string>
+    <string name="date_calculator_title">Calculateur de Date</string>
+    <string name="date_calculator_description">Calculez la durée entre deux dates</string>
+    <string name="date_calculator_tab_difference">Différence</string>
+    <string name="date_calculator_tab_add_subtract">Ajouter / Soustraire</string>
+    <string name="date_calculator_start_date">Date de début</string>
+    <string name="date_calculator_end_date">Date de fin</string>
+    <string name="date_calculator_initial_date">Date initiale</string>
+    <string name="date_calculator_years">Années</string>
+    <string name="date_calculator_months">Mois</string>
+    <string name="date_calculator_days">Jours</string>
+    <string name="date_calculator_new_date">Nouvelle date :</string>
+    <string name="error_current_zero">Le courant ne peut pas être nul pour calculer la résistance.</string>
+    <string name="error_resistance_zero">La résistance ne peut pas être nulle pour calculer le courant.</string>
+    <string name="easter_calculator_title">Calculateur de Pâques</string>
+    <string name="easter_calculator_description">Calculer la date de Pâques pour une année donnée.</string>
+    <string name="year_label">Année</string>
+    <string name="easter_date_result">Date de Pâques : %1$s</string>
+
+    <!-- Section À propos -->
+    <string name="about_title">À propos</string>
+    <string name="about_app_version">Version de l\'application</string>
+    <string name="about_github">Code Source sur GitHub</string>
+    <string name="about_report_issue">Signaler un problème</string>
+    <string name="about_licenses">Licences Open Source</string>
+
+    <!-- Section Comportement -->
+    <string name="behavior_title">Comportement</string>
+    <string name="haptic_feedback_label">Retour Haptique</string>
+    <string name="haptic_feedback_description">Vibrer à la pression des touches</string>
+    <string name="keep_screen_on_label">Garder l\'écran allumé</string>
+    <string name="keep_screen_on_description">Empêcher l\'écran de s\'éteindre</string>
 </resources>
+

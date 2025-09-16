@@ -4,7 +4,7 @@
     <string name="theme_label">Thema</string>
     <string name="color_label">Primärfarbe</string>
     <string name="language_label">Sprache</string>
-    <string name="auto_label">Auto (System)</string>
+    <string name="auto_label">Auto</string>
     <string name="light_label">Hell</string>
     <string name="dark_label">Dunkel</string>
     <string name="welcome_home">Willkommen bei Ganymed</string>
@@ -168,6 +168,43 @@
     <string name="more_coming_soon">Weitere Funktionen folgen in Kürze!</string>
     <string name="more_coming_soon_description">Bleiben Sie dran für Updates.</string>
 
+    <!-- Electronics Category -->
+    <string name="electronics_category_title">Elektronik</string>
+    <string name="electronics_category_description">Werkzeuge und Rechner für die Elektronik</string>
+
+    <!-- Health Category -->
+    <string name="health_category_title">Gesundheit</string>
+    <string name="health_category_description">Werkzeuge für Gesundheit und Fitness</string>
+    <string name="bmi_calculator_title">BMI-Rechner</string>
+    <!-- Suggestion: Changed to infinitive form for consistency with other descriptions. -->
+    <string name="bmi_calculator_description">Body-Mass-Index berechnen</string>
+    <string name="metric">Metrisch</string>
+    <string name="imperial">Imperial</string>
+    <string name="height_cm">Größe (cm)</string>
+    <string name="height_in">Größe (in)</string>
+    <string name="weight_kg">Gewicht (kg)</string>
+    <string name="weight_lbs">Gewicht (lbs)</string>
+    <string name="enter_values">Werte eingeben</string>
+    <string name="underweight">Untergewicht</string>
+    <string name="normal_weight">Normalgewicht</string>
+    <string name="overweight">Übergewicht</string>
+    <string name="obesity">Fettleibigkeit</string>
+    <string name="bmr_calculator_title">Grundumsatz-Rechner</string>
+    <!-- Suggestion: Changed to infinitive form for consistency. "Grundumsatz" is more common than "Grundumsatzrate". -->
+    <string name="bmr_calculator_description">Grundumsatz schätzen</string>
+    <string name="gender_male">Männlich</string>
+    <string name="gender_female">Weiblich</string>
+    <string name="age_years">Alter (Jahre)</string>
+    <string name="bmr_result_title">Grundumsatz (BMR)</string>
+    <string name="body_fat_calculator_title">Körperfettanteil</string>
+    <!-- Suggestion: Changed to infinitive form for consistency. -->
+    <string name="body_fat_calculator_description">Körperfettanteil anhand von Umfangsmessungen schätzen</string>
+    <string name="neck_circumference_cm">Hals (cm)</string>
+    <string name="waist_circumference_cm">Taille (cm)</string>
+    <string name="hip_circumference_cm">Hüfte (cm)</string>
+    <string name="body_fat_percentage_result">Körperfettanteil</string>
+
+    <!-- Resistor Calculator -->
     <string name="resistor_calculator_title">Widerstandsrechner</string>
     <string name="resistor_calculator_description">Widerstandswerte anhand von Farbcodes berechnen</string>
     <string name="black">Schwarz</string>
@@ -217,10 +254,9 @@
     <string name="default_suffix"> (Standard)</string>
     <string name="temp_coefficient_format">Temperaturkoeffizient: %sppm</string>
 
+    <!-- Inductance Calculator -->
     <string name="inductance_calculator_title">Induktivitätsrechner</string>
     <string name="inductance_calculator_description">Induktivitätswerte und Farbcodes berechnen</string>
-    <string name="electronics_category_title">Elektronik</string>
-    <string name="electronics_category_description">Werkzeuge und Rechner für die Elektronik</string>
     <string name="tab_color_code">Farbcode</string>
     <string name="tab_value_to_color">Wert → Farbe</string>
     <string name="tab_winding">Wicklung</string>
@@ -238,6 +274,7 @@
     <string name="inductance_result_format">Induktivität: %s</string>
     <string name="tolerance_result_format">Toleranz: %s</string>
 
+    <!-- Settings Screen -->
     <string name="settings_theme_colors_title">Themenfarben</string>
     <string name="settings_diagnostics_title">Diagnose</string>
     <string name="settings_crash_reports_label">Absturzberichte</string>
@@ -255,10 +292,295 @@
     <string name="dialog_crash_confirm_button">Absturz</string>
     <string name="dialog_crash_cancel_button">Abbrechen</string>
 
+    <!-- History Dialog -->
     <string name="history_title">Verlauf</string>
     <string name="history_empty">Kein Verlauf</string>
     <string name="history_close_button">Schließen</string>
     <string name="history_clear_all_button">Alles löschen</string>
 
     <string name="back_button_description">Zurück</string>
+
+    <!-- Capacitor / Time constant strings -->
+    <string name="time_constant_calculator_title">Zeitkonstanten-Rechner</string>
+    <string name="time_constant_calculator_description">RC-Schaltkreis-Ladezeit berechnen</string>
+    <string name="mode_charge">Laden</string>
+    <string name="mode_discharge">Entladen</string>
+    <string name="resistor_label">Widerstand (Ω)</string>
+    <string name="capacitor_label">Kapazität (µF)</string>
+    <string name="capacitor_label_description">Kondensatorwert in Mikrofarad (µF) eingeben</string>
+    <string name="time_label">Zeit (s)</string>
+    <string name="time_label_seconds">Sekunden</string>
+    <string name="calculate_button">Berechnen</string>
+    <string name="result_voltage_format">Spannung: %.4f V</string>
+    <string name="result_charge_format">Ladung: %.6f C</string>
+    <string name="plot_duration_label">Diagrammdauer (s)</string>
+    <string name="max_y_label">Max. Y (V) – optional</string>
+    <string name="max_y_description">Leer lassen für automatische Skalierung</string>
+    <string name="press_calculate_to_generate_graph">Drücken Sie \'Berechnen\', um das Diagramm zu erstellen.</string>
+    <string name="rc_charge_calculator_title">RC-Lade-Rechner</string>
+    <string name="input_parameters_title">Eingabeparameter</string>
+    <string name="voltage_label">Spannung [U]</string>
+    <string name="capacitance_label">Kapazität [C]</string>
+    <string name="resistance_label">Widerstand [Ω]</string>
+    <string name="reset_button">Zurücksetzen</string>
+    <string name="results_title">Ergebnisse:</string>
+    <string name="result_title">Ergebnis:</string>
+    <string name="time_constant_result">Zeitkonstante [τ]: %.4f s</string>
+    <string name="stored_energy_result">Gespeicherte Energie [E]: %.4f J</string>
+    <string name="voltage_legend">Spannung (Vc)</string>
+    <string name="current_legend">Strom [I]</string>
+    <string name="time_constant_formula_description">Formel für die Zeitkonstante</string>
+
+    <!-- Parallel/Series Calculators -->
+    <string name="parallel_series_resistor_calculator_title">Parallel- &amp; Serien-Widerstandsrechner</string>
+    <string name="parallel_series_resistor_calculator_description">Gesamtwiderstand für Bauteile berechnen</string>
+    <string name="parallel_series_capacitor_calculator_title">Parallel- &amp; Serien-Kondensatorrechner</string>
+    <string name="parallel_series_capacitor_calculator_description">Gesamtkapazität für Bauteile berechnen</string>
+    <string name="series_result">Serie: %1$s %2$s</string>
+    <string name="parallel_result">Parallel: %1$s %2$s</string>
+    <string name="add_component">%1$s hinzufügen</string>
+    <string name="remove_component">%1$s entfernen</string>
+    <string name="component_value">%1$s %2$d Wert (%3$s)</string>
+
+    <!-- Ohm's Law Calculator -->
+    <!-- Suggestion: Shorter, more common title. -->
+    <string name="ohms_law_calculator_title">Ohmsches Gesetz</string>
+    <string name="ohms_law_calculator_description">V, I, R nach dem Ohmschen Gesetz berechnen</string>
+    <string name="ohms_law_triangle_description">Ohmsches Gesetz Dreieck, das V = I * R zeigt</string>
+    <string name="ohms_law_description">Zwei Werte eingeben, um den dritten zu berechnen.</string>
+    <string name="voltage_v">Spannung (V)</string>
+    <string name="current_a">Strom (A)</string>
+    <string name="resistance_ohm">Widerstand (Ω)</string>
+
+    <!-- Voltage Divider Calculator -->
+    <string name="voltage_divider_calculator_title">Spannungsteiler</string>
+    <string name="voltage_divider_calculator_description">Ausgangsspannung eines Spannungsteilers berechnen</string>
+    <string name="voltage_divider_circuit_description">Schaltplan eines Spannungsteilers</string>
+    <string name="input_voltage_vin">Eingangsspannung (Vin)</string>
+    <string name="resistance_r1_ohm">Widerstand R1 (Ω)</string>
+    <string name="resistance_r2_ohm">Widerstand R2 (Ω)</string>
+    <string name="output_voltage_vout">Ausgangsspannung (Vout): %s V</string>
+
+    <!-- LED Resistor Calculator -->
+    <string name="led_resistor_calculator_title">LED-Vorwiderstand</string>
+    <string name="led_resistor_calculator_description">Passenden Vorwiderstand für eine LED finden</string>
+    <string name="source_voltage_v">Quellenspannung (V)</string>
+    <string name="led_forward_voltage_v">LED-Durchlassspannung (V)</string>
+    <string name="led_forward_current_ma">LED-Durchlassstrom (mA)</string>
+    <string name="required_resistor_value">Benötigter Widerstand: %s Ω</string>
+
+    <!-- 555 Timer Calculator -->
+    <string name="timer_555_astable_title">555-Timer (astabil)</string>
+    <string name="timer_555_astable_description">Frequenz und Tastverhältnis für 555-Timer berechnen</string>
+    <string name="timer_555_astable_circuit_desc">Schaltplan für einen 555-Timer im astabilen Modus</string>
+    <string name="resistance_r1_kohm">Widerstand R1 (kΩ)</string>
+    <string name="resistance_r2_kohm">Widerstand R2 (kΩ)</string>
+    <string name="capacitance_c1_uf">Kapazität C1 (µF)</string>
+    <string name="frequency_result">Frequenz: %s Hz</string>
+    <string name="period_result">Periode: %s s</string>
+    <string name="duty_cycle_result">Tastverhältnis: %s %%</string>
+    <string name="time_high_result">Zeit High: %s s</string>
+    <string name="time_low_result">Zeit Low: %s s</string>
+    <string name="calculate">Berechnen</string>
+
+    <!-- Math Utilities -->
+    <string name="math_category_title">Mathematik</string>
+    <string name="math_category_description">Mathematische Werkzeuge und Rechner</string>
+    <string name="quadratic_equation_solver_title">Quadratische Gleichungen</string>
+    <string name="quadratic_equation_solver_description">Gleichungen der Form ax²+bx+c=0 lösen</string>
+    <string name="quadratic_equation_formula">Gleichung: ax² + bx + c = 0</string>
+    <string name="coefficient_a">Koeffizient a</string>
+    <string name="coefficient_b">Koeffizient b</string>
+    <string name="coefficient_c">Koeffizient c</string>
+    <string name="discriminant_value">Diskriminante (Δ) = %1$.2f</string>
+    <string name="two_real_roots">Zwei reelle Wurzeln:\nx1 = %1$.2f\nx2 = %2$.2f</string>
+    <string name="one_real_root">Eine reelle Wurzel:\nx = %1$.2f</string>
+    <string name="two_complex_roots">Zwei komplexe Wurzeln:\nx1 = %1$.2f + %2$.2fi\nx2 = %1$.2f - %2$.2fi</string>
+    <string name="percentage_calculator_title">Prozentrechner</string>
+    <string name="percentage_calculator_description">Prozentsätze einfach berechnen</string>
+    <string name="gcd_lcm_calculator_title">ggT / kgV</string>
+    <string name="gcd_lcm_calculator_description">Größten gemeinsamen Teiler und kleinstes gemeinsames Vielfaches berechnen</string>
+    <string name="first_number">Erste Zahl</string>
+    <string name="second_number">Zweite Zahl</string>
+    <string name="gcd_result">ggT: %s</string>
+    <string name="lcm_result">kgV: %s</string>
+
+    <!-- Physics Category -->
+    <string name="physics_category_title">Physik</string>
+    <string name="physics_category_description">Werkzeuge für klassische Mechanik und mehr</string>
+    <string name="free_fall_calculator_title">Freier Fall</string>
+    <string name="free_fall_calculator_description">Geschwindigkeit und Zeit eines fallenden Objekts berechnen</string>
+    <string name="height_m_label">Höhe (m)</string>
+    <string name="final_velocity_label">Endgeschwindigkeit</string>
+    <string name="time_of_fall_label">Fallzeit</string>
+    <!-- Suggestion: More direct and user-friendly error message. -->
+    <string name="error_invalid_height">Bitte eine positive Höhe eingeben.</string>
+    <string name="newtons_second_law_title">Newtons zweites Gesetz</string>
+    <string name="newtons_second_law_description">Kraft aus Masse und Beschleunigung berechnen (F=ma)</string>
+    <string name="newtons_second_law_formula">Kraft = Masse × Beschleunigung</string>
+    <string name="force_newtons">Kraft (N)</string>
+    <string name="mass_kg">Masse (kg)</string>
+    <string name="acceleration_ms2">Beschleunigung (m/s²)</string>
+    <string name="projectile_motion_calculator_title">Wurfparabel</string>
+    <string name="projectile_motion_calculator_description">Flugbahn von Projektilen analysieren</string>
+    <string name="initial_velocity_label">Anfangsgeschwindigkeit (m/s)</string>
+    <string name="launch_angle_label">Abschusswinkel (Grad)</string>
+    <string name="initial_height_label">Anfangshöhe (m)</string>
+    <string name="max_height_label">Maximale Höhe:</string>
+    <string name="time_of_flight_label">Flugzeit:</string>
+    <string name="range_label">Reichweite:</string>
+
+    <!-- Filter Calculator -->
+    <string name="filter_calculator_title">Filter-Rechner</string>
+    <string name="filter_calculator_description">Grenzfrequenz von RC/RL-Filtern berechnen</string>
+    <string name="inductance_label">Induktivität (H)</string>
+    <string name="frequency_label">Frequenz (Hz)</string>
+    <string name="cutoff_frequency">Grenzfrequenz</string>
+    <string name="rc_filter_tab">RC-Filter</string>
+    <string name="rl_filter_tab">RL-Filter</string>
+    <string name="error_two_values_needed">Bitte genau zwei Werte eingeben.</string>
+    <string name="low_pass_filter_tab">Tiefpass</string>
+    <string name="high_pass_filter_tab">Hochpass</string>
+    <string name="circuit_type">Schaltungstyp</string>
+    <string name="filter_type">Filtertyp</string>
+    <string name="low_pass">Tiefpass</string>
+    <string name="high_pass">Hochpass</string>
+    <string name="capacitance_uf">Kapazität (µF)</string>
+    <string name="inductance_mh">Induktivität (mH)</string>
+    <string name="cutoff_frequency_hz">Grenzfrequenz (Hz)</string>
+
+    <!-- Power & Wiring Calculators -->
+    <string name="voltage_drop_calculator_title">Spannungsabfall</string>
+    <string name="voltage_drop_calculator_description">Spannungsverlust über ein Kabel berechnen</string>
+    <string name="wire_gauge_calculator_title">Kabelquerschnitt</string>
+    <string name="wire_gauge_calculator_description">Passenden Kabelquerschnitt (AWG) finden</string>
+    <string name="energy_cost_calculator_title">Energiekosten</string>
+    <string name="energy_cost_calculator_description">Stromkosten für ein Gerät schätzen</string>
+    <string name="wire_length_m">Kabellänge (m)</string>
+    <string name="wire_diameter_mm">Kabeldurchmesser (mm)</string>
+    <string name="copper">Kupfer</string>
+    <string name="aluminum">Aluminium</string>
+    <string name="error_all_fields_required">Bitte füllen Sie alle Felder aus.</string>
+    <string name="voltage_drop_result">Abfall: %.2f V (%.2f%%)</string>
+    <string name="max_voltage_drop_percent">Max. Spannungsabfall (%%)</string>
+    <string name="recommended_wire_gauge_result">Empfohlen: %d AWG (%.2f mm)</string>
+    <string name="power_consumption_w">Leistungsaufnahme (W)</string>
+    <string name="usage_hours_per_day">Nutzung (Stunden/Tag)</string>
+    <string name="cost_per_kwh">Kosten pro kWh</string>
+    <string name="estimated_cost">Geschätzte Kosten</string>
+    <string name="cost_per_day">Tag: %.2f</string>
+    <string name="cost_per_month">Monat: %.2f</string>
+    <string name="cost_per_year">Jahr: %.2f</string>
+    <string name="voltage_drop">Spannungsabfall</string>
+    <string name="voltage_drop_percent">Prozentualer Abfall</string>
+    <string name="end_voltage">Spannung am Ende</string>
+    <string name="recommended_wire_gauge">Empfohlener Querschnitt</string>
+    <string name="battery_life_calculator_title">Akkulaufzeit</string>
+    <string name="battery_life_calculator_description">Akkulaufzeit schätzen</string>
+    <string name="battery_capacity_mah">Akkukapazität (mAh)</string>
+    <string name="circuit_consumption_ma">Stromverbrauch (mA)</string>
+    <string name="estimated_battery_life">Geschätzte Akkulaufzeit</string>
+
+    <!-- Wavelength Calculator -->
+    <string name="wavelength_calculator_title">Wellenlänge</string>
+    <string name="wavelength_label">Wellenlänge</string>
+    <string name="frequency_hz">Frequenz (Hz)</string>
+    <string name="wavelength_m">Wellenlänge (m)</string>
+    <string name="wavelength_calculator_description">Wellenlänge aus Frequenz berechnen und umgekehrt</string>
+
+    <!-- Zener Diode Calculator -->
+    <string name="zener_diode_calculator_title">Zener-Diode</string>
+    <string name="zener_diode_calculator_description">Vorwiderstand für einen Zener-Regler berechnen</string>
+    <string name="input_voltage_range">Eingangsspannung (V)</string>
+    <string name="zener_voltage_vz">Zenerspannung (Vz)</string>
+    <string name="load_current_il">Laststrom (IL) in mA</string>
+    <string name="required_series_resistor">Benötigter Vorwiderstand (Rs)</string>
+    <string name="power_dissipation_in_resistor">Verlustleistung im Widerstand (Ps)</string>
+    <string name="power_dissipation_in_zener">Verlustleistung in Zenerdiode (Pz)</string>
+    <string name="min_value">Min</string>
+    <string name="max_value">Max</string>
+    <string name="zener_voltage_v">Zenerspannung (V)</string>
+    <string name="load_resistance_ohm">Lastwiderstand (Ω)</string>
+    <string name="zener_power_rating_w">Zener-Nennleistung (W)</string>
+    <string name="series_resistor_rs">Vorwiderstand (Rs)</string>
+    <string name="resistor_power_pr">Widerstandsleistung (Pr)</string>
+    <string name="zener_current_iz">Zenerstrom (Iz)</string>
+
+    <!-- Reactance Calculator -->
+    <string name="reactance_calculator_title">Reaktanz-Rechner</string>
+    <string name="reactance_calculator_description">Kapazitive und induktive Reaktanz berechnen</string>
+    <string name="capacitive_reactance_xc">Kapazitive Reaktanz (Xc)</string>
+    <string name="inductive_reactance_xl">Induktive Reaktanz (XL)</string>
+    <string name="ohms_unit">Ω</string>
+
+    <!-- Power Calculator -->
+    <string name="power_calculator_title">Leistungsrechner</string>
+    <string name="power_calculator_description">Gleich-/Wechselstromleistung und Leistungsfaktor berechnen</string>
+    <string name="dc_power">Gleichstromleistung</string>
+    <string name="ac_power_single_phase">Wechselstromleistung (einphasig)</string>
+    <string name="power_factor">Leistungsfaktor</string>
+    <string name="apparent_power_va">Scheinleistung (VA)</string>
+    <string name="real_power_w">Wirkleistung (W)</string>
+    <string name="reactive_power_var">Blindleistung (VAR)</string>
+    <string name="phase_angle_deg">Phasenwinkel (°)</string>
+
+    <!-- Wheatstone Bridge Calculator -->
+    <string name="wheatstone_bridge_calculator_title">Wheatstone-Brücke</string>
+    <string name="wheatstone_bridge_calculator_description">Unbekannten Widerstand in einer Wheatstone-Brücke berechnen</string>
+    <string name="unknown_resistance_rx">Unbekannter Widerstand (Rx)</string>
+    <string name="resistance_r3_ohm">Widerstand R3 (Ω)</string>
+    <string name="wheatstone_bridge_description">Schaltplan der Wheatstone-Brücke</string>
+    <string name="calculate_for">Berechnen für:</string>
+
+    <!-- Op-Amp Calculator -->
+    <!-- Suggestion: "Op-Amp" is a very common and shorter term. -->
+    <string name="op_amp_calculator_title">Op-Amp-Rechner</string>
+    <string name="op_amp_calculator_description">Verstärkung und Ausgangsspannung für Op-Amps berechnen</string>
+    <string name="op_amp_circuit_diagram">Schaltplan des Operationsverstärkers</string>
+    <string name="feedback_resistance_rf_kohm">Rückkopplungswiderstand (Rf) in kΩ</string>
+    <string name="voltage_gain">Spannungsverstärkung (Av)</string>
+    <string name="output_voltage_vout_short">Ausgangsspannung (Vout)</string>
+
+    <!-- Date & Time Category -->
+    <string name="date_category_title">Datum &amp; Zeit</string>
+    <string name="date_category_description">Werkzeuge für Datums- und Zeitberechnungen</string>
+    <string name="date_calculator_title">Datumsrechner</string>
+    <string name="date_calculator_description">Dauer zwischen zwei Daten berechnen</string>
+    <string name="date_calculator_tab_difference">Differenz</string>
+    <string name="date_calculator_tab_add_subtract">Addieren / Subtrahieren</string>
+    <string name="date_calculator_start_date">Startdatum</string>
+    <string name="date_calculator_end_date">Enddatum</string>
+    <string name="date_calculator_initial_date">Anfangsdatum</string>
+    <string name="date_calculator_years">Jahre</string>
+    <string name="date_calculator_months">Monate</string>
+    <string name="date_calculator_days">Tage</string>
+    <string name="date_calculator_new_date">Neues Datum:</string>
+    <string name="easter_calculator_title">Osterrechner</string>
+    <!-- Suggestion: Changed to infinitive form for consistency. -->
+    <string name="easter_calculator_description">Osterdatum für ein beliebiges Jahr berechnen.</string>
+    <string name="year_label">Jahr</string>
+    <string name="easter_date_result">Osterdatum: %1$s</string>
+
+
+    <!-- Error Messages -->
+    <!-- Suggestion: More specific and user-friendly error message. -->
+    <string name="error_a_cannot_be_zero">Koeffizient \'a\' darf nicht Null sein.</string>
+    <string name="error_invalid_numbers">Bitte geben Sie gültige Zahlen ein.</string>
+    <string name="error_current_zero">Der Strom darf nicht Null sein, um den Widerstand zu berechnen.</string>
+    <string name="error_resistance_zero">Der Widerstand darf nicht Null sein, um den Strom zu berechnen.</string>
+
+    <!-- About Section -->
+    <string name="about_title">Über</string>
+    <string name="about_app_version">App-Version</string>
+    <string name="about_github">Quellcode auf GitHub</string>
+    <string name="about_report_issue">Ein Problem melden</string>
+    <string name="about_licenses">Open-Source-Lizenzen</string>
+
+    <!-- Behavior Section -->
+    <string name="behavior_title">Verhalten</string>
+    <string name="haptic_feedback_label">Haptisches Feedback</string>
+    <string name="haptic_feedback_description">Bei Tastendruck vibrieren</string>
+    <string name="keep_screen_on_label">Bildschirm anlassen</string>
+    <string name="keep_screen_on_description">Verhindert, dass sich der Bildschirm ausschaltet</string>
 </resources>
+

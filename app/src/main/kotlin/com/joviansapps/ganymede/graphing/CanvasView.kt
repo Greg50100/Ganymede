@@ -3,6 +3,7 @@ package com.joviansapps.ganymede.graphing
 import android.util.Log
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.gestures.detectTransformGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -85,6 +86,25 @@ fun CanvasView(vm: GraphViewModel) {
                     newW.yScale = w.yScale
                     vm.window.value = newW
                 }
+            }
+            .pointerInput(widthPx, heightPx) { // A second pointerInput for dragging to update cursor
+                if (widthPx <= 0f || heightPx <= 0f) return@pointerInput
+                detectDragGestures(
+                    onDragStart = { offset ->
+                        val graphCoords = offset.pxToUnitCoordinates(vm.window.value, widthPx, heightPx)
+                        vm.setCursorPosition(graphCoords)
+                    },
+                    onDrag = { change, _ ->
+                        val graphCoords = change.position.pxToUnitCoordinates(vm.window.value, widthPx, heightPx)
+                        vm.setCursorPosition(graphCoords)
+                    },
+                    onDragEnd = {
+                        vm.setCursorPosition(null)
+                    },
+                    onDragCancel = {
+                        vm.setCursorPosition(null)
+                    }
+                )
             }
 
         Canvas(modifier = drawModifier) {

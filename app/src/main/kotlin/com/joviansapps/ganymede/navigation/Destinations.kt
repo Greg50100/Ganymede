@@ -29,6 +29,11 @@ sealed class Dest(val route: String) {
     data object EnergyCostCalculator : Dest("energy_cost_calculator")
     data object BatteryLifeCalculator : Dest("battery_life_calculator")
     data object WavelengthFrequencyCalculator : Dest("wavelength_frequency_calculator")
+    data object ZenerDiodeCalculator : Dest("zener_diode_calculator")
+    data object ReactanceCalculator : Dest("reactance_calculator")
+    data object PowerCalculator : Dest("power_calculator")
+    data object WheatstoneBridgeCalculator : Dest("wheatstone_bridge_calculator")
+    data object OpAmpCalculator : Dest("op_amp_calculator")
 
 
     // Health Utilities
@@ -49,4 +54,9 @@ sealed class Dest(val route: String) {
     data object NewtonsSecondLawCalculator : Dest("newtons_second_law_calculator")
     data object ProjectileMotionCalculator : Dest("projectile_motion_calculator")
 
+    // Date & Time Utilities
+    data object DateCategory     : Dest("date_category")
+    data object DateCalculator   : Dest("date_calculator")
+
 }
+

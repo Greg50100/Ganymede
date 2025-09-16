@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 // Data class to represent a generic item on a category screen
@@ -39,6 +40,7 @@ data class CategoryItem(
  * This avoids duplicating the layout for Electronics, Health, Math, etc.
  */
 @Composable
+@Preview
 fun CategoryGridScreen(
     items: List<CategoryItem>,
     modifier: Modifier = Modifier
@@ -64,6 +66,7 @@ fun CategoryGridScreen(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
+
 private fun CategoryCard(
     title: String,
     description: String,

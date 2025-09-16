@@ -2,9 +2,13 @@ package com.joviansapps.ganymede.navigation
 
 import android.content.ComponentCallbacks
 import android.content.res.Configuration
+import android.os.Build
+import android.view.View
 import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.unit.LayoutDirection
 import java.util.*
 
 /**
@@ -14,10 +18,7 @@ import java.util.*
 fun LanguageProvider(code: String, content: @Composable () -> Unit) {
     val ctx = LocalContext.current
 
-    // 1) Create the Locale object from the provided code
     val locale = remember(code) { Locale(code) }
-
-    // 2) Read the current base configuration using LocalConfiguration and create a new Configuration with the new locale
     val baseConfig = LocalConfiguration.current
     val config = remember(locale, baseConfig) {
         Configuration(baseConfig).apply {
@@ -25,33 +26,54 @@ fun LanguageProvider(code: String, content: @Composable () -> Unit) {
         }
     }
 
-    // 3) Create a localized context from the modified configuration
+    // Gestion de la direction de la mise en page (RTL/LTR)
+    val layoutDirection = remember(locale) {
+        if (TextUtils.getLayoutDirectionFromLocale(locale) == View.LAYOUT_DIRECTION_RTL) {
+            LayoutDirection.Rtl
+        } else {
+            LayoutDirection.Ltr
+        }
+    }
+
     val localizedCtx = remember(config) {
         ctx.createConfigurationContext(config)
     }
 
-    // 4) Listen for configuration changes to allow recomposition if the system configuration changes
     DisposableEffect(ctx) {
         val callback = object : ComponentCallbacks {
-            override fun onConfigurationChanged(newConfig: Configuration) {
-                // No-op here; keeping the callback ensures system changes are observable.
-                // If you need to force a recomposition, you can update a state observed by the composable.
-            }
-
+            override fun onConfigurationChanged(newConfig: Configuration) {}
             override fun onLowMemory() {}
         }
         ctx.registerComponentCallbacks(callback)
         onDispose { ctx.unregisterComponentCallbacks(callback) }
     }
 
-    // TODO: Gérer la direction RTL si une langue RTL est ajoutée (CompositionLocalProvider(LocalLayoutDirection, ...)).
-    // TODO: Envisager un mécanisme de recomposition forcée si la config système change (orientation, locales système),
-    //       par exemple via un state clé plutôt qu'un ComponentCallbacks no-op.
-
-    // 5) Provide the localized context to the composition
     CompositionLocalProvider(
-        LocalContext provides localizedCtx
+        LocalContext provides localizedCtx,
+        LocalLayoutDirection provides layoutDirection
     ) {
         content()
+    }
+}
+
+// Helper pour la direction de la mise en page
+object TextUtils {
+    fun getLayoutDirectionFromLocale(locale: Locale?): Int {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            android.text.TextUtils.getLayoutDirectionFromLocale(locale)
+        } else {
+            // Fallback pour les anciennes versions, bien que votre minSdk soit probablement > 17
+            // Vous pouvez ajuster cette logique si nécessaire.
+            if (locale != null && isRtl(locale)) {
+                View.LAYOUT_DIRECTION_RTL
+            } else {
+                View.LAYOUT_DIRECTION_LTR
+            }
+        }
+    }
+
+    private fun isRtl(locale: Locale): Boolean {
+        val language = locale.language
+        return language in listOf("ar", "fa", "he", "iw", "ur")
     }
 }
