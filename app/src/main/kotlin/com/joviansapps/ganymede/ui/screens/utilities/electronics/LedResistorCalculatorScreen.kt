@@ -16,6 +16,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.joviansapps.ganymede.R
+import com.joviansapps.ganymede.ui.components.ResultRow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -111,12 +112,19 @@ fun LedResistorCalculatorScreen(viewModel: LedResistorViewModel = viewModel()) {
             modifier = Modifier.fillMaxWidth()
         )
 
-        Card(modifier = Modifier.fillMaxWidth()) {
-            Column(Modifier.padding(16.dp)) {
-                Text(
-                    text = stringResource(R.string.required_resistor_value, uiState.resistance?.let(formatter::format) ?: "N/A"),
-                    style = MaterialTheme.typography.titleLarge
-                )
+        if (uiState.resistance != null) {
+            Card(modifier = Modifier.fillMaxWidth()) {
+                Column(Modifier.padding(16.dp)) {
+                    Text(
+                        text = stringResource(id = R.string.results_title),
+                        style = MaterialTheme.typography.titleLarge
+                    )
+                    Divider(modifier = Modifier.padding(vertical = 8.dp))
+                    ResultRow(
+                        label = stringResource(R.string.required_resistor_label),
+                        value = "${formatter.format(uiState.resistance)} Ω"
+                    )
+                }
             }
         }
     }

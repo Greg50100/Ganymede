@@ -12,6 +12,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.joviansapps.ganymede.R
+import com.joviansapps.ganymede.ui.components.ResultRow
 import com.joviansapps.ganymede.viewmodel.DateCalculatorViewModel
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
@@ -47,8 +48,13 @@ fun EasterCalculatorScreen(vm: DateCalculatorViewModel = viewModel()) {
             Card(modifier = Modifier.fillMaxWidth()) {
                 Column(Modifier.padding(16.dp)) {
                     Text(
-                        text = stringResource(id = R.string.easter_date_result, easterResult.format(formatter)),
+                        text = stringResource(id = R.string.results_title),
                         style = MaterialTheme.typography.titleLarge
+                    )
+                    Divider(modifier = Modifier.padding(vertical = 8.dp))
+                    ResultRow(
+                        label = stringResource(id = R.string.easter_date_result_label),
+                        value = easterResult.format(formatter)
                     )
                 }
             }

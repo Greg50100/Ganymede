@@ -430,6 +430,7 @@
     <string name="resistance_r1_ohm">Resistance R1 (Ω)</string>
     <string name="resistance_r2_ohm">Resistance R2 (Ω)</string>
     <string name="output_voltage_vout">Output Voltage (Vout): %s V</string>
+    <string name="output_voltage_vout_label">Output Voltage (Vout)</string>
 
     <!-- LED Resistor Calculator -->
     <string name="led_resistor_calculator_title">LED Resistor Calculator</string>
@@ -438,6 +439,7 @@
     <string name="led_forward_voltage_v">LED Forward Voltage (V)</string>
     <string name="led_forward_current_ma">LED Forward Current (mA)</string>
     <string name="required_resistor_value">Required Resistor: %s Ω</string>
+    <string name="required_resistor_label">Required Resistor</string>
 
     <!-- 555 Timer Calculator -->
     <string name="timer_555_astable_title">555 Timer Astable Calculator</string>
@@ -447,11 +449,11 @@
     <string name="resistance_r2_kohm">Resistance R2 (kΩ)</string>
     <string name="capacitance_c1_uf">Capacitance C1 (µF)</string>
     <string name="calculate">Calculate</string>
-    <string name="frequency_result">Frequency: %s Hz</string>
-    <string name="period_result">Period: %s s</string>
-    <string name="duty_cycle_result">Duty Cycle: %s %%</string>
-    <string name="time_high_result">Time High: %s s</string>
-    <string name="time_low_result">Time Low: %s s</string>
+    <string name="frequency_label">Frequency</string>
+    <string name="period_label">Period</string>
+    <string name="duty_cycle_label">Duty Cycle</string>
+    <string name="time_high_label">Time High</string>
+    <string name="time_low_label">Time Low</string>
 
 
     <!-- Math Utilities -->
@@ -484,7 +486,7 @@
     <string name="filter_calculator_title">Filter Calculator</string>
     <string name="filter_calculator_description">Calculates RC/RL filter cutoff frequency</string>
     <string name="inductance_label">Inductance (H)</string>
-    <string name="frequency_label">Frequency (Hz)</string>
+    <string name="frequency_hz_label">Frequency (Hz)</string>
     <string name="cutoff_frequency">Cutoff Frequency</string>
     <string name="rc_filter_tab">RC Filter</string>
     <string name="rl_filter_tab">RL Filter</string>
@@ -587,8 +589,8 @@
     <string name="gcd_lcm_calculator_description">Compute greatest common divisor and least common multiple</string>
     <string name="first_number">First Number</string>
     <string name="second_number">Second Number</string>
-    <string name="gcd_result">GCD: %s</string>
-    <string name="lcm_result">LCM: %s</string>
+    <string name="gcd_result_label">GCD</string>
+    <string name="lcm_result_label">LCM</string>
 
     <!-- Newton's Second Law -->
     <string name="newtons_second_law_title">Newton\'s Second Law</string>
@@ -671,7 +673,7 @@
     <string name="easter_calculator_title">Easter Calculator</string>
     <string name="easter_calculator_description">Calculate the date of Easter for a given year.</string>
     <string name="year_label">Year</string>
-    <string name="easter_date_result">Easter date: %1$s</string>
+    <string name="easter_date_result_label">Easter date</string>
 
     <!-- Error Messages -->
     <string name="error_current_zero">Current cannot be zero to calculate resistance.</string>
@@ -693,4 +695,5 @@
     <string name="debug_title">Debug</string>
     <string name="debug_force_crash">Force crash</string>
 </resources>
+
 

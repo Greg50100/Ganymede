@@ -18,6 +18,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.joviansapps.ganymede.R
+import com.joviansapps.ganymede.ui.components.ResultRow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -113,7 +114,9 @@ fun Timer555CalculatorScreen(viewModel: Timer555ViewModel = viewModel()) {
         Image(
             painter = painterResource(id = R.drawable.ic_555_astable_circuit),
             contentDescription = stringResource(R.string.timer_555_astable_circuit_desc),
-            modifier = Modifier.fillMaxWidth().height(150.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(150.dp)
         )
         Spacer(Modifier.height(16.dp))
 
@@ -142,14 +145,17 @@ fun Timer555CalculatorScreen(viewModel: Timer555ViewModel = viewModel()) {
         )
         Spacer(Modifier.height(16.dp))
 
-        Card(modifier = Modifier.fillMaxWidth()) {
-            Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                Text(stringResource(R.string.results_title), style = MaterialTheme.typography.titleMedium)
-                Text(stringResource(R.string.frequency_result, uiState.frequency?.let { formatter.format(it) } ?: "N/A"))
-                Text(stringResource(R.string.period_result, uiState.period?.let { formatter.format(it) } ?: "N/A"))
-                Text(stringResource(R.string.duty_cycle_result, uiState.dutyCycle?.let { formatter.format(it) } ?: "N/A"))
-                Text(stringResource(R.string.time_high_result, uiState.timeHigh?.let { formatter.format(it) } ?: "N/A"))
-                Text(stringResource(R.string.time_low_result, uiState.timeLow?.let { formatter.format(it) } ?: "N/A"))
+        if (uiState.frequency != null) {
+            Card(modifier = Modifier.fillMaxWidth()) {
+                Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                    Text(stringResource(R.string.results_title), style = MaterialTheme.typography.titleLarge)
+                    Divider(modifier = Modifier.padding(vertical = 8.dp))
+                    ResultRow(label = stringResource(R.string.frequency_label), value = "${formatter.format(uiState.frequency)} Hz")
+                    ResultRow(label = stringResource(R.string.period_label), value = "${formatter.format(uiState.period)} s")
+                    ResultRow(label = stringResource(R.string.duty_cycle_label), value = "${formatter.format(uiState.dutyCycle)} %")
+                    ResultRow(label = stringResource(R.string.time_high_label), value = "${formatter.format(uiState.timeHigh)} s")
+                    ResultRow(label = stringResource(R.string.time_low_label), value = "${formatter.format(uiState.timeLow)} s")
+                }
             }
         }
     }

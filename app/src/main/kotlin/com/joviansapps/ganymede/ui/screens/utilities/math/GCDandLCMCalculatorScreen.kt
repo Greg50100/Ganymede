@@ -16,6 +16,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.joviansapps.ganymede.R
+import com.joviansapps.ganymede.ui.components.ResultRow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -57,7 +58,10 @@ fun GcdLcmCalculatorScreen(viewModel: GcdLcmViewModel = viewModel()) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     Column(
-        modifier = Modifier.fillMaxSize().padding(16.dp).verticalScroll(rememberScrollState()),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+            .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Text(stringResource(R.string.gcd_lcm_calculator_title), style = MaterialTheme.typography.headlineSmall)
@@ -67,8 +71,10 @@ fun GcdLcmCalculatorScreen(viewModel: GcdLcmViewModel = viewModel()) {
         if (uiState.gcd != null && uiState.lcm != null) {
             Card(modifier = Modifier.fillMaxWidth()) {
                 Column(modifier = Modifier.padding(16.dp)) {
-                    Text(stringResource(R.string.gcd_result, uiState.gcd.toString()), style = MaterialTheme.typography.titleLarge)
-                    Text(stringResource(R.string.lcm_result, uiState.lcm.toString()), style = MaterialTheme.typography.titleLarge)
+                    Text(stringResource(R.string.results_title), style = MaterialTheme.typography.titleLarge)
+                    Divider(modifier = Modifier.padding(vertical = 8.dp))
+                    ResultRow(label = stringResource(id = R.string.gcd_result_label), value = uiState.gcd.toString())
+                    ResultRow(label = stringResource(id = R.string.lcm_result_label), value = uiState.lcm.toString())
                 }
             }
         }
