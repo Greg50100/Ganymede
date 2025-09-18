@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -66,7 +67,6 @@ fun CategoryGridScreen(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-
 private fun CategoryCard(
     title: String,
     description: String,
@@ -83,7 +83,7 @@ private fun CategoryCard(
         Column(
             modifier = Modifier
                 .padding(16.dp)
-                .height(150.dp),
+                .heightIn(min = 150.dp), // Use heightIn for flexibility
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {

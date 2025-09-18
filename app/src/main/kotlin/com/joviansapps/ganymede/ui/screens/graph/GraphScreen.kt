@@ -25,6 +25,13 @@ fun GraphScreen(graphViewModel: GraphViewModel = viewModel()) {
     // functions is a SnapshotStateList<GraphFunction> exposed by the ViewModel
     val functions = graphViewModel.functions
     val context = LocalContext.current
+    val functionColors = listOf(
+        MaterialTheme.colorScheme.primary,
+        MaterialTheme.colorScheme.secondary,
+        MaterialTheme.colorScheme.tertiary,
+        MaterialTheme.colorScheme.error,
+        MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.8f) // Example
+    )
 
     Column(modifier = Modifier.fillMaxSize()) {
         // The CanvasView now takes up the majority of the screen
@@ -57,7 +64,10 @@ fun GraphScreen(graphViewModel: GraphViewModel = viewModel()) {
         }
         FunctionInputPage(
             functions = functions,
-            onAddFunction = { name, expression -> graphViewModel.addFunction(name, expression) },
+            onAddFunction = { name, expression ->
+                val color = functionColors[functions.size % functionColors.size]
+                graphViewModel.addFunction(name, expression, color)
+            },
             onRemoveFunction = { id -> graphViewModel.removeFunction(id) },
             onFunctionExpressionChange = { id, expression ->
                 val index = functions.indexOfFirst { it.id == id }

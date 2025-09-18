@@ -9,6 +9,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -16,8 +17,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.joviansapps.ganymede.R
-
-private val BuyMeACoffeeButtonSize = 200.dp
 
 @Composable
 @Preview
@@ -29,15 +28,15 @@ fun HomeScreen(
     onOpenUtilities: () -> Unit = {},
 ) {
     val context = LocalContext.current
-    val buyMeACoffeeUrl = stringResource(id = R.string.buy_me_a_coffee)
+    val buyMeACoffeeUrl = stringResource(id = R.string.buy_me_a_coffee_url) // Changed to a dedicated URL string
 
-    Box(
-        modifier = Modifier.fillMaxSize()
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(24.dp)
     ) {
         Column(
-            modifier = Modifier
-                .align(Alignment.TopCenter)
-                .padding(PaddingValues(24.dp))
+            modifier = Modifier.weight(1f)
         ) {
             Text(stringResource(R.string.welcome_home), style = MaterialTheme.typography.headlineSmall)
             Spacer(Modifier.height(24.dp))
@@ -77,12 +76,18 @@ fun HomeScreen(
             OutlinedLabelButton(
                 title = stringResource(R.string.more_coming_soon),
                 description = stringResource(R.string.more_coming_soon_description),
-                onClick = { /* Rien pour l'instant */ },
+                onClick = { /* Nothing for now */ },
             )
         }
 
-        Box(modifier = Modifier.align(Alignment.BottomCenter)) {
-            BuyMeACoffeeButton(modifier = Modifier.fillMaxWidth()) {
+        // The button is now at the bottom of the main column
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 16.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            BuyMeACoffeeButton {
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(buyMeACoffeeUrl)).apply {
                     addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 }
@@ -134,14 +139,21 @@ private fun BuyMeACoffeeButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
-    IconButton(
+    FilledTonalButton(
         onClick = onClick,
-        modifier = modifier
+        modifier = modifier,
+        colors = ButtonDefaults.filledTonalButtonColors(
+            containerColor = Color(0xFFFFDD00), // Yellow color from the image
+            contentColor = Color.Black
+        ),
+        shape = RoundedCornerShape(12.dp)
     ) {
-        androidx.compose.foundation.Image(
-            painter = painterResource(id = R.drawable.yellow_img),
-            contentDescription = stringResource(R.string.buy_me_a_coffee),
-            modifier = Modifier.size(BuyMeACoffeeButtonSize)
+        Icon(
+            painter = painterResource(id = R.drawable.cofee_logo),
+            contentDescription = null, // The text provides the description
+            modifier = Modifier.size(ButtonDefaults.IconSize)
         )
+        Spacer(Modifier.size(ButtonDefaults.IconSpacing))
+        Text(stringResource(R.string.buy_me_a_coffee))
     }
 }

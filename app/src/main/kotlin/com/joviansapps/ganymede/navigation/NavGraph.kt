@@ -17,6 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -33,6 +34,8 @@ import com.joviansapps.ganymede.ui.screens.graph.GraphScreen
 import com.joviansapps.ganymede.ui.screens.home.HomeScreen
 import com.joviansapps.ganymede.ui.screens.settings.SettingsScreen
 import com.joviansapps.ganymede.ui.screens.utilities.UtilitiesScreen
+import com.joviansapps.ganymede.ui.screens.utilities.date.DateCalculatorScreen
+import com.joviansapps.ganymede.ui.screens.utilities.date.DateCategoryScreen
 import com.joviansapps.ganymede.ui.screens.utilities.electronics.*
 import com.joviansapps.ganymede.ui.screens.utilities.electronics.inductancecalculator.InductanceCalculatorScreen
 import com.joviansapps.ganymede.ui.screens.utilities.electronics.resistorcalculator.ResistorCalculatorScreen
@@ -43,12 +46,11 @@ import com.joviansapps.ganymede.ui.screens.utilities.math.PercentageCalculatorSc
 import com.joviansapps.ganymede.ui.screens.utilities.math.QuadraticEquationSolverScreen
 import com.joviansapps.ganymede.ui.screens.utilities.physics.*
 import com.joviansapps.ganymede.viewmodel.SettingsViewModel
-import com.joviansapps.ganymede.ui.screens.utilities.date.DateCalculatorScreen
-import com.joviansapps.ganymede.ui.screens.utilities.date.DateCategoryScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppRoot(settingsVm: SettingsViewModel) {
+    val settingsState by settingsVm.uiState.collectAsState()
     val nav = rememberNavController()
     val bottomItems = listOf(Dest.Home, Dest.Settings)
 
@@ -177,7 +179,7 @@ fun AppRoot(settingsVm: SettingsViewModel) {
                 )
             }
             composable(Dest.Calculator.route) {
-                CalculatorScreen()
+                CalculatorScreen(hapticFeedbackEnabled = settingsState.hapticFeedbackEnabled)
             }
             composable(Dest.Converter.route) {
                 ConverterScreen()
@@ -290,3 +292,4 @@ fun AppRoot(settingsVm: SettingsViewModel) {
         }
     }
 }
+

@@ -160,10 +160,10 @@ fun BmiResultGauge(bmi: Float?) {
     // Determine the category and color based on the BMI value. This is non-composable logic.
     val (categoryResId, color) = when {
         bmi == null -> R.string.enter_values to MaterialTheme.colorScheme.onSurface
-        bmi < 18.5 -> R.string.underweight to Color(0xFF2196F3) // Blue
+        bmi < 18.5 -> R.string.underweight to MaterialTheme.colorScheme.secondary // Blue
         bmi < 25 -> R.string.normal_weight to Color(0xFF4CAF50) // Green
-        bmi < 30 -> R.string.overweight to Color(0xFFFFC107) // Amber
-        else -> R.string.obesity to Color(0xFFF44336) // Red
+        bmi < 30 -> R.string.overweight to MaterialTheme.colorScheme.tertiary // Amber
+        else -> R.string.obesity to MaterialTheme.colorScheme.error // Red
     }
 
     // Now, call the composable stringResource function with the determined ID.
@@ -221,4 +221,3 @@ fun BmiResultGauge(bmi: Float?) {
         }
     }
 }
-

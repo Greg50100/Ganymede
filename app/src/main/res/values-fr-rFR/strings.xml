@@ -175,9 +175,9 @@
     <string name="settings_crash_reports_active_label">(Actif)</string>
     <string name="settings_crash_reports_inactive_label">(Inactif)</string>
     <string name="settings_number_format_title">Format des nombres</string>
-    <string name="settings_number_format_plain">NORMAL</string>
-    <string name="settings_number_format_thousands">MILLIERS</string>
-    <string name="settings_number_format_scientific">SCIENTIFIQUE</string>
+    <string name="settings_number_format_plain">normal</string>
+    <string name="settings_number_format_thousands">milliers</string>
+    <string name="settings_number_format_scientific">scientifique</string>
     <string name="dialog_crash_title">Confirmer le plantage</string>
     <string name="dialog_crash_message">Cette action fera planter intentionnellement l\'application pour tester Crashlytics.</string>
     <string name="dialog_crash_confirm_button">Planter</string>

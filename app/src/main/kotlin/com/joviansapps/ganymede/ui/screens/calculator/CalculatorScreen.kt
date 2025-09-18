@@ -20,7 +20,9 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
@@ -41,10 +43,21 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 @Preview(showBackground = true)
-fun CalculatorScreen(vm: CalculatorViewModel = viewModel()) {
+fun CalculatorScreen(
+    vm: CalculatorViewModel = viewModel(),
+    hapticFeedbackEnabled: Boolean = true
+) {
     val state by vm.uiState.collectAsState()
     val pagerState = rememberPagerState(initialPage = 1, pageCount = { 3 })
     var showHistory by remember { mutableStateOf(false) }
+
+    val haptics = LocalHapticFeedback.current
+    val onActionWithHaptics: (CalculatorAction) -> Unit = { action ->
+        if (hapticFeedbackEnabled) {
+            haptics.performHapticFeedback(HapticFeedbackType.LongPress)
+        }
+        vm.onAction(action)
+    }
 
     Column(
         modifier = Modifier
@@ -106,9 +119,9 @@ fun CalculatorScreen(vm: CalculatorViewModel = viewModel()) {
             pageSpacing = 6.dp
         ) { page ->
             when (page) {
-                0 -> FunctionPageLeft(onAction = vm::onAction)
-                1 -> NumericPadPage(onAction = vm::onAction)
-                2 -> FunctionPageRight(onAction = vm::onAction)
+                0 -> FunctionPageLeft(onAction = onActionWithHaptics)
+                1 -> NumericPadPage(onAction = onActionWithHaptics)
+                2 -> FunctionPageRight(onAction = onActionWithHaptics)
             }
         }
         // Pager indicators
@@ -135,18 +148,21 @@ fun CalculatorScreen(vm: CalculatorViewModel = viewModel()) {
 
         // Action row
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            SmallTextButton("C", modifier = Modifier.weight(1f)) { vm.onAction(CalculatorAction.ClearAll) }
-            SmallTextButton("CE", modifier = Modifier.weight(1f)) { vm.onAction(CalculatorAction.Clear) }
-            SmallTextButton(if (state.isDegrees) "DEG" else "RAD", modifier = Modifier.weight(1f)) { vm.onAction(CalculatorAction.ToggleDegrees) }
-            SmallTextButton("H", modifier = Modifier.weight(1f)) { showHistory = true }
+            SmallTextButton("C", modifier = Modifier.weight(1f)) { onActionWithHaptics(CalculatorAction.ClearAll) }
+            SmallTextButton("CE", modifier = Modifier.weight(1f)) { onActionWithHaptics(CalculatorAction.Clear) }
+            SmallTextButton(if (state.isDegrees) "DEG" else "RAD", modifier = Modifier.weight(1f)) { onActionWithHaptics(CalculatorAction.ToggleDegrees) }
+            SmallTextButton("H", modifier = Modifier.weight(1f)) {
+                if (hapticFeedbackEnabled) haptics.performHapticFeedback(HapticFeedbackType.LongPress)
+                showHistory = true
+            }
         }
         Spacer(Modifier.height(6.dp))
         // Memory row
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            SmallTextButton(stringResource(R.string.calc_m_plus), modifier = Modifier.weight(1f)) { vm.onAction(CalculatorAction.MemoryPlus) }
-            SmallTextButton(stringResource(R.string.calc_m_minus), modifier = Modifier.weight(1f)) { vm.onAction(CalculatorAction.MemoryMinus) }
-            SmallTextButton(stringResource(R.string.calc_m_recall), modifier = Modifier.weight(1f)) { vm.onAction(CalculatorAction.MemoryRecall) }
-            SmallTextButton(stringResource(R.string.calc_m_clear), modifier = Modifier.weight(1f)) { vm.onAction(CalculatorAction.MemoryClear) }
+            SmallTextButton(stringResource(R.string.calc_m_plus), modifier = Modifier.weight(1f)) { onActionWithHaptics(CalculatorAction.MemoryPlus) }
+            SmallTextButton(stringResource(R.string.calc_m_minus), modifier = Modifier.weight(1f)) { onActionWithHaptics(CalculatorAction.MemoryMinus) }
+            SmallTextButton(stringResource(R.string.calc_m_recall), modifier = Modifier.weight(1f)) { onActionWithHaptics(CalculatorAction.MemoryRecall) }
+            SmallTextButton(stringResource(R.string.calc_m_clear), modifier = Modifier.weight(1f)) { onActionWithHaptics(CalculatorAction.MemoryClear) }
         }
     }
 
@@ -164,10 +180,10 @@ fun CalculatorScreen(vm: CalculatorViewModel = viewModel()) {
                                     val left = item
                                         .split(" = ")
                                         .firstOrNull() ?: item
-                                    vm.onAction(CalculatorAction.SetExpression(left))
+                                    onActionWithHaptics(CalculatorAction.SetExpression(left))
                                     showHistory = false
                                 })
-                            IconButton(onClick = { vm.onAction(CalculatorAction.RemoveHistoryItem(i)) }) {
+                            IconButton(onClick = { onActionWithHaptics(CalculatorAction.RemoveHistoryItem(i)) }) {
                                 Icon(
                                     imageVector = Icons.Default.Delete,
                                     contentDescription = stringResource(R.string.delete)
@@ -179,7 +195,7 @@ fun CalculatorScreen(vm: CalculatorViewModel = viewModel()) {
                 }
             },
             confirmButton = { TextButton(onClick = { showHistory = false }) { Text(stringResource(R.string.history_close_button)) } },
-            dismissButton = { TextButton(onClick = { vm.onAction(CalculatorAction.ClearHistory) }) { Text(stringResource(R.string.history_clear_all_button)) } }
+            dismissButton = { TextButton(onClick = { onActionWithHaptics(CalculatorAction.ClearHistory) }) { Text(stringResource(R.string.history_clear_all_button)) } }
         )
     }
 }

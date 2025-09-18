@@ -25,11 +25,9 @@ class GraphViewModel : ViewModel() {
     }
 
     // Add / remove / clear functions
-    fun addFunction(name: String, expression: String) {
+    fun addFunction(name: String, expression: String, color: Color) {
         val displayName = if (name.isBlank()) expression else name
         // pick a color based on current count
-        val colors = listOf(Color.Red, Color.Green, Color.Blue, Color.Magenta, Color.Cyan)
-        val color = colors[functions.size % colors.size]
         val gf = GraphFunction(expression, color, displayName)
         functions.add(gf)
     }
