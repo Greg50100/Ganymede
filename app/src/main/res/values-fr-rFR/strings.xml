@@ -159,6 +159,7 @@
     <plurals name="functions_count">
         <item quantity="one">%1$d Fonction</item>
         <item quantity="other">%1$d Fonctions</item>
+        <item quantity="many">%1$d Fonctions</item>
     </plurals>
     <string name="no_functions">Aucune fonction</string>
     <string name="delete">Supprimer</string>
@@ -297,6 +298,7 @@
     <string name="voltage_label">Tension [U]</string>
     <string name="capacitance_label">Capacité [C]</string>
     <string name="resistance_label">Résistance [Ω]</string>
+    <string name="reset_button">Reset</string>
     <string name="results_title">Résultats :</string>
     <string name="result_title">Résultat :</string>
     <string name="time_constant_result">Constante de temps [τ] : %.4f s</string>
@@ -316,7 +318,11 @@
     <string name="parallel_result">Parallèle : %1$s %2$s</string>
     <string name="add_component">Ajouter %1$s</string>
     <string name="remove_component">Supprimer %1$s</string>
-    <string name="component_value">Valeur %1$s %2$d (%3$s)</string>
+    <plurals name="component_value">
+        <item quantity="one">Valeur %1$s %2$d (%3$s)</item>
+        <item quantity="other">Valeurs %1$s %2$d (%3$s)</item>
+        <item quantity="many">Valeurs %1$s %2$d (%3$s)</item>
+    </plurals>
     <string name="ohms_law_calculator_title">Calculateur de la loi d\'Ohm</string>
     <string name="ohms_law_calculator_description">Calculez V, I, R en fonction de la loi d\'Ohm</string>
     <string name="ohms_law_triangle_description">Triangle de la loi d\'Ohm montrant V = I * R</string>
@@ -331,24 +337,26 @@
     <string name="resistance_r1_ohm">Résistance R1 (Ω)</string>
     <string name="resistance_r2_ohm">Résistance R2 (Ω)</string>
     <string name="output_voltage_vout">Tension de sortie (Vout) : %s V</string>
+    <string name="output_voltage_vout_label">Tension de sortie (Vout)</string>
     <string name="led_resistor_calculator_title">Calculateur de résistance pour LED</string>
     <string name="led_resistor_calculator_description">Trouvez la bonne résistance de limitation de courant pour votre LED</string>
     <string name="source_voltage_v">Tension source (V)</string>
     <string name="led_forward_voltage_v">Tension directe de la LED (V)</string>
     <string name="led_forward_current_ma">Courant direct de la LED (mA)</string>
-    <string name="required_resistor_value">Résistance requise : %s Ω</string>
+    <string name="required_resistor_value">Résistance requise : %s Ω</string>
+    <string name="required_resistor_label">Résistance requise</string>
     <string name="timer_555_astable_title">Calculateur astable pour Timer 555</string>
     <string name="timer_555_astable_description">Calculez la fréquence et le rapport cyclique pour un timer 555 en mode astable</string>
     <string name="timer_555_astable_circuit_desc">Schéma de circuit pour un timer 555 en mode astable</string>
     <string name="resistance_r1_kohm">Résistance R1 (kΩ)</string>
     <string name="resistance_r2_kohm">Résistance R2 (kΩ)</string>
     <string name="capacitance_c1_uf">Capacité C1 (µF)</string>
-    <string name="frequency_result">Fréquence : %s Hz</string>
-    <string name="period_result">Période : %s s</string>
-    <string name="duty_cycle_result">Rapport cyclique : %s %%</string>
-    <string name="time_high_result">Temps haut : %s s</string>
-    <string name="time_low_result">Temps bas : %s s</string>
     <string name="calculate">Calculer</string>
+    <string name="frequency_label">Fréquence</string>
+    <string name="period_label">Période</string>
+    <string name="duty_cycle_label">Rapport cyclique</string>
+    <string name="time_high_label">Temps haut</string>
+    <string name="time_low_label">Temps bas</string>
     <string name="quadratic_equation_solver_title">Solveur d\'équation quadratique</string>
     <string name="quadratic_equation_solver_description">Résoudre les équations de la forme ax²+bx+c=0</string>
     <string name="quadratic_equation_formula">Équation : ax² + bx + c = 0</string>
@@ -374,7 +382,7 @@
     <string name="filter_calculator_title">Calculateur de filtre</string>
     <string name="filter_calculator_description">Calcule la fréquence de coupure du filtre RC/RL</string>
     <string name="inductance_label">Inductance (H)</string>
-    <string name="frequency_label">Fréquence (Hz)</string>
+    <string name="frequency_hz_label">Fréquence (Hz)</string>
     <string name="cutoff_frequency">Fréquence de coupure</string>
     <string name="rc_filter_tab">Filtre RC</string>
     <string name="rl_filter_tab">Filtre RL</string>
@@ -392,9 +400,9 @@
     <string name="copper">Cuivre</string>
     <string name="aluminum">Aluminium</string>
     <string name="error_all_fields_required">Veuillez remplir tous les champs.</string>
-    <string name="voltage_drop_result">Chute : %.2f V (%.2f%%)</string>
+    <string name="voltage_drop_result">Chute : %1$.2f V (%2$.2f%%)</string>
     <string name="max_voltage_drop_percent">Chute de tension max (%)</string>
-    <string name="recommended_wire_gauge_result">Recommandé : %d AWG (%.2f mm)</string>
+    <string name="recommended_wire_gauge_result">Recommandé : %1$d AWG (%2$.2f mm)</string>
     <string name="power_consumption_w">Consommation électrique (W)</string>
     <string name="usage_hours_per_day">Utilisation (heures/jour)</string>
     <string name="cost_per_kwh">Coût par kWh</string>
@@ -449,8 +457,8 @@
     <string name="gcd_lcm_calculator_description">Calculez le plus grand commun diviseur et le plus petit commun multiple</string>
     <string name="first_number">Premier nombre</string>
     <string name="second_number">Deuxième nombre</string>
-    <string name="gcd_result">PGCD : %s</string>
-    <string name="lcm_result">PPCM : %s</string>
+    <string name="gcd_result_label">PGCD</string>
+    <string name="lcm_result_label">PPCM</string>
     <string name="newtons_second_law_title">Deuxième loi de Newton</string>
     <string name="newtons_second_law_description">Calculer la force à partir de la masse et de l\'accélération (F = m × a)</string>
     <string name="newtons_second_law_formula">Force = Masse × Accélération</string>
@@ -476,7 +484,7 @@
     <string name="easter_calculator_title">Calculateur de Pâques</string>
     <string name="easter_calculator_description">Calculer la date de Pâques pour une année donnée.</string>
     <string name="year_label">Année</string>
-    <string name="easter_date_result">Date de Pâques : %1$s</string>
+    <string name="easter_date_result_label">Date de Pâques</string>
 
     <!-- Section À propos -->
     <string name="about_title">À propos</string>
@@ -491,5 +499,48 @@
     <string name="haptic_feedback_description">Vibrer à la pression des touches</string>
     <string name="keep_screen_on_label">Garder l\'écran allumé</string>
     <string name="keep_screen_on_description">Empêcher l\'écran de s\'éteindre</string>
+    <string name="debug_title">Débogage</string>
+    <string name="debug_force_crash">Forcer le plantage</string>
+    <string name="loading">Chargement…</string>
+    <string name="zener_diode_calculator_title">Calculateur de diode Zener</string>
+    <string name="zener_diode_calculator_description">Calculer la résistance série pour un régulateur Zener</string>
+    <string name="max_value">Max</string>
+    <string name="zener_voltage_v">Tension Zener (V)</string>
+    <string name="load_resistance_ohm">Résistance de charge (Ω)</string>
+    <string name="zener_power_rating_w">Puissance nominale Zener (W)</string>
+    <string name="series_resistor_rs">Résistance série (Rs)</string>
+    <string name="resistor_power_pr">Puissance de la résistance (Pr)</string>
+    <string name="zener_current_iz">Courant Zener (Iz)</string>
+    <string name="reactance_calculator_title">Calculateur de réactance</string>
+    <string name="reactance_calculator_description">Calculer la réactance capacitive et inductive</string>
+    <string name="capacitive_reactance_xc">Réactance capacitive (Xc)</string>
+    <string name="inductive_reactance_xl">Réactance inductive (XL)</string>
+    <string name="power_calculator_title">Calculateur de puissance</string>
+    <string name="power_calculator_description">Calculer la puissance CC/CA et le facteur de puissance</string>
+    <string name="dc_power">Puissance CC</string>
+    <string name="ac_power_single_phase">Puissance CA (monophasé)</string>
+    <string name="power_factor">Facteur de puissance</string>
+    <string name="apparent_power_va">Puissance apparente (VA)</string>
+    <string name="real_power_w">Puissance réelle (W)</string>
+    <string name="reactive_power_var">Puissance réactive (VAR)</string>
+    <string name="phase_angle_deg">Angle de phase (°)</string>
+    <string name="wheatstone_bridge_calculator_title">Pont de Wheatstone</string>
+    <string name="wheatstone_bridge_calculator_description">Calculer la résistance inconnue dans un pont de Wheatstone</string>
+    <string name="unknown_resistance_rx">Résistance inconnue (Rx)</string>
+    <string name="resistance_r3_ohm">Résistance R3 (Ω)</string>
+    <string name="wheatstone_bridge_description">Schéma du pont de Wheatstone</string>
+    <string name="calculate_for">Calculer pour :</string>
+    <string name="op_amp_calculator_title">Calculateur d\'ampli-op</string>
+    <string name="op_amp_calculator_description">Calculer le gain et la tension de sortie pour les ampli-ops</string>
+    <string name="op_amp_circuit_diagram">Schéma de l\'amplificateur opérationnel</string>
+    <string name="feedback_resistance_rf_kohm">Résistance de rétroaction (Rf) en kΩ</string>
+    <string name="voltage_gain">Gain de tension (Av)</string>
+    <string name="output_voltage_vout_short">Tension de sortie (Vout)</string>
+    <string name="input_voltage_range">Tension d\'entrée (V)</string>
+    <string name="zener_voltage_vz">Tension Zener (Vz)</string>
+    <string name="load_current_il">Courant de charge (IL) en mA</string>
+    <string name="required_series_resistor">Résistance série requise (Rs)</string>
+    <string name="power_dissipation_in_resistor">Puissance dans la résistance (Ps)</string>
+    <string name="power_dissipation_in_zener">Puissance en Zener (Pz)</string>
+    <string name="min_value">Min</string>
 </resources>
-

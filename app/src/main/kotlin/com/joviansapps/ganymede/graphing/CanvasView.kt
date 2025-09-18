@@ -8,18 +8,14 @@ import androidx.compose.foundation.gestures.detectTransformGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.tooling.preview.Preview
-import com.joviansapps.ganymede.graphing.GraphViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
 fun CanvasView(vm: GraphViewModel) {
@@ -28,12 +24,15 @@ fun CanvasView(vm: GraphViewModel) {
         val gridLinesColor = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.2f)
         val gridAxesColor = MaterialTheme.colorScheme.onBackground
 
-        var widthPx by remember { mutableStateOf(0f) }
-        var heightPx by remember { mutableStateOf(0f) }
+        var widthPx by remember { mutableFloatStateOf(0f) }
+        var heightPx by remember { mutableFloatStateOf(0f) }
 
         val drawModifier = Modifier
             .fillMaxSize()
-            .onSizeChanged { widthPx = it.width.toFloat(); heightPx = it.height.toFloat() }
+            .onSizeChanged {
+                widthPx = it.width.toFloat()
+                heightPx = it.height.toFloat()
+            }
             .pointerInput(Unit) {
                 // use widthPx/heightPx captured from onSizeChanged
                 detectTransformGestures { centroid, pan, zoom, _ ->
@@ -119,5 +118,5 @@ fun CanvasView(vm: GraphViewModel) {
 @Preview(showBackground = true)
 @Composable
 fun CanvasViewPreview() {
-    CanvasView(vm = androidx.lifecycle.viewmodel.compose.viewModel())
+    CanvasView(vm = viewModel())
 }

@@ -1,0 +1,29 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+
+    <!-- Outer Circle -->
+    <path
+        android:strokeColor="?android:attr/textColorPrimary"
+        android:strokeWidth="1"
+        android:pathData="M 50,10 A 40,40 0 1,1 50,90 A 40,40 0 1,1 50,10" />
+
+    <!-- Inner Circle -->
+    <path
+        android:strokeColor="?android:attr/textColorPrimary"
+        android:strokeWidth="1"
+        android:pathData="M 50,30 A 20,20 0 1,1 50,70 A 20,20 0 1,1 50,30" />
+
+    <!-- Dividing Lines -->
+    <path
+        android:strokeColor="?android:attr/textColorPrimary"
+        android:strokeWidth="0.5"
+        android:pathData="M 10,50 L 90,50" />
+    <path
+        android:strokeColor="?android:attr/textColorPrimary"
+        android:strokeWidth="0.5"
+        android:pathData="M 50,10 L 50,90" />
+</vector>
+

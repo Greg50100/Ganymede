@@ -21,6 +21,9 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_21
         targetCompatibility = JavaVersion.VERSION_21
+
+        // Active la prise en charge des dernières fonctionnalités Java via desugaring
+        isCoreLibraryDesugaringEnabled = true
     }
 
     buildFeatures {
@@ -31,6 +34,25 @@ android {
 
     lint {
         abortOnError = false
+    }
+
+    buildTypes {
+        getByName("release") {
+            // Remplace `useProguard true`
+            isMinifyEnabled = true
+
+            // Crunch PNGs (activé par défaut en release, mais explicité ici)
+            isCrunchPngs = true
+
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+        getByName("debug") {
+            // En général, la minification est désactivée pour le débogage
+            isMinifyEnabled = false
+        }
     }
 }
 
@@ -69,6 +91,9 @@ dependencies {
 
     debugImplementation(libs.compose.ui.tooling)
 
+    // Lifecycle ViewModel pour Compose (fournit viewModel() utilisé dans CanvasViewPreview)
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
+
     testImplementation(libs.junit)
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
     androidTestImplementation(libs.androidx.junit)
@@ -87,4 +112,7 @@ dependencies {
 
     // TODO: Optionnel — utiliser le BOM Firebase pour aligner Crashlytics et dépendances associées
     // implementation(platform("com.google.firebase:firebase-bom:<version>"))
+
+    // Ajoute la dépendance nécessaire pour le desugaring
+    coreLibraryDesugaring(libs.android.desugar.jdk.libs)
 }

@@ -11,6 +11,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -135,6 +136,8 @@ private fun ValueInputRow(
     componentName: String,
     unit: String
 ) {
+    val context = LocalContext.current
+
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -142,7 +145,17 @@ private fun ValueInputRow(
         OutlinedTextField(
             value = value,
             onValueChange = onValueChange,
-            label = { Text(stringResource(R.string.component_value, componentName, index + 1, unit)) },
+            label = {
+                // Utilise la ressource plurals pour gérer "value" vs "values"
+                val labelText = context.resources.getQuantityString(
+                    R.plurals.component_value,
+                    1, // Le nombre est 1 car c'est pour un seul champ
+                    componentName,
+                    index + 1,
+                    unit
+                )
+                Text(labelText)
+            },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             modifier = Modifier.weight(1f)
         )

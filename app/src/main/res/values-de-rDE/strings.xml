@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="settings_title">Einstellungen</string>
     <string name="theme_label">Thema</string>
@@ -340,7 +339,10 @@
     <string name="parallel_result">Parallel: %1$s %2$s</string>
     <string name="add_component">%1$s hinzufügen</string>
     <string name="remove_component">%1$s entfernen</string>
-    <string name="component_value">%1$s %2$d Wert (%3$s)</string>
+    <plurals name="component_value">
+        <item quantity="one">%1$s %2$d Wert (%3$s)</item>
+        <item quantity="other">%1$s %2$d Werte (%3$s)</item>
+    </plurals>
 
     <!-- Ohm's Law Calculator -->
     <!-- Suggestion: Shorter, more common title. -->
@@ -360,6 +362,7 @@
     <string name="resistance_r1_ohm">Widerstand R1 (Ω)</string>
     <string name="resistance_r2_ohm">Widerstand R2 (Ω)</string>
     <string name="output_voltage_vout">Ausgangsspannung (Vout): %s V</string>
+    <string name="output_voltage_vout_label">Ausgangsspannung (Vout)</string>
 
     <!-- LED Resistor Calculator -->
     <string name="led_resistor_calculator_title">LED-Vorwiderstand</string>
@@ -367,7 +370,8 @@
     <string name="source_voltage_v">Quellenspannung (V)</string>
     <string name="led_forward_voltage_v">LED-Durchlassspannung (V)</string>
     <string name="led_forward_current_ma">LED-Durchlassstrom (mA)</string>
-    <string name="required_resistor_value">Benötigter Widerstand: %s Ω</string>
+    <string name="required_resistor_value">Erforderlicher Widerstand: %s Ω</string>
+    <string name="required_resistor_label">Benötigter Widerstand</string>
 
     <!-- 555 Timer Calculator -->
     <string name="timer_555_astable_title">555-Timer (astabil)</string>
@@ -376,12 +380,12 @@
     <string name="resistance_r1_kohm">Widerstand R1 (kΩ)</string>
     <string name="resistance_r2_kohm">Widerstand R2 (kΩ)</string>
     <string name="capacitance_c1_uf">Kapazität C1 (µF)</string>
-    <string name="frequency_result">Frequenz: %s Hz</string>
-    <string name="period_result">Periode: %s s</string>
-    <string name="duty_cycle_result">Tastverhältnis: %s %%</string>
-    <string name="time_high_result">Zeit High: %s s</string>
-    <string name="time_low_result">Zeit Low: %s s</string>
     <string name="calculate">Berechnen</string>
+    <string name="frequency_label">Frequenz</string>
+    <string name="period_label">Periode</string>
+    <string name="duty_cycle_label">Tastverhältnis</string>
+    <string name="time_high_label">Zeit High</string>
+    <string name="time_low_label">Zeit Low</string>
 
     <!-- Math Utilities -->
     <string name="math_category_title">Mathematik</string>
@@ -402,8 +406,8 @@
     <string name="gcd_lcm_calculator_description">Größten gemeinsamen Teiler und kleinstes gemeinsames Vielfaches berechnen</string>
     <string name="first_number">Erste Zahl</string>
     <string name="second_number">Zweite Zahl</string>
-    <string name="gcd_result">ggT: %s</string>
-    <string name="lcm_result">kgV: %s</string>
+    <string name="gcd_result_label">ggT</string>
+    <string name="lcm_result_label">kgV</string>
 
     <!-- Physics Category -->
     <string name="physics_category_title">Physik</string>
@@ -434,7 +438,7 @@
     <string name="filter_calculator_title">Filter-Rechner</string>
     <string name="filter_calculator_description">Grenzfrequenz von RC/RL-Filtern berechnen</string>
     <string name="inductance_label">Induktivität (H)</string>
-    <string name="frequency_label">Frequenz (Hz)</string>
+    <string name="frequency_hz_label">Frequenz (Hz)</string>
     <string name="cutoff_frequency">Grenzfrequenz</string>
     <string name="rc_filter_tab">RC-Filter</string>
     <string name="rl_filter_tab">RL-Filter</string>
@@ -461,9 +465,9 @@
     <string name="copper">Kupfer</string>
     <string name="aluminum">Aluminium</string>
     <string name="error_all_fields_required">Bitte füllen Sie alle Felder aus.</string>
-    <string name="voltage_drop_result">Abfall: %.2f V (%.2f%%)</string>
+    <string name="voltage_drop_result">Abfall: %1$.2f V (%2$.2f%%)</string>
     <string name="max_voltage_drop_percent">Max. Spannungsabfall (%%)</string>
-    <string name="recommended_wire_gauge_result">Empfohlen: %d AWG (%.2f mm)</string>
+    <string name="recommended_wire_gauge_result">Empfohlen: %1$d AWG (%2$.2f mm)</string>
     <string name="power_consumption_w">Leistungsaufnahme (W)</string>
     <string name="usage_hours_per_day">Nutzung (Stunden/Tag)</string>
     <string name="cost_per_kwh">Kosten pro kWh</string>
@@ -489,15 +493,8 @@
     <string name="wavelength_calculator_description">Wellenlänge aus Frequenz berechnen und umgekehrt</string>
 
     <!-- Zener Diode Calculator -->
-    <string name="zener_diode_calculator_title">Zener-Diode</string>
-    <string name="zener_diode_calculator_description">Vorwiderstand für einen Zener-Regler berechnen</string>
-    <string name="input_voltage_range">Eingangsspannung (V)</string>
-    <string name="zener_voltage_vz">Zenerspannung (Vz)</string>
-    <string name="load_current_il">Laststrom (IL) in mA</string>
-    <string name="required_series_resistor">Benötigter Vorwiderstand (Rs)</string>
-    <string name="power_dissipation_in_resistor">Verlustleistung im Widerstand (Ps)</string>
-    <string name="power_dissipation_in_zener">Verlustleistung in Zenerdiode (Pz)</string>
-    <string name="min_value">Min</string>
+    <string name="zener_diode_calculator_title">Zenerdioden-Rechner</string>
+    <string name="zener_diode_calculator_description">Berechnen Sie den Serienwiderstand für einen Zener-Regler</string>
     <string name="max_value">Max</string>
     <string name="zener_voltage_v">Zenerspannung (V)</string>
     <string name="load_resistance_ohm">Lastwiderstand (Ω)</string>
@@ -511,7 +508,6 @@
     <string name="reactance_calculator_description">Kapazitive und induktive Reaktanz berechnen</string>
     <string name="capacitive_reactance_xc">Kapazitive Reaktanz (Xc)</string>
     <string name="inductive_reactance_xl">Induktive Reaktanz (XL)</string>
-    <string name="ohms_unit">Ω</string>
 
     <!-- Power Calculator -->
     <string name="power_calculator_title">Leistungsrechner</string>
@@ -559,7 +555,7 @@
     <!-- Suggestion: Changed to infinitive form for consistency. -->
     <string name="easter_calculator_description">Osterdatum für ein beliebiges Jahr berechnen.</string>
     <string name="year_label">Jahr</string>
-    <string name="easter_date_result">Osterdatum: %1$s</string>
+    <string name="easter_date_result_label">Osterdatum</string>
 
 
     <!-- Error Messages -->
@@ -582,5 +578,15 @@
     <string name="haptic_feedback_description">Bei Tastendruck vibrieren</string>
     <string name="keep_screen_on_label">Bildschirm anlassen</string>
     <string name="keep_screen_on_description">Verhindert, dass sich der Bildschirm ausschaltet</string>
+    <string name="format_label">Format</string>
+    <string name="loading">Wird geladen…</string>
+    <string name="debug_title">Debug</string>
+    <string name="debug_force_crash">Absturz erzwingen</string>
+    <string name="input_voltage_range">Eingangsspannung (V)</string>
+    <string name="zener_voltage_vz">Zenerspannung (Vz)</string>
+    <string name="load_current_il">Laststrom (IL) in mA</string>
+    <string name="required_series_resistor">Erforderlicher Serienwiderstand (Rs)</string>
+    <string name="power_dissipation_in_resistor">Leistung im Widerstand (Ps)</string>
+    <string name="power_dissipation_in_zener">Leistung in Zener (Pz)</string>
+    <string name="min_value">Mindest</string>
 </resources>
-

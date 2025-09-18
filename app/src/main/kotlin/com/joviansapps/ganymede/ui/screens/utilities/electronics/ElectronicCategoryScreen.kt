@@ -1,6 +1,7 @@
 package com.joviansapps.ganymede.ui.screens.utilities.electronics
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.CompareArrows
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -48,8 +49,8 @@ fun ElectronicCategoryScreen(
         // --- Basic Components ---
         CategoryItem(stringResource(R.string.resistor_calculator_title), stringResource(R.string.resistor_calculator_description), Icons.Default.Tune, onOpenResistorCalculator),
         CategoryItem(stringResource(R.string.inductance_calculator_title), stringResource(R.string.inductance_calculator_description), Icons.Default.DataObject, onOpenInductanceCalculator),
-        CategoryItem(stringResource(R.string.parallel_series_resistor_calculator_title), stringResource(R.string.parallel_series_resistor_calculator_description), Icons.Default.CompareArrows, onOpenParallelSeriesResistorCalculator),
-        CategoryItem(stringResource(R.string.parallel_series_capacitor_calculator_title), stringResource(R.string.parallel_series_capacitor_calculator_description), Icons.Default.CompareArrows, onOpenParallelSeriesCapacitorCalculator),
+        CategoryItem(stringResource(R.string.parallel_series_resistor_calculator_title), stringResource(R.string.parallel_series_resistor_calculator_description), Icons.AutoMirrored.Filled.CompareArrows, onOpenParallelSeriesResistorCalculator),
+        CategoryItem(stringResource(R.string.parallel_series_capacitor_calculator_title), stringResource(R.string.parallel_series_capacitor_calculator_description), Icons.AutoMirrored.Filled.CompareArrows, onOpenParallelSeriesCapacitorCalculator),
         CategoryItem(stringResource(R.string.led_resistor_calculator_title), stringResource(R.string.led_resistor_calculator_description), Icons.Default.Lightbulb, onOpenLedResistorCalculator),
         // --- Power & Wiring ---
         CategoryItem(stringResource(R.string.battery_life_calculator_title), stringResource(R.string.battery_life_calculator_description), Icons.Default.BatteryChargingFull, onOpenBatteryLifeCalculator),

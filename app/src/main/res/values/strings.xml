@@ -16,7 +16,6 @@
     <string name="converter_description">Length, weight, volume, and more</string>
     <string name="utilities_title">Utilities</string>
     <string name="utilities_description">A collection of small tools</string>
-    <string name="open_button">Open</string>
 
     <!-- Welcome screen -->
     <string name="welcome">Welcome</string>
@@ -24,12 +23,8 @@
     <string name="continue_button">Continue</string>
 
     <!-- Converter -->
-    <string name="converter_input_label">Value in %1$s</string>
-    <string name="converter_result_format">Result: %1$s %2$s</string>
     <string name="converter_category_label">Category</string>
     <string name="format_label">Format</string>
-    <string name="converter_from_unit_label">From unit</string>
-    <string name="converter_to_unit_label">To unit</string>
     <string name="unit_length">Length</string>
     <string name="unit_mass">Mass</string>
     <string name="unit_temperature">Temperature</string>
@@ -73,25 +68,6 @@
     <string name="unit_f_full">degree Fahrenheit</string>
     <string name="unit_k_full">kelvin</string>
 
-    <string name="value">Value</string>
-    <string name="unit">Unit</string>
-    <string name="copy_text">Copy text</string>
-
-    <!-- Navigation -->
-    <string name="home_label">Home</string>
-
-    <!-- Advanced Calculator -->
-    <string name="calc_memory_indicator" translatable="false">M</string>
-    <string name="calc_m_plus" translatable="false">M+</string>
-    <string name="calc_m_minus" translatable="false">M-</string>
-    <string name="calc_m_recall" translatable="false">MR</string>
-    <string name="calc_m_clear" translatable="false">MC</string>
-    <string name="calc_swipe_hint">Swipe horizontally for functions</string>
-    <string name="result_format">Result: %1$s</string>
-    <string name="calc_error_generic">Error</string>
-    <string name="calc_div_zero">Division by zero</string>
-
-    <!-- Additional full unit names -->
     <string name="unit_m2_full">square meter</string>
     <string name="unit_km2_full">square kilometer</string>
     <string name="unit_ha_full">hectare</string>
@@ -169,14 +145,23 @@
     <string name="unit_base8_full">base 8 (octal)</string>
     <string name="unit_base10_full">base 10 (decimal)</string>
 
+    <!-- Navigation -->
+    <string name="home_label">Home</string>
+
+    <!-- Advanced Calculator -->
+    <string name="calc_memory_indicator" translatable="false">M</string>
+    <string name="calc_m_plus" translatable="false">M+</string>
+    <string name="calc_m_minus" translatable="false">M-</string>
+    <string name="calc_m_recall" translatable="false">MR</string>
+    <string name="calc_m_clear" translatable="false">MC</string>
+    <string name="calc_swipe_hint">Swipe horizontally for functions</string>
+
+    <!-- Additional full unit names (supprimés si non utilisés) -->
+
     <string name="graph_title">Graph tool</string>
     <string name="graph_description">Create simple line graphs from points</string>
     <string name="name_optionnal">Name (optional)</string>
     <string name="f_x" translatable="false">f(x)</string>
-
-    <!-- GraphScreen strings -->
-    <string name="tab_functions">Functions</string>
-    <string name="tab_graph">Graph</string>
     <string name="add">Add</string>
     <string name="clear_all">Clear all</string>
     <!-- Plurals for function count -->
@@ -184,20 +169,16 @@
         <item quantity="one">%1$d Function</item>
         <item quantity="other">%1$d Functions</item>
     </plurals>
-    <string name="no_functions">No functions</string>
     <string name="delete">Delete</string>
-    <string name="zoom_in">Zoom in</string>
-    <string name="zoom_out">Zoom out</string>
     <string name="reset">Reset</string>
 
-    <string name="buy_me_a_coffee">Buy me a coffee</string>
+    <string name="buy_me_a_coffee" translatable="false">Buy me a coffee</string>
     <string name="buy_me_a_coffee_url" translatable="false">https://www.buymeacoffee.com/greg50100</string>
-    <string name="loading">Loading…</string>
 
     <string name="more_coming_soon">More features coming soon!</string>
     <string name="more_coming_soon_description">Stay tuned for updates.</string>
 
-    <!-- Resistor Calculator -->
+    <!-- Electronics Category -->
     <string name="resistor_calculator_title">Resistor Calculator</string>
     <string name="resistor_calculator_description">Calculate resistor values based on color codes</string>
     <string name="black">Black</string>
@@ -214,53 +195,7 @@
     <string name="silver">Silver</string>
     <string name="none">None</string>
 
-    <string-array name="resistor_band_colors">
-        <item>@string/black</item>
-        <item>@string/brown</item>
-        <item>@string/red</item>
-        <item>@string/orange</item>
-        <item>@string/yellow</item>
-        <item>@string/green</item>
-        <item>@string/blue</item>
-        <item>@string/violet</item>
-        <item>@string/gray</item>
-        <item>@string/white</item>
-    </string-array>
-
-    <string-array name="resistor_multiplier_colors">
-        <item>@string/black</item>
-        <item>@string/brown</item>
-        <item>@string/red</item>
-        <item>@string/orange</item>
-        <item>@string/yellow</item>
-        <item>@string/green</item>
-        <item>@string/blue</item>
-        <item>@string/violet</item>
-        <item>@string/gray</item>
-        <item>@string/white</item>
-        <item>@string/gold</item>
-        <item>@string/silver</item>
-    </string-array>
-
-    <string-array name="resistor_tolerance_colors">
-        <item>@string/brown</item>
-        <item>@string/red</item>
-        <item>@string/green</item>
-        <item>@string/blue</item>
-        <item>@string/violet</item>
-        <item>@string/gray</item>
-        <item>@string/gold</item>
-        <item>@string/silver</item>
-    </string-array>
-
-    <string-array name="resistor_ppm_colors">
-        <item>@string/brown</item>
-        <item>@string/red</item>
-        <item>@string/orange</item>
-        <item>@string/yellow</item>
-        <item>@string/blue</item>
-        <item>@string/violet</item>
-    </string-array>
+    <!-- Arrays liés aux résistances supprimés si non utilisés -->
 
     <string name="black_1">Black (×1)</string>
     <string name="brown_10">Brown (×10)</string>
@@ -274,12 +209,6 @@
     <string name="white_1G">White (×1G)</string>
     <string name="gold_0_1">Gold (×0.1)</string>
     <string name="silver_0_01">Silver (×0.01)</string>
-    <string name="resistor_band_1">Band 1</string>
-    <string name="resistor_band_2">Band 2</string>
-    <string name="resistor_band_3">Band 3</string>
-    <string name="resistor_band_4">Band 4 (tolerance)</string>
-    <string name="resistor_value_format">Resistor value: %1$s Ω ± %2$s%%</string>
-    <string name="resistor_invalid_selection">Please select colors for all bands</string>
     <string name="gold_5">Gold (±5%)</string>
     <string name="silver_10">Silver (±10%)</string>
     <string name="brown_1">Brown (±1%)</string>
@@ -293,13 +222,12 @@
     <string name="inductance_calculator_title">Inductance Calculator</string>
     <string name="inductance_calculator_description">Calculate inductor values and color codes</string>
     <string name="time_constant_calculator_title">Time Constant Calculator</string>
-    <string name="time_constant_calculator_description">Calculate RC circuit charge time</string>
+    <string name="time_constant_calculator_description">Calculate the time constant of a circuit</string>
 
-    <!-- Electronics Category -->
+    <!-- Health Category -->
     <string name="electronics_category_title">Electronics</string>
     <string name="electronics_category_description">Tools and calculators for electronics</string>
 
-    <!-- Health Category -->
     <string name="health_category_title">Health</string>
     <string name="health_category_description">Utilities for health and fitness</string>
     <string name="bmi_calculator_title">BMI Calculator</string>
@@ -315,7 +243,6 @@
     <string name="normal_weight">Normal</string>
     <string name="overweight">Overweight</string>
     <string name="obesity">Obesity</string>
-
 
     <!-- Inductance Calculator -->
     <string name="tab_color_code">Color Code</string>
@@ -345,14 +272,6 @@
     <string name="temp_coefficient_format">Temperature coefficient: %sppm</string>
 
     <!-- Settings Screen -->
-    <string name="settings_theme_colors_title">Theme colors</string>
-    <string name="settings_diagnostics_title">Diagnostics</string>
-    <string name="settings_crash_reports_label">Crash reports</string>
-    <string name="settings_crash_reports_description">Enables simulated report logging in Logcat (tag CrashReporter).</string>
-    <string name="settings_crash_reports_test_button">Test send</string>
-    <string name="settings_crash_reports_force_button">Force real crash</string>
-    <string name="settings_crash_reports_active_label">(Active)</string>
-    <string name="settings_crash_reports_inactive_label">(Inactive)</string>
     <string name="settings_number_format_title">Number format</string>
     <string name="settings_number_format_plain">plain</string>
     <string name="settings_number_format_thousands">thousands</string>
@@ -373,35 +292,28 @@
     <!-- Capacitor / Time constant strings -->
     <string name="mode_charge">Charge</string>
     <string name="mode_discharge">Discharge</string>
-    <string name="resistor_label">Resistance (Ω)</string>
     <string name="capacitor_label">Capacitance (µF)</string>
     <string name="capacitor_label_description">Enter capacitor value in microfarads (µF)</string>
     <string name="time_label">Time (s)</string>
-    <string name="time_label_seconds">Seconds</string>
     <string name="calculate_button">Calculate</string>
     <string name="result_voltage_format">Voltage: %.4f V</string>
     <string name="result_charge_format">Charge: %.6f C</string>
 
-
     <string name="plot_duration_label">Plot duration (s)</string>
     <string name="max_y_label">Max Y (V) — optional</string>
     <string name="max_y_description">Leave empty for auto scale</string>
-    <string name="press_calculate_to_generate_graph">Press \'Calculate\' to generate the graph.</string>
 
     <string name="rc_charge_calculator_title">RC Charge Calculator</string>
     <string name="input_parameters_title">Input parameters</string>
-    <string name="voltage_label">Voltage [U]</string>
-    <string name="capacitance_label">Capacitance [C]</string>
-    <string name="resistance_label">Resistance [Ω]</string>
-    <string name="reset_button" translatable="false">Reset</string>
     <string name="results_title">Results:</string>
     <string name="result_title">Result:</string>
-    <string name="time_constant_result">Time constant [τ]: %.4f s</string>
-    <string name="stored_energy_result">Stored energy [E]: %.4f J</string>
+    <!-- Ajouts pour corriger références manquantes -->
+    <string name="voltage_label">Voltage [U]</string>
+    <string name="resistance_label">Resistance (Ω)</string>
     <string name="voltage_legend">Voltage (Vc)</string>
     <string name="current_legend">Current [I]</string>
+    <string name="reset_button" tools:ignore="MissingTranslation">Reset</string>
 
-    <string name="time_constant_formula_description">Formula for time constant</string>
     <!-- Parallel/Series Calculators -->
     <string name="parallel_series_resistor_calculator_title">Parallel &amp; Series Resistor Calculator</string>
     <string name="parallel_series_resistor_calculator_description">Calculate total resistance for components</string>
@@ -411,7 +323,10 @@
     <string name="parallel_result">Parallel: %1$s %2$s</string>
     <string name="add_component">Add %1$s</string>
     <string name="remove_component">Remove %1$s</string>
-    <string name="component_value">%1$s %2$d value (%3$s)</string>
+    <plurals name="component_value" tools:ignore="MissingTranslation">
+        <item quantity="one">%1$s %2$d Value (%3$s)</item>
+        <item quantity="other">%1$s %2$d Value (%3$s)</item>
+    </plurals>
 
     <!-- Ohm's Law Calculator -->
     <string name="ohms_law_calculator_title">Ohm\'s Law Calculator</string>
@@ -421,6 +336,11 @@
     <string name="voltage_v">Voltage (V)</string>
     <string name="current_a">Current (A)</string>
     <string name="resistance_ohm">Resistance (Ω)</string>
+    <string name="power_w">Power (W)</string>
+
+    <!-- Error messages for Ohm's Law calculator extended with power -->
+    <string name="error_voltage_zero">Voltage cannot be zero to calculate current.</string>
+    <string name="error_power_invalid">Power and resistance must be non-negative to calculate voltage/current.</string>
 
     <!-- Voltage Divider Calculator -->
     <string name="voltage_divider_calculator_title">Voltage Divider Calculator</string>
@@ -429,7 +349,6 @@
     <string name="input_voltage_vin">Input Voltage (Vin)</string>
     <string name="resistance_r1_ohm">Resistance R1 (Ω)</string>
     <string name="resistance_r2_ohm">Resistance R2 (Ω)</string>
-    <string name="output_voltage_vout">Output Voltage (Vout): %s V</string>
     <string name="output_voltage_vout_label">Output Voltage (Vout)</string>
 
     <!-- LED Resistor Calculator -->
@@ -438,7 +357,6 @@
     <string name="source_voltage_v">Source Voltage (V)</string>
     <string name="led_forward_voltage_v">LED Forward Voltage (V)</string>
     <string name="led_forward_current_ma">LED Forward Current (mA)</string>
-    <string name="required_resistor_value">Required Resistor: %s Ω</string>
     <string name="required_resistor_label">Required Resistor</string>
 
     <!-- 555 Timer Calculator -->
@@ -455,7 +373,6 @@
     <string name="time_high_label">Time High</string>
     <string name="time_low_label">Time Low</string>
 
-
     <!-- Math Utilities -->
     <string name="quadratic_equation_solver_title">Quadratic Equation Solver</string>
     <string name="quadratic_equation_solver_description">Solve equations of the form ax²+bx+c=0</string>
@@ -463,14 +380,11 @@
     <string name="coefficient_a">Coefficient a</string>
     <string name="coefficient_b">Coefficient b</string>
     <string name="coefficient_c">Coefficient c</string>
-    <string name="error_a_cannot_be_zero">\'a\' cannot be zero.</string>
-    <string name="discriminant_value">Discriminant (Δ) = %1$.2f</string>
-    <string name="two_real_roots">Two real roots:\nx1 = %1$.2f\nx2 = %2$.2f</string>
-    <string name="one_real_root">One real root:\nx = %1$.2f</string>
-    <string name="two_complex_roots">Two complex roots:\nx1 = %1$.2f + %2$.2fi\nx2 = %1$.2f - %2$.2fi</string>
     <string name="error_invalid_numbers">Please enter valid numbers for a, b, and c.</string>
+    <string name="error_a_cannot_be_zero">\'a\' cannot be zero.</string>
     <string name="math_category_title">Math</string>
     <string name="math_category_description">Mathematical tools and calculators</string>
+    <string name="copy_text">Copy</string>
 
     <!-- Physics Category -->
     <string name="physics_category_title">Physics</string>
@@ -480,19 +394,20 @@
     <string name="height_m_label">Height (m)</string>
     <string name="final_velocity_label">Final Velocity</string>
     <string name="time_of_fall_label">Time of Fall</string>
-    <string name="error_invalid_height">Please enter a valid positive height.</string>
 
     <!-- Filter Calculator -->
     <string name="filter_calculator_title">Filter Calculator</string>
     <string name="filter_calculator_description">Calculates RC/RL filter cutoff frequency</string>
     <string name="inductance_label">Inductance (H)</string>
-    <string name="frequency_hz_label">Frequency (Hz)</string>
-    <string name="cutoff_frequency">Cutoff Frequency</string>
+    <string name="frequency_hz_label">Frequency [Hz]</string>
     <string name="rc_filter_tab">RC Filter</string>
     <string name="rl_filter_tab">RL Filter</string>
-    <string name="error_two_values_needed">Please enter exactly two values.</string>
     <string name="low_pass_filter_tab">Low-Pass</string>
     <string name="high_pass_filter_tab">High-Pass</string>
+    <!-- Ajoutées pour corriger les références manquantes -->
+    <string name="low_pass">Low-Pass</string>
+    <string name="high_pass">High-Pass</string>
+    <string name="capacitance_label">Capacitance (µF)</string>
 
     <!-- Power & Wiring Calculators -->
     <string name="voltage_drop_calculator_title">Voltage Drop Calculator</string>
@@ -505,10 +420,10 @@
     <string name="wire_diameter_mm">Wire Diameter (mm)</string>
     <string name="copper">Copper</string>
     <string name="aluminum">Aluminum</string>
-    <string name="error_all_fields_required">Please fill in all fields.</string>
-    <string name="voltage_drop_result">Drop: %.2f V (%.2f%%)</string>
+    <string name="voltage_drop_result">Drop: %1$.2f V (%2$.2f%%)</string>
     <string name="max_voltage_drop_percent">Max Voltage Drop (%%)</string>
-    <string name="recommended_wire_gauge_result">Recommended: %d AWG (%.2f mm)</string>
+    <string name="recommended_wire_gauge">Recommended Gauge</string>
+    <string name="recommended_wire_gauge_result">Recommended: %1$d AWG (%2$.2f mm)</string>
     <string name="power_consumption_w">Power Consumption (W)</string>
     <string name="usage_hours_per_day">Usage (hours/day)</string>
     <string name="cost_per_kwh">Cost per kWh</string>
@@ -554,8 +469,6 @@
 
     <string name="circuit_type">Circuit Type</string>
     <string name="filter_type">Filter Type</string>
-    <string name="low_pass">Low-Pass</string>
-    <string name="high_pass">High-Pass</string>
     <string name="capacitance_uf">Capacitance (µF)</string>
     <string name="inductance_mh">Inductance (mH)</string>
     <string name="cutoff_frequency_hz">Cutoff Frequency (Hz)</string>
@@ -566,12 +479,10 @@
     <string name="end_voltage">Voltage at End</string>
 
     <!-- Wire Gauge Calculator -->
-    <string name="recommended_wire_gauge">Recommended Gauge</string>
     <string name="awg_result_format" translatable="false">AWG %d (%.2f mm)</string>
 
     <!-- Wavelength Calculator -->
     <string name="wavelength_calculator_title">Wavelength</string>
-    <string name="wavelength_label">Wavelength</string>
     <string name="frequency_hz">Frequency (Hz)</string>
     <string name="wavelength_m">Wavelength (m)</string>
     <string name="wavelength_calculator_description">Calculate wavelength from frequency and vice versa</string>
@@ -606,26 +517,18 @@
     <string name="input_voltage_range">Input Voltage (V)</string>
     <string name="zener_voltage_vz">Zener Voltage (Vz)</string>
     <string name="load_current_il">Load Current (IL) in mA</string>
-    <string name="required_series_resistor">Required Series Resistor (Rs)</string>
-    <string name="power_dissipation_in_resistor">Power in Resistor (Ps)</string>
-    <string name="power_dissipation_in_zener">Power in Zener (Pz)</string>
-    <string name="min_value">Min</string>
-    <string name="max_value">Max</string>
-
-    <!-- Zener Diode Calculator (compat keys expected by code) -->
-    <string name="zener_voltage_v">Zener Voltage (V)</string>
-    <string name="load_resistance_ohm">Load Resistance (Ω)</string>
-    <string name="zener_power_rating_w">Zener Power Rating (W)</string>
     <string name="series_resistor_rs">Series Resistor (Rs)</string>
     <string name="resistor_power_pr">Resistor Power (Pr)</string>
     <string name="zener_current_iz">Zener Current (Iz)</string>
+    <string name="zener_voltage_v">Zener Voltage (V)</string>
+    <string name="load_resistance_ohm">Load Resistance (Ω)</string>
+    <string name="zener_power_rating_w">Zener Power Rating (W)</string>
 
     <!-- Reactance Calculator -->
     <string name="reactance_calculator_title">Reactance Calculator</string>
     <string name="reactance_calculator_description">Calculate capacitive and inductive reactance</string>
     <string name="capacitive_reactance_xc">Capacitive Reactance (Xc)</string>
     <string name="inductive_reactance_xl">Inductive Reactance (XL)</string>
-    <string name="ohms_unit">Ω</string>
 
     <!-- Power Calculator -->
     <string name="power_calculator_title">Power Calculator</string>
@@ -683,7 +586,6 @@
     <string name="about_title">About</string>
     <string name="about_app_version">App Version</string>
     <string name="about_github">Source Code on GitHub</string>
-    <string name="about_report_issue">Report an Issue</string>
     <string name="about_licenses">Open Source Licenses</string>
 
     <!-- Behavior Section -->
@@ -695,5 +597,3 @@
     <string name="debug_title">Debug</string>
     <string name="debug_force_crash">Force crash</string>
 </resources>
-
-

@@ -106,7 +106,7 @@ private fun ResistorColorCodeCalculator() {
         stringResource(R.string.silver) to Color(0xFFC0C0C0)
     )
 
-    var bandCount by remember { mutableStateOf(4) }
+    var bandCount by remember { mutableIntStateOf(4) }
     var band1 by remember { mutableStateOf(digitColors[1].first) }
     var band2 by remember { mutableStateOf(digitColors[0].first) }
     var band3 by remember { mutableStateOf(digitColors[0].first) }

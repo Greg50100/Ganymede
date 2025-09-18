@@ -59,21 +59,7 @@ fun LanguageProvider(code: String, content: @Composable () -> Unit) {
 // Helper pour la direction de la mise en page
 object TextUtils {
     fun getLayoutDirectionFromLocale(locale: Locale?): Int {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            android.text.TextUtils.getLayoutDirectionFromLocale(locale)
-        } else {
-            // Fallback pour les anciennes versions, bien que votre minSdk soit probablement > 17
-            // Vous pouvez ajuster cette logique si nécessaire.
-            if (locale != null && isRtl(locale)) {
-                View.LAYOUT_DIRECTION_RTL
-            } else {
-                View.LAYOUT_DIRECTION_LTR
-            }
-        }
-    }
-
-    private fun isRtl(locale: Locale): Boolean {
-        val language = locale.language
-        return language in listOf("ar", "fa", "he", "iw", "ur")
+        // La vérification de version est obsolète car minSdk (23) > JELLY_BEAN_MR1 (17)
+        return android.text.TextUtils.getLayoutDirectionFromLocale(locale)
     }
 }

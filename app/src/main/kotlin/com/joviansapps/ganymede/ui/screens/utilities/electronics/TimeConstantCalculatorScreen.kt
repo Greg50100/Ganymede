@@ -252,14 +252,14 @@ private fun CalculatorTabContent(
             OutlinedTextField(
                 value = formatNumber(uiState.timeConstant, "s"),
                 onValueChange = {},
-                label = { Text("Cste de temps (τ)") },
+                label = { Text("Cste de temps (τ)") }, //TODO: translate in English
                 readOnly = true,
                 modifier = Modifier.weight(1f)
             )
             OutlinedTextField(
                 value = formatNumber(uiState.energy, "J"),
                 onValueChange = {},
-                label = { Text("Énergie (E)") },
+                label = { Text("Énergie (E)") }, //TODO: translate in English
                 readOnly = true,
                 modifier = Modifier.weight(1f)
             )
@@ -278,7 +278,7 @@ private fun CalculatorTabContent(
 
         Image(
             painter = painterResource(id = R.drawable.time_constant_equation),
-            contentDescription = "Illustration d'un condensateur en charge",
+            contentDescription = "Illustration d'un condensateur en charge", //TODO: translate in English
             contentScale = ContentScale.FillWidth,
             modifier = Modifier
                 .fillMaxWidth(),
@@ -287,7 +287,7 @@ private fun CalculatorTabContent(
 
         Image(
             painter = painterResource(id = R.drawable.time_constant_circuit),
-            contentDescription = "Illustration d'un circuit RC",
+            contentDescription = "Illustration d'un circuit RC", //TODO: translate in English
             contentScale = ContentScale.FillWidth,
             modifier = Modifier
                 .fillMaxWidth(),
@@ -359,7 +359,7 @@ private fun GraphTabContent(uiState: CapacitorChargeUiState) {
             ChargeDischargeGraph(points = uiState.graphPoints)
         } else {
             Text(
-                text = "Veuillez effectuer un calcul pour afficher le graphique.",
+                text = "Veuillez effectuer un calcul pour afficher le graphique.", //TODO: translate in English
                 textAlign = TextAlign.Center
             )
         }
