@@ -16,7 +16,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.joviansapps.ganymede.R
-import com.joviansapps.ganymede.ui.components.ResultRow
+import com.joviansapps.ganymede.ui.components.ResultField
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -103,9 +103,9 @@ private fun ResultsCard(uiState: ProjectileUiState) {
         Column(Modifier.padding(16.dp)) {
             Text(stringResource(R.string.results_title), style = MaterialTheme.typography.titleLarge)
             Spacer(Modifier.height(16.dp))
-            ResultRow(stringResource(R.string.max_height_label), "${formatter.format(uiState.maxHealth)} m")
-            ResultRow(stringResource(R.string.time_of_flight_label), "${formatter.format(uiState.timeOfFlight)} s")
-            ResultRow(stringResource(R.string.range_label), "${formatter.format(uiState.range)} m")
+            ResultField(stringResource(R.string.max_height_label), "${formatter.format(uiState.maxHealth)} m")
+            ResultField(stringResource(R.string.time_of_flight_label), "${formatter.format(uiState.timeOfFlight)} s")
+            ResultField(stringResource(R.string.range_label), "${formatter.format(uiState.range)} m")
         }
     }
 }

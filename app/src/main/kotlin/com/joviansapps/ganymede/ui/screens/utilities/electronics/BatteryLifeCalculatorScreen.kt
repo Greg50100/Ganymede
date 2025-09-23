@@ -23,6 +23,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.joviansapps.ganymede.R
+import com.joviansapps.ganymede.ui.components.ResultField
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -33,7 +34,7 @@ import kotlin.math.floor
 data class BatteryLifeUiState(
     val capacity: String = "2000",
     val consumption: String = "150",
-    val lifeInHours: Double? = null
+    val result: Double? = null
 )
 
 // --- 2. ViewModel ---
@@ -61,13 +62,13 @@ class BatteryLifeViewModel : ViewModel() {
             val consumptionMa = _uiState.value.consumption.toDoubleOrNull()
 
             if (capacityMah == null || consumptionMa == null || consumptionMa <= 0) {
-                _uiState.update { it.copy(lifeInHours = null) }
+                _uiState.update { it.copy(result = null) }
                 return@launch
             }
 
             // Simple formula: Life (hours) = Capacity (mAh) / Consumption (mA)
             val life = capacityMah / consumptionMa
-            _uiState.update { it.copy(lifeInHours = life) }
+            _uiState.update { it.copy(result = life) }
         }
     }
 }
@@ -102,19 +103,30 @@ fun BatteryLifeCalculatorScreen(viewModel: BatteryLifeViewModel = viewModel()) {
             modifier = Modifier.fillMaxWidth()
         )
 
-        uiState.lifeInHours?.let { hours ->
-            Card(modifier = Modifier.fillMaxWidth()) {
-                Column(Modifier.padding(16.dp)) {
-                    Text(
-                        text = stringResource(R.string.estimated_battery_life),
-                        style = MaterialTheme.typography.titleLarge
-                    )
-                    Text(
-                        text = formatDuration(hours),
-                        style = MaterialTheme.typography.headlineMedium.copy(color = MaterialTheme.colorScheme.primary)
-                    )
-                }
-            }
+//        uiState.result?.let { hours ->
+//            Card(modifier = Modifier.fillMaxWidth()) {
+//                Column(Modifier.padding(16.dp)) {
+//                    Text(
+//                        text = stringResource(R.string.estimated_battery_life),
+//                        style = MaterialTheme.typography.titleLarge
+//                    )
+//                    Text(
+//                        text = formatDuration(hours),
+//                        style = MaterialTheme.typography.headlineMedium.copy(color = MaterialTheme.colorScheme.primary)
+//                    )
+//                }
+//            }
+//        }
+        uiState.result?.let {
+            val resultsText =
+                "${stringResource(R.string.estimated_battery_life)}: ${formatDuration(it)}"
+
+            ResultField(
+                label = stringResource(R.string.results_title),
+                value = resultsText,
+                modifier = Modifier.fillMaxWidth()
+            )
+
         }
     }
 }
@@ -126,9 +138,9 @@ private fun formatDuration(totalHours: Double): String {
     val remainingMinutes = floor((totalHours * 60) % 60).toInt()
 
     val parts = mutableListOf<String>()
-    if (days > 0) parts.add("$days days")
-    if (remainingHours > 0) parts.add("$remainingHours hours")
-    if (remainingMinutes > 0) parts.add("$remainingMinutes minutes")
+    if (days > 0) parts.add("$days d")
+    if (remainingHours > 0) parts.add("$remainingHours h")
+    if (remainingMinutes > 0) parts.add("$remainingMinutes m")
 
     return if (parts.isEmpty()) "Less than a minute" else parts.joinToString(" ")
 }

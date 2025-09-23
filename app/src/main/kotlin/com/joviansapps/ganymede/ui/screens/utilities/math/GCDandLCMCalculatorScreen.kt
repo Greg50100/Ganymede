@@ -16,7 +16,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.joviansapps.ganymede.R
-import com.joviansapps.ganymede.ui.components.ResultRow
+import com.joviansapps.ganymede.ui.components.ResultField
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -73,8 +73,8 @@ fun GcdLcmCalculatorScreen(viewModel: GcdLcmViewModel = viewModel()) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Text(stringResource(R.string.results_title), style = MaterialTheme.typography.titleLarge)
                     Divider(modifier = Modifier.padding(vertical = 8.dp))
-                    ResultRow(label = stringResource(id = R.string.gcd_result_label), value = uiState.gcd.toString())
-                    ResultRow(label = stringResource(id = R.string.lcm_result_label), value = uiState.lcm.toString())
+                    ResultField(label = stringResource(id = R.string.gcd_result_label), value = uiState.gcd.toString())
+                    ResultField(label = stringResource(id = R.string.lcm_result_label), value = uiState.lcm.toString())
                 }
             }
         }

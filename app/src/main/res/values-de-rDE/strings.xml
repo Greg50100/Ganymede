@@ -349,7 +349,7 @@
     <string name="ohms_law_calculator_title">Ohmsches Gesetz</string>
     <string name="ohms_law_calculator_description">V, I, R nach dem Ohmschen Gesetz berechnen</string>
     <string name="ohms_law_triangle_description">Ohmsches Gesetz Dreieck, das V = I * R zeigt</string>
-    <string name="ohms_law_description">Zwei Werte eingeben, um den dritten zu berechnen.</string>
+    <string name="ohms_law_description">Geben Sie zwei beliebige Werte ein, um den dritten und vierten Wert zu berechnen.</string>
     <string name="voltage_v">Spannung (V)</string>
     <string name="current_a">Strom (A)</string>
     <string name="resistance_ohm">Widerstand (Ω)</string>

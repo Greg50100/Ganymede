@@ -1,5 +1,7 @@
 package com.joviansapps.ganymede.navigation
 
+// Petit commentaire pour forcer la re-analyse du fichier par l'IDE/outil.
+
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material.icons.Icons
@@ -34,6 +36,8 @@ import com.joviansapps.ganymede.ui.screens.graph.GraphScreen
 import com.joviansapps.ganymede.ui.screens.home.HomeScreen
 import com.joviansapps.ganymede.ui.screens.settings.SettingsScreen
 import com.joviansapps.ganymede.ui.screens.utilities.UtilitiesScreen
+import com.joviansapps.ganymede.ui.screens.utilities.chemistry.ChemistryCategoryScreen
+import com.joviansapps.ganymede.ui.screens.utilities.chemistry.MolarMassCalculatorScreen
 import com.joviansapps.ganymede.ui.screens.utilities.date.DateCalculatorScreen
 import com.joviansapps.ganymede.ui.screens.utilities.date.DateCategoryScreen
 import com.joviansapps.ganymede.ui.screens.utilities.electronics.*
@@ -89,6 +93,20 @@ fun AppRoot(settingsVm: SettingsViewModel) {
                 Dest.PowerCalculator.route -> stringResource(R.string.power_calculator_title)
                 Dest.WheatstoneBridgeCalculator.route -> stringResource(R.string.wheatstone_bridge_calculator_title)
                 Dest.OpAmpCalculator.route -> stringResource(R.string.op_amp_calculator_title)
+                Dest.CapacitorCodeCalculator.route -> stringResource(R.string.capacitor_code_calculator_title)
+                "smd_resistor_calculator" -> stringResource(R.string.smd_resistor_calculator_title)
+                "power_ac_calculator" -> stringResource(R.string.ac_power_calculator_title)
+                "delta_star_converter" -> stringResource(R.string.delta_star_converter_title)
+                "component_tolerance_calculator" -> stringResource(R.string.component_tolerance_calculator_title)
+                "standard_value_calculator" -> stringResource(R.string.standard_value_calculator_title)
+                "rlc_impedance_calculator" -> stringResource(R.string.rlc_impedance_calculator_title)
+                "rlc_resonant_circuit_calculator" -> stringResource(R.string.rlc_resonant_circuit_calculator_title)
+                // AJOUTÉ
+                Dest.PassiveFilterCalculator.route -> stringResource(R.string.passive_filter_calculator_title)
+                "rms_calculator" -> stringResource(R.string.rms_calculator_title)
+                "bjt_biasing_calculator" -> stringResource(R.string.bjt_biasing_calculator_title)
+                "transformer_calculator" -> stringResource(R.string.transformer_calculator_title)
+
 
                 Dest.HealthCategory.route -> stringResource(R.string.health_category_title)
                 Dest.BmiCalculator.route -> stringResource(R.string.bmi_calculator_title)
@@ -104,6 +122,11 @@ fun AppRoot(settingsVm: SettingsViewModel) {
                 Dest.FreeFallCalculator.route -> stringResource(R.string.free_fall_calculator_title)
                 Dest.NewtonsSecondLawCalculator.route -> stringResource(R.string.newtons_second_law_title)
                 Dest.ProjectileMotionCalculator.route -> stringResource(R.string.projectile_motion_calculator_title)
+                Dest.IdealGasLawCalculator.route -> stringResource(R.string.ideal_gas_law_calculator_title)
+                Dest.BernoulliCalculator.route -> stringResource(R.string.bernoulli_calculator_title)
+
+                Dest.ChemistryCategory.route -> stringResource(R.string.chemistry_category_title)
+                Dest.MolarMassCalculator.route -> stringResource(R.string.molar_mass_calculator_title)
 
 
                 else -> stringResource(R.string.app_name)
@@ -197,7 +220,8 @@ fun AppRoot(settingsVm: SettingsViewModel) {
                     onOpenHealth = { nav.navigate(Dest.HealthCategory.route) },
                     onOpenMath = { nav.navigate(Dest.MathCategory.route) },
                     onOpenPhysics = { nav.navigate(Dest.PhysicsCategory.route) },
-                    onOpenDate = { nav.navigate(Dest.DateCategory.route) }
+                    onOpenDate = { nav.navigate(Dest.DateCategory.route) },
+                    onOpenChemistry = { nav.navigate(Dest.ChemistryCategory.route) }
                 )
             }
             composable(Dest.ElectronicsCategory.route) {
@@ -221,7 +245,20 @@ fun AppRoot(settingsVm: SettingsViewModel) {
                     onOpenReactanceCalculator = { nav.navigate(Dest.ReactanceCalculator.route) },
                     onOpenPowerCalculator = { nav.navigate(Dest.PowerCalculator.route) },
                     onOpenWheatstoneBridgeCalculator = { nav.navigate(Dest.WheatstoneBridgeCalculator.route) },
-                    onOpenOpAmpCalculator = { nav.navigate(Dest.OpAmpCalculator.route) }
+                    onOpenOpAmpCalculator = { nav.navigate(Dest.OpAmpCalculator.route) },
+                    onOpenCapacitorCodeCalculator = { nav.navigate(Dest.CapacitorCodeCalculator.route) },
+                    onOpenSmdResistorCalculator = { nav.navigate("smd_resistor_calculator") },
+                    onOpenPowerAcCalculator = { nav.navigate("power_ac_calculator") },
+                    onOpenDeltaStarConverter = { nav.navigate("delta_star_converter") },
+                    onOpenComponentToleranceCalculator = { nav.navigate("component_tolerance_calculator") },
+                    onOpenStandardValueCalculator = { nav.navigate("standard_value_calculator") },
+                    onOpenRlcImpedanceCalculator = { nav.navigate("rlc_impedance_calculator") },
+                    onOpenRlcResonantCircuitCalculator = { nav.navigate("rlc_resonant_circuit_calculator") },
+                    // AJOUTÉ
+                    onOpenPassiveFilterCalculator = { nav.navigate(Dest.PassiveFilterCalculator.route) },
+                    onOpenRmsCalculator = { nav.navigate("rms_calculator") },
+                    onOpenBjtBiasingCalculator = { nav.navigate("bjt_biasing_calculator") },
+                    onOpenTransformerCalculator = { nav.navigate("transformer_calculator") }
                 )
             }
             composable(Dest.ResistorCalculator.route) { ResistorCalculatorScreen() }
@@ -244,6 +281,19 @@ fun AppRoot(settingsVm: SettingsViewModel) {
             composable(Dest.PowerCalculator.route) { PowerCalculatorScreen() }
             composable(Dest.WheatstoneBridgeCalculator.route) { WheatstoneBridgeCalculatorScreen() }
             composable(Dest.OpAmpCalculator.route) { OpAmpCalculatorScreen() }
+            composable(Dest.CapacitorCodeCalculator.route) { CapacitorCodeCalculatorScreen() }
+            composable("smd_resistor_calculator") { SmdResistorCalculatorScreen() }
+            composable("power_ac_calculator") { PowerAcCalculatorScreen() }
+            composable("delta_star_converter") { DeltaStarConverterScreen() }
+            composable("component_tolerance_calculator") { ComponentToleranceCalculatorScreen() }
+            composable("standard_value_calculator") { StandardValueCalculatorScreen() }
+            composable("rlc_impedance_calculator") { RlcImpedanceCalculatorScreen() }
+            composable("rlc_resonant_circuit_calculator") { RlcResonantCircuitCalculatorScreen() }
+            // AJOUTÉ
+            composable(Dest.PassiveFilterCalculator.route) { PassiveFilterCalculatorScreen() }
+            composable("rms_calculator") { RmsCalculatorScreen() }
+            composable("bjt_biasing_calculator") { BjtBiasingCalculatorScreen() }
+            composable("transformer_calculator") { TransformerCalculatorScreen() }
 
 
             composable(Dest.HealthCategory.route) {
@@ -272,14 +322,18 @@ fun AppRoot(settingsVm: SettingsViewModel) {
                 PhysicsCategoryScreen(
                     onOpenFreeFallCalculator = { nav.navigate(Dest.FreeFallCalculator.route) },
                     onOpenNewtonsSecondLawCalculator = { nav.navigate(Dest.NewtonsSecondLawCalculator.route) },
-                    onOpenProjectileMotionCalculator = { nav.navigate(Dest.ProjectileMotionCalculator.route) }
+                    onOpenProjectileMotionCalculator = { nav.navigate(Dest.ProjectileMotionCalculator.route) },
+                    onOpenIdealGasLawCalculator = { nav.navigate(Dest.IdealGasLawCalculator.route) },
+                    onOpenBernoulliCalculator = { nav.navigate(Dest.BernoulliCalculator.route) }
                 )
             }
             composable(Dest.FreeFallCalculator.route) { FreeFallCalculatorScreen() }
             composable(Dest.NewtonsSecondLawCalculator.route) { NewtonsSecondLawCalculatorScreen() }
             composable(Dest.ProjectileMotionCalculator.route) { ProjectileMotionCalculatorScreen() }
+            composable(Dest.IdealGasLawCalculator.route) { IdealGasLawCalculatorScreen() }
+            composable(Dest.BernoulliCalculator.route) { BernoulliCalculatorScreen() }
 
-            // --- NOUVELLES ROUTES POUR LA DATE ---
+
             composable(Dest.DateCategory.route) {
                 DateCategoryScreen(
                     onOpenDateCalculator = { nav.navigate(Dest.DateCalculator.route) }
@@ -289,7 +343,15 @@ fun AppRoot(settingsVm: SettingsViewModel) {
                 DateCalculatorScreen()
             }
 
+            composable(Dest.ChemistryCategory.route) {
+                ChemistryCategoryScreen(
+                    onOpenMolarMassCalculator = { nav.navigate(Dest.MolarMassCalculator.route) }
+                )
+            }
+            composable(Dest.MolarMassCalculator.route) {
+                MolarMassCalculatorScreen()
+            }
+
         }
     }
 }
-

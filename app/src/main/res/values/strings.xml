@@ -308,6 +308,7 @@
     <string name="results_title">Results:</string>
     <string name="result_title">Result:</string>
     <!-- Ajouts pour corriger références manquantes -->
+    <string name="select_configuration">Select configuration</string>
     <string name="voltage_label">Voltage [U]</string>
     <string name="resistance_label">Resistance (Ω)</string>
     <string name="voltage_legend">Voltage (Vc)</string>
@@ -332,7 +333,7 @@
     <string name="ohms_law_calculator_title">Ohm\'s Law Calculator</string>
     <string name="ohms_law_calculator_description">Calculate V, I, R based on Ohm\'s Law</string>
     <string name="ohms_law_triangle_description">Ohm\'s Law Triangle showing V = I * R</string>
-    <string name="ohms_law_description">Enter any two values to calculate the third.</string>
+    <string name="ohms_law_description">Enter any two values to calculate the third and fourth values.</string>
     <string name="voltage_v">Voltage (V)</string>
     <string name="current_a">Current (A)</string>
     <string name="resistance_ohm">Resistance (Ω)</string>
@@ -596,4 +597,63 @@
     <string name="keep_screen_on_description">Prevent the screen from turning off</string>
     <string name="debug_title">Debug</string>
     <string name="debug_force_crash">Force crash</string>
+
+    <!-- AJOUTÉ : NOUVELLES STRINGS -->
+    <string name="chemistry_category_title">Chemistry</string>
+    <string name="chemistry_category_description">Tools for chemical calculations</string>
+    <string name="molar_mass_calculator_title">Molar Mass Calculator</string>
+    <string name="molar_mass_calculator_description">Calculate the molar mass of a chemical formula</string>
+    <string name="ideal_gas_law_calculator_title">Ideal Gas Law</string>
+    <string name="ideal_gas_law_calculator_description">Calculate P, V, n, or T using PV=nRT</string>
+    <string name="bernoulli_calculator_title">Bernoulli\'s Principle</string>
+    <string name="bernoulli_calculator_description">Fluid dynamics calculations for pressure, velocity, and height</string>
+    <string name="capacitor_code_calculator_title">Capacitor Code Calculator</string>
+    <string name="capacitor_code_calculator_description">Decode standard capacitor markings</string>
+    <!-- AJOUTÉ -->
+    <string name="smd_resistor_calculator_title">SMD Resistor Calculator</string>
+    <string name="smd_resistor_calculator_description">Decode surface-mount resistor codes</string>
+    <string name="ac_power_calculator_title">AC Power Calculator</string>
+    <string name="ac_power_calculator_description">Calculate apparent, real, and reactive power</string>
+    <string name="delta_star_converter_title">Delta-Star Converter</string>
+    <string name="delta_star_converter_description">Convert between Δ and Y circuit configurations</string>
+    <!-- AJOUTÉ -->
+    <string name="component_tolerance_calculator_title">Component Tolerance</string>
+    <string name="component_tolerance_calculator_description">Calculate min/max values based on tolerance</string>
+    <string name="standard_value_calculator_title">Standard Value Calculator</string>
+    <string name="standard_value_calculator_description">Find the nearest standard E-series value</string>
+    <!-- AJOUTÉ -->
+    <string name="rlc_impedance_calculator_title">RLC Impedance Calculator</string>
+    <string name="rlc_impedance_calculator_description">For series/parallel RLC circuits</string>
+    <string name="rlc_resonant_circuit_calculator_title">RLC Resonant Circuit</string>
+    <string name="rlc_resonant_circuit_calculator_description">Calculate resonant frequency, Q factor, and bandwidth</string>
+    <!-- AJOUTÉ -->
+    <string name="passive_filter_calculator_title">Passive Filter Calculator</string>
+    <string name="passive_filter_calculator_description">Calculate cutoff frequency for RC, RL, LC filters</string>
+    <string name="rms_calculator_title">RMS Value Calculator</string>
+    <string name="rms_calculator_description">Calculate RMS value for various waveforms</string>
+    <string name="bjt_biasing_calculator_title">BJT Biasing Calculator</string>
+    <string name="bjt_biasing_calculator_description">Find the Q-point for a voltage divider circuit</string>
+    <string name="transformer_calculator_title">Transformer Calculator</string>
+    <string name="transformer_calculator_description">Calculate turns ratio and voltages for ideal transformers</string>
+
+<!--    <string name="ideal_transformer_note">Pour transformateurs idéaux</string>-->
+<!--    <string name="primary_turns_label">Spires Primaire (Np)</string>-->
+<!--    <string name="secondary_turns_label">Spires Secondaire (Ns)</string>-->
+<!--    <string name="primary_voltage_label">Tension Primaire (Vp)</string>-->
+<!--    <string name="secondary_voltage_label">Tension Secondaire (Vs)</string>-->
+<!--    <string name="primary_current_label">Courant Primaire (Ip)</string>-->
+<!--    <string name="secondary_current_label">Courant Secondaire (Is)</string>-->
+<!--    <string name="results_title">Résultats</string>-->
+<!--    <string name="turns_ratio_label">Rapport de Transformation (Np/Ns)</string>-->
+
+    <string name="ideal_transformer_note">For ideal transformers</string>
+    <string name="primary_turns_label">Primary Turns (Np)</string>
+    <string name="secondary_turns_label">Secondary Turns (Ns)</string>
+    <string name="primary_voltage_label">Primary Voltage (Vp)</string>
+    <string name="secondary_voltage_label">Secondary Voltage (Vs)</string>
+    <string name="primary_current_label">Primary Current (Ip)</string>
+    <string name="secondary_current_label">Secondary Current (Is)</string>
+    <string name="turns_ratio_label">Turns Ratio (Np/Ns)</string>
+
 </resources>
+

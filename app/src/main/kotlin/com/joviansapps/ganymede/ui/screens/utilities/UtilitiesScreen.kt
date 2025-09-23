@@ -16,7 +16,8 @@ fun UtilitiesScreen(
     onOpenHealth: () -> Unit = {},
     onOpenMath: () -> Unit = {},
     onOpenPhysics: () -> Unit = {},
-    onOpenDate: () -> Unit = {} // Ajouté
+    onOpenDate: () -> Unit = {},
+    onOpenChemistry: () -> Unit = {} // AJOUTÉ
 ) {
     // List of available utility categories
     val utilityItems = listOf(
@@ -43,6 +44,13 @@ fun UtilitiesScreen(
             description = stringResource(id = R.string.physics_category_description),
             icon = Icons.Default.Speed, // Changed icon for better distinction
             onClick = onOpenPhysics
+        ),
+        // AJOUTÉ : Nouvelle catégorie Chimie
+        CategoryItem(
+            title = "Chimie", // À AJOUTER DANS strings.xml
+            description = "Outils pour les calculs chimiques.", // À AJOUTER
+            icon = Icons.Default.Science,
+            onClick = onOpenChemistry
         ),
         // Date utility category
         CategoryItem(

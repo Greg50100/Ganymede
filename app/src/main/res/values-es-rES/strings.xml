@@ -337,7 +337,7 @@
     <string name="ohms_law_calculator_title">Calculadora de la Ley de Ohm</string>
     <string name="ohms_law_calculator_description">Calcular V, I, R según la Ley de Ohm</string>
     <string name="ohms_law_triangle_description">Triángulo de la Ley de Ohm que muestra V = I * R</string>
-    <string name="ohms_law_description">Introduzca dos valores cualesquiera para calcular el tercero.</string>
+    <string name="ohms_law_description">Introduzca dos valores cualesquiera para calcular el tercer y cuarto valor.</string>
     <string name="voltage_v">Voltaje (V)</string>
     <string name="current_a">Corriente (A)</string>
     <string name="resistance_ohm">Resistencia (Ω)</string>

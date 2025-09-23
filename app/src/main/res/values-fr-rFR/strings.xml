@@ -326,7 +326,7 @@
     <string name="ohms_law_calculator_title">Calculateur de la loi d\'Ohm</string>
     <string name="ohms_law_calculator_description">Calculez V, I, R en fonction de la loi d\'Ohm</string>
     <string name="ohms_law_triangle_description">Triangle de la loi d\'Ohm montrant V = I * R</string>
-    <string name="ohms_law_description">Entrez deux valeurs quelconques pour calculer la troisième.</string>
+    <string name="ohms_law_description">Entrez deux valeurs quelconques pour calculer les troisième et quatrième valeurs.</string>
     <string name="voltage_v">Tension (V)</string>
     <string name="current_a">Courant (A)</string>
     <string name="resistance_ohm">Résistance (Ω)</string>
@@ -543,4 +543,27 @@
     <string name="power_dissipation_in_resistor">Puissance dans la résistance (Ps)</string>
     <string name="power_dissipation_in_zener">Puissance en Zener (Pz)</string>
     <string name="min_value">Min</string>
+
+    <!-- AJOUTÉ : NOUVELLES STRINGS -->
+    <string name="chemistry_category_title">Chimie</string>
+    <string name="chemistry_category_description">Outils pour les calculs chimiques</string>
+    <string name="molar_mass_calculator_title">Calculateur de Masse Molaire</string>
+    <string name="molar_mass_calculator_description">Calcule la masse molaire d\'une formule chimique</string>
+    <string name="ideal_gas_law_calculator_title">Loi des Gaz Parfaits</string>
+    <string name="ideal_gas_law_calculator_description">Calcule P, V, n, ou T avec PV=nRT</string>
+    <string name="bernoulli_calculator_title">Principe de Bernoulli</string>
+    <string name="bernoulli_calculator_description">Calculs de dynamique des fluides (pression, vitesse, hauteur)</string>
+    <!-- AJOUTÉ -->
+    <string name="capacitor_code_calculator_title">Calculateur Code Condensateur</string>
+    <string name="capacitor_code_calculator_description">Déchiffrez les marquages standards des condensateurs</string>
+
+    <string name="ideal_transformer_note">Pour transformateurs idéaux</string>
+    <string name="primary_turns_label">Spires Primaire (Np)</string>
+    <string name="secondary_turns_label">Spires Secondaire (Ns)</string>
+    <string name="primary_voltage_label">Tension Primaire (Vp)</string>
+    <string name="secondary_voltage_label">Tension Secondaire (Vs)</string>
+    <string name="primary_current_label">Courant Primaire (Ip)</string>
+    <string name="secondary_current_label">Courant Secondaire (Is)</string>
+    <string name="turns_ratio_label">Rapport de Transformation (Np/Ns)</string>
 </resources>
+

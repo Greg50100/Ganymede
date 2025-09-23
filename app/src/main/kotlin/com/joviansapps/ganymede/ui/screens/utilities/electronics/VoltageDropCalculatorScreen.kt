@@ -7,7 +7,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
@@ -17,6 +16,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.joviansapps.ganymede.R
+import com.joviansapps.ganymede.ui.components.ResultField
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -125,19 +125,21 @@ fun VoltageDropCalculatorScreen(viewModel: VoltageDropViewModel = viewModel()) {
 
         // --- Results ---
         if (uiState.voltageDrop != null) {
-            Card(modifier = Modifier.fillMaxWidth()) {
-                Column(
-                    modifier = Modifier.padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    Text(stringResource(R.string.results_title), style = MaterialTheme.typography.titleLarge)
-                    ElectronicsResultRow(label = stringResource(R.string.voltage_drop), value = "%.2f V".format(uiState.voltageDrop))
-                    ElectronicsResultRow(label = stringResource(R.string.voltage_drop_percent), value = "%.2f %%".format(uiState.voltageDropPercentage))
-                    ElectronicsResultRow(label = stringResource(R.string.end_voltage), value = "%.2f V".format(uiState.endVoltage))
-                }
-            }
+            ResultField(
+                label = stringResource(R.string.voltage_drop),
+                value = "%.2f".format(uiState.voltageDrop),
+                unit = "V"
+            )
+            ResultField(
+                label = stringResource(R.string.voltage_drop_percent),
+                value = "%.2f".format(uiState.voltageDropPercentage),
+                unit = "%"
+            )
+            ResultField(
+                label = stringResource(R.string.end_voltage),
+                value = "%.2f".format(uiState.endVoltage),
+                unit = "V"
+            )
         }
     }
 }
-
-// Use shared ResultRow defined in ResultRow.kt

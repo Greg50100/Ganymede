@@ -17,7 +17,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.joviansapps.ganymede.R
-import com.joviansapps.ganymede.ui.components.ResultRow
+import com.joviansapps.ganymede.ui.components.ResultField
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -82,7 +82,8 @@ fun FreeFallCalculatorScreen(viewModel: FreeFallViewModel = viewModel()) {
             .fillMaxSize()
             .padding(16.dp)
             .verticalScroll(rememberScrollState()),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Text(
             text = stringResource(R.string.free_fall_calculator_description),
@@ -100,8 +101,6 @@ fun FreeFallCalculatorScreen(viewModel: FreeFallViewModel = viewModel()) {
             ),
             modifier = Modifier.fillMaxWidth()
         )
-
-        Spacer(modifier = Modifier.height(16.dp))
 
         Button(
             onClick = { viewModel.calculate() },
@@ -127,20 +126,20 @@ fun FreeFallCalculatorScreen(viewModel: FreeFallViewModel = viewModel()) {
 
 @Composable
 private fun Results(finalVelocity: Double, time: Double) {
-    Column(modifier = Modifier.padding(top = 16.dp)) {
-        Divider(modifier = Modifier.padding(vertical = 8.dp))
+    Column(modifier = Modifier.padding(top = 16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Text(
             text = stringResource(R.string.results_title),
             style = MaterialTheme.typography.titleLarge,
-            modifier = Modifier.padding(bottom = 16.dp)
         )
-        ResultRow(
+        ResultField(
             label = stringResource(R.string.final_velocity_label),
-            value = "%.2f m/s".format(finalVelocity)
+            value = "%.2f".format(finalVelocity),
+            unit = "m/s"
         )
-        ResultRow(
+        ResultField(
             label = stringResource(R.string.time_of_fall_label),
-            value = "%.2f s".format(time)
+            value = "%.2f".format(time),
+            unit = "s"
         )
     }
 }

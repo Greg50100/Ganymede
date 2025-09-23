@@ -42,6 +42,13 @@ object CrashReporter {
 
     fun getBufferedReports(): List<String> = buffer.toList()
 
+    // New public helper for tests to clear the in-memory buffer
+    fun clearBufferedReports() {
+        synchronized(buffer) {
+            buffer.clear()
+        }
+    }
+
     fun log(throwable: Throwable, message: String? = null, extra: Map<String, Any?> = emptyMap()) {
         if (!enabled) return
         val line = buildString {
