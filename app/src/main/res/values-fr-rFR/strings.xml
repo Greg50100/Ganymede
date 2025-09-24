@@ -565,5 +565,10 @@
     <string name="primary_current_label">Courant Primaire (Ip)</string>
     <string name="secondary_current_label">Courant Secondaire (Is)</string>
     <string name="turns_ratio_label">Rapport de Transformation (Np/Ns)</string>
+
+    <string name="search_label">Rechercher</string>
+    <string name="info_not_available">Information non encore disponible pour cet utilitaire.</string>
+    <string name="formulas_title">Formules</string>
+    <string name="info_button_description">Afficher les formules et la théorie</string>
 </resources>
 

@@ -655,5 +655,46 @@
     <string name="secondary_current_label">Secondary Current (Is)</string>
     <string name="turns_ratio_label">Turns Ratio (Np/Ns)</string>
 
+    <string name="search_label">Search</string>
+    <string name="info_not_available">Information not yet available for this utility.</string>
+    <string name="formulas_title">Formulas</string>
+    <string name="info_button_description">Show formulas and theory</string>
+
+    <!-- Ohm's Law Info -->
+    <string name="ohms_law_info_description">Ohm\'s law states that the current through a conductor between two points is directly proportional to the voltage across the two points. It is fundamental for circuit analysis.</string>
+    <string name="ohms_law_info_formulas">V = I × R\nI = V / R\nR = V / I\nP = V × I = I² × R = V² / R</string>
+
+    <!-- Voltage Divider Info -->
+    <string name="voltage_divider_info_description">A voltage divider is a passive linear circuit that produces an output voltage (Vout) that is a fraction of its input voltage (Vin). Voltage division is the result of distributing the input voltage among the components of the divider.</string>
+    <string name="voltage_divider_info_formulas">Vout = Vin × (R2 / (R1 + R2))</string>
+
+    <!-- Time Constant Info -->
+    <string name="time_constant_info_description">The time constant (τ), is the time required for the voltage or current to rise to 63.2% of its final value or fall to 36.8% of its initial value in an RC or RL circuit. It is a measure of how quickly the circuit responds to a change in voltage or current.</string>
+    <string name="time_constant_info_formulas">For an RC circuit: τ = R × C\nFor an RL circuit: τ = L / R</string>
+
+    <!-- 555 Timer Info -->
+    <string name="timer_555_info_description">The 555 timer configured as an astable multivibrator generates a continuous train of rectangular pulses with a specific frequency. The frequency and duty cycle are determined by two resistors (R1, R2) and one capacitor (C).</string>
+    <string name="timer_555_info_formulas">Frequency (f) = 1.44 / ((R1 + 2R2) × C)\nDuty Cycle = (R1 + R2) / (R1 + 2R2) × 100%</string>
+
+    <!-- Op-Amp Info -->
+    <string name="op_amp_info_description">An operational amplifier (op-amp) is a high-gain electronic voltage amplifier with a differential input and, usually, a single-ended output. This calculator covers three basic configurations.</string>
+    <string name="op_amp_info_formulas">Inverting: Vout = -Vin × (Rf / Rin)\nNon-Inverting: Vout = Vin × (1 + Rf / Rin)\nDifferential: Vout = (R2/R1) × (V2 - V1)</string>
+
+    <!-- BJT Biasing Info -->
+    <string name="bjt_biasing_info_description">Biasing a Bipolar Junction Transistor (BJT) means setting up a stable DC operating point (Q-point) so that it works correctly as an amplifier. This calculator analyzes a standard voltage-divider biasing circuit for a common-emitter configuration.</string>
+    <string name="bjt_biasing_info_formulas">Base Voltage (Vb) ≈ Vcc × (R2 / (R1 + R2))\nEmitter Voltage (Ve) = Vb - Vbe\nEmitter Current (Ie) = Ve / Re\nCollector Current (Ic) ≈ Ie</string>
+
+    <!-- BMI Info -->
+    <string name="bmi_info_description">Body Mass Index (BMI) is a measure that uses your height and weight to work out if your weight is healthy. The calculation divides an adult\'s weight in kilograms by their height in metres squared.</string>
+    <string name="bmi_info_formulas">BMI = weight (kg) / [height (m)]²\nBMI = weight (lb) / [height (in)]² × 703</string>
+
+    <!-- BMR Info -->
+    <string name="bmr_info_description">Basal Metabolic Rate (BMR) is the number of calories your body needs to accomplish its most basic (basal) life-sustaining functions. The Mifflin-St Jeor Equation is used for the calculation.</string>
+    <string name="bmr_info_formulas">For Men:\nBMR = 10W + 6.25H - 5A + 5\n\nFor Women:\nBMR = 10W + 6.25H - 5A - 161\n(W=weight in kg, H=height in cm, A=age in years)</string>
+
+    <!-- Quadratic Equation Info -->
+    <string name="quadratic_equation_info_description">A quadratic equation is a second-degree polynomial equation in a single variable x with the form ax² + bx + c = 0. The quadratic formula is used to find the roots (solutions) of this equation.</string>
+    <string name="quadratic_equation_info_formulas">Discriminant (Δ) = b² - 4ac\n\nIf Δ > 0, roots are x1,2 = (-b ± √Δ) / 2a\nIf Δ = 0, one root x = -b / 2a\nIf Δ &lt; 0, no real roots</string>
+
 </resources>
 

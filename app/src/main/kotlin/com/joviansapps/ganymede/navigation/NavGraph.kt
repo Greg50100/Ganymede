@@ -1,12 +1,11 @@
 package com.joviansapps.ganymede.navigation
 
-// Petit commentaire pour forcer la re-analyse du fichier par l'IDE/outil.
-
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -19,25 +18,33 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.joviansapps.ganymede.R
+import com.joviansapps.ganymede.data.getSearchableList
 import com.joviansapps.ganymede.graphing.GraphViewModel
 import com.joviansapps.ganymede.ui.screens.calculator.CalculatorScreen
 import com.joviansapps.ganymede.ui.screens.converter.ConverterScreen
 import com.joviansapps.ganymede.ui.screens.graph.GraphScreen
 import com.joviansapps.ganymede.ui.screens.home.HomeScreen
+import com.joviansapps.ganymede.ui.screens.search.SearchScreen
 import com.joviansapps.ganymede.ui.screens.settings.SettingsScreen
 import com.joviansapps.ganymede.ui.screens.utilities.UtilitiesScreen
 import com.joviansapps.ganymede.ui.screens.utilities.chemistry.ChemistryCategoryScreen
 import com.joviansapps.ganymede.ui.screens.utilities.chemistry.MolarMassCalculatorScreen
+import com.joviansapps.ganymede.ui.screens.utilities.common.UtilityInfoScreen
+import com.joviansapps.ganymede.ui.screens.utilities.common.getUtilityRoutesWithInfo
 import com.joviansapps.ganymede.ui.screens.utilities.date.DateCalculatorScreen
 import com.joviansapps.ganymede.ui.screens.utilities.date.DateCategoryScreen
 import com.joviansapps.ganymede.ui.screens.utilities.electronics.*
@@ -49,6 +56,7 @@ import com.joviansapps.ganymede.ui.screens.utilities.math.MathCategoryScreen
 import com.joviansapps.ganymede.ui.screens.utilities.math.PercentageCalculatorScreen
 import com.joviansapps.ganymede.ui.screens.utilities.math.QuadraticEquationSolverScreen
 import com.joviansapps.ganymede.ui.screens.utilities.physics.*
+import com.joviansapps.ganymede.viewmodel.SearchViewModel
 import com.joviansapps.ganymede.viewmodel.SettingsViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -56,7 +64,9 @@ import com.joviansapps.ganymede.viewmodel.SettingsViewModel
 fun AppRoot(settingsVm: SettingsViewModel) {
     val settingsState by settingsVm.uiState.collectAsState()
     val nav = rememberNavController()
-    val bottomItems = listOf(Dest.Home, Dest.Settings)
+    val bottomItems = listOf(Dest.Home, Dest.Search, Dest.Settings)
+    // CORRECTED: Using the new function from UtilityInfoProvider.kt
+    val utilityRoutesWithInfo = getUtilityRoutesWithInfo()
 
     Scaffold(
         modifier = Modifier.systemBarsPadding(),
@@ -66,11 +76,13 @@ fun AppRoot(settingsVm: SettingsViewModel) {
             val isMainScreen = bottomItems.any { it.route == route }
 
             val titleText: String = when (route) {
+                Dest.UtilityInfo.route -> stringResource(R.string.formulas_title)
                 Dest.Home.route -> stringResource(R.string.home_label)
                 Dest.Calculator.route -> stringResource(R.string.calculator_title)
                 Dest.Converter.route -> stringResource(R.string.converter_title)
                 Dest.Graph.route -> stringResource(R.string.graph_title)
                 Dest.Utilities.route -> stringResource(R.string.utilities_title)
+                Dest.Search.route -> stringResource(R.string.search_label)
                 Dest.Settings.route -> stringResource(R.string.settings_title)
                 Dest.ElectronicsCategory.route -> stringResource(R.string.electronics_category_title)
                 Dest.ResistorCalculator.route -> stringResource(R.string.resistor_calculator_title)
@@ -101,36 +113,29 @@ fun AppRoot(settingsVm: SettingsViewModel) {
                 "standard_value_calculator" -> stringResource(R.string.standard_value_calculator_title)
                 "rlc_impedance_calculator" -> stringResource(R.string.rlc_impedance_calculator_title)
                 "rlc_resonant_circuit_calculator" -> stringResource(R.string.rlc_resonant_circuit_calculator_title)
-                // AJOUTÉ
                 Dest.PassiveFilterCalculator.route -> stringResource(R.string.passive_filter_calculator_title)
                 "rms_calculator" -> stringResource(R.string.rms_calculator_title)
                 "bjt_biasing_calculator" -> stringResource(R.string.bjt_biasing_calculator_title)
                 "transformer_calculator" -> stringResource(R.string.transformer_calculator_title)
-
-
                 Dest.HealthCategory.route -> stringResource(R.string.health_category_title)
                 Dest.BmiCalculator.route -> stringResource(R.string.bmi_calculator_title)
                 Dest.BmrCalculator.route -> stringResource(R.string.bmr_calculator_title)
                 Dest.BodyFatCalculator.route -> stringResource(R.string.body_fat_calculator_title)
-
                 Dest.MathCategory.route -> stringResource(R.string.math_category_title)
                 Dest.QuadraticEquationSolver.route -> stringResource(R.string.quadratic_equation_solver_title)
                 Dest.GCDandLCMCalculator.route -> stringResource(R.string.gcd_lcm_calculator_title)
                 Dest.PercentageCalculator.route -> stringResource(R.string.percentage_calculator_title)
-
                 Dest.PhysicsCategory.route -> stringResource(R.string.physics_category_title)
                 Dest.FreeFallCalculator.route -> stringResource(R.string.free_fall_calculator_title)
                 Dest.NewtonsSecondLawCalculator.route -> stringResource(R.string.newtons_second_law_title)
                 Dest.ProjectileMotionCalculator.route -> stringResource(R.string.projectile_motion_calculator_title)
                 Dest.IdealGasLawCalculator.route -> stringResource(R.string.ideal_gas_law_calculator_title)
                 Dest.BernoulliCalculator.route -> stringResource(R.string.bernoulli_calculator_title)
-
                 Dest.ChemistryCategory.route -> stringResource(R.string.chemistry_category_title)
                 Dest.MolarMassCalculator.route -> stringResource(R.string.molar_mass_calculator_title)
-
-
                 else -> stringResource(R.string.app_name)
             }
+
             TopAppBar(
                 title = { Text(text = titleText) },
                 navigationIcon = {
@@ -139,6 +144,20 @@ fun AppRoot(settingsVm: SettingsViewModel) {
                             Icon(
                                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                                 contentDescription = stringResource(R.string.back_button_description)
+                            )
+                        }
+                    }
+                },
+                actions = {
+                    // Show the f(x) icon only on specified utility screens
+                    if (route in utilityRoutesWithInfo) {
+                        IconButton(onClick = {
+                            // The route is guaranteed to be non-null here
+                            nav.navigate(Dest.UtilityInfo.createRoute(route!!))
+                        }) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.ic_functions),
+                                contentDescription = stringResource(R.string.info_button_description)
                             )
                         }
                     }
@@ -158,9 +177,10 @@ fun AppRoot(settingsVm: SettingsViewModel) {
             ) {
                 val current by nav.currentBackStackEntryAsState()
                 bottomItems.forEach { dest ->
-                    val labelRes = when (dest) {
-                        Dest.Settings -> R.string.settings_title
-                        else -> R.string.home_label
+                    val (labelRes, icon) = when (dest) {
+                        Dest.Settings -> Pair(R.string.settings_title, Icons.Default.Settings)
+                        Dest.Search -> Pair(R.string.search_label, Icons.Default.Search)
+                        else -> Pair(R.string.home_label, Icons.Default.Home)
                     }
                     NavigationBarItem(
                         selected = current?.destination?.route == dest.route,
@@ -175,10 +195,7 @@ fun AppRoot(settingsVm: SettingsViewModel) {
                         },
                         icon = {
                             Icon(
-                                imageVector = when (dest) {
-                                    Dest.Settings -> Icons.Default.Settings
-                                    else -> Icons.Default.Home
-                                },
+                                imageVector = icon,
                                 contentDescription = null
                             )
                         },
@@ -209,6 +226,19 @@ fun AppRoot(settingsVm: SettingsViewModel) {
             }
             composable(Dest.Settings.route) {
                 SettingsScreen(vm = settingsVm)
+            }
+            composable(Dest.Search.route) {
+                val searchViewModel: SearchViewModel = viewModel()
+                val searchableList = getSearchableList()
+
+                LaunchedEffect(searchableList) {
+                    searchViewModel.setSearchableItems(searchableList)
+                }
+
+                SearchScreen(
+                    onNavigate = { route -> nav.navigate(route) },
+                    searchViewModel = searchViewModel
+                )
             }
             composable(Dest.Graph.route) {
                 val graphVm: GraphViewModel = viewModel()
@@ -254,7 +284,6 @@ fun AppRoot(settingsVm: SettingsViewModel) {
                     onOpenStandardValueCalculator = { nav.navigate("standard_value_calculator") },
                     onOpenRlcImpedanceCalculator = { nav.navigate("rlc_impedance_calculator") },
                     onOpenRlcResonantCircuitCalculator = { nav.navigate("rlc_resonant_circuit_calculator") },
-                    // AJOUTÉ
                     onOpenPassiveFilterCalculator = { nav.navigate(Dest.PassiveFilterCalculator.route) },
                     onOpenRmsCalculator = { nav.navigate("rms_calculator") },
                     onOpenBjtBiasingCalculator = { nav.navigate("bjt_biasing_calculator") },
@@ -289,7 +318,6 @@ fun AppRoot(settingsVm: SettingsViewModel) {
             composable("standard_value_calculator") { StandardValueCalculatorScreen() }
             composable("rlc_impedance_calculator") { RlcImpedanceCalculatorScreen() }
             composable("rlc_resonant_circuit_calculator") { RlcResonantCircuitCalculatorScreen() }
-            // AJOUTÉ
             composable(Dest.PassiveFilterCalculator.route) { PassiveFilterCalculatorScreen() }
             composable("rms_calculator") { RmsCalculatorScreen() }
             composable("bjt_biasing_calculator") { BjtBiasingCalculatorScreen() }
@@ -352,6 +380,14 @@ fun AppRoot(settingsVm: SettingsViewModel) {
                 MolarMassCalculatorScreen()
             }
 
+            composable(
+                route = Dest.UtilityInfo.route,
+                arguments = listOf(navArgument("utilityId") { type = NavType.StringType })
+            ) { backStackEntry ->
+                UtilityInfoScreen(utilityId = backStackEntry.arguments?.getString("utilityId"))
+            }
+
         }
     }
 }
+

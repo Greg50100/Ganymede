@@ -589,4 +589,9 @@
     <string name="power_dissipation_in_resistor">Leistung im Widerstand (Ps)</string>
     <string name="power_dissipation_in_zener">Leistung in Zener (Pz)</string>
     <string name="min_value">Mindest</string>
+
+    <string name="search_label">Suchen</string>
+    <string name="info_not_available">Informationen für dieses Dienstprogramm noch nicht verfügbar.</string>
+    <string name="formulas_title">Formeln</string>
+    <string name="info_button_description">Formeln und Theorie anzeigen</string>
 </resources>

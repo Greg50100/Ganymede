@@ -534,4 +534,9 @@
     <string name="power_dissipation_in_resistor">Potencia en la resistencia (Ps)</string>
     <string name="power_dissipation_in_zener">Potencia en Zener (Pz)</string>
     <string name="min_value">Mínimo</string>
+
+    <string name="search_label">Buscar</string>
+    <string name="info_not_available">Información aún no disponible para esta utilidad.</string>
+    <string name="formulas_title">Fórmulas</string>
+    <string name="info_button_description">Mostrar fórmulas y teoría</string>
 </resources>

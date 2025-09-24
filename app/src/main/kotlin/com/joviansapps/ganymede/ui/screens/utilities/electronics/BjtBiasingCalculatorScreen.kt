@@ -1,5 +1,6 @@
 package com.joviansapps.ganymede.ui.screens.utilities.electronics
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
@@ -10,8 +11,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -106,6 +110,7 @@ class BjtBiasingViewModel : ViewModel() {
 }
 
 @Composable
+@Preview
 fun BjtBiasingCalculatorScreen(viewModel: BjtBiasingViewModel = viewModel()) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -116,7 +121,15 @@ fun BjtBiasingCalculatorScreen(viewModel: BjtBiasingViewModel = viewModel()) {
             .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        Text(stringResource(id = R.string.bjt_biasing_calculator_title), style = MaterialTheme.typography.headlineSmall)
+        Image(
+            painter = androidx.compose.ui.res.painterResource(id = R.drawable.bjt_biasing),
+            contentDescription = "BJT Biasing",
+            contentScale = ContentScale.FillWidth,
+            modifier = Modifier
+                .fillMaxWidth(),
+            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.primary)
+        )
+
         Text("Pour configuration diviseur de tension", style = MaterialTheme.typography.bodyMedium)
 
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {

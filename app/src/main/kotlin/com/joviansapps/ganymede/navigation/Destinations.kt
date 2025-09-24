@@ -11,6 +11,11 @@ sealed class Dest(val route: String) {
     data object Graph            : Dest("graph")
     data object Utilities        : Dest("utilities")
     data object Settings         : Dest("settings")
+    data object Search : Dest("search")
+    data object UtilityInfo : Dest("utility_info/{utilityId}") {
+        fun createRoute(utilityId: String) = "utility_info/$utilityId"
+    }
+
 
     // Electronics Utilities
     data object ElectronicsCategory : Dest("electronics_category")
