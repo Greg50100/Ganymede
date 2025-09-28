@@ -11,6 +11,7 @@ sealed class Dest(val route: String) {
     data object Graph            : Dest("graph")
     data object Utilities        : Dest("utilities")
     data object Settings         : Dest("settings")
+    data object Ressources       : Dest("ressources")
     data object Search : Dest("search")
     data object UtilityInfo : Dest("utility_info/{utilityId}") {
         fun createRoute(utilityId: String) = "utility_info/$utilityId"
@@ -83,5 +84,15 @@ sealed class Dest(val route: String) {
 
     data object ChemistryCategory : Dest("chemistry_category")
     data object MolarMassCalculator : Dest("molar_mass_calculator")
+
+    // Resources
+    data object GreekAlphabet : Dest("greek_alphabet")
+    data object LogicGates : Dest("logic_gates")
+    data object PeriodicTable : Dest("periodic_table")
+    data object ASCIITables : Dest("ascii_tables")
+    data object SIDerivedUnits : Dest("si_derived_units")
+    data object SIUnits : Dest("si_units")
+    data object SIConstants : Dest("si_constants")
+    data object SIPrefixes : Dest("si_prefixes")
 
 }

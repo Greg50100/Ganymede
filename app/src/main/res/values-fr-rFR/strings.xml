@@ -570,5 +570,13 @@
     <string name="info_not_available">Information non encore disponible pour cet utilitaire.</string>
     <string name="formulas_title">Formules</string>
     <string name="info_button_description">Afficher les formules et la théorie</string>
-</resources>
 
+    <!-- SI units resource page -->
+    <string name="si_units_title">Unités SI</string>
+    <string name="si_units_description">Les sept unités de base du SI</string>
+
+    <!-- Unités dérivées SI -->
+    <string name="si_derived_units_title">Unités dérivées du SI</string>
+    <string name="si_derived_units_description">Liste des unités dérivées du SI avec nom, symbole et définition en unités de base</string>
+
+</resources>

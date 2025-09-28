@@ -32,6 +32,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.joviansapps.ganymede.R
+import com.joviansapps.ganymede.data.conversion.DENSITY_UNITS
 import com.joviansapps.ganymede.data.getSearchableList
 import com.joviansapps.ganymede.graphing.GraphViewModel
 import com.joviansapps.ganymede.ui.screens.calculator.CalculatorScreen
@@ -59,6 +60,15 @@ import com.joviansapps.ganymede.ui.screens.utilities.physics.*
 import com.joviansapps.ganymede.viewmodel.SearchViewModel
 import com.joviansapps.ganymede.viewmodel.SettingsViewModel
 
+import com.joviansapps.ganymede.ui.screens.ressources.RessourcesScreen
+import com.joviansapps.ganymede.ui.screens.ressources.SIConstantsScreen
+import com.joviansapps.ganymede.ui.screens.ressources.SIUnitsScreen
+import com.joviansapps.ganymede.ui.screens.ressources.DerivedSIUnitsScreen
+import com.joviansapps.ganymede.ui.screens.ressources.ASCIITablesScreen
+import com.joviansapps.ganymede.ui.screens.ressources.GreekAlphabetScreen
+import com.joviansapps.ganymede.ui.screens.ressources.LogicGatesScreen
+import com.joviansapps.ganymede.ui.screens.ressources.PeriodicTableScreen
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppRoot(settingsVm: SettingsViewModel) {
@@ -84,6 +94,7 @@ fun AppRoot(settingsVm: SettingsViewModel) {
                 Dest.Utilities.route -> stringResource(R.string.utilities_title)
                 Dest.Search.route -> stringResource(R.string.search_label)
                 Dest.Settings.route -> stringResource(R.string.settings_title)
+                Dest.Ressources.route -> stringResource(R.string.ressources_title)
                 Dest.ElectronicsCategory.route -> stringResource(R.string.electronics_category_title)
                 Dest.ResistorCalculator.route -> stringResource(R.string.resistor_calculator_title)
                 Dest.InductanceCalculator.route -> stringResource(R.string.inductance_calculator_title)
@@ -106,17 +117,17 @@ fun AppRoot(settingsVm: SettingsViewModel) {
                 Dest.WheatstoneBridgeCalculator.route -> stringResource(R.string.wheatstone_bridge_calculator_title)
                 Dest.OpAmpCalculator.route -> stringResource(R.string.op_amp_calculator_title)
                 Dest.CapacitorCodeCalculator.route -> stringResource(R.string.capacitor_code_calculator_title)
-                "smd_resistor_calculator" -> stringResource(R.string.smd_resistor_calculator_title)
-                "power_ac_calculator" -> stringResource(R.string.ac_power_calculator_title)
-                "delta_star_converter" -> stringResource(R.string.delta_star_converter_title)
-                "component_tolerance_calculator" -> stringResource(R.string.component_tolerance_calculator_title)
-                "standard_value_calculator" -> stringResource(R.string.standard_value_calculator_title)
-                "rlc_impedance_calculator" -> stringResource(R.string.rlc_impedance_calculator_title)
-                "rlc_resonant_circuit_calculator" -> stringResource(R.string.rlc_resonant_circuit_calculator_title)
+                Dest.SmdResistorCalculator.route -> stringResource(R.string.smd_resistor_calculator_title)
+                Dest.PowerAcCalculator.route -> stringResource(R.string.ac_power_calculator_title)
+                Dest.DeltaStarConverter.route -> stringResource(R.string.delta_star_converter_title)
+                Dest.ComponentToleranceCalculator.route -> stringResource(R.string.component_tolerance_calculator_title)
+                Dest.StandardValueCalculator.route -> stringResource(R.string.standard_value_calculator_title)
+                Dest.RlcImpedanceCalculator.route -> stringResource(R.string.rlc_impedance_calculator_title)
+                Dest.RlcResonantCircuitCalculator.route -> stringResource(R.string.rlc_resonant_circuit_calculator_title)
                 Dest.PassiveFilterCalculator.route -> stringResource(R.string.passive_filter_calculator_title)
-                "rms_calculator" -> stringResource(R.string.rms_calculator_title)
-                "bjt_biasing_calculator" -> stringResource(R.string.bjt_biasing_calculator_title)
-                "transformer_calculator" -> stringResource(R.string.transformer_calculator_title)
+                Dest.RmsCalculator.route -> stringResource(R.string.rms_calculator_title)
+                Dest.BjtBiasingCalculator.route -> stringResource(R.string.bjt_biasing_calculator_title)
+                Dest.TransformerCalculator.route -> stringResource(R.string.transformer_calculator_title)
                 Dest.HealthCategory.route -> stringResource(R.string.health_category_title)
                 Dest.BmiCalculator.route -> stringResource(R.string.bmi_calculator_title)
                 Dest.BmrCalculator.route -> stringResource(R.string.bmr_calculator_title)
@@ -133,6 +144,13 @@ fun AppRoot(settingsVm: SettingsViewModel) {
                 Dest.BernoulliCalculator.route -> stringResource(R.string.bernoulli_calculator_title)
                 Dest.ChemistryCategory.route -> stringResource(R.string.chemistry_category_title)
                 Dest.MolarMassCalculator.route -> stringResource(R.string.molar_mass_calculator_title)
+                Dest.SIPrefixes.route -> stringResource(R.string.si_prefixes_title)
+                Dest.SIConstants.route -> stringResource(R.string.si_constants_title)
+                Dest.SIUnits.route -> stringResource(R.string.si_units_title)
+                Dest.SIDerivedUnits.route -> stringResource(R.string.si_derived_units_title)
+                Dest.GreekAlphabet.route -> "Alphabet Grec"
+                Dest.LogicGates.route -> "Portes Logiques"
+                Dest.PeriodicTable.route -> "Tableau Périodique"
                 else -> stringResource(R.string.app_name)
             }
 
@@ -215,7 +233,8 @@ fun AppRoot(settingsVm: SettingsViewModel) {
                     onOpenCalculator = { nav.navigate(Dest.Calculator.route) },
                     onOpenConverter = { nav.navigate(Dest.Converter.route) },
                     onOpenGraph = { nav.navigate(Dest.Graph.route) },
-                    onOpenUtilities = { nav.navigate(Dest.Utilities.route) }
+                    onOpenUtilities = { nav.navigate(Dest.Utilities.route) },
+                    onOpenRessources = { nav.navigate(Dest.Ressources.route) }
                 )
             }
             composable(Dest.Calculator.route) {
@@ -311,17 +330,17 @@ fun AppRoot(settingsVm: SettingsViewModel) {
             composable(Dest.WheatstoneBridgeCalculator.route) { WheatstoneBridgeCalculatorScreen() }
             composable(Dest.OpAmpCalculator.route) { OpAmpCalculatorScreen() }
             composable(Dest.CapacitorCodeCalculator.route) { CapacitorCodeCalculatorScreen() }
-            composable("smd_resistor_calculator") { SmdResistorCalculatorScreen() }
-            composable("power_ac_calculator") { PowerAcCalculatorScreen() }
-            composable("delta_star_converter") { DeltaStarConverterScreen() }
-            composable("component_tolerance_calculator") { ComponentToleranceCalculatorScreen() }
-            composable("standard_value_calculator") { StandardValueCalculatorScreen() }
-            composable("rlc_impedance_calculator") { RlcImpedanceCalculatorScreen() }
-            composable("rlc_resonant_circuit_calculator") { RlcResonantCircuitCalculatorScreen() }
+            composable(Dest.SmdResistorCalculator.route) { SmdResistorCalculatorScreen() }
+            composable(Dest.PowerAcCalculator.route) { PowerAcCalculatorScreen() }
+            composable(Dest.DeltaStarConverter.route) { DeltaStarConverterScreen() }
+            composable(Dest.ComponentToleranceCalculator.route) { ComponentToleranceCalculatorScreen() }
+            composable(Dest.StandardValueCalculator.route) { StandardValueCalculatorScreen() }
+            composable(Dest.RlcImpedanceCalculator.route) { RlcImpedanceCalculatorScreen() }
+            composable(Dest.RlcResonantCircuitCalculator.route) { RlcResonantCircuitCalculatorScreen() }
             composable(Dest.PassiveFilterCalculator.route) { PassiveFilterCalculatorScreen() }
-            composable("rms_calculator") { RmsCalculatorScreen() }
-            composable("bjt_biasing_calculator") { BjtBiasingCalculatorScreen() }
-            composable("transformer_calculator") { TransformerCalculatorScreen() }
+            composable(Dest.RmsCalculator.route) { RmsCalculatorScreen() }
+            composable(Dest.BjtBiasingCalculator.route) { BjtBiasingCalculatorScreen() }
+            composable(Dest.TransformerCalculator.route) { TransformerCalculatorScreen() }
 
 
             composable(Dest.HealthCategory.route) {
@@ -387,7 +406,40 @@ fun AppRoot(settingsVm: SettingsViewModel) {
                 UtilityInfoScreen(utilityId = backStackEntry.arguments?.getString("utilityId"))
             }
 
+            composable(route = Dest.Ressources.route) {
+                RessourcesScreen(
+                    onOpenSIPrefixes = { nav.navigate(Dest.SIPrefixes.route) },
+                    onOpenSIConstants = { nav.navigate(Dest.SIConstants.route) },
+                    onOpenSIUnits = { nav.navigate(Dest.SIUnits.route) },
+                    onOpenSIDerivedUnits = { nav.navigate(Dest.SIDerivedUnits.route) },
+                    onOpenASCIITables = { nav.navigate(Dest.ASCIITables.route) },
+                    onOpenGreekAlphabet = { nav.navigate(Dest.GreekAlphabet.route) },
+                    onOpenLogicGates = { nav.navigate(Dest.LogicGates.route) },
+                    onOpenPeriodicTable = { nav.navigate(Dest.PeriodicTable.route) }
+                )
+            }
+
+
+            composable(Dest.ASCIITables.route) {
+                ASCIITablesScreen()
+            }
+
+            composable(Dest.SIPrefixes.route) {
+                com.joviansapps.ganymede.ui.screens.ressources.SIPrefixesScreen()
+            }
+            composable(Dest.SIConstants.route) {
+                SIConstantsScreen()
+            }
+            composable(Dest.SIUnits.route) {
+                SIUnitsScreen()
+            }
+            composable(Dest.SIDerivedUnits.route) {
+                DerivedSIUnitsScreen()
+            }
+            composable(Dest.GreekAlphabet.route) { GreekAlphabetScreen() }
+            composable(Dest.LogicGates.route) { LogicGatesScreen() }
+            composable(Dest.PeriodicTable.route) { PeriodicTableScreen() }
+
         }
     }
 }
-

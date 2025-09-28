@@ -29,7 +29,8 @@ fun UtilityInfoScreen(utilityId: String?) {
             Dest.TimeConstantCalculator.route -> TimeConstantCalculatorInfo()
             Dest.Timer555Calculator.route -> Timer555CalculatorInfo()
             Dest.OpAmpCalculator.route -> OpAmpCalculatorInfo()
-            "bjt_biasing_calculator" -> BjtBiasingCalculatorInfo()
+            Dest.TransformerCalculator.route -> TransformerCalculatorInfo()
+            Dest.BjtBiasingCalculator.route -> BjtBiasingCalculatorInfo()
 
             // Health
             Dest.BmiCalculator.route -> BmiCalculatorInfo()
@@ -56,7 +57,8 @@ fun getUtilityRoutesWithInfo(): Set<String> {
         Dest.TimeConstantCalculator.route,
         Dest.Timer555Calculator.route,
         Dest.OpAmpCalculator.route,
-        "bjt_biasing_calculator",
+        Dest.TransformerCalculator.route,
+        Dest.BjtBiasingCalculator.route,
 
         // Health
         Dest.BmiCalculator.route,

@@ -26,6 +26,7 @@ fun HomeScreen(
     onOpenConverter: () -> Unit = {},
     onOpenGraph: () -> Unit = {},
     onOpenUtilities: () -> Unit = {},
+    onOpenRessources: () -> Unit = {},
 ) {
     val context = LocalContext.current
     val buyMeACoffeeUrl = stringResource(id = R.string.buy_me_a_coffee_url) // Changed to a dedicated URL string
@@ -69,6 +70,14 @@ fun HomeScreen(
                 title = stringResource(R.string.utilities_title),
                 description = stringResource(R.string.utilities_description),
                 onClick = onOpenUtilities,
+            )
+
+            Spacer(Modifier.height(16.dp))
+
+            OutlinedLabelButton(
+                title = stringResource(R.string.ressources_title),
+                description = stringResource(R.string.ressources_description),
+                onClick = onOpenRessources,
             )
 
             Spacer(Modifier.height(16.dp))

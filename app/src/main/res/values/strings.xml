@@ -696,5 +696,24 @@
     <string name="quadratic_equation_info_description">A quadratic equation is a second-degree polynomial equation in a single variable x with the form ax² + bx + c = 0. The quadratic formula is used to find the roots (solutions) of this equation.</string>
     <string name="quadratic_equation_info_formulas">Discriminant (Δ) = b² - 4ac\n\nIf Δ > 0, roots are x1,2 = (-b ± √Δ) / 2a\nIf Δ = 0, one root x = -b / 2a\nIf Δ &lt; 0, no real roots</string>
 
-</resources>
+    <!-- Ressources (Resources) -->
+    <string name="ressources_title">Resources</string>
+    <string name="ressources_description">Helpful links and documents</string>
 
+    <!-- SI prefixes resource page -->
+    <string name="si_prefixes_title">SI prefixes</string>
+    <string name="si_prefixes_description">Common SI prefixes and their powers of ten</string>
+
+    <!-- SI constants resource page -->
+    <string name="si_constants_title">SI constants</string>
+    <string name="si_constants_description">Fundamental physical constants</string>
+
+    <!-- SI units resource page -->
+    <string name="si_units_title">SI units</string>
+    <string name="si_units_description">The seven base units of the SI</string>
+
+    <!-- New: SI derived units -->
+    <string name="si_derived_units_title">SI derived units</string>
+    <string name="si_derived_units_description">List of SI derived units with name, symbol and definition in base SI units</string>
+
+</resources>
