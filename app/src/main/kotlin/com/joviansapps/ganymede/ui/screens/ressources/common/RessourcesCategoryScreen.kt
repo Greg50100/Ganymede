@@ -1,10 +1,9 @@
-package com.joviansapps.ganymede.ui.screens.utilities.common
+package com.joviansapps.ganymede.ui.screens.ressources.common
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -33,7 +32,6 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
 
-// Data class to represent a generic item on a category screen
 data class CategoryItem(
     val title: String,
     val description: String,
@@ -41,13 +39,8 @@ data class CategoryItem(
     val onClick: () -> Unit
 )
 
-/**
- * A generic screen to display a grid of categories.
- * This avoids duplicating the layout for Electronics, Health, Math, etc.
- */
 @Composable
-@Preview(showBackground = true)
-fun CategoryGridScreen(
+fun ResourcesCategoryGridScreen(
     items: List<CategoryItem>,
     modifier: Modifier = Modifier
 ) {
@@ -81,7 +74,10 @@ private fun CategoryCard(
 ) {
     // Simplify: use Card's built-in onClick & ripple to ensure clicks propagate and navigation works
     Card(
-        onClick = onClick,
+        onClick = {
+            // Click log removed to avoid logging on every card click
+            onClick()
+        },
         modifier = Modifier
             .fillMaxWidth()
             .height(92.dp) // taille fixe plus compacte
@@ -126,15 +122,18 @@ private fun CategoryCard(
     }
 }
 
-// Preview helper to visualize compact uniformly-sized cards
 @Preview(showBackground = true)
 @Composable
 private fun CategoryGridPreview() {
     val sample = listOf(
-        CategoryItem("Électronique", "Outils et calc", Icons.Default.Info, {}),
-        CategoryItem("Santé", "Indice & co", Icons.Default.Info, {}),
-        CategoryItem("Math", "Solveurs & util", Icons.Default.Info, {}),
-        CategoryItem("Physique", "Formules", Icons.Default.Info, {})
+        CategoryItem("SI Units", "International System of Units", Icons.Default.Info,  {}
+        ),
+        CategoryItem("General References", "Common constants and conversions", Icons.Default.Info, {}
+        ),
+        CategoryItem("Chemistry & Physics", "Resources for chemistry and physics", Icons.Default.Info, {}
+        ),
+        CategoryItem("Computing", "Computing related resources", Icons.Default.Info, {}
+        )
     )
-    CategoryGridScreen(items = sample)
+    ResourcesCategoryGridScreen(items = sample)
 }

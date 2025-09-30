@@ -76,12 +76,18 @@ dependencies {
     implementation(libs.compose.material3)
     implementation(libs.navigation.compose)
     implementation(libs.compose.foundation)
+    // Ajout de Material (Compose Material 2) : certaines écrans utilisent encore les API Material2
+    implementation("androidx.compose.material:material")
     implementation("net.objecthunter:exp4j:0.4.8")
     // Icônes Material (ArrowBack etc.)
     implementation(libs.androidx.compose.material.icons.extended)
 
     // DataStore Preferences
     implementation("androidx.datastore:datastore-preferences:1.0.0")
+
+    // Accompanist Pager (utilisé par UsefulCommandsScreen)
+    implementation("com.google.accompanist:accompanist-pager:0.30.1")
+    implementation("com.google.accompanist:accompanist-pager-indicators:0.30.1")
 
     // Firebase Crashlytics (use version catalog alias)
     implementation(libs.firebase.crashlytics)
@@ -99,7 +105,8 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    // TODO: Envisager l'usage du BOM Compose pour ui/foundation/material3/navigation/activity afin d'éviter le drift de versions.
+    // TODO: Envisager l'usage du BOM Compose pour ui/foundation/material3/navigation/activity afin d'
+    //       éviter le drift de versions.
 
     // TODO: Mettre à jour DataStore preferences vers 1.1.x
     // implementation("androidx.datastore:datastore-preferences:1.1.1")

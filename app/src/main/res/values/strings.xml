@@ -315,6 +315,13 @@
     <string name="current_legend">Current [I]</string>
     <string name="reset_button" tools:ignore="MissingTranslation">Reset</string>
 
+    <!-- Ressources screens strings -->
+    <string name="regex_cheat_sheet">Regex Cheat Sheet</string>
+    <string name="useful_commands">Useful Commands</string>
+    <string name="electronic_symbols">Electronic Symbols</string>
+    <string name="wire_gauge_reference">Wire Gauge Reference</string>
+    <string name="component_pinouts">Component Pinouts</string>
+
     <!-- Parallel/Series Calculators -->
     <string name="parallel_series_resistor_calculator_title">Parallel &amp; Series Resistor Calculator</string>
     <string name="parallel_series_resistor_calculator_description">Calculate total resistance for components</string>
@@ -385,7 +392,10 @@
     <string name="error_a_cannot_be_zero">\'a\' cannot be zero.</string>
     <string name="math_category_title">Math</string>
     <string name="math_category_description">Mathematical tools and calculators</string>
-    <string name="copy_text">Copy</string>
+    <string name="mathematics_category_title">Math</string>
+    <string name="mathematics_category_description">Mathematical tools and calculators</string>
+    <string name="mechanics_category_title">Mechanics</string>
+    <string name="mechanics_category_description">Classical mechanics references and calculators</string>
 
     <!-- Physics Category -->
     <string name="physics_category_title">Physics</string>
@@ -669,12 +679,12 @@
     <string name="voltage_divider_info_formulas">Vout = Vin × (R2 / (R1 + R2))</string>
 
     <!-- Time Constant Info -->
-    <string name="time_constant_info_description">The time constant (τ), is the time required for the voltage or current to rise to 63.2% of its final value or fall to 36.8% of its initial value in an RC or RL circuit. It is a measure of how quickly the circuit responds to a change in voltage or current.</string>
+    <string name="time_constant_info_description" formatted="false">The time constant (τ), is the time required for the voltage or current to rise to 63.2% of its final value or fall to 36.8% of its initial value in an RC or RL circuit. It is a measure of how quickly the circuit responds to a change in voltage or current.</string>
     <string name="time_constant_info_formulas">For an RC circuit: τ = R × C\nFor an RL circuit: τ = L / R</string>
 
     <!-- 555 Timer Info -->
     <string name="timer_555_info_description">The 555 timer configured as an astable multivibrator generates a continuous train of rectangular pulses with a specific frequency. The frequency and duty cycle are determined by two resistors (R1, R2) and one capacitor (C).</string>
-    <string name="timer_555_info_formulas">Frequency (f) = 1.44 / ((R1 + 2R2) × C)\nDuty Cycle = (R1 + R2) / (R1 + 2R2) × 100%</string>
+    <string name="timer_555_info_formulas" formatted="false">Frequency (f) = 1.44 / ((R1 + 2R2) × C)\nDuty Cycle = (R1 + R2) / (R1 + 2R2) × 100%</string>
 
     <!-- Op-Amp Info -->
     <string name="op_amp_info_description">An operational amplifier (op-amp) is a high-gain electronic voltage amplifier with a differential input and, usually, a single-ended output. This calculator covers three basic configurations.</string>
@@ -716,4 +726,40 @@
     <string name="si_derived_units_title">SI derived units</string>
     <string name="si_derived_units_description">List of SI derived units with name, symbol and definition in base SI units</string>
 
+    <!-- Ressources categories -->
+    <string name="si_units_system_category_title">SI Units</string>
+    <string name="si_units_system_category_description">International System of Units and constants</string>
+    <string name="general_references_category_title">General References</string>
+    <string name="general_references_category_description">Reference tables, formulas, and more</string>
+    <string name="chemistry_physics_category_title">Chemistry &amp; Physics</string>
+    <string name="chemistry_physics_category_description">Periodic table, elements, and physical constants</string>
+    <string name="computing_category_title">Computing</string>
+    <string name="computing_category_description">Data, logic, and computer science resources</string>
+
+    <string name="e_series_values">E-Series Standard Values</string>
+    <string name="e_series_description">Standardized values for resistors and capacitors.</string>
+    <string name="connector_pinouts">Connector Pinouts</string>
+    <string name="battery_technology">Battery Technology Comparison</string>
+    <string name="component_packages">Component Packages Guide</string>
+    <string name="git_cheatsheet">Git Cheatsheet</string>
+    <string name="http_status_codes">HTTP Status Codes</string>
+    <string name="tcp_udp_ports">Common TCP/UDP Ports</string>
+    <string name="markdown_syntax">Markdown Syntax</string>
+    <string name="latex_syntax">LaTeX Syntax</string>
+    <string name="material_properties">Material Properties</string>
+    <string name="electromagnetic_spectrum">Electromagnetic Spectrum</string>
+    <string name="em_spectrum_description">The range of all types of EM radiation.</string>
+    <string name="redox_potentials">Standard Redox Potentials</string>
+    <string name="derivatives_integrals">Derivatives and Integrals</string>
+    <string name="trig_identities">Trigonometric Identities</string>
+    <string name="laplace_transforms">Laplace Transforms</string>
+    <string name="tapping_drill_chart">Tapping Drill Chart (Metric)</string>
+    <string name="bearing_designations">Bearing Designations</string>
+    <string name="nato_phonetic_alphabet">NATO Phonetic Alphabet</string>
+    <string name="morse_code">Morse Code</string>
+    <string name="roman_numerals">Roman Numerals</string>
+    <string name="mathematics_resources">Mathematics</string>
+    <string name="mechanics_resources">Mechanics</string>
+    <string name="electronics_resources">Electronics</string>
+    <string name="copy_text">Copy</string>
 </resources>

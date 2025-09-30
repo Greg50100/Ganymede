@@ -1,6 +1,5 @@
-package com.joviansapps.ganymede.ui.screens.ressources
+package com.joviansapps.ganymede.ui.screens.ressources.SIUnitsSystem
 
-import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.horizontalScroll
@@ -26,7 +25,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalClipboardManager
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -269,7 +267,6 @@ private fun DerivedUnitRowScrollable(unit: DerivedUnit) {
 @Composable
 private fun UnitDetailDialog(unit: DerivedUnit, onDismiss: () -> Unit) {
     val clipboard = LocalClipboardManager.current
-    val context = LocalContext.current
     val formatted = """
         Grandeur physique: ${unit.grandeurPhysique}
         Symbole: ${unit.symbole}
@@ -285,7 +282,6 @@ private fun UnitDetailDialog(unit: DerivedUnit, onDismiss: () -> Unit) {
         confirmButton = {
             TextButton(onClick = {
                 clipboard.setText(AnnotatedString(formatted))
-                Toast.makeText(context, "Copié: ${unit.grandeurPhysique}", Toast.LENGTH_SHORT).show()
                 onDismiss()
             }) {
                 Text("Copier")
@@ -318,7 +314,6 @@ private fun CopyableCell(
     onLongPress: () -> Unit
 ) {
     val clipboard = LocalClipboardManager.current
-    val context = LocalContext.current
     Text(
         text = text,
         modifier = modifier
@@ -326,7 +321,6 @@ private fun CopyableCell(
                 detectTapGestures(
                     onTap = {
                         clipboard.setText(AnnotatedString(text))
-                        Toast.makeText(context, "Copié: $text", Toast.LENGTH_SHORT).show()
                     },
                     onLongPress = { onLongPress() }
                 )

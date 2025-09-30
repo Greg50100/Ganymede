@@ -1,84 +1,83 @@
 package com.joviansapps.ganymede.ui.screens.ressources
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.Spellcheck
-import androidx.compose.material.icons.filled.Functions
-import androidx.compose.material.icons.filled.GridOn
+import androidx.compose.material.icons.filled.MenuBook
+import androidx.compose.material.icons.filled.Straighten
+import androidx.compose.material.icons.filled.ElectricalServices
+import androidx.compose.material.icons.filled.Science
+import androidx.compose.material.icons.filled.Memory
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.joviansapps.ganymede.R
-import com.joviansapps.ganymede.ui.screens.utilities.common.CategoryGridScreen
-import com.joviansapps.ganymede.ui.screens.utilities.common.CategoryItem
-import androidx.compose.material3.Surface
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.foundation.layout.fillMaxSize
+import com.joviansapps.ganymede.ui.screens.ressources.common.ResourcesCategoryGridScreen
+import com.joviansapps.ganymede.ui.screens.ressources.common.CategoryItem
+import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import android.util.Log
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.ui.unit.dp
+import androidx.compose.material3.Text
 
 @Composable
 fun RessourcesScreen(
     modifier: Modifier = Modifier,
-    onOpenSIPrefixes: () -> Unit = {},
-    onOpenSIConstants: () -> Unit = {},
-    onOpenSIUnits: () -> Unit = {},
-    onOpenSIDerivedUnits: () -> Unit = {},
-    onOpenASCIITables: () -> Unit = {},
-    onOpenGreekAlphabet: () -> Unit = {},
-    onOpenLogicGates: () -> Unit = {},
-    onOpenPeriodicTable: () -> Unit = {}
+    onOpenSIUnitsSystem: () -> Unit = {},
+    onOpenElectronics: () -> Unit = {},
+    onOpenGeneralReferences: () -> Unit = {},
+    onOpenChemistryPhysics: () -> Unit = {},
+    onOpenComputing: () -> Unit = {},
+    onOpenMathematics: () -> Unit = {},
+    onOpenMechanics: () -> Unit = {}
 ) {
-    val resourceItems = listOf(
+    val ressourcesItems = listOf(
         CategoryItem(
-            title = stringResource(id = R.string.si_prefixes_title),
-            description = stringResource(id = R.string.si_prefixes_description),
-            icon = Icons.Default.Info,
-            onClick = onOpenSIPrefixes
+            title = stringResource(id = R.string.si_units_system_category_title),
+            description = stringResource(id = R.string.si_units_system_category_description),
+            icon = Icons.Filled.Straighten,
+            onClick = onOpenSIUnitsSystem
         ),
         CategoryItem(
-            title = stringResource(id = R.string.si_constants_title),
-            description = stringResource(id = R.string.si_constants_description),
-            icon = Icons.Default.Info,
-            onClick = onOpenSIConstants
+            title = stringResource(id = R.string.electronics_category_title),
+            description = stringResource(id = R.string.electronics_category_description),
+            icon = Icons.Filled.ElectricalServices,
+            onClick = onOpenElectronics
         ),
         CategoryItem(
-            title = stringResource(id = R.string.si_units_title),
-            description = stringResource(id = R.string.si_units_description),
-            icon = Icons.Default.Info,
-            onClick = onOpenSIUnits
+            title = stringResource(id = R.string.general_references_category_title),
+            description = stringResource(id = R.string.general_references_category_description),
+            icon = Icons.Filled.MenuBook,
+            onClick = onOpenGeneralReferences
         ),
         CategoryItem(
-            title = stringResource(id = R.string.si_derived_units_title),
-            description = stringResource(id = R.string.si_derived_units_description),
-            icon = Icons.Default.Info,
-            onClick = onOpenSIDerivedUnits
+            title = stringResource(id = R.string.chemistry_physics_category_title),
+            description = stringResource(id = R.string.chemistry_physics_category_description),
+            icon = Icons.Filled.Science,
+            onClick = onOpenChemistryPhysics
         ),
         CategoryItem(
-            title = "Tables ASCII",
-            description = "Référence des caractères",
-            icon = Icons.Default.Info,
-            onClick = onOpenASCIITables
+            title = stringResource(id = R.string.computing_category_title),
+            description = stringResource(id = R.string.computing_category_description),
+            icon = Icons.Filled.Memory,
+            onClick = onOpenComputing
         ),
         CategoryItem(
-            title = "Alphabet Grec",
-            description = "Lettres pour les sciences",
-            icon = Icons.Default.Spellcheck,
-            onClick = onOpenGreekAlphabet
+            title = stringResource(id = R.string.mathematics_resources),
+            description = stringResource(id = R.string.math_category_description),
+            icon = Icons.Filled.MenuBook,
+            onClick = onOpenMathematics
         ),
         CategoryItem(
-            title = "Portes Logiques",
-            description = "Symboles et tables de vérité",
-            icon = Icons.Default.Functions,
-            onClick = onOpenLogicGates
-        ),
-        CategoryItem(
-            title = "Tableau Périodique",
-            description = "Informations sur les éléments",
-            icon = Icons.Default.GridOn,
-            onClick = onOpenPeriodicTable
+            title = stringResource(id = R.string.mechanics_resources),
+            description = "Classical mechanics references and calculators",
+            icon = Icons.Filled.Science,
+            onClick = onOpenMechanics
         )
     )
 
-    Surface(modifier = modifier.fillMaxSize(), color = MaterialTheme.colorScheme.surface) {
-        CategoryGridScreen(items = resourceItems, modifier = Modifier)
-    }
+    ResourcesCategoryGridScreen(items = ressourcesItems, modifier = modifier)
 }

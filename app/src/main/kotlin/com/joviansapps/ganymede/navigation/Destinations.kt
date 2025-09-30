@@ -85,14 +85,62 @@ sealed class Dest(val route: String) {
     data object ChemistryCategory : Dest("chemistry_category")
     data object MolarMassCalculator : Dest("molar_mass_calculator")
 
+    // Resources Categories
+    data object RessourcesCategory : Dest("ressources_category")
+    data object GeneralReferences : Dest("general_references")
+    data object ChemistryPhysics : Dest("chemistry_physics")
+    data object Computing : Dest("computing")
+    data object SIUnitsSystem : Dest("si_units_system")
+    data object Mathematics : Dest("mathematics")
+    data object Mechanics : Dest("mechanics")
+
     // Resources
     data object GreekAlphabet : Dest("greek_alphabet")
     data object LogicGates : Dest("logic_gates")
     data object PeriodicTable : Dest("periodic_table")
     data object ASCIITables : Dest("ascii_tables")
     data object SIDerivedUnits : Dest("si_derived_units")
-    data object SIUnits : Dest("si_units")
+    // Avoid name collision with resource keys (si_units_*). Use a more explicit route name.
+    data object SIUnits : Dest("si_units_screen")
     data object SIConstants : Dest("si_constants")
     data object SIPrefixes : Dest("si_prefixes")
 
+    // Resources: electronics sub-category
+    data object RessourcesElectronicsCategory : Dest("ressources_electronics")
+    // Individual resource screens for electronics
+    data object ElectronicSymbols : Dest("electronic_symbols")
+    data object ComponentPinouts : Dest("component_pinouts")
+    data object WireGauge : Dest("wire_gauge")
+    data object BatteryTech : Dest("battery_tech")
+    data object ComponentPackages : Dest("component_packages")
+    data object ConnectorsPinouts : Dest("connectors_pinouts")
+
+
+    // General References
+    data object MorseCode : Dest("morse_code")
+    data object NatoAlphabet : Dest("nato_alphabet")
+    data object RomanNumerals : Dest("roman_numerals")
+
+    // Computing
+    data object GitCheatSheet : Dest("git_cheat_sheet")
+    data object HttpCodes : Dest("http_codes")
+    data object LatexSyntax : Dest("latex_syntax")
+    data object MarkdownSyntax : Dest("markdown_syntax")
+    data object RegexCheatSheet : Dest("regex_cheat_sheet")
+    data object TcpUdpPorts : Dest("tcp_udp_ports")
+    data object UsefulCommands : Dest("useful_commands")
+
+    // Chemistry & Physics
+    data object ElectromagneticSpectrum : Dest("electromagnetic_spectrum")
+    data object MaterialProperties : Dest("material_properties")
+    data object RedoxPotential : Dest("redox_potential")
+
+    // Mathematics
+    data object DerivativesIntegrals : Dest("derivatives_integrals")
+    data object LaplaceTransforms : Dest("laplace_transforms")
+    data object TrigIdentities : Dest("trig_identities")
+
+    // Mechanics
+    data object BearingDesignation : Dest("bearing_designation")
+    data object TappingDrill : Dest("tapping_drill")
 }

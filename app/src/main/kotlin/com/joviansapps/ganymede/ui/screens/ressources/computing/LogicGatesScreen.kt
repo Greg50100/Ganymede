@@ -13,7 +13,7 @@
  * Repository: https://github.com/Greg50100/Ganymede
  */
 
-package com.joviansapps.ganymede.ui.screens.ressources
+package com.joviansapps.ganymede.ui.screens.ressources.computing
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -21,8 +21,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState

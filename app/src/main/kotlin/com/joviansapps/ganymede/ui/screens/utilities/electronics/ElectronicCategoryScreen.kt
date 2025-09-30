@@ -20,7 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.joviansapps.ganymede.R
-import com.joviansapps.ganymede.ui.screens.utilities.common.CategoryGridScreen
+import com.joviansapps.ganymede.ui.screens.utilities.common.UtilitiesCategoryGridScreen
 import com.joviansapps.ganymede.ui.screens.utilities.common.CategoryItem
 
 @Composable
@@ -254,6 +254,6 @@ fun ElectronicCategoryScreen(
             onClick = onOpenPowerCalculator
         ),
     )
-    CategoryGridScreen(items = electronicsItems, modifier = modifier)
+    UtilitiesCategoryGridScreen(items = electronicsItems, modifier = modifier)
 }
 

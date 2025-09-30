@@ -1,5 +1,6 @@
 package com.joviansapps.ganymede.navigation
 
+import android.util.Log
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material.icons.Icons
@@ -32,7 +33,6 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.joviansapps.ganymede.R
-import com.joviansapps.ganymede.data.conversion.DENSITY_UNITS
 import com.joviansapps.ganymede.data.getSearchableList
 import com.joviansapps.ganymede.graphing.GraphViewModel
 import com.joviansapps.ganymede.ui.screens.calculator.CalculatorScreen
@@ -61,13 +61,45 @@ import com.joviansapps.ganymede.viewmodel.SearchViewModel
 import com.joviansapps.ganymede.viewmodel.SettingsViewModel
 
 import com.joviansapps.ganymede.ui.screens.ressources.RessourcesScreen
-import com.joviansapps.ganymede.ui.screens.ressources.SIConstantsScreen
-import com.joviansapps.ganymede.ui.screens.ressources.SIUnitsScreen
-import com.joviansapps.ganymede.ui.screens.ressources.DerivedSIUnitsScreen
-import com.joviansapps.ganymede.ui.screens.ressources.ASCIITablesScreen
-import com.joviansapps.ganymede.ui.screens.ressources.GreekAlphabetScreen
-import com.joviansapps.ganymede.ui.screens.ressources.LogicGatesScreen
-import com.joviansapps.ganymede.ui.screens.ressources.PeriodicTableScreen
+import com.joviansapps.ganymede.ui.screens.ressources.SIUnitsSystem.SIConstantsScreen
+import com.joviansapps.ganymede.ui.screens.ressources.SIUnitsSystem.SIUnitsScreen
+import com.joviansapps.ganymede.ui.screens.ressources.SIUnitsSystem.DerivedSIUnitsScreen
+import com.joviansapps.ganymede.ui.screens.ressources.SIUnitsSystem.SIPrefixesScreen
+import com.joviansapps.ganymede.ui.screens.ressources.SIUnitsSystem.SIUnitsSystemCategoryScreen
+import com.joviansapps.ganymede.ui.screens.ressources.generalreferences.GeneralReferencesCategoryScreen
+import com.joviansapps.ganymede.ui.screens.ressources.computing.ComputingCategoryScreen
+import com.joviansapps.ganymede.ui.screens.ressources.chemistryphysics.ChemistryPhysicsCategoryScreen
+import com.joviansapps.ganymede.ui.screens.ressources.computing.ASCIITablesScreen
+import com.joviansapps.ganymede.ui.screens.ressources.generalreferences.GreekAlphabetScreen
+import com.joviansapps.ganymede.ui.screens.ressources.computing.LogicGatesScreen
+import com.joviansapps.ganymede.ui.screens.ressources.chemistryphysics.PeriodicTableScreen
+import com.joviansapps.ganymede.ui.screens.ressources.electronics.ElectronicSymbolsScreen
+import com.joviansapps.ganymede.ui.screens.ressources.electronics.ComponentPinoutsScreen
+import com.joviansapps.ganymede.ui.screens.ressources.electronics.WireGaugeScreen
+import com.joviansapps.ganymede.ui.screens.ressources.electronics.BatteryTechScreen
+import com.joviansapps.ganymede.ui.screens.ressources.electronics.ComponentPackagesScreen
+import com.joviansapps.ganymede.ui.screens.ressources.electronics.ConnectorsPinoutsScreen
+import com.joviansapps.ganymede.ui.screens.ressources.generalreferences.MorseCodeScreen
+import com.joviansapps.ganymede.ui.screens.ressources.generalreferences.NatoAlphabetScreen
+import com.joviansapps.ganymede.ui.screens.ressources.generalreferences.RomanNumeralsScreen
+import com.joviansapps.ganymede.ui.screens.ressources.computing.GitCheatSheetScreen
+import com.joviansapps.ganymede.ui.screens.ressources.computing.HttpCodesScreen
+import com.joviansapps.ganymede.ui.screens.ressources.computing.LatexSyntaxScreen
+import com.joviansapps.ganymede.ui.screens.ressources.computing.MarkdownSyntaxScreen
+import com.joviansapps.ganymede.ui.screens.ressources.computing.RegexCheatSheetScreen
+import com.joviansapps.ganymede.ui.screens.ressources.computing.TcpUdpPortsScreen
+import com.joviansapps.ganymede.ui.screens.ressources.computing.UsefulCommandsScreen
+import com.joviansapps.ganymede.ui.screens.ressources.chemistryphysics.ElectromagneticSpectrumScreen
+import com.joviansapps.ganymede.ui.screens.ressources.chemistryphysics.MaterialPropertiesScreen
+import com.joviansapps.ganymede.ui.screens.ressources.chemistryphysics.RedoxPotentialScreen
+import com.joviansapps.ganymede.ui.screens.ressources.mathematics.DerivativesIntegralsScreen
+import com.joviansapps.ganymede.ui.screens.ressources.mathematics.LaplaceTransformsScreen
+import com.joviansapps.ganymede.ui.screens.ressources.mathematics.TrigIdentitiesScreen
+import com.joviansapps.ganymede.ui.screens.ressources.mathematics.MathematicsCategoryScreen
+import com.joviansapps.ganymede.ui.screens.ressources.mechanics.BearingDesignationScreen
+import com.joviansapps.ganymede.ui.screens.ressources.mechanics.TappingDrillScreen
+import com.joviansapps.ganymede.ui.screens.ressources.mechanics.MechanicsCategoryScreen
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -148,9 +180,34 @@ fun AppRoot(settingsVm: SettingsViewModel) {
                 Dest.SIConstants.route -> stringResource(R.string.si_constants_title)
                 Dest.SIUnits.route -> stringResource(R.string.si_units_title)
                 Dest.SIDerivedUnits.route -> stringResource(R.string.si_derived_units_title)
+                // Ressources électroniques
+                Dest.ElectronicSymbols.route -> stringResource(R.string.electronic_symbols)
+                Dest.ComponentPinouts.route -> stringResource(R.string.component_pinouts)
+                Dest.WireGauge.route -> stringResource(R.string.wire_gauge_reference)
                 Dest.GreekAlphabet.route -> "Alphabet Grec"
                 Dest.LogicGates.route -> "Portes Logiques"
                 Dest.PeriodicTable.route -> "Tableau Périodique"
+                Dest.BatteryTech.route -> "Technologies de batterie"
+                Dest.ComponentPackages.route -> "Boîtiers de composants"
+                Dest.ConnectorsPinouts.route -> "Brochage des connecteurs"
+                Dest.MorseCode.route -> "Code Morse"
+                Dest.NatoAlphabet.route -> "Alphabet de l'OTAN"
+                Dest.RomanNumerals.route -> "Chiffres Romains"
+                Dest.GitCheatSheet.route -> "Git Cheat Sheet"
+                Dest.HttpCodes.route -> "Codes HTTP"
+                Dest.LatexSyntax.route -> "Syntaxe LaTeX"
+                Dest.MarkdownSyntax.route -> "Syntaxe Markdown"
+                Dest.RegexCheatSheet.route -> "Regex Cheat Sheet"
+                Dest.TcpUdpPorts.route -> "Ports TCP/UDP"
+                Dest.UsefulCommands.route -> "Commandes Utiles"
+                Dest.ElectromagneticSpectrum.route -> "Spectre Électromagnétique"
+                Dest.MaterialProperties.route -> "Propriétés des Matériaux"
+                Dest.RedoxPotential.route -> "Potentiel Redox"
+                Dest.DerivativesIntegrals.route -> "Dérivées et Intégrales"
+                Dest.LaplaceTransforms.route -> "Transformées de Laplace"
+                Dest.TrigIdentities.route -> "Identités Trigonométriques"
+                Dest.BearingDesignation.route -> "Désignation des Roulements"
+                Dest.TappingDrill.route -> "Perçage de Taraudage"
                 else -> stringResource(R.string.app_name)
             }
 
@@ -399,6 +456,15 @@ fun AppRoot(settingsVm: SettingsViewModel) {
                 MolarMassCalculatorScreen()
             }
 
+            // Mathematics category screen (registered to avoid missing destination crash)
+            composable(Dest.Mathematics.route) {
+                MathematicsCategoryScreen(
+                    onOpenDerivativesIntegrals = { nav.navigate(Dest.DerivativesIntegrals.route) },
+                    onOpenLaplaceTransforms = { nav.navigate(Dest.LaplaceTransforms.route) },
+                    onOpenTrigIdentities = { nav.navigate(Dest.TrigIdentities.route) }
+                )
+            }
+
             composable(
                 route = Dest.UtilityInfo.route,
                 arguments = listOf(navArgument("utilityId") { type = NavType.StringType })
@@ -406,40 +472,115 @@ fun AppRoot(settingsVm: SettingsViewModel) {
                 UtilityInfoScreen(utilityId = backStackEntry.arguments?.getString("utilityId"))
             }
 
-            composable(route = Dest.Ressources.route) {
+            composable(Dest.Ressources.route) {
                 RessourcesScreen(
-                    onOpenSIPrefixes = { nav.navigate(Dest.SIPrefixes.route) },
-                    onOpenSIConstants = { nav.navigate(Dest.SIConstants.route) },
-                    onOpenSIUnits = { nav.navigate(Dest.SIUnits.route) },
-                    onOpenSIDerivedUnits = { nav.navigate(Dest.SIDerivedUnits.route) },
-                    onOpenASCIITables = { nav.navigate(Dest.ASCIITables.route) },
-                    onOpenGreekAlphabet = { nav.navigate(Dest.GreekAlphabet.route) },
-                    onOpenLogicGates = { nav.navigate(Dest.LogicGates.route) },
-                    onOpenPeriodicTable = { nav.navigate(Dest.PeriodicTable.route) }
+                    onOpenSIUnitsSystem = { nav.navigate(Dest.SIUnitsSystem.route) },
+                    onOpenElectronics = { nav.navigate(Dest.RessourcesElectronicsCategory.route) },
+                    onOpenGeneralReferences = { nav.navigate(Dest.GeneralReferences.route) },
+                    onOpenChemistryPhysics = { nav.navigate(Dest.ChemistryPhysics.route) },
+                    onOpenComputing = { nav.navigate(Dest.Computing.route) },
+                    onOpenMathematics = { nav.navigate(Dest.Mathematics.route) },
+                    onOpenMechanics = { nav.navigate(Dest.Mechanics.route) }
                 )
             }
 
-
-            composable(Dest.ASCIITables.route) {
-                ASCIITablesScreen()
+            composable(Dest.SIUnitsSystem.route) {
+                SIUnitsSystemCategoryScreen(
+                    onOpenSIPrefixes = { nav.navigate(Dest.SIPrefixes.route) },
+                    onOpenSIConstants = { nav.navigate(Dest.SIConstants.route) },
+                    onOpenSIUnits = { nav.navigate(Dest.SIUnits.route) },
+                    onOpenSIDerivedUnits = { nav.navigate(Dest.SIDerivedUnits.route) }
+                )
+            }
+            // Category écran pour ressources électroniques
+            composable(Dest.RessourcesElectronicsCategory.route) {
+                com.joviansapps.ganymede.ui.screens.ressources.electronics.ElectronicsResourcesCategoryScreen(
+                    onOpenElectronicSymbols = { nav.navigate(Dest.ElectronicSymbols.route) },
+                    onOpenComponentPinouts = { nav.navigate(Dest.ComponentPinouts.route) },
+                    onOpenWireGauge = { nav.navigate(Dest.WireGauge.route) },
+                    onOpenBatteryTech = { nav.navigate(Dest.BatteryTech.route) },
+                    onOpenComponentPackages = { nav.navigate(Dest.ComponentPackages.route) },
+                    onOpenConnectorsPinouts = { nav.navigate(Dest.ConnectorsPinouts.route) }
+                )
+            }
+            composable(Dest.GeneralReferences.route) {
+                GeneralReferencesCategoryScreen(
+                    onOpenGreekAlphabet = { nav.navigate(Dest.GreekAlphabet.route) },
+                    onOpenMorseCode = { nav.navigate(Dest.MorseCode.route) },
+                    onOpenNatoAlphabet = { nav.navigate(Dest.NatoAlphabet.route) },
+                    onOpenRomanNumerals = { nav.navigate(Dest.RomanNumerals.route) }
+                )
+            }
+            composable(Dest.Computing.route) {
+                ComputingCategoryScreen(
+                    onOpenASCIITables = { nav.navigate(Dest.ASCIITables.route) },
+                    onOpenLogicGates = { nav.navigate(Dest.LogicGates.route) },
+                    onOpenGitCheatSheet = { nav.navigate(Dest.GitCheatSheet.route) },
+                    onOpenHttpCodes = { nav.navigate(Dest.HttpCodes.route) },
+                    onOpenLatexSyntax = { nav.navigate(Dest.LatexSyntax.route) },
+                    onOpenMarkdownSyntax = { nav.navigate(Dest.MarkdownSyntax.route) },
+                    onOpenRegexCheatSheet = { nav.navigate(Dest.RegexCheatSheet.route) },
+                    onOpenTcpUdpPorts = { nav.navigate(Dest.TcpUdpPorts.route) },
+                    onOpenUsefulCommands = { nav.navigate(Dest.UsefulCommands.route) }
+                )
+            }
+            composable(Dest.ChemistryPhysics.route) {
+                ChemistryPhysicsCategoryScreen(
+                    onOpenPeriodicTable = { nav.navigate(Dest.PeriodicTable.route) },
+                    onOpenElectromagneticSpectrum = { nav.navigate(Dest.ElectromagneticSpectrum.route) },
+                    onOpenMaterialProperties = { nav.navigate(Dest.MaterialProperties.route) },
+                    onOpenRedoxPotential = { nav.navigate(Dest.RedoxPotential.route) },
+                    modifier = Modifier
+                )
             }
 
-            composable(Dest.SIPrefixes.route) {
-                com.joviansapps.ganymede.ui.screens.ressources.SIPrefixesScreen()
+            // Mechanics category screen
+            composable(Dest.Mechanics.route) {
+                MechanicsCategoryScreen(
+                    onOpenBearingDesignation = { nav.navigate(Dest.BearingDesignation.route) },
+                    onOpenTappingDrill = { nav.navigate(Dest.TappingDrill.route) }
+                )
             }
-            composable(Dest.SIConstants.route) {
-                SIConstantsScreen()
-            }
-            composable(Dest.SIUnits.route) {
-                SIUnitsScreen()
-            }
-            composable(Dest.SIDerivedUnits.route) {
-                DerivedSIUnitsScreen()
-            }
+
+            // Individual resource screens
+            composable(Dest.SIPrefixes.route) { SIPrefixesScreen() }
+            composable(Dest.SIConstants.route) { SIConstantsScreen() }
+            composable(Dest.SIUnits.route) { SIUnitsScreen() }
+            composable(Dest.SIDerivedUnits.route) { DerivedSIUnitsScreen() }
             composable(Dest.GreekAlphabet.route) { GreekAlphabetScreen() }
             composable(Dest.LogicGates.route) { LogicGatesScreen() }
             composable(Dest.PeriodicTable.route) { PeriodicTableScreen() }
-
+            composable(Dest.ASCIITables.route) { ASCIITablesScreen() }
+            // Ressources électroniques (nouveaux)
+            composable(Dest.ElectronicSymbols.route) { ElectronicSymbolsScreen()
+            }
+            composable(Dest.ComponentPinouts.route) {
+                ComponentPinoutsScreen()
+            }
+            composable(Dest.WireGauge.route) {
+                WireGaugeScreen()
+            }
+            composable(Dest.BatteryTech.route) { BatteryTechScreen() }
+            composable(Dest.ComponentPackages.route) { ComponentPackagesScreen() }
+            composable(Dest.ConnectorsPinouts.route) { ConnectorsPinoutsScreen() }
+            composable(Dest.MorseCode.route) { MorseCodeScreen() }
+            composable(Dest.NatoAlphabet.route) { NatoAlphabetScreen() }
+            composable(Dest.RomanNumerals.route) { RomanNumeralsScreen() }
+            composable(Dest.GitCheatSheet.route) { GitCheatSheetScreen() }
+            composable(Dest.HttpCodes.route) { HttpCodesScreen() }
+            composable(Dest.LatexSyntax.route) { LatexSyntaxScreen() }
+            composable(Dest.MarkdownSyntax.route) { MarkdownSyntaxScreen() }
+            composable(Dest.RegexCheatSheet.route) { RegexCheatSheetScreen() }
+            composable(Dest.TcpUdpPorts.route) { TcpUdpPortsScreen() }
+            composable(Dest.UsefulCommands.route) { UsefulCommandsScreen() }
+            composable(Dest.ElectromagneticSpectrum.route) { ElectromagneticSpectrumScreen() }
+            composable(Dest.MaterialProperties.route) { MaterialPropertiesScreen() }
+            composable(Dest.RedoxPotential.route) { RedoxPotentialScreen() }
+            composable(Dest.DerivativesIntegrals.route) { DerivativesIntegralsScreen() }
+            composable(Dest.LaplaceTransforms.route) { LaplaceTransformsScreen() }
+            composable(Dest.TrigIdentities.route) { TrigIdentitiesScreen() }
+            composable(Dest.BearingDesignation.route) { BearingDesignationScreen() }
+            composable(Dest.TappingDrill.route) { TappingDrillScreen() }
         }
     }
 }

@@ -1,8 +1,7 @@
-package com.joviansapps.ganymede.ui.screens.ressources
+package com.joviansapps.ganymede.ui.screens.ressources.computing
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize

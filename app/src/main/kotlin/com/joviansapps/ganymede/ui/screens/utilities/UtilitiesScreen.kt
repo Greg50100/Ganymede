@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.joviansapps.ganymede.R
-import com.joviansapps.ganymede.ui.screens.utilities.common.CategoryGridScreen
+import com.joviansapps.ganymede.ui.screens.utilities.common.UtilitiesCategoryGridScreen
 import com.joviansapps.ganymede.ui.screens.utilities.common.CategoryItem
 
 @Composable
@@ -62,5 +62,5 @@ fun UtilitiesScreen(
         // New utility categories can be added here easily
     )
 
-    CategoryGridScreen(items = utilityItems, modifier = modifier)
+    UtilitiesCategoryGridScreen(items = utilityItems, modifier = modifier)
 }

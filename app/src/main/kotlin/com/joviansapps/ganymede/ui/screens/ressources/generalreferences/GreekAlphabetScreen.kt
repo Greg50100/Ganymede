@@ -1,4 +1,4 @@
-package com.joviansapps.ganymede.ui.screens.ressources
+package com.joviansapps.ganymede.ui.screens.ressources.generalreferences
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*

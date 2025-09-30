@@ -579,4 +579,29 @@
     <string name="si_derived_units_title">Unités dérivées du SI</string>
     <string name="si_derived_units_description">Liste des unités dérivées du SI avec nom, symbole et définition en unités de base</string>
 
+    <string name="e_series_values">Valeurs Normalisées (Séries E)</string>
+    <string name="e_series_description">Valeurs standardisées pour les résistances et condensateurs.</string>
+    <string name="connector_pinouts">Brochages de Connecteurs</string>
+    <string name="battery_technology">Comparatif des Technologies de Batteries</string>
+    <string name="component_packages">Guide des Boîtiers de Composants</string>
+    <string name="git_cheatsheet">Aide-mémoire Git</string>
+    <string name="http_status_codes">Codes de Statut HTTP</string>
+    <string name="tcp_udp_ports">Ports TCP/UDP Courants</string>
+    <string name="markdown_syntax">Syntaxe Markdown</string>
+    <string name="latex_syntax">Syntaxe LaTeX</string>
+    <string name="material_properties">Propriétés des Matériaux</string>
+    <string name="electromagnetic_spectrum">Spectre Électromagnétique</string>
+    <string name="em_spectrum_description">La gamme de tous les types de rayonnements électromagnétiques.</string>
+    <string name="redox_potentials">Potentiels Rédox Standard</string>
+    <string name="derivatives_integrals">Dérivées et Intégrales</string>
+    <string name="trig_identities">Identités Trigonométriques</string>
+    <string name="laplace_transforms">Transformées de Laplace</string>
+    <string name="tapping_drill_chart">Table de Taraudage (Métrique)</string>
+    <string name="bearing_designations">Désignation des Roulements</string>
+    <string name="nato_phonetic_alphabet">Alphabet Phonétique de l\'OTAN</string>
+    <string name="morse_code">Code Morse</string>
+    <string name="roman_numerals">Chiffres Romains</string>
+    <string name="mathematics_resources">Mathématiques</string>
+    <string name="mechanics_resources">Mécanique</string>
+    <string name="electronics_resources">Électronique</string>
 </resources>
