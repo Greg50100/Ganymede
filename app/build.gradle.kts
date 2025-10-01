@@ -36,6 +36,10 @@ android {
         abortOnError = false
     }
 
+    packaging {
+        resources.excludes.add("**/desktop.ini")
+    }
+
     buildTypes {
         getByName("release") {
             // Remplace `useProguard true`

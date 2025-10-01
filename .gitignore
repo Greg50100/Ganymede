@@ -76,3 +76,7 @@ fastlane/screenshots/
 # Misc
 *.orig
 *.rej
+
+# Fichiers système Windows
+desktop.ini
+Thumbs.db
