@@ -269,11 +269,11 @@ private fun LanguageSelector(
             expanded = expanded,
             onDismissRequest = { expanded = false }
         ) {
-            languages.forEach { lang ->
+            languages.forEach { (langCode, langName) ->
                 DropdownMenuItem(
-                    text = { Text(Locale(lang).displayLanguage) },
+                    text = { Text(langName) },
                     onClick = {
-                        onLanguageSelected(lang)
+                        onLanguageSelected(langCode)
                         expanded = false
                     }
                 )
@@ -355,4 +355,3 @@ private fun ConfirmCrashDialog(onDismiss: () -> Unit, onConfirm: () -> Unit) {
         text = { Text(stringResource(R.string.dialog_crash_message)) }
     )
 }
-

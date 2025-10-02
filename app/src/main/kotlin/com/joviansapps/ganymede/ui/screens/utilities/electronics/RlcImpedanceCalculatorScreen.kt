@@ -69,25 +69,26 @@ class RlcImpedanceViewModel : ViewModel() {
 
     // Helper to parse values with metric prefixes
     private fun parseValue(str: String): Double? {
-        val valueString = str.lowercase().trim()
-        if (valueString.isEmpty()) return null
+        val raw = str.trim()
+        if (raw.isEmpty()) return null
 
-        var multiplier = 1.0
-        val lastChar = valueString.last()
-
-        if (!lastChar.isDigit()) {
-            when (lastChar) {
-                'p' -> multiplier = 1e-12
-                'n' -> multiplier = 1e-9
-                'u', 'µ' -> multiplier = 1e-6
-                'm' -> multiplier = 1e-3
-                'k' -> multiplier = 1e3
-                'g' -> multiplier = 1e9
-                'm' -> multiplier = 1e6 // Note: 'M' for Mega, 'm' for milli
+        val lastChar = raw.last()
+        val (numberPart, multiplier) = if (lastChar.isDigit() || lastChar == '.') {
+            raw to 1.0
+        } else {
+            val m = when (lastChar) {
+                'p' -> 1e-12
+                'n' -> 1e-9
+                'u', '\u00b5' -> 1e-6
+                'm' -> 1e-3
+                'k', 'K' -> 1e3
+                'M' -> 1e6
+                'G' -> 1e9
+                else -> 1.0
             }
-            return valueString.dropLast(1).toDoubleOrNull()?.let { it * multiplier }
+            raw.dropLast(1) to m
         }
-        return valueString.toDoubleOrNull()
+        return numberPart.toDoubleOrNull()?.let { it * multiplier }
     }
 
 

@@ -15,11 +15,12 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.joviansapps.ganymede.R
+import com.joviansapps.ganymede.ui.components.NumericTextField
+import com.joviansapps.ganymede.ui.components.formatDouble
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import java.text.DecimalFormat
 
 private const val GAS_CONSTANT = 8.31446261815324 // J/(mol·K)
 
@@ -65,7 +66,6 @@ class IdealGasLawViewModel : ViewModel() {
             val n = state.moles.toDoubleOrNull()
             val t = state.temperature.toDoubleOrNull()
 
-            val formatter = DecimalFormat("#.#####")
             val res: Double? = when (state.unknown) {
                 UnknownVariable.Pressure -> if (n != null && t != null && v != null && v != 0.0) (n * GAS_CONSTANT * t) / v else null
                 UnknownVariable.Volume -> if (n != null && t != null && p != null && p != 0.0) (n * GAS_CONSTANT * t) / p else null
@@ -75,10 +75,10 @@ class IdealGasLawViewModel : ViewModel() {
 
             val resultString = res?.let {
                 when (state.unknown) {
-                    UnknownVariable.Pressure -> "${formatter.format(it)} Pa"
-                    UnknownVariable.Volume -> "${formatter.format(it)} m³"
-                    UnknownVariable.Moles -> "${formatter.format(it)} mol"
-                    UnknownVariable.Temperature -> "${formatter.format(it)} K"
+                    UnknownVariable.Pressure -> "${formatDouble(it, "#.#####")} Pa"
+                    UnknownVariable.Volume -> "${formatDouble(it, "#.#####")} m³"
+                    UnknownVariable.Moles -> "${formatDouble(it, "#.#####")} mol"
+                    UnknownVariable.Temperature -> "${formatDouble(it, "#.#####")} K"
                 }
             }
             _uiState.update { it.copy(result = resultString) }
@@ -159,10 +159,10 @@ fun IdealGasLawCalculatorScreen(viewModel: IdealGasLawViewModel = viewModel()) {
 
 @Composable
 private fun GasLawInput(label: String, value: String, onValueChange: (String) -> Unit, isEnabled: Boolean) {
-    OutlinedTextField(
+    NumericTextField(
         value = value,
         onValueChange = onValueChange,
-        label = { Text(label) },
+        label = label,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
         modifier = Modifier.fillMaxWidth(),
         enabled = isEnabled,

@@ -12,9 +12,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.joviansapps.ganymede.R
+import androidx.compose.foundation.layout.width
 
 /**
  * A reusable, styled dropdown menu for selecting an item from a list,
@@ -130,5 +132,47 @@ fun ColorSelectionDropdown(
             }
         }
         Spacer(Modifier.height(6.dp))
+    }
+}
+
+@Composable
+fun TableHeader(headers: List<String>) {
+    Row(
+        Modifier
+            .background(MaterialTheme.colorScheme.primaryContainer)
+            .padding(vertical = 8.dp, horizontal = 4.dp)
+    ) {
+        headers.forEach { header ->
+            Text(
+                text = header,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onPrimaryContainer,
+                modifier = Modifier
+                    .width(150.dp)
+                    .padding(horizontal = 4.dp),
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis
+            )
+        }
+    }
+}
+
+@Composable
+fun TableRow(cells: List<String>) {
+    Row(
+        Modifier
+            .padding(vertical = 8.dp, horizontal = 4.dp)
+    ) {
+        cells.forEach { cell ->
+            Text(
+                text = cell,
+                modifier = Modifier
+                    .width(150.dp)
+                    .padding(horizontal = 4.dp),
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+        }
     }
 }

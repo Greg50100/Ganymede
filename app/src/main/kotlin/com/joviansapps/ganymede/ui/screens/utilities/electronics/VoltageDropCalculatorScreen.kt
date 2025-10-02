@@ -17,6 +17,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.joviansapps.ganymede.R
 import com.joviansapps.ganymede.ui.components.ResultField
+import com.joviansapps.ganymede.ui.components.NumericTextField
+import com.joviansapps.ganymede.ui.components.formatDouble
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -104,10 +106,10 @@ fun VoltageDropCalculatorScreen(viewModel: VoltageDropViewModel = viewModel()) {
         Text(stringResource(R.string.voltage_drop_calculator_title), style = MaterialTheme.typography.headlineSmall)
 
         // --- Input Fields ---
-        OutlinedTextField(value = uiState.sourceVoltage, onValueChange = viewModel::onSourceVoltageChange, label = { Text(stringResource(R.string.source_voltage_v)) }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
-        OutlinedTextField(value = uiState.current, onValueChange = viewModel::onCurrentChange, label = { Text(stringResource(R.string.current_a)) }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
-        OutlinedTextField(value = uiState.wireLength, onValueChange = viewModel::onWireLengthChange, label = { Text(stringResource(R.string.wire_length_m)) }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
-        OutlinedTextField(value = uiState.wireDiameter, onValueChange = viewModel::onWireDiameterChange, label = { Text(stringResource(R.string.wire_diameter_mm)) }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
+        NumericTextField(value = uiState.sourceVoltage, onValueChange = viewModel::onSourceVoltageChange, label = stringResource(R.string.source_voltage_v))
+        NumericTextField(value = uiState.current, onValueChange = viewModel::onCurrentChange, label = stringResource(R.string.current_a))
+        NumericTextField(value = uiState.wireLength, onValueChange = viewModel::onWireLengthChange, label = stringResource(R.string.wire_length_m))
+        NumericTextField(value = uiState.wireDiameter, onValueChange = viewModel::onWireDiameterChange, label = stringResource(R.string.wire_diameter_mm))
 
         // --- Material Selector ---
         SingleChoiceSegmentedButtonRow(modifier = Modifier.fillMaxWidth()) {
@@ -127,17 +129,17 @@ fun VoltageDropCalculatorScreen(viewModel: VoltageDropViewModel = viewModel()) {
         if (uiState.voltageDrop != null) {
             ResultField(
                 label = stringResource(R.string.voltage_drop),
-                value = "%.2f".format(uiState.voltageDrop),
+                value = formatDouble(uiState.voltageDrop, "#.##"),
                 unit = "V"
             )
             ResultField(
                 label = stringResource(R.string.voltage_drop_percent),
-                value = "%.2f".format(uiState.voltageDropPercentage),
+                value = formatDouble(uiState.voltageDropPercentage, "#.##"),
                 unit = "%"
             )
             ResultField(
                 label = stringResource(R.string.end_voltage),
-                value = "%.2f".format(uiState.endVoltage),
+                value = formatDouble(uiState.endVoltage, "#.##"),
                 unit = "V"
             )
         }

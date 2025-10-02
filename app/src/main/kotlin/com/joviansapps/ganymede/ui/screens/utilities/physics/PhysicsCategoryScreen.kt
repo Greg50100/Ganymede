@@ -8,8 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.joviansapps.ganymede.R
-import com.joviansapps.ganymede.ui.screens.utilities.common.UtilitiesCategoryGridScreen
-import com.joviansapps.ganymede.ui.screens.utilities.common.CategoryItem
+import com.joviansapps.ganymede.ui.components.UtilitiesCategoryGridScreen
+import com.joviansapps.ganymede.ui.components.CategoryItem
 
 @Composable
 fun PhysicsCategoryScreen(
@@ -59,4 +59,3 @@ fun PhysicsCategoryScreen(
     // Use the generic CategoryGridScreen to display them
     UtilitiesCategoryGridScreen(items = physicsItems, modifier = modifier)
 }
-

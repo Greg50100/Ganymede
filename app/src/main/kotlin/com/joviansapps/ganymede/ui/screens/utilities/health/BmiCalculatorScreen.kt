@@ -26,6 +26,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.joviansapps.ganymede.R
+import com.joviansapps.ganymede.ui.components.NumericTextField
+import com.joviansapps.ganymede.ui.components.formatDouble
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -110,18 +112,18 @@ fun BmiCalculatorScreen(viewModel: BmiViewModel = viewModel()) {
         val heightLabel = if (uiState.unitSystem == BmiUnitSystem.Metric) stringResource(R.string.height_cm) else stringResource(R.string.height_in)
         val weightLabel = if (uiState.unitSystem == BmiUnitSystem.Metric) stringResource(R.string.weight_kg) else stringResource(R.string.weight_lbs)
 
-        OutlinedTextField(
+        NumericTextField(
             value = uiState.height,
             onValueChange = { viewModel.onHeightChange(it) },
-            label = { Text(heightLabel) },
+            label = heightLabel,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             modifier = Modifier.fillMaxWidth()
         )
 
-        OutlinedTextField(
+        NumericTextField(
             value = uiState.weight,
             onValueChange = { viewModel.onWeightChange(it) },
-            label = { Text(weightLabel) },
+            label = weightLabel,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             modifier = Modifier.fillMaxWidth()
         )
@@ -207,7 +209,7 @@ fun BmiResultGauge(bmi: Float?) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             if (bmi != null) {
                 Text(
-                    text = "%.1f".format(bmi),
+                    text = formatDouble(bmi.toDouble(), "#.1"),
                     style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold),
                     color = color
                 )

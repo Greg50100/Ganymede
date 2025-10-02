@@ -1,6 +1,5 @@
 package com.joviansapps.ganymede.navigation
 
-import android.util.Log
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material.icons.Icons
@@ -47,6 +46,7 @@ import com.joviansapps.ganymede.ui.screens.utilities.chemistry.MolarMassCalculat
 import com.joviansapps.ganymede.ui.screens.utilities.common.UtilityInfoScreen
 import com.joviansapps.ganymede.ui.screens.utilities.common.getUtilityRoutesWithInfo
 import com.joviansapps.ganymede.ui.screens.utilities.date.DateCalculatorScreen
+import com.joviansapps.ganymede.ui.screens.utilities.date.EasterCalculatorScreen
 import com.joviansapps.ganymede.ui.screens.utilities.date.DateCategoryScreen
 import com.joviansapps.ganymede.ui.screens.utilities.electronics.*
 import com.joviansapps.ganymede.ui.screens.utilities.electronics.inductancecalculator.InductanceCalculatorScreen
@@ -56,6 +56,7 @@ import com.joviansapps.ganymede.ui.screens.utilities.math.GcdLcmCalculatorScreen
 import com.joviansapps.ganymede.ui.screens.utilities.math.MathCategoryScreen
 import com.joviansapps.ganymede.ui.screens.utilities.math.PercentageCalculatorScreen
 import com.joviansapps.ganymede.ui.screens.utilities.math.QuadraticEquationSolverScreen
+import com.joviansapps.ganymede.ui.screens.utilities.math.MatrixCalculatorScreen
 import com.joviansapps.ganymede.ui.screens.utilities.physics.*
 import com.joviansapps.ganymede.viewmodel.SearchViewModel
 import com.joviansapps.ganymede.viewmodel.SettingsViewModel
@@ -168,6 +169,8 @@ fun AppRoot(settingsVm: SettingsViewModel) {
                 Dest.QuadraticEquationSolver.route -> stringResource(R.string.quadratic_equation_solver_title)
                 Dest.GCDandLCMCalculator.route -> stringResource(R.string.gcd_lcm_calculator_title)
                 Dest.PercentageCalculator.route -> stringResource(R.string.percentage_calculator_title)
+                // NOUVELLE FONCTIONNALITÉ
+                Dest.MatrixCalculator.route -> "Calculatrice de Matrices"
                 Dest.PhysicsCategory.route -> stringResource(R.string.physics_category_title)
                 Dest.FreeFallCalculator.route -> stringResource(R.string.free_fall_calculator_title)
                 Dest.NewtonsSecondLawCalculator.route -> stringResource(R.string.newtons_second_law_title)
@@ -403,24 +406,26 @@ fun AppRoot(settingsVm: SettingsViewModel) {
             composable(Dest.HealthCategory.route) {
                 HealthCategoryScreen(
                     onOpenBmiCalculator = { nav.navigate(Dest.BmiCalculator.route) },
-                    onOpenBmrCalculator = { nav.navigate(Dest.BmrCalculator.route) },
-                    onOpenBodyFatCalculator = { nav.navigate(Dest.BodyFatCalculator.route) }
+                    onOpenBmrCalculator = { nav.navigate(Dest.BmrCalculator.route) }
                 )
             }
             composable(Dest.BmiCalculator.route) { BmiCalculatorScreen() }
             composable(Dest.BmrCalculator.route) { BmrCalculatorScreen() }
-            composable(Dest.BodyFatCalculator.route) { BodyFatCalculatorScreen() }
 
             composable(Dest.MathCategory.route) {
                 MathCategoryScreen(
                     onOpenQuadraticEquationSolver = { nav.navigate(Dest.QuadraticEquationSolver.route) },
                     onOpenGCDandLCMCalculator = { nav.navigate(Dest.GCDandLCMCalculator.route) },
-                    onOpenPercentageCalculator = { nav.navigate(Dest.PercentageCalculator.route) }
+                    onOpenPercentageCalculator = { nav.navigate(Dest.PercentageCalculator.route) },
+                    // NOUVELLE FONCTIONNALITÉ
+                    onOpenMatrixCalculator = { nav.navigate(Dest.MatrixCalculator.route) }
                 )
             }
             composable(Dest.QuadraticEquationSolver.route) { QuadraticEquationSolverScreen() }
             composable(Dest.PercentageCalculator.route) { PercentageCalculatorScreen() }
             composable(Dest.GCDandLCMCalculator.route) { GcdLcmCalculatorScreen() }
+            // NOUVELLE FONCTIONNALITÉ - Route pour la calculatrice de matrices
+            composable(Dest.MatrixCalculator.route) { MatrixCalculatorScreen() }
 
             composable(Dest.PhysicsCategory.route) {
                 PhysicsCategoryScreen(
@@ -440,12 +445,14 @@ fun AppRoot(settingsVm: SettingsViewModel) {
 
             composable(Dest.DateCategory.route) {
                 DateCategoryScreen(
-                    onOpenDateCalculator = { nav.navigate(Dest.DateCalculator.route) }
+                    onOpenDateCalculator = { nav.navigate(Dest.DateCalculator.route) },
+                    onOpenEasterCalculator = { nav.navigate(Dest.EasterCalculator.route) }
                 )
             }
             composable(Dest.DateCalculator.route) {
                 DateCalculatorScreen()
             }
+            composable(Dest.EasterCalculator.route) { EasterCalculatorScreen() }
 
             composable(Dest.ChemistryCategory.route) {
                 ChemistryCategoryScreen(
@@ -456,7 +463,7 @@ fun AppRoot(settingsVm: SettingsViewModel) {
                 MolarMassCalculatorScreen()
             }
 
-            // Mathematics category screen (registered to avoid missing destination crash)
+            // Mathematics category (registered to avoid missing destination crash)
             composable(Dest.Mathematics.route) {
                 MathematicsCategoryScreen(
                     onOpenDerivativesIntegrals = { nav.navigate(Dest.DerivativesIntegrals.route) },

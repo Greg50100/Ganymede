@@ -68,6 +68,8 @@ sealed class Dest(val route: String) {
     data object QuadraticEquationSolver : Dest("quadratic_solver")
     data object PercentageCalculator : Dest("percentage_calculator")
     data object GCDandLCMCalculator : Dest("gcd_lcm_calculator")
+    // NOUVELLES FONCTIONNALITÉS AJOUTÉES
+    data object MatrixCalculator : Dest("matrix_calculator")
 
     // Physics Utilities
     data object PhysicsCategory  : Dest("physics_category")
@@ -81,6 +83,7 @@ sealed class Dest(val route: String) {
     // Date & Time Utilities
     data object DateCategory     : Dest("date_category")
     data object DateCalculator   : Dest("date_calculator")
+    data object EasterCalculator : Dest("easter_calculator")
 
     data object ChemistryCategory : Dest("chemistry_category")
     data object MolarMassCalculator : Dest("molar_mass_calculator")

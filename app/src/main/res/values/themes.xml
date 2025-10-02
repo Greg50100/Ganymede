@@ -1,8 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!-- res/values/themes.xml -->
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="Theme.App" parent="android:Theme.Material.Light.NoActionBar">
-        <!-- Pas de couleurs ici, tout est géré par Compose -->
+
+    <!-- Thème de base de l'application -->
+    <style name="Theme.App" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Couleurs principales -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorOnPrimary">@color/on_primary</item>
+        <item name="colorPrimaryContainer">@color/primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/on_primary_container</item>
+
+        <!-- Couleurs secondaires -->
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorOnSecondary">@color/on_secondary</item>
+        <item name="colorSecondaryContainer">@color/secondary_container</item>
+        <item name="colorOnSecondaryContainer">@color/on_secondary_container</item>
+
+        <!-- Couleurs de surface -->
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/on_surface</item>
+        <item name="colorSurfaceVariant">@color/surface_variant</item>
+        <item name="colorOnSurfaceVariant">@color/on_surface_variant</item>
+
+        <!-- Couleurs d'arrière-plan -->
+        <item name="android:colorBackground">@color/background</item>
+        <item name="colorOnBackground">@color/on_background</item>
+
+        <!-- Configuration des barres système -->
         <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
+
+        <!-- Configuration Edge-to-Edge -->
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">false</item>
+        <item name="android:enforceStatusBarContrast" tools:targetApi="29">false</item>
+        <item name="android:enforceNavigationBarContrast" tools:targetApi="29">false</item>
     </style>
+
+
+    <!-- Variante nocturne du thème -->
+    <style name="Theme.App.Night" parent="Theme.Material3.Dark.NoActionBar">
+        <!-- Configuration spécifique au mode sombre -->
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">false</item>
+    </style>
+
 </resources>

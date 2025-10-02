@@ -1,7 +1,7 @@
 package com.joviansapps.ganymede.ui.screens.ressources
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.MenuBook
+import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.material.icons.filled.Straighten
 import androidx.compose.material.icons.filled.ElectricalServices
 import androidx.compose.material.icons.filled.Science
@@ -12,16 +12,6 @@ import androidx.compose.ui.res.stringResource
 import com.joviansapps.ganymede.R
 import com.joviansapps.ganymede.ui.screens.ressources.common.ResourcesCategoryGridScreen
 import com.joviansapps.ganymede.ui.screens.ressources.common.CategoryItem
-import androidx.compose.material3.Button
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import android.util.Log
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
-import androidx.compose.ui.unit.dp
-import androidx.compose.material3.Text
 
 @Composable
 fun RessourcesScreen(
@@ -50,7 +40,7 @@ fun RessourcesScreen(
         CategoryItem(
             title = stringResource(id = R.string.general_references_category_title),
             description = stringResource(id = R.string.general_references_category_description),
-            icon = Icons.Filled.MenuBook,
+            icon = Icons.AutoMirrored.Filled.MenuBook,
             onClick = onOpenGeneralReferences
         ),
         CategoryItem(
@@ -68,7 +58,7 @@ fun RessourcesScreen(
         CategoryItem(
             title = stringResource(id = R.string.mathematics_resources),
             description = stringResource(id = R.string.math_category_description),
-            icon = Icons.Filled.MenuBook,
+            icon = Icons.AutoMirrored.Filled.MenuBook,
             onClick = onOpenMathematics
         ),
         CategoryItem(

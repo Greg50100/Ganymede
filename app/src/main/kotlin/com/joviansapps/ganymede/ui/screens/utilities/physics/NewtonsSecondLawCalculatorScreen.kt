@@ -2,19 +2,18 @@ package com.joviansapps.ganymede.ui.screens.utilities.physics
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.joviansapps.ganymede.R
+import com.joviansapps.ganymede.ui.components.NumericTextField
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -60,8 +59,8 @@ fun NewtonsSecondLawCalculatorScreen(viewModel: NewtonsLawViewModel = viewModel(
     ) {
         Text(stringResource(R.string.newtons_second_law_title), style = MaterialTheme.typography.headlineSmall)
         Text(stringResource(R.string.newtons_second_law_formula), style = MaterialTheme.typography.titleMedium)
-        OutlinedTextField(value = uiState.force, onValueChange = viewModel::onForceChange, label = { Text(stringResource(R.string.force_newtons)) }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
-        OutlinedTextField(value = uiState.mass, onValueChange = viewModel::onMassChange, label = { Text(stringResource(R.string.mass_kg)) }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
-        OutlinedTextField(value = uiState.acceleration, onValueChange = viewModel::onAccelerationChange, label = { Text(stringResource(R.string.acceleration_ms2)) }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
+        NumericTextField(value = uiState.force, onValueChange = viewModel::onForceChange, label = stringResource(R.string.force_newtons))
+        NumericTextField(value = uiState.mass, onValueChange = viewModel::onMassChange, label = stringResource(R.string.mass_kg))
+        NumericTextField(value = uiState.acceleration, onValueChange = viewModel::onAccelerationChange, label = stringResource(R.string.acceleration_ms2))
     }
 }

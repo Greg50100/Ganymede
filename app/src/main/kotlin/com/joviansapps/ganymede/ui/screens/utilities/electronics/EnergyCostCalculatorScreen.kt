@@ -17,6 +17,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.joviansapps.ganymede.R
+import com.joviansapps.ganymede.ui.components.NumericTextField
+import com.joviansapps.ganymede.ui.components.formatDouble
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -107,24 +109,24 @@ fun EnergyCostCalculatorScreen(viewModel: EnergyCostViewModel = viewModel()) {
             .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        OutlinedTextField(
+        NumericTextField(
             value = uiState.powerConsumption,
             onValueChange = viewModel::onPowerChanged,
-            label = { Text(stringResource(R.string.power_consumption_w)) },
+            label = stringResource(R.string.power_consumption_w),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number, imeAction = ImeAction.Next),
             modifier = Modifier.fillMaxWidth()
         )
-        OutlinedTextField(
+        NumericTextField(
             value = uiState.usageHoursPerDay,
             onValueChange = viewModel::onHoursChanged,
-            label = { Text(stringResource(R.string.usage_hours_per_day)) },
+            label = stringResource(R.string.usage_hours_per_day),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number, imeAction = ImeAction.Next),
             modifier = Modifier.fillMaxWidth()
         )
-        OutlinedTextField(
+        NumericTextField(
             value = uiState.costPerKwh,
             onValueChange = viewModel::onCostChanged,
-            label = { Text(stringResource(R.string.cost_per_kwh)) },
+            label = stringResource(R.string.cost_per_kwh),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number, imeAction = ImeAction.Done),
             modifier = Modifier.fillMaxWidth()
         )
@@ -155,9 +157,8 @@ private fun Results(day: Double, month: Double, year: Double) {
     Column(modifier = Modifier.padding(16.dp)) {
         Text(stringResource(R.string.estimated_cost), style = MaterialTheme.typography.headlineSmall)
         Spacer(modifier = Modifier.height(8.dp))
-        Text(stringResource(R.string.cost_per_day, day))
-        Text(stringResource(R.string.cost_per_month, month))
-        Text(stringResource(R.string.cost_per_year, year))
+        Text("Day: ${formatDouble(day, "#.##")}")
+        Text("Month: ${formatDouble(month, "#.##")}")
+        Text("Year: ${formatDouble(year, "#.##")}")
     }
 }
-

@@ -2,21 +2,17 @@ package com.joviansapps.ganymede.viewmodel
 
 import android.app.Application
 import android.content.Context
+import android.util.Log
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.joviansapps.ganymede.data.CalculatorAction
-import com.joviansapps.ganymede.data.CalculatorEvent
+import com.joviansapps.ganymede.data.CalculationHistoryItem
 import com.joviansapps.ganymede.data.CalculatorState
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.update
+import com.joviansapps.ganymede.data.OperationStatus
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import net.objecthunter.exp4j.ExpressionBuilder
 import net.objecthunter.exp4j.function.Function
@@ -32,9 +28,15 @@ private val Context.dataStore by preferencesDataStore(name = "calculator_history
 /**
  * ViewModel for the scientific calculator, now with persistent history using DataStore.
  */
-class CalculatorViewModel(application: Application) : AndroidViewModel(application) {
+class CalculatorViewModel(
+    application: Application,
+    private val enablePersistence: Boolean = true
+) : AndroidViewModel(application) {
 
-    private val dataStore = application.dataStore
+    // Constructeur sans argument pour les tests unitaires (persistance désactivée)
+    constructor() : this(Application(), enablePersistence = false)
+
+    private val dataStore = if (enablePersistence) application.dataStore else null
     private val HISTORY_KEY = stringPreferencesKey("calculation_history")
     // Utiliser un séparateur peu commun pour stocker la liste dans une seule chaîne
     private val HISTORY_SEPARATOR = "|||"
@@ -42,13 +44,31 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
     private val _uiState = MutableStateFlow(CalculatorState())
     val uiState = _uiState.asStateFlow()
 
-    val history = uiState
-        .map { it.history }
-        .stateIn(viewModelScope, SharingStarted.Eagerly, _uiState.value.history)
+    // État exposé attendu par les tests
+    val expr: StateFlow<String> = uiState
+        .map { it.expression }
+        .stateIn(viewModelScope, SharingStarted.Eagerly, _uiState.value.expression)
 
     val displayText = uiState
         .map { it.result }
         .stateIn(viewModelScope, SharingStarted.Eagerly, _uiState.value.result)
+
+    // Alias pour compatibilité tests
+    val result: StateFlow<String> = displayText
+
+    // Wrapper compatible UI + tests
+    data class HistoryDisplay(private val value: String, val raw: com.joviansapps.ganymede.data.CalculationHistoryItem) : CharSequence {
+        fun formatForDisplay(): String = value
+        override val length: Int get() = value.length
+        override fun get(index: Int): Char = value[index]
+        override fun subSequence(startIndex: Int, endIndex: Int): CharSequence = value.subSequence(startIndex, endIndex)
+        override fun toString(): String = value
+    }
+
+    // L’UI utilisait auparavant des items avec formatForDisplay(); les tests utilisent les fonctions CharSequence
+    val history: StateFlow<List<HistoryDisplay>> = uiState
+        .map { st -> st.history.map { HistoryDisplay(it.formatForDisplay(), it) } }
+        .stateIn(viewModelScope, SharingStarted.Eagerly, _uiState.value.history.map { HistoryDisplay(it.formatForDisplay(), it) })
 
     private var memoryValue = 0.0
     private val operators = setOf('+', '-', '*', '/', '^')
@@ -57,90 +77,123 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
     private val _formatMode = MutableStateFlow(FormatMode.PLAIN)
     val formatMode = _formatMode.asStateFlow()
 
-    init {
-        // Charger l'historique au démarrage
-        loadHistory()
-    }
+    // Piles pour undo/redo de l’expression
+    private val undoStack: ArrayDeque<String> = ArrayDeque()
+    private val redoStack: ArrayDeque<String> = ArrayDeque()
 
-    private fun loadHistory() {
-        viewModelScope.launch {
-            val prefs = dataStore.data.first()
-            val savedHistory = prefs[HISTORY_KEY]?.split(HISTORY_SEPARATOR)?.filter { it.isNotEmpty() } ?: emptyList()
-            _uiState.update { it.copy(history = savedHistory) }
+    init {
+        // Charger l'historique au démarrage si la persistance est activée
+        if (enablePersistence) {
+            loadHistory()
         }
     }
 
-    private fun saveHistory(history: List<String>) {
+    private fun loadHistory() {
+        val ds = dataStore ?: return
         viewModelScope.launch {
-            dataStore.edit { prefs ->
-                prefs[HISTORY_KEY] = history.joinToString(HISTORY_SEPARATOR)
+            val prefs = ds.data.first()
+            val savedStrings = prefs[HISTORY_KEY]?.split(HISTORY_SEPARATOR)?.filter { it.isNotEmpty() } ?: emptyList()
+            // Convert saved string lines into CalculationHistoryItem instances
+            val savedHistoryItems = savedStrings.map { s ->
+                val parts = s.split(" = ")
+                val expr = parts.getOrNull(0) ?: s
+                val res = parts.getOrNull(1) ?: ""
+                CalculationHistoryItem(expression = expr, result = res)
+            }
+            _uiState.update { it.copy(history = savedHistoryItems) }
+        }
+    }
+
+    private fun saveHistory(history: List<CalculationHistoryItem>) {
+        val ds = dataStore ?: return
+        viewModelScope.launch {
+            ds.edit { prefs ->
+                val joined = history.map { it.formatForDisplay() }.joinToString(HISTORY_SEPARATOR)
+                prefs[HISTORY_KEY] = joined
             }
         }
     }
 
     /**
-     * Backwards-compatible event handler used by older UI components.
-     * Translates CalculatorEvent -> CalculatorAction and delegates to onAction.
+     * Gère les actions de la calculatrice
      */
-    fun onEvent(event: CalculatorEvent) {
-        when (event) {
-            CalculatorEvent.Decimal -> onAction(CalculatorAction.Decimal)
-            CalculatorEvent.Evaluate -> onAction(CalculatorAction.Evaluate)
-            CalculatorEvent.Delete -> onAction(CalculatorAction.Delete)
-            CalculatorEvent.DeleteAll -> onAction(CalculatorAction.ClearHistory)
-            CalculatorEvent.ToggleTrig -> onAction(CalculatorAction.ToggleDegrees)
-            is CalculatorEvent.Number -> onAction(CalculatorAction.Number(event.value.toString()))
-            is CalculatorEvent.Operator -> onAction(CalculatorAction.Operator(event.op.toString()))
-        }
-    }
-
-    fun setFormatMode(mode: FormatMode) {
-        _formatMode.value = mode
-        if (_uiState.value.justEvaluated) {
-            val currentResult = uiState.value.result.toDoubleOrNull()
-            if (currentResult != null) {
-                _uiState.update { it.copy(result = formatNumber(currentResult)) }
+    fun onAction(action: CalculatorAction) {
+        when (action) {
+            is CalculatorAction.InputNumber -> inputNumber(action.number)
+            is CalculatorAction.InputOperator -> inputOperator(action.operator.symbol)
+            is CalculatorAction.ApplyFunction -> applyFunction(action.function.symbol)
+            is CalculatorAction.SetExpression -> setExpression(action.expression)
+            is CalculatorAction.RemoveHistoryItem -> removeHistoryItem(action.index)
+            // Actions compatibles avec l'ancien code
+            is CalculatorAction.Number -> inputNumber(action.value)
+            is CalculatorAction.Operator -> inputOperator(action.op)
+            is CalculatorAction.Function -> applyFunction(action.function)
+            CalculatorAction.Decimal -> inputDecimal()
+            CalculatorAction.Evaluate -> evaluate()
+            CalculatorAction.Delete -> delete()
+            CalculatorAction.DeleteAll -> clear()
+            CalculatorAction.ClearAll -> clear()
+            CalculatorAction.ToggleDegrees -> toggleAngleMode()
+            CalculatorAction.ToggleTrig -> toggleAngleMode()
+            CalculatorAction.MemoryPlus -> memoryAdd()
+            CalculatorAction.MemoryMinus -> memorySubtract()
+            CalculatorAction.MemoryRecall -> memoryRecall()
+            CalculatorAction.MemoryStore -> memoryStore()
+            CalculatorAction.MemoryClear -> memoryClear()
+            CalculatorAction.LeftParenthesis -> inputParenthesis("(")
+            CalculatorAction.RightParenthesis -> inputParenthesis(")")
+            CalculatorAction.ClearHistory -> clearHistory()
+            else -> {
+                Log.w("CalculatorViewModel", "Action non implémentée: $action")
             }
         }
     }
 
-    fun onAction(action: CalculatorAction) {
-        when (action) {
-            is CalculatorAction.Number -> enterNumber(action.number)
-            is CalculatorAction.Operator -> enterOperator(action.operator)
-            is CalculatorAction.Function -> enterFunction(action.function)
-            is CalculatorAction.SetExpression -> setExpression(action.expression)
-            is CalculatorAction.RemoveHistoryItem -> removeHistoryItem(action.index)
-            is CalculatorAction.ClearHistory -> clearHistory()
-            CalculatorAction.Decimal -> enterDecimal()
-            CalculatorAction.Evaluate -> evaluate()
-            CalculatorAction.Delete -> delete()
-            CalculatorAction.Clear -> clear()
-            CalculatorAction.ClearAll -> clearAll()
-            CalculatorAction.ToggleDegrees -> toggleDegrees()
-            CalculatorAction.MemoryPlus -> memoryPlus()
-            CalculatorAction.MemoryMinus -> memoryMinus()
-            CalculatorAction.MemoryRecall -> memoryRecall()
-            CalculatorAction.MemoryClear -> memoryClear()
-            CalculatorAction.LeftParenthesis -> enterParenthesis("(")
-            CalculatorAction.RightParenthesis -> enterParenthesis(")")
-        }
+    // Compatibilité tests: méthode publique
+    fun onEvaluate() = evaluate()
+
+    // Compatibilité tests: setter public de l’expression avec gestion undo/redo
+    fun setExpression(expression: String) {
+        // Empile l’expression actuelle avant changement
+        undoStack.addLast(_uiState.value.expression)
+        redoStack.clear()
+        _uiState.update { it.copy(expression = expression, operationStatus = OperationStatus.Ready) }
     }
 
-    private fun enterNumber(number: String) {
+    // Expose un changeur de mode de formatage
+    fun setFormatMode(mode: FormatMode) { _formatMode.value = mode }
+
+    // Undo/Redo basiques pour tests
+    fun undo() {
+        if (undoStack.isEmpty()) return
+        val current = _uiState.value.expression
+        val previous = undoStack.removeLast()
+        redoStack.addLast(current)
+        _uiState.update { it.copy(expression = previous, operationStatus = OperationStatus.Ready) }
+    }
+
+    fun redo() {
+        if (redoStack.isEmpty()) return
+        val current = _uiState.value.expression
+        val next = redoStack.removeLast()
+        undoStack.addLast(current)
+        _uiState.update { it.copy(expression = next, operationStatus = OperationStatus.Ready) }
+    }
+
+    private fun inputNumber(number: String) {
         _uiState.update { state ->
             if (state.justEvaluated) {
-                state.copy(expression = number, result = "0", justEvaluated = false)
+                state.copy(expression = number, result = "0", operationStatus = OperationStatus.Ready)
             } else {
                 state.copy(expression = state.expression + number)
             }
         }
     }
 
-    private fun enterDecimal() {
+    private fun inputDecimal() {
         _uiState.update { state ->
             if (state.justEvaluated) {
-                state.copy(expression = "0.", result = "0", justEvaluated = false)
+                state.copy(expression = "0.", result = "0", operationStatus = OperationStatus.Ready)
             } else {
                 val parts = state.expression.split(Regex("[+*/^()-]"))
                 val current = parts.lastOrNull() ?: ""
@@ -158,7 +211,7 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
         }
     }
 
-    private fun enterOperator(op: String) {
+    private fun inputOperator(op: String) {
         _uiState.update { state ->
             val newExpr = if (state.justEvaluated) {
                 state.result + op
@@ -169,21 +222,21 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
             } else {
                 state.expression + op
             }
-            state.copy(expression = newExpr, justEvaluated = false)
+            state.copy(expression = newExpr, operationStatus = OperationStatus.Ready)
         }
     }
 
-    private fun enterParenthesis(paren: String) {
+    private fun inputParenthesis(paren: String) {
         _uiState.update { state ->
             if (state.justEvaluated) {
-                state.copy(expression = paren, result = "0", justEvaluated = false)
+                state.copy(expression = paren, result = "0", operationStatus = OperationStatus.Ready)
             } else {
                 state.copy(expression = state.expression + paren)
             }
         }
     }
 
-    private fun enterFunction(func: String) {
+    private fun applyFunction(func: String) {
         _uiState.update { state ->
             val expressionToAppend = when {
                 func.endsWith("(") || func.contains("^") -> func
@@ -191,7 +244,7 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
                 else -> "$func("
             }
             if (state.justEvaluated) {
-                state.copy(expression = expressionToAppend, result = "0", justEvaluated = false)
+                state.copy(expression = expressionToAppend, result = "0", operationStatus = OperationStatus.Ready)
             } else {
                 state.copy(expression = state.expression + expressionToAppend)
             }
@@ -201,7 +254,7 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
     private fun delete() {
         _uiState.update { state ->
             if (state.expression.isNotEmpty()) {
-                state.copy(expression = state.expression.dropLast(1), justEvaluated = false)
+                state.copy(expression = state.expression.dropLast(1), operationStatus = OperationStatus.Ready)
             } else {
                 state
             }
@@ -209,17 +262,13 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
     }
 
     private fun clear() {
-        _uiState.update { it.copy(expression = "", result = "0", justEvaluated = false) }
+        _uiState.update { it.copy(expression = "", result = "0", operationStatus = OperationStatus.Ready) }
     }
 
     private fun clearAll() {
-        val newState = CalculatorState(isDegrees = _uiState.value.isDegrees, hasMemory = _uiState.value.hasMemory)
+        val newState = CalculatorState(angleMode = _uiState.value.angleMode, memory = _uiState.value.memory)
         _uiState.update { newState }
         saveHistory(newState.history)
-    }
-
-    private fun setExpression(expression: String) {
-        _uiState.update { it.copy(expression = expression, justEvaluated = false) }
     }
 
     private fun removeHistoryItem(index: Int) {
@@ -233,27 +282,44 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
         saveHistory(emptyList())
     }
 
-    private fun toggleDegrees() {
-        _uiState.update { it.copy(isDegrees = !it.isDegrees) }
+    private fun toggleAngleMode() {
+        _uiState.update { state ->
+            val newAngleMode = state.angleMode.next()
+            state.copy(angleMode = newAngleMode)
+        }
     }
 
-    private fun memoryPlus() {
-        evaluateInternal()?.let { memoryValue += it }
-        _uiState.update { it.copy(hasMemory = memoryValue != 0.0) }
+    private fun memoryAdd() {
+        evaluateInternal()?.let {
+            val newMemory = _uiState.value.memory.add(it)
+            _uiState.update { state -> state.copy(memory = newMemory) }
+        }
     }
 
-    private fun memoryMinus() {
-        evaluateInternal()?.let { memoryValue -= it }
-        _uiState.update { it.copy(hasMemory = memoryValue != 0.0) }
+    private fun memorySubtract() {
+        evaluateInternal()?.let {
+            val newMemory = _uiState.value.memory.subtract(it)
+            _uiState.update { state -> state.copy(memory = newMemory) }
+        }
     }
 
     private fun memoryRecall() {
-        _uiState.update { it.copy(expression = it.expression + formatNumber(memoryValue), justEvaluated = false) }
+        val memoryValue = _uiState.value.memory.value
+        _uiState.update { state ->
+            state.copy(expression = state.expression + formatNumber(memoryValue), operationStatus = OperationStatus.Ready)
+        }
+    }
+
+    private fun memoryStore() {
+        evaluateInternal()?.let { value ->
+            val newMemory = _uiState.value.memory.store(value)
+            _uiState.update { state -> state.copy(memory = newMemory) }
+        }
     }
 
     private fun memoryClear() {
-        memoryValue = 0.0
-        _uiState.update { it.copy(hasMemory = false) }
+        val clearedMemory = _uiState.value.memory.clear()
+        _uiState.update { state -> state.copy(memory = clearedMemory) }
     }
 
     private fun evaluate() {
@@ -265,19 +331,24 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
         try {
             val resultValue = evaluateExpression(expressionToEval, state.isDegrees)
             val formattedResult = formatNumber(resultValue)
-            val newHistory = state.history + "${state.expression} = $formattedResult"
+            val historyItem = CalculationHistoryItem(
+                expression = state.expression,
+                result = formattedResult,
+                angleMode = state.angleMode
+            )
+            val newHistory = state.history + historyItem
             _uiState.update {
                 it.copy(
                     result = formattedResult,
                     history = newHistory,
-                    justEvaluated = true
+                    operationStatus = OperationStatus.JustEvaluated
                 )
             }
             saveHistory(newHistory)
         } catch (e: ArithmeticException) {
-            _uiState.update { it.copy(result = "Division by zero", justEvaluated = true) }
+            _uiState.update { it.copy(result = "Division by zero", operationStatus = OperationStatus.Error) }
         } catch (e: Exception) {
-            _uiState.update { it.copy(result = "Error", justEvaluated = true) }
+            _uiState.update { it.copy(result = "Error", operationStatus = OperationStatus.Error) }
         }
     }
 

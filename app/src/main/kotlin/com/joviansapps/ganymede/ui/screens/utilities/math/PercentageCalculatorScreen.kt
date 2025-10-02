@@ -13,11 +13,12 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.joviansapps.ganymede.R
+import com.joviansapps.ganymede.ui.components.NumericTextField
+import com.joviansapps.ganymede.ui.components.formatDouble
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import java.text.DecimalFormat
 
 // --- 1. UI State & Model ---
 enum class PercentMode {
@@ -59,7 +60,6 @@ class PercentageViewModel : ViewModel() {
         viewModelScope.launch {
             val a = _uiState.value.valA.toDoubleOrNull()
             val b = _uiState.value.valB.toDoubleOrNull()
-            val formatter = DecimalFormat("#.##")
 
             if (a == null || b == null) {
                 _uiState.update { it.copy(result = null) }
@@ -67,9 +67,11 @@ class PercentageViewModel : ViewModel() {
             }
 
             val res = when (_uiState.value.mode) {
-                PercentMode.PERCENT_OF -> "${formatter.format(a / 100 * b)}"
-                PercentMode.IS_WHAT_PERCENT -> if (b != 0.0) "${formatter.format(a / b * 100)}%" else "N/A"
-                PercentMode.CHANGE -> if (a != 0.0) "${formatter.format((b - a) / a * 100)}%" else "N/A"
+                PercentMode.PERCENT_OF -> "${formatDouble(a / 100 * b, "#.##")}"
+
+                PercentMode.IS_WHAT_PERCENT -> if (b != 0.0) "${formatDouble(a / b * 100, "#.##")}%" else "N/A"
+
+                PercentMode.CHANGE -> if (a != 0.0) "${formatDouble((b - a) / a * 100, "#.##")}%" else "N/A"
             }
             _uiState.update { it.copy(result = res) }
         }
@@ -90,18 +92,16 @@ fun PercentageCalculatorScreen(viewModel: PercentageViewModel = viewModel()) {
         Spacer(Modifier.height(16.dp))
 
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            OutlinedTextField(
+            NumericTextField(
                 value = uiState.valA,
                 onValueChange = viewModel::onValAChange,
-                label = { Text("Value A") },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                label = stringResource(R.string.first_number),
                 modifier = Modifier.weight(1f)
             )
-            OutlinedTextField(
+            NumericTextField(
                 value = uiState.valB,
                 onValueChange = viewModel::onValBChange,
-                label = { Text("Value B") },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                label = stringResource(R.string.second_number),
                 modifier = Modifier.weight(1f)
             )
         }

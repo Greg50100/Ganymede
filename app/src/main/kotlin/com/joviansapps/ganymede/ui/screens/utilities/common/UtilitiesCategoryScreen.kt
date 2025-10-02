@@ -1,4 +1,4 @@
-package com.joviansapps.ganymede.ui.screens.utilities.common
+package com.joviansapps.ganymede.ui.components
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement

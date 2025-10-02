@@ -16,6 +16,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.joviansapps.ganymede.R
+import com.joviansapps.ganymede.ui.components.ResultField
+import com.joviansapps.ganymede.ui.components.NumericTextField
+import com.joviansapps.ganymede.ui.components.formatDouble
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -96,11 +99,11 @@ fun BodyFatCalculatorScreen(viewModel: BodyFatViewModel = viewModel()) {
             ) { Text(stringResource(R.string.gender_female)) }
         }
 
-        OutlinedTextField(value = uiState.height, onValueChange = viewModel::onHeightChange, label = { Text(stringResource(R.string.height_cm)) }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
-        OutlinedTextField(value = uiState.neck, onValueChange = viewModel::onNeckChange, label = { Text(stringResource(R.string.neck_circumference_cm)) }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
-        OutlinedTextField(value = uiState.waist, onValueChange = viewModel::onWaistChange, label = { Text(stringResource(R.string.waist_circumference_cm)) }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
+        NumericTextField(value = uiState.height, onValueChange = viewModel::onHeightChange, label = stringResource(R.string.height_cm))
+        NumericTextField(value = uiState.neck, onValueChange = viewModel::onNeckChange, label = stringResource(R.string.neck_circumference_cm))
+        NumericTextField(value = uiState.waist, onValueChange = viewModel::onWaistChange, label = stringResource(R.string.waist_circumference_cm))
         if (!uiState.isMale) {
-            OutlinedTextField(value = uiState.hip, onValueChange = viewModel::onHipChange, label = { Text(stringResource(R.string.hip_circumference_cm)) }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
+            NumericTextField(value = uiState.hip, onValueChange = viewModel::onHipChange, label = stringResource(R.string.hip_circumference_cm))
         }
 
         uiState.bodyFatPercentage?.let {
@@ -108,7 +111,7 @@ fun BodyFatCalculatorScreen(viewModel: BodyFatViewModel = viewModel()) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Text(stringResource(R.string.body_fat_percentage_result), style = MaterialTheme.typography.titleLarge)
                     Text(
-                        text = "%.1f %%".format(it),
+                        text = "${formatDouble(it, "#.0")} %",
                         style = MaterialTheme.typography.headlineMedium,
                         color = MaterialTheme.colorScheme.primary
                     )

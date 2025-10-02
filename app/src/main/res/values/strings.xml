@@ -631,6 +631,11 @@
     <string name="component_tolerance_calculator_description">Calculate min/max values based on tolerance</string>
     <string name="standard_value_calculator_title">Standard Value Calculator</string>
     <string name="standard_value_calculator_description">Find the nearest standard E-series value</string>
+    <!-- Localized French UI strings used in StandardValueCalculatorScreen -->
+    <string name="standard_value_description_fr">Trouve la valeur standard la plus proche dans une série E.</string>
+    <string name="standard_value_desired_label">Valeur désirable</string>
+    <string name="series_e_label">Série E</string>
+    <string name="nearest_value_label">Valeur la plus proche</string>
     <!-- AJOUTÉ -->
     <string name="rlc_impedance_calculator_title">RLC Impedance Calculator</string>
     <string name="rlc_impedance_calculator_description">For series/parallel RLC circuits</string>
@@ -762,4 +767,60 @@
     <string name="mechanics_resources">Mechanics</string>
     <string name="electronics_resources">Electronics</string>
     <string name="copy_text">Copy</string>
+
+    <!-- Chaînes manquantes identifiées dans l'erreur -->
+    <string name="about_report_issue">Report an issue</string>
+    <string name="calc_div_zero">Division by zero</string>
+    <string name="calc_error_generic">Calculation error</string>
+    <string name="converter_from_unit_label">From unit</string>
+    <string name="converter_input_label">Input value</string>
+    <string name="converter_result_format">Result: %1$s %2$s</string>
+    <string name="converter_to_unit_label">To unit</string>
+    <string name="cutoff_frequency">Cutoff frequency</string>
+    <string name="discriminant_value">Discriminant value</string>
+    <string name="error_all_fields_required">All fields are required</string>
+    <string name="error_invalid_height">Invalid height value</string>
+    <string name="error_two_values_needed">Two values are needed</string>
+    <string name="loading">Loading…</string>
+    <string name="max_value">Maximum value</string>
+    <string name="min_value">Minimum value</string>
+    <string name="no_functions">No functions available</string>
+    <string name="one_real_root">One real root</string>
+    <string name="open_button">Open</string>
+    <string name="output_voltage_vout">Output voltage (Vout)</string>
+    <string name="power_dissipation_in_resistor">Power dissipation in resistor</string>
+    <string name="power_dissipation_in_zener">Power dissipation in Zener diode</string>
+    <string name="press_calculate_to_generate_graph">Press calculate to generate graph</string>
+    <string name="required_resistor_value">Required resistor value</string>
+    <string name="required_series_resistor">Required series resistor</string>
+    <string name="resistor_band_1">Band 1</string>
+    <string name="resistor_band_2">Band 2</string>
+    <string name="resistor_band_3">Band 3</string>
+    <string name="resistor_band_4">Band 4</string>
+    <string name="resistor_invalid_selection">Invalid resistor selection</string>
+    <string name="resistor_label">Resistor</string>
+    <string name="resistor_value_format">Resistor value: %1$s Ω</string>
+    <string name="result_format">Result: %1$s</string>
+    <string name="settings_crash_reports_active_label">Crash reports: Active</string>
+    <string name="settings_crash_reports_description">Help improve the app by sending crash reports</string>
+    <string name="settings_crash_reports_force_button">Force crash</string>
+    <string name="settings_crash_reports_inactive_label">Crash reports: Inactive</string>
+    <string name="settings_crash_reports_label">Crash reports</string>
+    <string name="settings_crash_reports_test_button">Test crash reporting</string>
+    <string name="settings_diagnostics_title">Diagnostics</string>
+    <string name="settings_theme_colors_title">Theme and colors</string>
+    <string name="stored_energy_result">Stored energy</string>
+    <string name="tab_functions">Functions</string>
+    <string name="tab_graph">Graph</string>
+    <string name="time_constant_formula_description">Time constant formula</string>
+    <string name="time_constant_result">Time constant</string>
+    <string name="time_label_seconds">Time (seconds)</string>
+    <string name="two_complex_roots">Two complex roots</string>
+    <string name="two_real_roots">Two real roots</string>
+    <string name="unit">Unit</string>
+    <string name="value">Value</string>
+    <string name="wavelength_label">Wavelength</string>
+    <string name="zoom_in">Zoom in</string>
+    <string name="zoom_out">Zoom out</string>
+
 </resources>

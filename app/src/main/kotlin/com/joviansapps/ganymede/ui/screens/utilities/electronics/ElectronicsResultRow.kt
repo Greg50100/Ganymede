@@ -1,4 +1,4 @@
-package com.joviansapps.ganymede.ui.screens.utilities.electronics
+package com.joviansapps.ganymede.ui.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -21,4 +21,3 @@ fun ElectronicsResultRow(label: String, value: String, modifier: Modifier = Modi
         }
     }
 }
-

@@ -13,7 +13,7 @@ import androidx.compose.runtime.collectAsState       // si tu collectes un flow 
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.joviansapps.ganymede.data.CalculatorEvent
+import com.joviansapps.ganymede.data.CalculatorAction
 
 
 private val portraitKeys = listOf(
@@ -25,7 +25,7 @@ private val portraitKeys = listOf(
 )
 
 @Composable
-fun Keypad(onEvent: (CalculatorEvent) -> Unit) {
+fun Keypad(onEvent: (CalculatorAction) -> Unit) {
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         portraitKeys.forEach { row ->
             Row(
@@ -35,13 +35,13 @@ fun Keypad(onEvent: (CalculatorEvent) -> Unit) {
                 row.forEach { label ->
                     KeypadButton(label) {
                         when (label) {
-                            in "0".."9" -> onEvent(CalculatorEvent.Number(label.toInt()))
-                            "."         -> onEvent(CalculatorEvent.Decimal)
+                            in "0".."9" -> onEvent(CalculatorAction.Number(label))
+                            "."         -> onEvent(CalculatorAction.Decimal)
                             "+" , "-", "*", "/" ->
-                                onEvent(CalculatorEvent.Operator(label[0]))
-                            "⌫"         -> onEvent(CalculatorEvent.Delete)
-                            "C"         -> onEvent(CalculatorEvent.DeleteAll)
-                            "="         -> onEvent(CalculatorEvent.Evaluate)
+                                onEvent(CalculatorAction.Operator(label))
+                            "⌫"         -> onEvent(CalculatorAction.Delete)
+                            "C"         -> onEvent(CalculatorAction.DeleteAll)
+                            "="         -> onEvent(CalculatorAction.Evaluate)
                         }
                     }
                 }

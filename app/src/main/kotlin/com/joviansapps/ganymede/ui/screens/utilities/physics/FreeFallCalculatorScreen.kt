@@ -18,6 +18,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.joviansapps.ganymede.R
 import com.joviansapps.ganymede.ui.components.ResultField
+import com.joviansapps.ganymede.ui.components.NumericTextField
+import com.joviansapps.ganymede.ui.components.formatDouble
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -91,10 +93,10 @@ fun FreeFallCalculatorScreen(viewModel: FreeFallViewModel = viewModel()) {
             modifier = Modifier.padding(bottom = 24.dp)
         )
 
-        OutlinedTextField(
+        NumericTextField(
             value = uiState.heightInput,
             onValueChange = viewModel::onHeightChanged,
-            label = { Text(stringResource(R.string.height_m_label)) },
+            label = stringResource(R.string.height_m_label),
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Number,
                 imeAction = ImeAction.Done
@@ -133,12 +135,12 @@ private fun Results(finalVelocity: Double, time: Double) {
         )
         ResultField(
             label = stringResource(R.string.final_velocity_label),
-            value = "%.2f".format(finalVelocity),
+            value = formatDouble(finalVelocity, "#.##"),
             unit = "m/s"
         )
         ResultField(
             label = stringResource(R.string.time_of_fall_label),
-            value = "%.2f".format(time),
+            value = formatDouble(time, "#.##"),
             unit = "s"
         )
     }

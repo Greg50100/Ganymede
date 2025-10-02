@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.joviansapps.ganymede.R
 import com.joviansapps.ganymede.viewmodel.DateCalculatorViewModel
+import com.joviansapps.ganymede.ui.components.NumericTextField
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
@@ -126,25 +127,22 @@ private fun AddSubtractCalculator(uiState: DateCalculatorViewModel.UiState, onEv
         ) { showDatePicker = true }
 
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            OutlinedTextField(
+            NumericTextField(
                 value = uiState.yearsToAdd,
                 onValueChange = { onEvent(DateCalculatorViewModel.Event.SetYears(it)) },
-                label = { Text(stringResource(id = R.string.date_calculator_years)) },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                label = stringResource(id = R.string.date_calculator_years),
                 modifier = Modifier.weight(1f)
             )
-            OutlinedTextField(
+            NumericTextField(
                 value = uiState.monthsToAdd,
                 onValueChange = { onEvent(DateCalculatorViewModel.Event.SetMonths(it)) },
-                label = { Text(stringResource(id = R.string.date_calculator_months)) },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                label = stringResource(id = R.string.date_calculator_months),
                 modifier = Modifier.weight(1f)
             )
-            OutlinedTextField(
+            NumericTextField(
                 value = uiState.daysToAdd,
                 onValueChange = { onEvent(DateCalculatorViewModel.Event.SetDays(it)) },
-                label = { Text(stringResource(id = R.string.date_calculator_days)) },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                label = stringResource(id = R.string.date_calculator_days),
                 modifier = Modifier.weight(1f)
             )
         }
@@ -229,4 +227,3 @@ fun DatePickerDialog(
         DatePicker(state = datePickerState)
     }
 }
-

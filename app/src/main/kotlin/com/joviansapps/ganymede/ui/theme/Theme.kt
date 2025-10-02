@@ -5,9 +5,9 @@ import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import com.joviansapps.ganymede.viewmodel.ThemeMode
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 
 private val LightOrangeScheme = lightColorScheme(
     primary = Color(0xFFFB8C00),
@@ -60,9 +60,11 @@ private val DarkOrangeScheme = darkColorScheme(
     errorContainer = Color(0xFF93000A),
     onErrorContainer = Color(0xFFFFDAD6)
 )
+
 @Composable
 fun AppTheme(
     themeMode: ThemeMode,
+    dynamicColors: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val systemDark = isSystemInDarkTheme()
@@ -71,25 +73,20 @@ fun AppTheme(
         ThemeMode.DARK -> true
         ThemeMode.LIGHT -> false
     }
-    // TODO: Ajouter support Dynamic Color (Android 12+) via dynamicLightColorScheme/dynamicDarkColorScheme avec fallback sur LightOrangeScheme/DarkOrangeScheme
-    val scheme = if (useDark) DarkOrangeScheme else LightOrangeScheme
-    // TODO: Centraliser Typography/Shapes si nécessaire (MaterialTheme(typography = ..., shapes = ...))
-    // TODO: Harmoniser la barre de statut (WindowInsetsControllerCompat) avec le thème courant (clair/sombre)
-    MaterialTheme(colorScheme = scheme, typography = Typography(), content = content)
+
+    val context = LocalContext.current
+    val supportsDynamicColors = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
+
+    val colorScheme = when {
+        dynamicColors && supportsDynamicColors && useDark -> dynamicDarkColorScheme(context)
+        dynamicColors && supportsDynamicColors && !useDark -> dynamicLightColorScheme(context)
+        useDark -> DarkOrangeScheme
+        else -> LightOrangeScheme
+    }
+
+    MaterialTheme(
+        colorScheme = colorScheme,
+        typography = Typography(),
+        content = content
+    )
 }
-
-
-//TODO: Ajouter ce code mais trouver les défaux de fonctionnement avant( appli en noir et blanc)
-// --- Amélioration 3 : Ajouter le support pour les couleurs dynamiques (Material You) ---
-//val dynamicColor = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
-//val context = LocalContext.current
-//
-//val scheme = when {
-//    dynamicColor && useDark -> dynamicDarkColorScheme(context)
-//    dynamicColor && !useDark -> dynamicLightColorScheme(context)
-//    useDark -> DarkOrangeScheme
-//    else -> LightOrangeScheme
-//}
-//
-//MaterialTheme(colorScheme = scheme, typography = Typography(), content = content)
-//}

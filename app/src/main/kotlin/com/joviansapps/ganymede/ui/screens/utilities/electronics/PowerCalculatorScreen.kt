@@ -15,11 +15,13 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.joviansapps.ganymede.R
+import com.joviansapps.ganymede.ui.components.NumericTextField
+import com.joviansapps.ganymede.ui.components.formatDouble
+import com.joviansapps.ganymede.ui.components.ElectronicsResultRow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import java.text.DecimalFormat
 import kotlin.math.acos
 import kotlin.math.cos
 import kotlin.math.pow
@@ -128,7 +130,6 @@ class PowerViewModel : ViewModel() {
 @Composable
 fun PowerCalculatorScreen(viewModel: PowerViewModel = viewModel()) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    val formatter = DecimalFormat("#.###")
 
     Column(
         modifier = Modifier
@@ -152,11 +153,11 @@ fun PowerCalculatorScreen(viewModel: PowerViewModel = viewModel()) {
         }
 
         // --- Refactoring Step 3: Update UI calls to pass the sealed class instance ---
-        OutlinedTextField(value = uiState.voltage, onValueChange = { viewModel.onValueChange(PowerField.Voltage, it) }, label = { Text(stringResource(R.string.voltage_v)) }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
-        OutlinedTextField(value = uiState.current, onValueChange = { viewModel.onValueChange(PowerField.Current, it) }, label = { Text(stringResource(R.string.current_a)) }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
+        NumericTextField(value = uiState.voltage, onValueChange = { viewModel.onValueChange(PowerField.Voltage, it) }, label = stringResource(R.string.voltage_v), keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
+        NumericTextField(value = uiState.current, onValueChange = { viewModel.onValueChange(PowerField.Current, it) }, label = stringResource(R.string.current_a), keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
 
         if (uiState.calcType == PowerCalcType.AC_Single_Phase) {
-            OutlinedTextField(value = uiState.powerFactor, onValueChange = { viewModel.onValueChange(PowerField.PowerFactor, it) }, label = { Text(stringResource(R.string.power_factor)) }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
+            NumericTextField(value = uiState.powerFactor, onValueChange = { viewModel.onValueChange(PowerField.PowerFactor, it) }, label = stringResource(R.string.power_factor), keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
         }
 
         // --- Result ---
@@ -169,19 +170,19 @@ fun PowerCalculatorScreen(viewModel: PowerViewModel = viewModel()) {
                     Text(stringResource(R.string.results_title), style = MaterialTheme.typography.titleLarge)
                     if (res.power != null) {
                         val label = if(uiState.calcType == PowerCalcType.DC) stringResource(R.string.dc_power) else stringResource(R.string.real_power_w)
-                        ElectronicsResultRow(label, "${formatter.format(res.power)} W")
+                        ElectronicsResultRow(label, "${formatDouble(res.power, "#.###")} W")
                     }
                     if (res.resistance != null) {
-                        ElectronicsResultRow(stringResource(R.string.resistance_ohm), "${formatter.format(res.resistance)} Ω")
+                        ElectronicsResultRow(stringResource(R.string.resistance_ohm), "${formatDouble(res.resistance, "#.###")} Ω")
                     }
                     if (res.apparentPower != null) {
-                        ElectronicsResultRow(stringResource(R.string.apparent_power_va), "${formatter.format(res.apparentPower)} VA")
+                        ElectronicsResultRow(stringResource(R.string.apparent_power_va), "${formatDouble(res.apparentPower, "#.###")} VA")
                     }
                     if (res.reactivePower != null) {
-                        ElectronicsResultRow(stringResource(R.string.reactive_power_var), "${formatter.format(res.reactivePower)} VAR")
+                        ElectronicsResultRow(stringResource(R.string.reactive_power_var), "${formatDouble(res.reactivePower, "#.###")} VAR")
                     }
                     if (res.phaseAngle != null) {
-                        ElectronicsResultRow(stringResource(R.string.phase_angle_deg), "${formatter.format(res.phaseAngle)}°")
+                        ElectronicsResultRow(stringResource(R.string.phase_angle_deg), "${formatDouble(res.phaseAngle, "#.###")}°")
                     }
                 }
             }

@@ -11,7 +11,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -24,6 +23,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.joviansapps.ganymede.R
+import com.joviansapps.ganymede.ui.components.NumericTextField
+import com.joviansapps.ganymede.ui.components.formatDouble
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -77,21 +78,21 @@ class QuadraticEquationViewModel : ViewModel() {
             }
 
             val discriminant = valB.pow(2) - 4 * valA * valC
-            val discriminantText = "Discriminant (Δ) = ${"%.2f".format(discriminant)}\n"
+            val discriminantText = "Discriminant (Δ) = ${formatDouble(discriminant, "#.##")}\n"
             val newResult = when {
                 discriminant > 0 -> {
                     val root1 = (-valB + sqrt(discriminant)) / (2 * valA)
                     val root2 = (-valB - sqrt(discriminant)) / (2 * valA)
-                    discriminantText + "Two real roots:\nx1 = ${"%.2f".format(root1)}\nx2 = ${"%.2f".format(root2)}"
+                    discriminantText + "Two real roots:\nx1 = ${formatDouble(root1, "#.##")}\nx2 = ${formatDouble(root2, "#.##")}"
                 }
                 discriminant == 0.0 -> {
                     val root = -valB / (2 * valA)
-                    discriminantText + "One real root:\nx = ${"%.2f".format(root)}"
+                    discriminantText + "One real root:\nx = ${formatDouble(root, "#.##")}"
                 }
                 else -> {
                     val realPart = -valB / (2 * valA)
                     val imaginaryPart = sqrt(-discriminant) / (2 * valA)
-                    discriminantText + "Two complex roots:\nx1 = ${"%.2f".format(realPart)} + ${"%.2f".format(imaginaryPart)}i\nx2 = ${"%.2f".format(realPart)} - ${"%.2f".format(imaginaryPart)}i"
+                    discriminantText + "Two complex roots:\nx1 = ${formatDouble(realPart, "#.##")} + ${formatDouble(imaginaryPart, "#.##")}i\nx2 = ${formatDouble(realPart, "#.##")} - ${formatDouble(imaginaryPart, "#.##")}i"
                 }
             }
             _uiState.update { it.copy(result = newResult, error = null) } // Clear error on success
@@ -119,26 +120,23 @@ fun QuadraticEquationSolverScreen(viewModel: QuadraticEquationViewModel = viewMo
         Spacer(modifier = Modifier.height(8.dp))
 
         // Input fields are now dumb components
-        OutlinedTextField(
+        NumericTextField(
             value = uiState.a,
             onValueChange = viewModel::onAChanged,
-            label = { Text(stringResource(R.string.coefficient_a)) },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number, imeAction = ImeAction.Next),
-            modifier = Modifier.fillMaxWidth()
+            label = stringResource(R.string.coefficient_a),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number, imeAction = ImeAction.Next)
         )
-        OutlinedTextField(
+        NumericTextField(
             value = uiState.b,
             onValueChange = viewModel::onBChanged,
-            label = { Text(stringResource(R.string.coefficient_b)) },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number, imeAction = ImeAction.Next),
-            modifier = Modifier.fillMaxWidth()
+            label = stringResource(R.string.coefficient_b),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number, imeAction = ImeAction.Next)
         )
-        OutlinedTextField(
+        NumericTextField(
             value = uiState.c,
             onValueChange = viewModel::onCChanged,
-            label = { Text(stringResource(R.string.coefficient_c)) },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number, imeAction = ImeAction.Done),
-            modifier = Modifier.fillMaxWidth()
+            label = stringResource(R.string.coefficient_c),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number, imeAction = ImeAction.Done)
         )
         Spacer(modifier = Modifier.height(8.dp))
 

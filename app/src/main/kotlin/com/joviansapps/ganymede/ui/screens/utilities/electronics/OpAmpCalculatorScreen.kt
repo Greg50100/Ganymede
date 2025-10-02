@@ -161,7 +161,7 @@ fun OpAmpCalculatorScreen(viewModel: OpAmpViewModel = viewModel()) {
                 readOnly = true,
                 trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
                 modifier = Modifier
-                    .menuAnchor()
+                    .menuAnchor(MenuAnchorType.PrimaryNotEditable, enabled = true)
                     .fillMaxWidth(),
                 singleLine = true
             )

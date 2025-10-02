@@ -23,7 +23,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.joviansapps.ganymede.data.CalculatorEvent
+import com.joviansapps.ganymede.data.CalculatorAction
 import com.joviansapps.ganymede.viewmodel.CalculatorViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -65,12 +65,12 @@ fun ColumnScope.CalculatorDisplay(
         ) {
             items(history) { item ->
                 Text(
-                    text = item,
+                    text = item.formatForDisplay(),
                     style = secondaryTextStyle,
                     textAlign = TextAlign.End,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clickable { vm.onEvent(CalculatorEvent.DeleteAll) }
+                        .clickable { vm.onAction(CalculatorAction.DeleteAll) }
                 )
             }
         }

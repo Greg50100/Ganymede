@@ -6,15 +6,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.joviansapps.ganymede.R
-import com.joviansapps.ganymede.ui.screens.utilities.common.UtilitiesCategoryGridScreen
-import com.joviansapps.ganymede.ui.screens.utilities.common.CategoryItem
+import com.joviansapps.ganymede.ui.components.UtilitiesCategoryGridScreen
+import com.joviansapps.ganymede.ui.components.CategoryItem
 
 @Composable
 fun MathCategoryScreen(
     onOpenQuadraticEquationSolver: () -> Unit,
     modifier: Modifier = Modifier,
     onOpenPercentageCalculator: () -> Unit,
-    onOpenGCDandLCMCalculator: () -> Unit
+    onOpenGCDandLCMCalculator: () -> Unit,
+    onOpenMatrixCalculator: () -> Unit = {}
 ) {
     // Define the list of items for the math category
     val mathItems = listOf(
@@ -35,6 +36,12 @@ fun MathCategoryScreen(
             description = stringResource(id = R.string.gcd_lcm_calculator_description),
             icon = Icons.Default.Functions,
             onClick = onOpenGCDandLCMCalculator
+        ),
+        CategoryItem(
+            title = "Calculatrice de Matrices",
+            description = "Effectuez des opérations sur les matrices : addition, soustraction, multiplication et déterminant",
+            icon = Icons.Default.Functions,
+            onClick = onOpenMatrixCalculator
         )
         // Add other math calculators here in the future
     )

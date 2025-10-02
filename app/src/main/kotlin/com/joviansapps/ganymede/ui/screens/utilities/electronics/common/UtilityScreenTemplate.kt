@@ -84,7 +84,7 @@ fun <T> UtilityScreen(
             Card(modifier = Modifier.fillMaxWidth()) {
                 Column(Modifier.padding(16.dp)) {
                     Text(stringResource(R.string.results_title), style = MaterialTheme.typography.titleLarge)
-                    Divider(modifier = Modifier.padding(vertical = 8.dp))
+                    HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
                     resultContent(result)
                 }
             }

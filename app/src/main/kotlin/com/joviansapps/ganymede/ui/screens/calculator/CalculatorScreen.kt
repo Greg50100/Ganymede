@@ -174,12 +174,10 @@ fun CalculatorScreen(
                 if (state.history.isEmpty()) Text(stringResource(R.string.history_empty)) else {
                     LazyColumn { itemsIndexed(state.history) { i, item ->
                         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                            Text(item, modifier = Modifier
+                            Text(item.formatForDisplay(), modifier = Modifier
                                 .weight(1f)
                                 .clickable {
-                                    val left = item
-                                        .split(" = ")
-                                        .firstOrNull() ?: item
+                                    val left = item.expression
                                     onActionWithHaptics(CalculatorAction.SetExpression(left))
                                     showHistory = false
                                 })

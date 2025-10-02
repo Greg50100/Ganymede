@@ -16,6 +16,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.joviansapps.ganymede.R
+import com.joviansapps.ganymede.ui.components.NumericTextField
+import com.joviansapps.ganymede.ui.components.formatDouble
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -112,24 +114,24 @@ fun BmrCalculatorScreen(viewModel: BmrViewModel = viewModel()) {
         }
 
         // Input Fields
-        OutlinedTextField(
+        NumericTextField(
             value = uiState.age,
             onValueChange = viewModel::onAgeChange,
-            label = { Text(stringResource(R.string.age_years)) },
+            label = stringResource(R.string.age_years),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             modifier = Modifier.fillMaxWidth()
         )
-        OutlinedTextField(
+        NumericTextField(
             value = uiState.height,
             onValueChange = viewModel::onHeightChange,
-            label = { Text(stringResource(R.string.height_cm)) },
+            label = stringResource(R.string.height_cm),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             modifier = Modifier.fillMaxWidth()
         )
-        OutlinedTextField(
+        NumericTextField(
             value = uiState.weight,
             onValueChange = viewModel::onWeightChange,
-            label = { Text(stringResource(R.string.weight_kg)) },
+            label = stringResource(R.string.weight_kg),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             modifier = Modifier.fillMaxWidth()
         )
@@ -143,7 +145,7 @@ fun BmrCalculatorScreen(viewModel: BmrViewModel = viewModel()) {
                         style = MaterialTheme.typography.titleLarge
                     )
                     Text(
-                        text = "${DecimalFormat("#,##0").format(bmr)} kcal / day",
+                        text = "${formatDouble(bmr, "#,##0")} kcal / day",
                         style = MaterialTheme.typography.headlineMedium.copy(color = MaterialTheme.colorScheme.primary)
                     )
                 }

@@ -22,12 +22,13 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.joviansapps.ganymede.R
 import com.joviansapps.ganymede.ui.components.ResultField
+import com.joviansapps.ganymede.ui.components.NumericTextField
+import com.joviansapps.ganymede.ui.components.formatDouble
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import java.text.DecimalFormat
 
 enum class Timer555Mode { ASTABLE, MONOSTABLE }
 
@@ -152,7 +153,6 @@ class Timer555ViewModel : ViewModel() {
 @Composable
 fun Timer555CalculatorScreen(vm: Timer555ViewModel = viewModel()) {
     val uiState by vm.uiState.collectAsStateWithLifecycle()
-    val formatter = remember { DecimalFormat("#.###") }
 
     Column(
         modifier = Modifier
@@ -181,20 +181,20 @@ fun Timer555CalculatorScreen(vm: Timer555ViewModel = viewModel()) {
         )
 
         if (uiState.mode == Timer555Mode.ASTABLE) {
-            OutlinedTextField(
+            NumericTextField(
                 value = uiState.r1,
                 onValueChange = { vm.onValueChange(it, "r1") },
-                label = { Text("Résistance R1 (Ω)") },
+                label = "Résistance R1 (Ω)",
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Text,
                     imeAction = ImeAction.Next
                 ),
                 modifier = Modifier.fillMaxWidth()
             )
-            OutlinedTextField(
+            NumericTextField(
                 value = uiState.r2,
                 onValueChange = { vm.onValueChange(it, "r2") },
-                label = { Text("Résistance R2 (Ω)") },
+                label = "Résistance R2 (Ω)",
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Text,
                     imeAction = ImeAction.Next
@@ -202,10 +202,10 @@ fun Timer555CalculatorScreen(vm: Timer555ViewModel = viewModel()) {
                 modifier = Modifier.fillMaxWidth()
             )
         } else {
-            OutlinedTextField(
+            NumericTextField(
                 value = uiState.r,
                 onValueChange = { vm.onValueChange(it, "r") },
-                label = { Text("Résistance R (Ω)") },
+                label = "Résistance R (Ω)",
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Text,
                     imeAction = ImeAction.Next
@@ -214,10 +214,10 @@ fun Timer555CalculatorScreen(vm: Timer555ViewModel = viewModel()) {
             )
         }
 
-        OutlinedTextField(
+        NumericTextField(
             value = uiState.c,
             onValueChange = { vm.onValueChange(it, "c") },
-            label = { Text("Capacité (F)") },
+            label = "Capacité (F)",
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Text,
                 imeAction = ImeAction.Done
@@ -233,33 +233,33 @@ fun Timer555CalculatorScreen(vm: Timer555ViewModel = viewModel()) {
                 if (uiState.mode == Timer555Mode.ASTABLE) {
                     ResultField(
                         label = "Fréquence",
-                        value = uiState.frequency?.let { formatter.format(it) } ?: "N/A",
+                        value = uiState.frequency?.let { formatDouble(it, "#.###") } ?: "N/A",
                         unit = "Hz"
                     )
                     ResultField(
                         label = "Cycle de service",
-                        value = uiState.dutyCycle?.let { formatter.format(it) } ?: "N/A",
+                        value = uiState.dutyCycle?.let { formatDouble(it, "#.##") } ?: "N/A",
                         unit = "%"
                     )
                     ResultField(
                         label = "Temps Haut",
-                        value = uiState.highTime?.let { formatter.format(it) } ?: "N/A",
+                        value = uiState.highTime?.let { formatDouble(it, "#.###") } ?: "N/A",
                         unit = "s"
                     )
                     ResultField(
                         label = "Temps Bas",
-                        value = uiState.lowTime?.let { formatter.format(it) } ?: "N/A",
+                        value = uiState.lowTime?.let { formatDouble(it, "#.###") } ?: "N/A",
                         unit = "s"
                     )
                     ResultField(
                         label = "Période",
-                        value = uiState.period?.let { formatter.format(it) } ?: "N/A",
+                        value = uiState.period?.let { formatDouble(it, "#.###") } ?: "N/A",
                         unit = "s"
                     )
                 } else {
                     ResultField(
                         label = "Largeur d'Impulsion (T)",
-                        value = uiState.period?.let { formatter.format(it) } ?: "N/A",
+                        value = uiState.period?.let { formatDouble(it, "#.###") } ?: "N/A",
                         unit = "s"
                     )
                 }

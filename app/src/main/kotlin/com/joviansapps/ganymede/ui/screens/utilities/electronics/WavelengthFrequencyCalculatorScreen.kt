@@ -15,6 +15,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.joviansapps.ganymede.R
+import com.joviansapps.ganymede.ui.components.NumericTextField
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -56,7 +57,7 @@ fun WavelengthFrequencyCalculatorScreen(viewModel: WavelengthViewModel = viewMod
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Text(stringResource(R.string.wavelength_calculator_title), style = MaterialTheme.typography.headlineSmall)
-        OutlinedTextField(value = uiState.frequency, onValueChange = viewModel::onFrequencyChange, label = { Text(stringResource(R.string.frequency_hz)) }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
-        OutlinedTextField(value = uiState.wavelength, onValueChange = viewModel::onWavelengthChange, label = { Text(stringResource(R.string.wavelength_m)) }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
+        NumericTextField(value = uiState.frequency, onValueChange = viewModel::onFrequencyChange, label = stringResource(R.string.frequency_hz), keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
+        NumericTextField(value = uiState.wavelength, onValueChange = viewModel::onWavelengthChange, label = stringResource(R.string.wavelength_m), keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
     }
 }

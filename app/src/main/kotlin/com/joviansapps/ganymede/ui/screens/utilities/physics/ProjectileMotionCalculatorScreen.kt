@@ -17,11 +17,12 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.joviansapps.ganymede.R
 import com.joviansapps.ganymede.ui.components.ResultField
+import com.joviansapps.ganymede.ui.components.NumericTextField
+import com.joviansapps.ganymede.ui.components.formatDouble
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import java.text.DecimalFormat
 import kotlin.math.*
 
 private const val GRAVITY_PROJECTILE = 9.80665 // m/s²
@@ -86,9 +87,9 @@ fun ProjectileMotionCalculatorScreen(viewModel: ProjectileViewModel = viewModel(
         modifier = Modifier.fillMaxSize().padding(16.dp).verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        OutlinedTextField(value = uiState.initialVelocity, onValueChange = viewModel::onVelocityChange, label = { Text(stringResource(R.string.initial_velocity_label)) }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
-        OutlinedTextField(value = uiState.launchAngle, onValueChange = viewModel::onAngleChange, label = { Text(stringResource(R.string.launch_angle_label)) }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
-        OutlinedTextField(value = uiState.initialHeight, onValueChange = viewModel::onHeightChange, label = { Text(stringResource(R.string.initial_height_label)) }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
+        NumericTextField(value = uiState.initialVelocity, onValueChange = viewModel::onVelocityChange, label = stringResource(R.string.initial_velocity_label), keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number))
+        NumericTextField(value = uiState.launchAngle, onValueChange = viewModel::onAngleChange, label = stringResource(R.string.launch_angle_label), keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number))
+        NumericTextField(value = uiState.initialHeight, onValueChange = viewModel::onHeightChange, label = stringResource(R.string.initial_height_label), keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number))
 
         uiState.maxHealth?.let {
             ResultsCard(uiState)
@@ -98,14 +99,13 @@ fun ProjectileMotionCalculatorScreen(viewModel: ProjectileViewModel = viewModel(
 
 @Composable
 private fun ResultsCard(uiState: ProjectileUiState) {
-    val formatter = DecimalFormat("#.##")
     Card(modifier = Modifier.fillMaxWidth().padding(top = 16.dp)) {
         Column(Modifier.padding(16.dp)) {
             Text(stringResource(R.string.results_title), style = MaterialTheme.typography.titleLarge)
             Spacer(Modifier.height(16.dp))
-            ResultField(stringResource(R.string.max_height_label), "${formatter.format(uiState.maxHealth)} m")
-            ResultField(stringResource(R.string.time_of_flight_label), "${formatter.format(uiState.timeOfFlight)} s")
-            ResultField(stringResource(R.string.range_label), "${formatter.format(uiState.range)} m")
+            ResultField(stringResource(R.string.max_height_label), "${formatDouble(uiState.maxHealth, "#.##")} m")
+            ResultField(stringResource(R.string.time_of_flight_label), "${formatDouble(uiState.timeOfFlight, "#.##")} s")
+            ResultField(stringResource(R.string.range_label), "${formatDouble(uiState.range, "#.##")} m")
         }
     }
 }

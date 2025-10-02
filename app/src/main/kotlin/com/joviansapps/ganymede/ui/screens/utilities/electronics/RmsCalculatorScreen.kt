@@ -14,11 +14,12 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.joviansapps.ganymede.R
 import com.joviansapps.ganymede.ui.components.ResultField
+import com.joviansapps.ganymede.ui.components.NumericTextField
+import com.joviansapps.ganymede.ui.components.formatDouble
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import java.text.DecimalFormat
 import kotlin.math.sqrt
 
 enum class WaveformType { SINE, SQUARE, TRIANGLE }
@@ -67,7 +68,6 @@ class RmsViewModel: ViewModel() {
 @Composable
 fun RmsCalculatorScreen(viewModel: RmsViewModel = viewModel()) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    val formatter = remember { DecimalFormat("#.###") }
 
     Column(
         modifier = Modifier
@@ -83,10 +83,10 @@ fun RmsCalculatorScreen(viewModel: RmsViewModel = viewModel()) {
             SegmentedButton(selected = uiState.waveformType == WaveformType.TRIANGLE, onClick = { viewModel.onWaveformChange(WaveformType.TRIANGLE) }, shape = SegmentedButtonDefaults.itemShape(2, 3)) { Text("Triangle") }
         }
 
-        OutlinedTextField(
+        NumericTextField(
             value = uiState.peakValue,
             onValueChange = viewModel::onValueChange,
-            label = { Text("Tension Crête (Vp)") },
+            label = "Tension Crête (Vp)",
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             modifier = Modifier.fillMaxWidth()
         )
@@ -94,7 +94,7 @@ fun RmsCalculatorScreen(viewModel: RmsViewModel = viewModel()) {
         if (uiState.rmsValue != null) {
             ResultField(
                 label = "Tension Efficace (Vrms)",
-                value = uiState.rmsValue?.let { formatter.format(it) } ?: "N/A",
+                value = formatDouble(uiState.rmsValue, "#.###"),
                 unit = "V"
             )
         }

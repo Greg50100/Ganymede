@@ -19,11 +19,12 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.joviansapps.ganymede.R
+import com.joviansapps.ganymede.ui.components.NumericTextField
+import com.joviansapps.ganymede.ui.components.formatDouble
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import java.text.DecimalFormat
 import kotlin.math.pow
 import kotlin.math.sqrt
 
@@ -118,11 +119,10 @@ class BernoulliViewModel : ViewModel() {
 
 
             val resultString = res?.let {
-                val formatter = DecimalFormat("#.###")
                 when (s.unknown) {
-                    BernoulliUnknown.P1, BernoulliUnknown.P2 -> "${formatter.format(it)} Pa"
-                    BernoulliUnknown.v1, BernoulliUnknown.v2 -> "${formatter.format(it)} m/s"
-                    BernoulliUnknown.h1, BernoulliUnknown.h2 -> "${formatter.format(it)} m"
+                    BernoulliUnknown.P1, BernoulliUnknown.P2 -> "${formatDouble(it, "#.###")} Pa"
+                    BernoulliUnknown.v1, BernoulliUnknown.v2 -> "${formatDouble(it, "#.###")} m/s"
+                    BernoulliUnknown.h1, BernoulliUnknown.h2 -> "${formatDouble(it, "#.###")} m"
                 }
             }
             _uiState.update { it.copy(result = resultString, error = err) }
@@ -150,15 +150,15 @@ fun BernoulliCalculatorScreen(viewModel: BernoulliViewModel = viewModel()) {
         Text("Principe de Bernoulli", style = MaterialTheme.typography.headlineSmall)
         Text("P + ½ρv² + ρgh = constante", style = MaterialTheme.typography.titleMedium)
 
-        OutlinedTextField(
+        NumericTextField(
             value = uiState.density,
             onValueChange = { viewModel.onValueChange("density", it) },
-            label = { Text("Densité du fluide (kg/m³)") },
+            label = "Densité du fluide (kg/m³)",
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             modifier = Modifier.fillMaxWidth()
         )
 
-        Divider(modifier = Modifier.padding(vertical = 8.dp))
+        HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
 
         Text(stringResource(id = R.string.calculate_for), style = MaterialTheme.typography.titleMedium)
         SingleChoiceSegmentedButtonRow(modifier = Modifier.fillMaxWidth()) {
@@ -206,10 +206,10 @@ fun BernoulliCalculatorScreen(viewModel: BernoulliViewModel = viewModel()) {
 
 @Composable
 private fun BernoulliInput(label: String, value: String, onValueChange: (String) -> Unit, isEnabled: Boolean, modifier: Modifier = Modifier) {
-    OutlinedTextField(
+    NumericTextField(
         value = value,
         onValueChange = onValueChange,
-        label = { Text(label) },
+        label = label,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
         modifier = modifier,
         enabled = isEnabled,

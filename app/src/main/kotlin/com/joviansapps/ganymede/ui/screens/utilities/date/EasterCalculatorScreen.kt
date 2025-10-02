@@ -14,6 +14,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.joviansapps.ganymede.R
 import com.joviansapps.ganymede.ui.components.ResultField
 import com.joviansapps.ganymede.viewmodel.DateCalculatorViewModel
+import com.joviansapps.ganymede.ui.components.NumericTextField
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 
@@ -35,11 +36,10 @@ fun EasterCalculatorScreen(vm: DateCalculatorViewModel = viewModel()) {
             style = MaterialTheme.typography.bodyLarge
         )
 
-        OutlinedTextField(
+        NumericTextField(
             value = uiState.easterYear,
             onValueChange = { newYear -> vm.onEvent(DateCalculatorViewModel.Event.SetEasterYear(newYear)) },
-            label = { Text(stringResource(id = R.string.year_label)) },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            label = stringResource(id = R.string.year_label),
             modifier = Modifier.fillMaxWidth()
         )
 
@@ -51,7 +51,7 @@ fun EasterCalculatorScreen(vm: DateCalculatorViewModel = viewModel()) {
                         text = stringResource(id = R.string.results_title),
                         style = MaterialTheme.typography.titleLarge
                     )
-                    Divider(modifier = Modifier.padding(vertical = 8.dp))
+                    HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
                     ResultField(
                         label = stringResource(id = R.string.easter_date_result_label),
                         value = easterResult.format(formatter)

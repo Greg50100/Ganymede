@@ -16,6 +16,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.joviansapps.ganymede.R
+import com.joviansapps.ganymede.ui.components.NumericTextField
 import com.joviansapps.ganymede.ui.components.ResultField
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -65,14 +66,14 @@ fun GcdLcmCalculatorScreen(viewModel: GcdLcmViewModel = viewModel()) {
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Text(stringResource(R.string.gcd_lcm_calculator_title), style = MaterialTheme.typography.headlineSmall)
-        OutlinedTextField(value = uiState.numberA, onValueChange = viewModel::onNumberAChange, label = { Text(stringResource(R.string.first_number)) }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
-        OutlinedTextField(value = uiState.numberB, onValueChange = viewModel::onNumberBChange, label = { Text(stringResource(R.string.second_number)) }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
+        NumericTextField(value = uiState.numberA, onValueChange = viewModel::onNumberAChange, label = stringResource(R.string.first_number))
+        NumericTextField(value = uiState.numberB, onValueChange = viewModel::onNumberBChange, label = stringResource(R.string.second_number))
 
         if (uiState.gcd != null && uiState.lcm != null) {
             Card(modifier = Modifier.fillMaxWidth()) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Text(stringResource(R.string.results_title), style = MaterialTheme.typography.titleLarge)
-                    Divider(modifier = Modifier.padding(vertical = 8.dp))
+                    HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
                     ResultField(label = stringResource(id = R.string.gcd_result_label), value = uiState.gcd.toString())
                     ResultField(label = stringResource(id = R.string.lcm_result_label), value = uiState.lcm.toString())
                 }

@@ -6,7 +6,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -19,11 +18,13 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.joviansapps.ganymede.R
+import com.joviansapps.ganymede.ui.components.ElectronicsResultRow
+import com.joviansapps.ganymede.ui.components.NumericTextField
+import com.joviansapps.ganymede.ui.components.formatDouble
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import java.text.DecimalFormat
 import kotlin.math.pow
 
 // --- State and ViewModel ---
@@ -130,7 +131,6 @@ class ZenerDiodeViewModel : ViewModel() {
 @Composable
 fun ZenerDiodeCalculatorScreen(viewModel: ZenerDiodeViewModel = viewModel()) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    val formatter = DecimalFormat("#.###")
 
     Column(
         modifier = Modifier
@@ -142,10 +142,10 @@ fun ZenerDiodeCalculatorScreen(viewModel: ZenerDiodeViewModel = viewModel()) {
         Text(stringResource(R.string.zener_diode_calculator_title), style = MaterialTheme.typography.headlineSmall)
 
         // --- Refactoring Step 3: Update UI calls to pass the sealed class instance ---
-        OutlinedTextField(value = uiState.sourceVoltage, onValueChange = { viewModel.onValueChange(ZenerField.SourceVoltage, it) }, label = { Text(stringResource(R.string.source_voltage_v)) }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
-        OutlinedTextField(value = uiState.zenerVoltage, onValueChange = { viewModel.onValueChange(ZenerField.ZenerVoltage, it) }, label = { Text(stringResource(R.string.zener_voltage_v)) }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
-        OutlinedTextField(value = uiState.loadResistance, onValueChange = { viewModel.onValueChange(ZenerField.LoadResistance, it) }, label = { Text(stringResource(R.string.load_resistance_ohm)) }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
-        OutlinedTextField(value = uiState.zenerPower, onValueChange = { viewModel.onValueChange(ZenerField.ZenerPower, it) }, label = { Text(stringResource(R.string.zener_power_rating_w)) }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
+        NumericTextField(value = uiState.sourceVoltage, onValueChange = { viewModel.onValueChange(ZenerField.SourceVoltage, it) }, label = stringResource(R.string.source_voltage_v))
+        NumericTextField(value = uiState.zenerVoltage, onValueChange = { viewModel.onValueChange(ZenerField.ZenerVoltage, it) }, label = stringResource(R.string.zener_voltage_v))
+        NumericTextField(value = uiState.loadResistance, onValueChange = { viewModel.onValueChange(ZenerField.LoadResistance, it) }, label = stringResource(R.string.load_resistance_ohm))
+        NumericTextField(value = uiState.zenerPower, onValueChange = { viewModel.onValueChange(ZenerField.ZenerPower, it) }, label = stringResource(R.string.zener_power_rating_w))
 
         // --- Result or Error ---
         uiState.error?.let {
@@ -159,10 +159,10 @@ fun ZenerDiodeCalculatorScreen(viewModel: ZenerDiodeViewModel = viewModel()) {
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     Text(stringResource(R.string.results_title), style = MaterialTheme.typography.titleLarge)
-                    ElectronicsResultRow(stringResource(R.string.series_resistor_rs), "${formatter.format(res.seriesResistor)} Ω")
-                    ElectronicsResultRow(stringResource(R.string.resistor_power_pr), "${formatter.format(res.resistorPower)} W")
-                    ElectronicsResultRow(stringResource(R.string.load_current_il), "${formatter.format(res.loadCurrent * 1000)} mA")
-                    ElectronicsResultRow(stringResource(R.string.zener_current_iz), "${formatter.format(res.zenerCurrent * 1000)} mA")
+                    ElectronicsResultRow(stringResource(R.string.series_resistor_rs), "${formatDouble(res.seriesResistor, "#.###")} Ω")
+                    ElectronicsResultRow(stringResource(R.string.resistor_power_pr), "${formatDouble(res.resistorPower, "#.###")} W")
+                    ElectronicsResultRow(stringResource(R.string.load_current_il), "${formatDouble(res.loadCurrent * 1000, "#.###")} mA")
+                    ElectronicsResultRow(stringResource(R.string.zener_current_iz), "${formatDouble(res.zenerCurrent * 1000, "#.###")} mA")
                 }
             }
         }

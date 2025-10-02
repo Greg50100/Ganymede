@@ -17,6 +17,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.joviansapps.ganymede.R
+import com.joviansapps.ganymede.ui.components.NumericTextField
+import com.joviansapps.ganymede.ui.components.formatDouble
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -68,12 +70,12 @@ class FilterViewModel : ViewModel() {
                 FilterCircuitType.RC -> {
                     val c = state.capacitance.toDoubleOrNull()?.times(1e-6) // Convert µF to F
                     val fRes = if (r != null && c != null && r > 0 && c > 0) 1 / (2 * PI * r * c) else null
-                    _uiState.update { it.copy(frequency = fRes?.let { "%.2f".format(it) } ?: "") }
+                    _uiState.update { it.copy(frequency = fRes?.let { formatDouble(it, "#.##") } ?: "") }
                 }
                 FilterCircuitType.RL -> {
                     val l = state.inductance.toDoubleOrNull()?.times(1e-3) // Convert mH to H
                     val fRes = if (r != null && l != null && r > 0 && l > 0) r / (2 * PI * l) else null
-                    _uiState.update { it.copy(frequency = fRes?.let { "%.2f".format(it) } ?: "") }
+                    _uiState.update { it.copy(frequency = fRes?.let { formatDouble(it, "#.##") } ?: "") }
                 }
             }
         }
@@ -123,21 +125,20 @@ fun FilterCalculatorScreen(viewModel: FilterViewModel = viewModel()) {
         )
 
         // --- Input Fields ---
-        OutlinedTextField(value = uiState.resistance, onValueChange = viewModel::onResistanceChange, label = { Text(stringResource(R.string.resistance_ohm)) }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
+        NumericTextField(value = uiState.resistance, onValueChange = viewModel::onResistanceChange, label = stringResource(R.string.resistance_ohm))
 
         if (uiState.circuitType == FilterCircuitType.RC) {
-            OutlinedTextField(value = uiState.capacitance, onValueChange = viewModel::onCapacitanceChange, label = { Text(stringResource(R.string.capacitance_uf)) }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
+            NumericTextField(value = uiState.capacitance, onValueChange = viewModel::onCapacitanceChange, label = stringResource(R.string.capacitance_uf))
         } else {
-            OutlinedTextField(value = uiState.inductance, onValueChange = viewModel::onInductanceChange, label = { Text(stringResource(R.string.inductance_mh)) }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
+            NumericTextField(value = uiState.inductance, onValueChange = viewModel::onInductanceChange, label = stringResource(R.string.inductance_mh))
         }
 
         // --- Result Field ---
-        OutlinedTextField(
+        NumericTextField(
             value = uiState.frequency,
-            onValueChange = { /* Read-only or handled by ViewModel if needed */ },
-            label = { Text(stringResource(R.string.cutoff_frequency_hz)) },
-            readOnly = true,
-            modifier = Modifier.fillMaxWidth()
+            onValueChange = { /* read-only */ },
+            label = stringResource(R.string.cutoff_frequency_hz),
+            readOnly = true
         )
     }
 }

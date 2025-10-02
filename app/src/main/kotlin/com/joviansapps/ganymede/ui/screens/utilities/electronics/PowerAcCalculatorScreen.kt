@@ -102,7 +102,6 @@ class PowerAcViewModel : ViewModel() {
 @Composable
 fun PowerAcCalculatorScreen(viewModel: PowerAcViewModel = viewModel()) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    val formatter = DecimalFormat("#.##")
 
     Column(
         modifier = Modifier

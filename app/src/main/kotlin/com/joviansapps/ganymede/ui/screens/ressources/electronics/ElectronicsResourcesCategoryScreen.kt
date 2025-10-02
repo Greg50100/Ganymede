@@ -1,7 +1,7 @@
 package com.joviansapps.ganymede.ui.screens.ressources.electronics
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.MenuBook
+import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Straighten
 import androidx.compose.runtime.Composable
@@ -24,7 +24,7 @@ fun ElectronicsResourcesCategoryScreen(
         CategoryItem(
             title = "Electronic Symbols",
             description = "IEC / ANSI symbols for components",
-            icon = Icons.Filled.MenuBook,
+            icon = Icons.AutoMirrored.Filled.MenuBook,
             onClick = onOpenElectronicSymbols
         ),
         CategoryItem(
