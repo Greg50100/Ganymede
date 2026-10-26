@@ -53,23 +53,43 @@ fun ComponentPinoutsScreen() {
             ),
             description = "Circuit intégré utilisé pour la temporisation et les multivibrateurs."
         ),
+        // TO-92 : face plate vers soi, pattes vers le bas, broche 1 à gauche.
+        // Les BC5xx et les 2N2222 / 2N2907 n'ont pas le même brochage : fiches onsemi BC546, BC556, PN2222A, PN2907A.
         PinoutInfo(
-            componentName = "Transistor NPN (BC547/2N2222)",
+            componentName = "Transistor NPN (BC547)",
             pins = listOf(
                 "Pin 1" to "Collector (C)",
                 "Pin 2" to "Base (B)",
                 "Pin 3" to "Emitter (E)"
             ),
-            description = "Brochage commun pour les boîtiers TO-92 (vue de face)."
+            description = "Boîtier TO-92, face plate vers soi, pattes vers le bas. Même brochage : BC546, BC548, BC549, BC550, BC337."
         ),
         PinoutInfo(
-            componentName = "Transistor PNP (BC557/2N2907)",
+            componentName = "Transistor PNP (BC557)",
             pins = listOf(
                 "Pin 1" to "Collector (C)",
                 "Pin 2" to "Base (B)",
                 "Pin 3" to "Emitter (E)"
             ),
-            description = "Brochage commun pour les boîtiers TO-92 (vue de face)."
+            description = "Boîtier TO-92, face plate vers soi, pattes vers le bas. Même brochage : BC556, BC558, BC559, BC560, BC327."
+        ),
+        PinoutInfo(
+            componentName = "Transistor NPN (2N2222A / PN2222A)",
+            pins = listOf(
+                "Pin 1" to "Emitter (E)",
+                "Pin 2" to "Base (B)",
+                "Pin 3" to "Collector (C)"
+            ),
+            description = "Boîtier TO-92, face plate vers soi, pattes vers le bas : l'inverse du BC547. Exception : le P2N2222A d'onsemi est câblé C, B, E. En boîtier métal (TO-18), l'ergot repère l'émetteur."
+        ),
+        PinoutInfo(
+            componentName = "Transistor PNP (2N2907A / PN2907A)",
+            pins = listOf(
+                "Pin 1" to "Emitter (E)",
+                "Pin 2" to "Base (B)",
+                "Pin 3" to "Collector (C)"
+            ),
+            description = "Boîtier TO-92, face plate vers soi, pattes vers le bas : l'inverse du BC557. En boîtier métal (TO-18), l'ergot repère l'émetteur."
         ),
         PinoutInfo(
             componentName = "Amplificateur Opérationnel (LM741)",
